@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
+
+
+//          Adopt and Events
+import Navbar from './Navbar.jsx'
 import './App.css';
 
+
 class App extends Component {
+
+  componentDidMount() {
+  //code I added in will link to server
+  }
+
+
+//       //              RENDERING
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Navbar />
       </div>
     );
   }
 }
+
 
 export default App;
