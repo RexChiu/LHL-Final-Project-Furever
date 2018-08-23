@@ -1,5 +1,5 @@
 // temp data helper functions to return dummy data
-module.exports = function makeDataHelpers(dbURL) {
+module.exports = function makeDataHelpers(db) {
   return {
     findAll() {
       return [

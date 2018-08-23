@@ -7,7 +7,8 @@ import url from 'url';
 require('dotenv').config();
 
 // data helper
-const DataHelpers = require('./helpers/data-helpers.js')('Cats');
+const db = 'Cats';
+const DataHelpers = require('./helpers/data-helpers.js')(db);
 
 // Setup express and environment
 const app = express();
