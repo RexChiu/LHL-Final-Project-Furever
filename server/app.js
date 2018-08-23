@@ -4,20 +4,28 @@ import logger from 'morgan';
 import path from 'path';
 import url from 'url';
 
-import indexController from './routes/index';
+// data helper
+const DataHelpers = require('./helpers/data-helpers.js')('Cats');
 
 require('dotenv').config();
 
 const app = express();
 const debug = Debug('server:app');
 
-app.use(logger('dev'));
+// Set environment
+app.set('env', process.env.APP_ENV || 'development');
+
+// HTTP Request logging (disabled in test mode)
+if (app.settings.env !== 'test') {
+  const loggerType = app.settings.env == 'production' ? 'common' : 'dev';
+  app.use(logger(loggerType));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
 
-app.use('/', indexController);
+app.use('/pets', require('./routes/pets')(DataHelpers));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
