@@ -14,6 +14,7 @@
     "debug": "^3.0.0",
     "dotenv": "^6.0.0",
     "express": "^4.15.4",
+    "jsonapi-serializer": "^3.5.6",
     "morgan": "^1.8.2"
   },
   "devDependencies": {
