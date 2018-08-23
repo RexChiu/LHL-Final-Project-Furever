@@ -6,6 +6,8 @@ import url from 'url';
 
 import indexController from './routes/index';
 
+require('dotenv').config();
+
 const app = express();
 const debug = Debug('server:app');
 
