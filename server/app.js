@@ -6,8 +6,17 @@ import url from 'url';
 
 require('dotenv').config();
 
+// firebase
+const firebase = require("firebase-admin");
+const serviceAccount = require("./serviceAccountKey.json");
+
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount),
+  databaseURL: "https://test1-c94ea.firebaseio.com"
+});
+
 // data helper
-const db = 'Cats';
+const db = firebase.database();
 const DataHelpers = require('./helpers/data-helpers.js')(db);
 
 // Setup express and environment
