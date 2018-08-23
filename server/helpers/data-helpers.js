@@ -8,7 +8,7 @@ module.exports = function makeDataHelpers(dbURL) {
       ];
     },
     find(id) {
-      return { id: 1, name: 'Cats', animal: 'Cats' };
+      return { id, name: 'Cats', animal: 'Cats' };
     }
   };
 };
