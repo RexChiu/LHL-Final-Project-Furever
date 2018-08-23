@@ -1,3 +1,4 @@
+// temp data helper functions to return dummy data
 module.exports = function makeDataHelpers(dbURL) {
   return {
     findAll() {

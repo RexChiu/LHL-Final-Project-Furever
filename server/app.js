@@ -4,15 +4,14 @@ import logger from 'morgan';
 import path from 'path';
 import url from 'url';
 
+require('dotenv').config();
+
 // data helper
 const DataHelpers = require('./helpers/data-helpers.js')('Cats');
 
-require('dotenv').config();
-
+// Setup express and environment
 const app = express();
 const debug = Debug('server:app');
-
-// Set environment
 app.set('env', process.env.APP_ENV || 'development');
 
 // HTTP Request logging (disabled in test mode)
@@ -24,7 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
-
 app.use('/pets', require('./routes/petsRoutes.js')(DataHelpers));
 
 // catch 404 and forward to error handler
