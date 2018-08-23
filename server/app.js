@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 
-app.use('/pets', require('./routes/pets')(DataHelpers));
+app.use('/pets', require('./routes/petsRoutes.js')(DataHelpers));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

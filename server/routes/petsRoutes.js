@@ -1,15 +1,10 @@
 import express from 'express';
-
-const JSONAPISerializer = require('jsonapi-serializer').Serializer;
+import PetsSerializer from '../serializers/pets';
 
 const router = express.Router();
 
 /* GET index page. */
 module.exports = (dataHelpers) => {
-  const PetsSerializer = new JSONAPISerializer('pets', {
-    attributes: ['name', 'animal']
-  });
-
   router.get('/', (req, res) => {
     const result = dataHelpers.findAll();
     const jsonOutput = PetsSerializer.serialize(result);
