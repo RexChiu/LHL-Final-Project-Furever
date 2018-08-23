@@ -12,6 +12,11 @@ module.exports = (dataHelpers) => {
     res.json(jsonOutput);
   });
 
+  router.get('/test', async (req, res) => {
+    const jsonOutput = await dataHelpers.returnAll();
+    res.json(jsonOutput);    
+  });  
+
   router.get('/:id', (req, res) => {
     const id = req.params.id;
     const result = dataHelpers.find(id);
