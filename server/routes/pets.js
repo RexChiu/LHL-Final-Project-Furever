@@ -7,25 +7,22 @@ const router = express.Router();
 /* GET index page. */
 module.exports = (dataHelpers) => {
   const PetsSerializer = new JSONAPISerializer('pets', {
-    attributes: ['name', 'type']
-  });
-  const PetSerializer = new JSONAPISerializer('pet', {
-    attributes: ['name', 'type']
+    attributes: ['name', 'animal']
   });
 
   router.get('/', (req, res) => {
     const result = dataHelpers.findAll();
-    const pets = PetsSerializer.serialize(result);
+    const jsonOutput = PetsSerializer.serialize(result);
 
-    res.json(pets);
+    res.json(jsonOutput);
   });
 
   router.get('/:id', (req, res) => {
     const id = req.params.id;
     const result = dataHelpers.find(id);
-    const pet = PetSerializer.serialize(result);
+    const jsonOutput = PetsSerializer.serialize(result);
 
-    res.json(pet);
+    res.json(jsonOutput);
   });
 
   return router;

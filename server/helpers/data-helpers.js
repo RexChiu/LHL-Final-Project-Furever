@@ -2,13 +2,13 @@ module.exports = function makeDataHelpers(dbURL) {
   return {
     findAll() {
       return [
-        { id: 1, name: 'Cats', type: 'Cats' },
-        { id: 2, name: 'Dogs', type: 'Dogs' },
-        { id: 3, name: 'Alpacas', type: 'Alpacas' }
+        { id: 1, name: 'Cats', animal: 'Cats' },
+        { id: 2, name: 'Dogs', animal: 'Dogs' },
+        { id: 3, name: 'Alpacas', animal: 'Alpacas' }
       ];
     },
     find(id) {
-      return { id: 1, name: 'Cats', type: 'Cats' };
+      return { id: 1, name: 'Cats', animal: 'Cats' };
     }
   };
 };
