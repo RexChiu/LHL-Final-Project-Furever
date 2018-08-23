@@ -2,7 +2,6 @@ import Debug from 'debug';
 import express from 'express';
 import logger from 'morgan';
 import path from 'path';
-import url from 'url';
 
 require('dotenv').config();
 
@@ -25,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use('/pets', require('./routes/petsRoutes.js')(DataHelpers));
+app.use('/pet', require('./routes/petRoutes.js')(DataHelpers));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -45,7 +45,7 @@ app.use((err, req, res, next) => {
 
 // Handle uncaughtException
 process.on('uncaughtException', (err) => {
-  debug('Caught exception: %j', err);
+  console.log('Caught exception: %j', err);
   process.exit(1);
 });
 
