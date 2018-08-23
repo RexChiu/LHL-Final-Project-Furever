@@ -13,8 +13,7 @@ module.exports = (dataHelpers) => {
   });
 
   router.get('/test', async (req, res) => {
-    const jsonOutput = await ( dataHelpers.returnAll() );
-    console.log(jsonOutput);
+    const jsonOutput = await dataHelpers.returnAll();
     res.json(jsonOutput);    
   });  
 
