@@ -21,10 +21,5 @@ module.exports = function santizePetfinder(json) {
     }
   });
 
-  // // move pet.media.photos.photo to pet.photos
-  // const photos = sanitizedJson.media.photos;
-  // delete sanitizedJson.media.photos;
-  // sanitizedJson.photos = photos;
-
   return sanitizedJson;
 };

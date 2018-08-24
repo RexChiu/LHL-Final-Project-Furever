@@ -1,6 +1,7 @@
 import express from 'express';
 import PetsSerializer from '../serializers/pets';
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
+import firebaseConverter from '../helpers/convert-json-to-firebase';
 
 const parser = require('fast-xml-parser');
 
@@ -252,8 +253,9 @@ module.exports = (dataHelpers) => {
     let jsonOutput = parser.parse(xml);
     jsonOutput = jsonOutput.petfinder.pets;
     const santizedJson = sanitizePetfinder(jsonOutput);
+    const firebaseJson = firebaseConverter(santizedJson);
 
-    res.json(santizedJson);
+    res.json(firebaseJson);
   });
 
   router.get('/:id', (req, res) => {
