@@ -1,7 +1,8 @@
 import express from 'express';
 import PetsSerializer from '../serializers/pets';
+import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
-const parser = require('xml2json-light');
+const parser = require('fast-xml-parser');
 
 const router = express.Router();
 
@@ -248,9 +249,11 @@ module.exports = (dataHelpers) => {
         </pets>
     </petfinder>`;
 
-    const jsonOutput = parser.toJson(xml);
+    let jsonOutput = parser.parse(xml);
+    jsonOutput = jsonOutput.petfinder.pets;
+    const santizedJson = sanitizePetfinder(jsonOutput);
 
-    res.json(jsonOutput);
+    res.json(santizedJson);
   });
 
   router.get('/:id', (req, res) => {
