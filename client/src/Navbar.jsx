@@ -11,17 +11,17 @@ class Navbar extends Component {
     return (
       <Router>
         <div>
-          <ul className="nav">
-            <li className="nav-item">
+          <div className="nav navbar-expand-lg">
+            <a className="nav-link">
               <Link to="/">Home</Link>
-            </li>
-            <li className="nav-item">
+            </a>
+            <a className="nav-link">
               <Link to="/events">Events</Link>
-            </li>
-            <li className="nav-item">
+            </a>
+            <a className="nav-link">
               <Link to="/adopt">Adopt</Link>
-            </li>
-          </ul>
+            </a>
+          </div>
 
           <hr />
           <Route exact path="/" component={Home} />
