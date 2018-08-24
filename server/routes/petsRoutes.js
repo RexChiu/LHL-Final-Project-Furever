@@ -250,9 +250,9 @@ module.exports = (dataHelpers) => {
         </pets>
     </petfinder>`;
 
-    let jsonOutput = parser.parse(xml);
-    jsonOutput = jsonOutput.petfinder.pets;
-    const santizedJson = sanitizePetfinder(jsonOutput);
+    let result = parser.parse(xml);
+    result = result.petfinder.pets;
+    const santizedJson = sanitizePetfinder(result);
     const firebaseJson = firebaseConverter(santizedJson);
 
     res.json(firebaseJson);
