@@ -3,17 +3,17 @@ import express from 'express';
 import logger from 'morgan';
 import path from 'path';
 import url from 'url';
-import cors from 'cors'
+import cors from 'cors';
 
 require('dotenv').config();
 
 // firebase
-const firebase = require("firebase-admin");
-const serviceAccount = require("./serviceAccountKey.json");
+const firebase = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
 
 firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount),
-  databaseURL: "https://test1-c94ea.firebaseio.com"
+  databaseURL: 'https://test1-c94ea.firebaseio.com'
 });
 
 // data helper
