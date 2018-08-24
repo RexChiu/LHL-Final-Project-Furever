@@ -1,4 +1,6 @@
 // temp data helper functions to return dummy data
+import firebaseConverter from '../helpers/convert-json-to-firebase';
+
 module.exports = function makeDataHelpers(db) {
   const ref = db.ref('restricted_access/secret_document');
 
@@ -18,6 +20,8 @@ module.exports = function makeDataHelpers(db) {
     },
     insertMultiple(jsonInput) {
       const petsRef = ref.child('pets');
+
+      jsonInput = firebaseConverter(jsonInput);
 
       petsRef.set(jsonInput);
     },

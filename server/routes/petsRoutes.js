@@ -253,11 +253,10 @@ module.exports = (dataHelpers) => {
     let jsonOutput = parser.parse(xml);
     jsonOutput = jsonOutput.petfinder.pets;
     const santizedJson = sanitizePetfinder(jsonOutput);
-    const firebaseJson = firebaseConverter(santizedJson);
 
-    const result = dataHelpers.insertMultiple(firebaseJson);
+    dataHelpers.insertMultiple(santizedJson);
 
-    res.json(firebaseJson);
+    res.json(santizedJson);
   });
 
   router.get('/:id', (req, res) => {
