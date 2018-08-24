@@ -4,18 +4,35 @@ import React, { Component } from 'react';
 class Home extends Component {
   render() {
     return (
-      <form method="post" id="login" action="/user/login">
-        <label>
-          username:
-          <input name="username" type="text" onChange={this.handleChange} />
-        </label>
-        <label>
-          password:
-          <input name="password" type="password" name="password" />
-        </label>
+      <React.Fragment>
+        <p>login</p>
+        <form method="post" id="login" action="/user/login">
+          <label>
+            username:
+            <input name="username" type="text" onChange={this.handleChange} />
+          </label>
+          <label>
+            password:
+            <input name="password" type="password" name="password" />
+          </label>
 
-        <input type="submit" value="Submit" />
-      </form>
+          <input type="submit" value="Submit" />
+        </form>
+
+        <p>register</p>
+        <form method="post" id="login" action="/user/register">
+          <label>
+            username:
+            <input name="username" type="text" />
+          </label>
+          <label>
+            password:
+            <input name="password" type="password" name="password" />
+          </label>
+
+          <input type="submit" value="Submit" />
+        </form>
+      </React.Fragment>
     );
   }
 }
