@@ -1,9 +1,10 @@
 import express from 'express';
+import parser from 'fast-xml-parser';
+
 import PetsSerializer from '../serializers/pets';
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
 import firebaseConverter from '../helpers/convert-json-to-firebase';
-
-const parser = require('fast-xml-parser');
+import petfinder from '../api/petfinder';
 
 const router = express.Router();
 
@@ -20,11 +21,21 @@ module.exports = (dataHelpers) => {
     const result = await dataHelpers.returnAll();
 
     // comment this out for serialized data
-    // res.json(result);
+    res.json(result);
 
     // uncomment this for serialized data
-    const jsonOutput = PetsSerializer.serialize(result);
-    res.json(jsonOutput);
+    // const jsonOutput = PetsSerializer.serialize(result);
+    // res.json(jsonOutput);
+  });
+
+  router.get('/populate', async (req, res) => {
+    const options = {
+      location: 'toronto,ontario',
+      output: 'full'
+    };
+    const result = await petfinder('pet.find', options);
+
+    res.json(result);
   });
 
   router.get('/parse', (req, res) => {
@@ -250,21 +261,19 @@ module.exports = (dataHelpers) => {
         </pets>
     </petfinder>`;
 
+<<<<<<< HEAD
     let jsonOutput = parser.parse(xml);
     jsonOutput = jsonOutput.petfinder.pets;
     const santizedJson = sanitizePetfinder(jsonOutput);
+=======
+    const result = parser.parse(xml);
+    const santizedJson = sanitizePetfinder(result);
+    const firebaseJson = firebaseConverter(santizedJson);
+>>>>>>> api/petfinder-connection
 
     dataHelpers.insertMultiple(santizedJson);
 
     res.json(santizedJson);
-  });
-
-  router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    const result = dataHelpers.find(id);
-
-    const jsonOutput = PetsSerializer.serialize(result);
-    res.json(jsonOutput);
   });
 
   return router;

@@ -17,6 +17,7 @@ module.exports = function makeDataHelpers(db) {
     },
     returnAll() {
       return ref.once('value').then(snap => snap.val());
+<<<<<<< HEAD
     },
     insertMultiple(jsonInput) {
       const petsRef = ref.child('pets');
@@ -24,6 +25,8 @@ module.exports = function makeDataHelpers(db) {
       jsonInput = firebaseConverter(jsonInput);
 
       petsRef.set(jsonInput);
+=======
+>>>>>>> api/petfinder-connection
     },
     insertDemoRecord() {
       const usersRef = ref.child('pets');

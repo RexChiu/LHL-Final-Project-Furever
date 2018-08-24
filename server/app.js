@@ -59,10 +59,10 @@ app.use((req, res, next) => {
 //   res.json(err);
 // });
 
-// // Handle uncaughtException
-// process.on('uncaughtException', (err) => {
-//   console.log('Caught exception: %j', err);
-//   process.exit(1);
-// });
+// Handle uncaughtException
+process.on('uncaughtException', (err) => {
+  console.log('Caught exception: %j', err);
+  process.exit(1);
+});
 
 export default app;

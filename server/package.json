@@ -20,6 +20,9 @@
     "he": "^1.1.1",
     "jsonapi-serializer": "^3.5.6",
     "morgan": "^1.8.2",
+    "query-string": "^6.1.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5",
     "xml2json-light": "^1.0.6"
   },
   "devDependencies": {
