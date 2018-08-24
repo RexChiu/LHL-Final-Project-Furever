@@ -33,7 +33,8 @@ module.exports = (dataHelpers) => {
       location: 'toronto,ontario',
       output: 'full'
     };
-    const result = await petfinder('pet.find', options);
+    let result = await petfinder('pet.find', options);
+    result = firebaseConverter(result);
 
     res.json(result);
   });

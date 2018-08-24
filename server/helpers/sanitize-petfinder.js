@@ -28,5 +28,5 @@ module.exports = function santizePetfinder(json) {
     elem.name = capitalizeFirstLetter(elem.name);
   });
 
-  return sanitizedJson;
+  return sanitizedJson.pet;
 };
