@@ -63,3 +63,10 @@ typings/
 
 # .json key for firebase
 serviceAccountKey.json
+# System file
+.DS_Store
+server/.DS_Store
+client/.DS_Store
+
+# PackageLock
+package-lock.json
