@@ -255,6 +255,8 @@ module.exports = (dataHelpers) => {
     const santizedJson = sanitizePetfinder(jsonOutput);
     const firebaseJson = firebaseConverter(santizedJson);
 
+    const result = dataHelpers.insertMultiple(firebaseJson);
+
     res.json(firebaseJson);
   });
 
