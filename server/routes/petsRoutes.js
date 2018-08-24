@@ -257,13 +257,5 @@ module.exports = (dataHelpers) => {
     res.json(firebaseJson);
   });
 
-  router.get('/:id', (req, res) => {
-    const id = req.params.id;
-    const result = dataHelpers.find(id);
-
-    const jsonOutput = PetsSerializer.serialize(result);
-    res.json(jsonOutput);
-  });
-
   return router;
 };
