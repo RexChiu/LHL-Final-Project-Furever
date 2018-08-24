@@ -1,5 +1,5 @@
 module.exports = function santizePetfinder(json) {
-  const sanitizedJson = json;
+  const sanitizedJson = json.petfinder.pets;
 
   sanitizedJson.pet.forEach((elem) => {
     // sanitize pet.breeds.breed to pet.breed
