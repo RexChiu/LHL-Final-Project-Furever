@@ -1,10 +1,10 @@
 import express from 'express';
+import parser from 'fast-xml-parser';
+
 import PetsSerializer from '../serializers/pets';
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
 import firebaseConverter from '../helpers/convert-json-to-firebase';
 import petfinder from '../api/petfinder';
-
-const parser = require('fast-xml-parser');
 
 const router = express.Router();
 
