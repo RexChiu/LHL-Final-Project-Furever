@@ -261,15 +261,9 @@ module.exports = (dataHelpers) => {
         </pets>
     </petfinder>`;
 
-<<<<<<< HEAD
     let jsonOutput = parser.parse(xml);
     jsonOutput = jsonOutput.petfinder.pets;
     const santizedJson = sanitizePetfinder(jsonOutput);
-=======
-    const result = parser.parse(xml);
-    const santizedJson = sanitizePetfinder(result);
-    const firebaseJson = firebaseConverter(santizedJson);
->>>>>>> api/petfinder-connection
 
     dataHelpers.insertMultiple(santizedJson);
 
