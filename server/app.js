@@ -3,6 +3,7 @@ import express from 'express';
 import logger from 'morgan';
 import path from 'path';
 import url from 'url';
+import cors from 'cors'
 
 require('dotenv').config();
 
@@ -14,6 +15,9 @@ const DataHelpers = require('./helpers/data-helpers.js')(db);
 const app = express();
 const debug = Debug('server:app');
 app.set('env', process.env.APP_ENV || 'development');
+
+// Enable All CORS Requests
+app.use(cors());
 
 // HTTP Request logging (disabled in test mode)
 if (app.settings.env !== 'test') {
