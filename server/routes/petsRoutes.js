@@ -13,7 +13,13 @@ module.exports = (dataHelpers) => {
   });
 
   router.get('/test', async (req, res) => {
-    const jsonOutput = await dataHelpers.returnAll();
+    const result = await dataHelpers.returnAll();
+
+    // comment this out for serialized data
+    // res.json(result);
+
+    // uncomment this for serialized data
+    const jsonOutput = PetsSerializer.serialize(result);
     res.json(jsonOutput);
   });
 
