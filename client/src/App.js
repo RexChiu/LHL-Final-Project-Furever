@@ -61,15 +61,19 @@ class App extends React.Component {
 //       //              RENDERING
   render() {
     const { pets } = this.state
+
     return (
-
-
 
       <div className="App">
         <Navbar />
-        <ul>
-          {pets && pets.map((pet, i) => <li key={i}>{pet.type}</li>)}
-        </ul>
+        <div>
+          {pets && pets.map((pet, i) =>
+            // <li key={i}>{pet.type}</li>
+            // <li key={i}>{pet.id}</li>
+            // <p> {pet.type} </p>
+            <p> {pet.attributes.name} </p>
+            )}
+        </div>
       </div>
 
 
