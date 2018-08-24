@@ -37,3 +37,11 @@
   margin-left: 0.5em;
   margin-right: 0.5em;
 }
+
+.searchui {
+  margin: 1em;
+  margin: 0 auto;
+  width: 500px;
+  height: 200px;
+  align: center;
+}

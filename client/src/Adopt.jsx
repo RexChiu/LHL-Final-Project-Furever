@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import assets
 
 import AdoptFilter from './AdoptFilter';
+import SearchUI from './SearchUI';
 
 class Adopt extends Component {
   constructor(props) {
@@ -37,26 +38,29 @@ class Adopt extends Component {
   render() {
     const { pets } = this.state;
     const adoptItems = pets.map((pet, i) => (
-      <div className="col-sm-4">
-        <div className="adoptitem panel panel-default">
-          <p> name </p>
-          <p> type </p>
-          {/* <p> {pet.attributes.name} </p>
-        <p> {pet.attributes.animal} </p>
-        <p> {pet.attributes.contact.adress1} </p>
-        <p> {pet.attributes.contact.city} </p>
-        <p> {pet.attributes.contact.phone} </p>
-        <p> {pet.attributes.contact.state} </p>
-        <p> {pet.attributes.contact.zip} </p> */}
-          <button> Adopt </button>
-          <br />
+      <section>
+        <div className="col-sm-4">
+          <div className="adoptitem panel panel-default">
+            <p> name </p>
+            <p> type </p>
+
+            <button id="myBtn"> Adopt </button>
+          </div>
         </div>
-      </div>
+
+        <div id="myModal" className="modal">
+          <div className="modal-content">
+            <span className="close">&times;</span>
+            <p>Some text in the Modal..</p>
+          </div>
+        </div>
+      </section>
     ));
 
     return (
       <main>
         <p> Adopt Page </p>
+        <SearchUI />
         <AdoptFilter />
         <div>{adoptItems}</div>
       </main>
