@@ -33,9 +33,13 @@ module.exports = (dataHelpers) => {
       location: 'toronto,ontario',
       output: 'full'
     };
-    const result = await petfinder('pet.find', options);
-
-    res.json(result);
+    try {
+      const result = await petfinder('pet.find', options);
+      const output = await dataHelpers.insertMultiple(result);
+      res.json(output);
+    } catch (e) {
+      console.log('Error', e);
+    }
   });
 
   router.get('/parse', (req, res) => {

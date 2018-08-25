@@ -23,7 +23,24 @@ module.exports = function makeDataHelpers(db) {
 
       jsonInput = firebaseConverter(jsonInput);
 
-      petsRef.set(jsonInput);
+      function replacer(key, value) {
+        if (value === undefined) {
+          return '';
+        }
+        return value;
+      }
+
+      const jsonInputCleaned = JSON.parse(JSON.stringify(jsonInput, replacer));
+
+      petsRef
+        .set(jsonInputCleaned)
+        .then(() => {
+          console.log('Synchronization succeeded');
+          return jsonInputCleaned;
+        })
+        .catch((error) => {
+          console.log('Synchronization failed');
+        });
     },
     insertDemoRecord() {
       const usersRef = ref.child('pets');
