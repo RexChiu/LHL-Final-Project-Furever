@@ -18,7 +18,7 @@ module.exports = function santizePetfinder(json) {
     const options = elem.options.option;
     delete elem.options;
     // not an array, put into array
-    if (!(options instanceof Array)) {
+    if (options && !(options instanceof Array)) {
       elem.options = [options];
     } else {
       elem.options = options;
