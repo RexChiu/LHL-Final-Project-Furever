@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 
 class Pet extends Component {
-  componentDidMount() {
-    //code I added in will link to server
-    fetch('http://localhost:8080/pets')
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            pets: result.data
-          });
-        },
-
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  // handleSubmit = event => {
+  //   event.preventDefault();
+  //   console.log(event.value);
+  //   fetch(`http://localhost:8080/users/${this.props.pet.id}/adopt`, {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       id: 'LKrbAGsDo6KsWQ-7reg'
+  //     })
+  //   });
+  // };
+
+  handleSubmit = event => {
+    fetch('https://httpbin.org/post', {
+      method: 'post',
+
+      body: JSON.stringify({ a: 7, str: 'Some string: &=&' })
+    })
+      .then(res => res.json())
+      .then(res => console.log(res));
+  };
 
   render() {
     return (
@@ -32,8 +37,6 @@ class Pet extends Component {
               <p> {this.props.pet.attributes.animal} </p>
               <p> {this.props.pet.attributes.breed} </p>
               <p> {this.props.pet.attributes.age} </p>
-
-              <a class="btn btn-lg btn-primary">Adopt</a>
             </div>
           </div>
           {/*                   MODAL                     */}
@@ -65,6 +68,10 @@ class Pet extends Component {
                   <button type="button" class="btn btn-default" data-dismiss="modal">
                     Close
                   </button>
+
+                  <a onClick={this.handleSubmit} value={this.props.pet.id} class="btn btn-lg btn-primary">
+                    Adopt
+                  </a>
                 </div>
               </div>
             </div>
