@@ -38,7 +38,7 @@ module.exports = (dataHelpers) => {
   });
 
   router.get('/finduser', async (req, res) => {
-    const result = await dataHelpers.getUserDetails('test1');
+    const result = await dataHelpers.getUserDetails('test');
 
     // comment this out for serialized data
     res.json(result);
