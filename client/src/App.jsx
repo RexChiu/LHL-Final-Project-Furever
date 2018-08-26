@@ -8,10 +8,12 @@ class App extends Component {
   // RENDERING
   render() {
     return (
-      <div className="App">
+      <React.Fragment>
         <Navbar />
-        <Main />
-      </div>
+        <div className="App">
+          <Main />
+        </div>
+      </React.Fragment>
     );
   }
 }
