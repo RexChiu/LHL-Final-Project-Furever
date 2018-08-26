@@ -10,9 +10,9 @@ class Main extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/events" component={Events} />
-        <Route path="/adopt" component={Adopt} />
+        <Route exact path="/" render={props => <Home {...props} setUserId={this.props.setUserId} userId={this.props.userId} />} />
+        <Route path="/events" render={props => <Events {...props} userId={this.props.userId} />} />
+        <Route path="/adopt" render={props => <Adopt {...props} userId={this.props.userId} />} />
       </Switch>
     );
   }

@@ -40,7 +40,7 @@ class Adopt extends Component {
 
   render() {
     const { pets } = this.state;
-    const adoptItems = pets.map((pet, i) => <Pet pet={pet} key={pet.id} />);
+    const adoptItems = pets.map((pet, i) => <Pet pet={pet} userId={this.props.userId} key={pet.id} />);
 
     return (
       <React.Fragment>

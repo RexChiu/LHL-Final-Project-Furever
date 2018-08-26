@@ -1,27 +1,6 @@
 import React, { Component } from 'react';
 
 class Pet extends Component {
-  componentDidMount() {
-    //code I added in will link to server
-    fetch('http://localhost:8080/pets')
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            pets: result.data
-          });
-        },
-
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
-  }
-
   render() {
     return (
       <React.Fragment>
