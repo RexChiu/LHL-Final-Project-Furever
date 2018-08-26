@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+const axios = require('axios');
 
 class Pet extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  // }
 
   // handleSubmit = event => {
   //   event.preventDefault();
@@ -18,13 +19,17 @@ class Pet extends Component {
   // };
 
   handleSubmit = event => {
-    fetch('https://httpbin.org/post', {
-      method: 'post',
-
-      body: JSON.stringify({ a: 7, str: 'Some string: &=&' })
-    })
-      .then(res => res.json())
-      .then(res => console.log(res));
+    axios
+      .post(`http://localhost:8080/pet/${this.props.pet.id}/adopt`, {
+        userId: `${this.props.userId}`,
+        petId: `${this.props.pet.id}`
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   render() {
