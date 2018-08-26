@@ -2,6 +2,7 @@ import express from 'express';
 
 import PetsSerializer from '../serializers/pets';
 import petfinder from '../api/petfinder';
+import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
 const router = express.Router();
 
@@ -29,12 +30,13 @@ module.exports = (dataHelpers) => {
   router.get('/populate', async (req, res) => {
     const options = {
       location: 'toronto,ontario',
-      output: 'full'
+      output: 'full',
+      count: 200
     };
     try {
       const result = await petfinder('pet.find', options);
-
-      const output = await dataHelpers.insertMultiplePets(result);
+      // const sanitized = await sanitizePetfinder(result);
+      const output = await dataHelpers.insertMultiplePets(result.petfinder.pets.pet);
       res.json(output);
     } catch (e) {
       console.log('Error', e);
