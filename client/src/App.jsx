@@ -5,13 +5,24 @@ import Main from './Main.jsx';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: ''
+    };
+  }
+
+  setUserId = userId => {
+    this.setState(userId);
+  };
+
   // RENDERING
   render() {
     return (
       <React.Fragment>
         <Navbar />
         <div className="App">
-          <Main />
+          <Main setUserId={this.setUserId} userId={this.state.userId} />
         </div>
       </React.Fragment>
     );

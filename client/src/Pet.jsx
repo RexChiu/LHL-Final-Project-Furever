@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class Pet extends Component {
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +28,8 @@ class Pet extends Component {
       .then(res => console.log(res));
   };
 
+=======
+>>>>>>> master
   render() {
     return (
       <React.Fragment>
