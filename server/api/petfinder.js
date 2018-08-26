@@ -1,7 +1,6 @@
 import rp from 'request-promise-native';
 import queryString from 'query-string';
 import parser from 'fast-xml-parser';
-import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
 module.exports = function APICall(method, params) {
   // specifies the uri endpoint to make a request to
@@ -16,9 +15,6 @@ module.exports = function APICall(method, params) {
   uri += `?${query}`;
 
   return rp(uri)
-    .then((result) => {
-      const parsedJSON = parser.parse(result);
-      return sanitizePetfinder(parsedJSON);
-    })
+    .then(result => parser.parse(result))
     .catch(err => err);
 };
