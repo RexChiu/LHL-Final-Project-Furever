@@ -102,6 +102,7 @@ module.exports = function makeDataHelpers(db) {
       const usersRef = ref.child('users');
       const newUserRef = usersRef.push();
       console.log();
+      newUser.user_id = newUserRef.key;
       return newUserRef.set(newUser).then(() => newUserRef.key);
     },
     insertDemoRecord() {
