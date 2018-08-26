@@ -1,6 +1,10 @@
 // temp data helper functions to return dummy data
 import firebaseConverter from '../helpers/convert-json-to-firebase';
+<<<<<<< HEAD
 import { callbackify } from 'util';
+=======
+import jsonConverter from '../helpers/convert-firebase-to-json';
+>>>>>>> 25b687e11bd6735fedc469c283e94849685bfdd2
 
 module.exports = function makeDataHelpers(db) {
   const ref = db.ref('restricted_access/secret_document');
@@ -20,7 +24,7 @@ module.exports = function makeDataHelpers(db) {
       return ref.once('value').then(snap => snap.val());
     },
     returnAll() {
-      return ref.once('value').then(snap => snap.val());
+      return ref.once('value').then(snap => jsonConverter(snap.val()));
     },
     insertMultiplePets(jsonInput) {
       const petsRef = ref.child('pets');
@@ -97,6 +101,12 @@ module.exports = function makeDataHelpers(db) {
         username: 'ginger',
         password: '123'
       });
+    },
+    insertNewUser(newUser) {
+      const usersRef = ref.child('users');
+      const newUserRef = usersRef.push();
+      console.log();
+      return newUserRef.set(newUser).then(() => newUserRef.key);
     },
     insertDemoRecord() {
       const petsRef = ref.child('pets');

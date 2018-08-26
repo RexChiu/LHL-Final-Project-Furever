@@ -8,7 +8,6 @@
 }
 
 .App-header {
-  background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
@@ -44,4 +43,26 @@
   width: 500px;
   height: 200px;
   align: center;
+}
+#home-video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+#home-panel {
+  margin: 1em;
+  margin: 0 auto;
+  width: 45em;
+
+  align: center;
+}
+
+#mouseUI {
+  width: 20em;
+  height: 20em;
 }

@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 class Navbar extends Component {
   render() {
     return (
-      <div className="nav navbar-expand-lg">
-        <a className="nav-link">
+      <div className="navbar navbar-expand-lg navbar-light bg-light">
+        <a className="navbar-brand">
           <Link to="/">Home</Link>
         </a>
-        <a className="nav-link">
+        <a className="nav-item nav-link">
           <Link to="/events">Events</Link>
         </a>
-        <a className="nav-link">
+        <a className="nav-item nav-link">
           <Link to="/adopt">Adopt</Link>
         </a>
         <hr />
