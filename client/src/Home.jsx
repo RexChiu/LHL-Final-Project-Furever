@@ -5,7 +5,7 @@ class Home extends Component {
   render() {
     return (
       <React.Fragment>
-        <img src="../public/favicon.ico" alt="notWorking" />
+        <img src={require('./src/assets/moe_00.png')} alt="notWorking" />
         <p>login</p>
         <form method="post" id="login" action="http://localhost:8080/user/login">
           <label>
