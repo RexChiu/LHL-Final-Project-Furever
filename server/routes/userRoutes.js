@@ -9,6 +9,13 @@ const SALT_ROUNDS = 10;
 /* GET index page. */
 module.exports = (dataHelpers) => {
   router.post('/register', async (req, res) => {
+    // guard statment for existing username
+    const exists = await dataHelpers.getUserDetails(req.body.username);
+    if (exists) {
+      res.json(null);
+      return;
+    }
+
     // generates a password hash
     const passwordDigest = await bcrypt.hash(req.body.password, SALT_ROUNDS);
 
@@ -29,12 +36,19 @@ module.exports = (dataHelpers) => {
     res.json(jsonOutput);
   });
 
-  router.post('/login', (req, res) => {
-    const inputObj = {
-      username: req.body.username,
-      password: req.body.password
-    };
-    res.json(inputObj);
+  router.post('/login', async (req, res) => {
+    const user = await dataHelpers.getUserDetails(req.body.username);
+
+    // guard statment for no existing user
+    if (!user) {
+      res.json(null);
+      return;
+    }
+
+    // using for loop to grab the key and values of the returned user
+    console.log(Object.values(user));
+
+    res.json(user);
   });
 
   return router;
