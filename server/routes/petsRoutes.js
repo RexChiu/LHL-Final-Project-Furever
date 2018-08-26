@@ -26,28 +26,6 @@ module.exports = (dataHelpers) => {
     // res.json(jsonOutput);
   });
 
-  router.get('/newuser', async (req, res) => {
-    const result = await dataHelpers.insertNewUserDemo();
-
-    // comment this out for serialized data
-    res.json(result);
-
-    // uncomment this for serialized data
-    // const jsonOutput = PetsSerializer.serialize(result);
-    // res.json(jsonOutput);
-  });
-
-  router.get('/finduser', async (req, res) => {
-    const result = await dataHelpers.getUserDetails('test');
-
-    // comment this out for serialized data
-    res.json(result);
-
-    // uncomment this for serialized data
-    // const jsonOutput = PetsSerializer.serialize(result);
-    // res.json(jsonOutput);
-  });
-
   router.get('/populate', async (req, res) => {
     const options = {
       location: 'toronto,ontario',

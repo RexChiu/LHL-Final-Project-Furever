@@ -9,6 +9,13 @@ const SALT_ROUNDS = 10;
 /* GET index page. */
 module.exports = (dataHelpers) => {
   router.post('/register', async (req, res) => {
+    // guard statment for existing username
+    const exists = await dataHelpers.getUserDetails(req.body.username);
+    if (exists) {
+      res.json(UserSerializer.serialize(null));
+      return;
+    }
+
     // generates a password hash
     const passwordDigest = await bcrypt.hash(req.body.password, SALT_ROUNDS);
 
@@ -19,22 +26,46 @@ module.exports = (dataHelpers) => {
     };
 
     // grabs userId from successful db insert
-    const userId = await dataHelpers.insertNewUser(inputObj);
+    const id = await dataHelpers.insertNewUser(inputObj);
 
     // constructs return obj and serializes it
     const returnObj = {
-      userId
+      id
     };
     const jsonOutput = UserSerializer.serialize(returnObj);
     res.json(jsonOutput);
   });
 
-  router.post('/login', (req, res) => {
+  router.post('/login', async (req, res) => {
     const inputObj = {
       username: req.body.username,
       password: req.body.password
     };
-    res.json(inputObj);
+
+    // grab user details with login details
+    let user = await dataHelpers.getUserDetails(req.body.username);
+
+    // guard statment for no existing user
+    if (!user) {
+      res.json(UserSerializer.serialize(null));
+      return;
+    }
+
+    // using .val() to extract data out of firebase snapshot, dunno why
+    user = user.val();
+
+    // extracting out the values of the user (don't know key, only way to grab the values)
+    user = Object.values(user)[0];
+
+    // using bcrypt to check password match
+    const match = await bcrypt.compare(inputObj.password, user.passwordDigest);
+
+    if (match) {
+      const jsonOutput = UserSerializer.serialize(user);
+      res.json(jsonOutput);
+    } else {
+      res.json(UserSerializer.serialize(null));
+    }
   });
 
   return router;
