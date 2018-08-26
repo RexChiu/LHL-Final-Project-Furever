@@ -14,7 +14,9 @@ module.exports = (dataHelpers) => {
       passwordDigest
     };
 
-    res.json(inputObj);
+    const userId = await dataHelpers.insertNewUser(inputObj);
+
+    res.json(userId);
   });
 
   router.post('/login', (req, res) => {
