@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
+import EventCompose from './EventCompose';
 //import assets
 
 class Events extends Component {
-
-
-
   render() {
     return (
-      <main>
-
+      <React.Fragment>
+        <EventCompose />
         <p> Events Page </p>
-      </main>
+      </React.Fragment>
     );
   }
 }
