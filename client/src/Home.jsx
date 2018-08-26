@@ -1,7 +1,96 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 //import assets
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      login_username: '',
+      login_password: '',
+      register_username: '',
+      register_password: ''
+    };
+  }
+
+  submitLogin = event => {
+    event.preventDefault();
+
+    // stops submit if either username or password is blank
+    if (!this.state.login_username || !this.state.login_password) {
+      alert('Username or Password is Blank!');
+      return;
+    }
+
+    const reqObj = {
+      username: this.state.login_username,
+      password: this.state.login_password
+    };
+
+    axios
+      .post('http://localhost:8080/user/login', reqObj)
+      .then(res => {
+        //grabs the userId from the successful login response
+        let userId = { userId: res.data.data.attributes.id };
+        this.props.setUserId(userId);
+        this.props.history.push('/adopt');
+      })
+      .catch(err => alert(err));
+  };
+
+  // controlled input for username
+  handleChangeLoginUsername = event => {
+    this.setState({
+      login_username: event.target.value.trim()
+    });
+  };
+
+  // controlled input for password
+  handleChangeLoginPassword = event => {
+    this.setState({
+      login_password: event.target.value.trim()
+    });
+  };
+
+  submitRegister = event => {
+    event.preventDefault();
+
+    // stops submit if either username or password is blank
+    if (!this.state.register_username || !this.state.register_password) {
+      alert('Username or Password is Blank!');
+      return;
+    }
+
+    const reqObj = {
+      username: this.state.register_username,
+      password: this.state.register_password
+    };
+
+    axios
+      .post('http://localhost:8080/user/register', reqObj)
+      .then(res => {
+        //grabs the userId from the successful login response
+        let userId = { userId: res.data.data.attributes.id };
+        this.props.setUserId(userId);
+        this.props.history.push('/adopt');
+      })
+      .catch(err => alert(err));
+  };
+
+  // controlled input for username
+  handleChangeRegisterUsername = event => {
+    this.setState({
+      register_username: event.target.value.trim()
+    });
+  };
+
+  // controlled input for password
+  handleChangeRegisterPassword = event => {
+    this.setState({
+      register_password: event.target.value.trim()
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -11,29 +100,30 @@ class Home extends Component {
 
         <section id="home-panel" class="panel panel-default">
           <img src={require('./assets/moe_00.png')} alt="notWorking" id="mouseUI" />
+
           <p>login</p>
-          <form method="post" id="login" action="http://localhost:8080/user/login">
+          <form onSubmit={this.submitLogin}>
             <label>
               username:
-              <input name="username" type="text" onChange={this.handleChange} />
+              <input name="username" type="text" onChange={this.handleChangeLoginUsername} />
             </label>
             <label>
               password:
-              <input name="password" type="password" name="password" />
+              <input name="password" type="password" onChange={this.handleChangeLoginPassword} />
             </label>
 
             <input type="submit" value="Submit" />
           </form>
 
           <p>register</p>
-          <form method="post" id="login" action="http://localhost:8080/user/register">
+          <form onSubmit={this.submitRegister}>
             <label>
               username:
-              <input name="username" type="text" />
+              <input name="username" type="text" onChange={this.handleChangeRegisterUsername} />
             </label>
             <label>
               password:
-              <input name="password" type="password" name="password" />
+              <input name="password" type="password" onChange={this.handleChangeRegisterPassword} />
             </label>
 
             <input type="submit" value="Submit" />
