@@ -21,7 +21,7 @@ module.exports = function santizePetfinder(json) {
     if (options && !(options instanceof Array)) {
       elem.options = [options];
     } else {
-      elem.options = options;
+      elem.options = options || '';
     }
 
     // sanitize pet.name to remove all caps

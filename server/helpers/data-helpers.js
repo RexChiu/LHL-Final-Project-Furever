@@ -24,20 +24,23 @@ module.exports = function makeDataHelpers(db) {
     insertMultiplePets(jsonInput) {
       const petsRef = ref.child('pets');
 
-      jsonInput = firebaseConverter(jsonInput);
+      const jsonInputCleaned = firebaseConverter(jsonInput);
+
+      // uncomment below if anymore undefined in firebaseConverter data
+
       // const jsonInputCleaned = jsonInput;
       // res.JSON(jsonInputCleaned)
 
-      function replacer(key, value) {
-        if (value === undefined) {
-          return '';
-        }
-        return value;
-      }
+      // function replacer(key, value) {
+      //   if (value === undefined) {
+      //     return '';
+      //   }
+      //   return value;
+      // }
 
-      const jsonInputCleaned = JSON.parse(JSON.stringify(jsonInput, replacer));
+      // const jsonInputCleaned = JSON.parse(JSON.stringify(jsonInput, replacer));
 
-      petsRef
+      return petsRef
         .set(jsonInputCleaned)
         .then(() => {
           console.log('Synchronization succeeded');
@@ -45,6 +48,7 @@ module.exports = function makeDataHelpers(db) {
         })
         .catch((error) => {
           console.log('Synchronization failed');
+          return error;
         });
     },
     insertDemoRecord() {

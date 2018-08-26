@@ -35,8 +35,9 @@ module.exports = (dataHelpers) => {
     };
     try {
       const result = await petfinder('pet.find', options);
+
       const output = await dataHelpers.insertMultiplePets(result);
-      res.json(result);
+      res.json(output);
     } catch (e) {
       console.log('Error', e);
     }
