@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import Adopt from './Adopt.jsx';
-import Events from './Events.jsx';
+import Events from './Events';
 import Home from './Home.jsx';
 
 class Main extends React.Component {

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 //import assets
 
+//modal
+
 import AdoptFilter from './AdoptFilter';
 import SearchUI from './SearchUI';
+import Pet from './Pet';
 
 class Adopt extends Component {
   constructor(props) {
@@ -37,25 +40,7 @@ class Adopt extends Component {
 
   render() {
     const { pets } = this.state;
-    const adoptItems = pets.map((pet, i) => (
-      <section>
-        <div className="col-sm-4">
-          <div className="adoptitem panel panel-default">
-            <p> name </p>
-            <p> type </p>
-
-            <button id="myBtn"> Adopt </button>
-          </div>
-        </div>
-
-        <div id="myModal" className="modal">
-          <div className="modal-content">
-            <span className="close">&times;</span>
-            <p>Some text in the Modal..</p>
-          </div>
-        </div>
-      </section>
-    ));
+    const adoptItems = pets.map((pet, i) => <Pet pet={pet} key={pet.id} />);
 
     return (
       <React.Fragment>
