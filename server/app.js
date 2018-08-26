@@ -37,6 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
+app.use('/user', require('./routes/userRoutes.js')(DataHelpers));
 app.use('/pets', require('./routes/petsRoutes.js')(DataHelpers));
 app.use('/pet', require('./routes/petRoutes.js')(DataHelpers));
 
