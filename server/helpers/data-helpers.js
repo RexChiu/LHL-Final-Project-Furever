@@ -15,13 +15,18 @@ module.exports = function makeDataHelpers(db) {
     find(id) {
       return { id, name: 'Cats', animal: 'Cats' };
     },
+    returnPetDescription() {
+      return ref.once('value').then(snap => snap.val());
+    },
     returnAll() {
       return ref.once('value').then(snap => snap.val());
     },
-    insertMultiple(jsonInput) {
+    insertMultiplePets(jsonInput) {
       const petsRef = ref.child('pets');
 
       jsonInput = firebaseConverter(jsonInput);
+      // const jsonInputCleaned = jsonInput;
+      // res.JSON(jsonInputCleaned)
 
       function replacer(key, value) {
         if (value === undefined) {
