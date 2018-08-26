@@ -69,7 +69,9 @@ class Home extends Component {
     axios
       .post('http://localhost:8080/user/register', reqObj)
       .then(res => {
-        alert(res);
+        //grabs the userId from the successful login response
+        let userId = { userId: res.data.data.attributes.id };
+        this.props.setUserId(userId);
         this.props.history.push('/adopt');
       })
       .catch(err => alert(err));
