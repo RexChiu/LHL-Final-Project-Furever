@@ -31,7 +31,7 @@ module.exports = (dataHelpers) => {
     const options = {
       location: 'toronto,ontario',
       output: 'full',
-      count: 200
+      count: 100
     };
     try {
       const result = await petfinder('pet.find', options);
