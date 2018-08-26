@@ -128,6 +128,44 @@ class Home extends Component {
 
             <input type="submit" value="Submit" />
           </form>
+
+          {/* <!-- Button HTML (to Trigger Modal) --> */}
+          <a href="#register" data-toggle="modal">
+            Register
+          </a>
+
+          {/* <!-- Modal HTML --> */}
+          <div id="register" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                  </button>
+                  <h4 class="modal-title">Register</h4>
+                </div>
+                <div class="modal-body">
+                  <form onSubmit={this.submitRegister}>
+                    <label>
+                      username:
+                      <input name="username" type="text" onChange={this.handleChangeRegisterUsername} />
+                    </label>
+                    <label>
+                      password:
+                      <input name="password" type="password" onChange={this.handleChangeRegisterPassword} />
+                    </label>
+
+                    <input type="submit" value="Submit" />
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </React.Fragment>
     );
