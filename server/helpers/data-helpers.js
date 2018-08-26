@@ -1,5 +1,6 @@
 // temp data helper functions to return dummy data
 import firebaseConverter from '../helpers/convert-json-to-firebase';
+import { callbackify } from 'util';
 
 module.exports = function makeDataHelpers(db) {
   const ref = db.ref('restricted_access/secret_document');
@@ -51,6 +52,43 @@ module.exports = function makeDataHelpers(db) {
           return error;
         });
     },
+    // This datahelper will insert/register a new user into the database
+    insertNewUser(newUser) {
+      const usersRef = ref.child('users');
+      const newUserRef = usersRef.push();
+      console.log(newUserRef.key);
+      return newUserRef.set(newUser).then(() => newUserRef.key);
+    },
+    // This datahelper will check if the provided username exists(returns boolean) in the database
+    checkUserExists(userName) {
+      const usersRef = ref.child('users');
+      console.log('Within checkUserExists');
+      return new Promise((resolve, reject) => {
+        usersRef
+          .orderByChild('username')
+          .equalTo(userName)
+          .once('value', (snapshot) => {
+            const exists = snapshot.val() !== null;
+            console.log('Value of exists ', exists);
+            resolve(exists);
+          });
+      });
+    },
+    // This datahelper will return all details for an existing username from the database
+    async getUserDetails(userName) {
+      const usersRef = ref.child('users');
+      const exists = await this.checkUserExists(userName);
+      console.log('Before true-> exists', exists);
+      if (exists === true) {
+        console.log('---->Within true', userName);
+        return usersRef
+          .orderByChild('username')
+          .equalTo(userName)
+          .once('value', snap => snap.val());
+      }
+      return null;
+    },
+    // This datahelper will insert/register a demo record into the database
     insertNewUserDemo() {
       const usersRef = ref.child('users');
       const newUserRef = usersRef.push();
@@ -59,12 +97,6 @@ module.exports = function makeDataHelpers(db) {
         username: 'ginger',
         password: '123'
       });
-    },
-    insertNewUser(newUser) {
-      const usersRef = ref.child('users');
-      const newUserRef = usersRef.push();
-      console.log();
-      return newUserRef.set(newUser).then(() => newUserRef);
     },
     insertDemoRecord() {
       const petsRef = ref.child('pets');
