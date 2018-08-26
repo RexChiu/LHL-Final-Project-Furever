@@ -51,9 +51,24 @@ module.exports = function makeDataHelpers(db) {
           return error;
         });
     },
+    insertNewUserDemo() {
+      const usersRef = ref.child('users');
+      const newUserRef = usersRef.push();
+      console.log();
+      newUserRef.set({
+        username: 'ginger',
+        password: '123'
+      });
+    },
+    insertNewUser(newUser) {
+      const usersRef = ref.child('users');
+      const newUserRef = usersRef.push();
+      console.log();
+      return newUserRef.set(newUser).then(() => newUserRef);
+    },
     insertDemoRecord() {
-      const usersRef = ref.child('pets');
-      usersRef.push().set({
+      const petsRef = ref.child('pets');
+      petsRef.push().set({
         date_of_birth: 'June 23, 2018',
         full_name: 'Ginger Paws',
         nickname: 'Gingu'
