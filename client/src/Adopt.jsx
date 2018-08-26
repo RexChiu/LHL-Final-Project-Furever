@@ -59,12 +59,10 @@ class Adopt extends Component {
 
     return (
       <React.Fragment>
-        <main>
-          <p> Adopt Page </p>
-          <SearchUI />
-          <AdoptFilter />
-          <div>{adoptItems}</div>
-        </main>
+        <p> Adopt Page </p>
+        <SearchUI />
+        <AdoptFilter />
+        <div>{adoptItems}</div>
       </React.Fragment>
     );
   }
