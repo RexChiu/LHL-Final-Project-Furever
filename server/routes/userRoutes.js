@@ -1,6 +1,8 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 
+import UserSerializer from '../serializers/user';
+
 const router = express.Router();
 const SALT_ROUNDS = 10;
 
@@ -16,7 +18,12 @@ module.exports = (dataHelpers) => {
 
     const userId = await dataHelpers.insertNewUser(inputObj);
 
-    res.json(userId);
+    const returnObj = {
+      userId
+    };
+
+    const jsonOutput = UserSerializer.serialize(returnObj);
+    res.json(jsonOutput);
   });
 
   router.post('/login', (req, res) => {
