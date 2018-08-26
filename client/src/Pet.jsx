@@ -38,7 +38,11 @@ class Pet extends Component {
         <section>
           <div className="col-sm-4" data-toggle="modal" href={'#petDetails' + this.props.pet.id}>
             <div className="adoptitem panel panel-default">
-              <img src={this.props.pet.attributes.media.photos.photo[2]} alt="notWorking" id="mouseUI" />
+              <img
+                src={this.props.pet.attributes.media ? this.props.pet.attributes.media.photos.photo[2] : 'https://i.imgur.com/I4y3r3l.jpg'}
+                alt="notWorking"
+                id="mouseUI"
+              />
               <p> {this.props.pet.attributes.animal} </p>
               <p> {this.props.pet.attributes.breeds.breed} </p>
               <p> {this.props.pet.attributes.age} </p>
@@ -56,7 +60,10 @@ class Pet extends Component {
                   <h4 class="modal-title">Confirmation</h4>
                 </div>
                 <div class="modal-body">
-                  <img src={this.props.pet.attributes.media.photos.photo[2]} alt="notWorking" />
+                  <img
+                    src={this.props.pet.attributes.media ? this.props.pet.attributes.media.photos.photo[2] : 'https://i.imgur.com/I4y3r3l.jpg'}
+                    alt="notWorking"
+                  />
                   <p> {this.props.pet.attributes.animal} </p>
                   <p> {this.props.pet.attributes.breeds.breed} </p>
                   <p> {this.props.pet.attributes.age} </p>
