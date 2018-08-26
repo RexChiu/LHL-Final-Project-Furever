@@ -7,7 +7,7 @@ class Home extends Component {
       <React.Fragment>
         <img src="../public/favicon.ico" alt="notWorking" />
         <p>login</p>
-        <form method="post" id="login" action="/user/login">
+        <form method="post" id="login" action="http://localhost:8080/user/login">
           <label>
             username:
             <input name="username" type="text" onChange={this.handleChange} />
@@ -21,7 +21,7 @@ class Home extends Component {
         </form>
 
         <p>register</p>
-        <form method="post" id="login" action="/user/register">
+        <form method="post" id="login" action="http://localhost:8080/user/register">
           <label>
             username:
             <input name="username" type="text" />
