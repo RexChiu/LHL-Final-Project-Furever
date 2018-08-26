@@ -1,10 +1,6 @@
 // temp data helper functions to return dummy data
 import firebaseConverter from '../helpers/convert-json-to-firebase';
-<<<<<<< HEAD
-import { callbackify } from 'util';
-=======
 import jsonConverter from '../helpers/convert-firebase-to-json';
->>>>>>> 25b687e11bd6735fedc469c283e94849685bfdd2
 
 module.exports = function makeDataHelpers(db) {
   const ref = db.ref('restricted_access/secret_document');
