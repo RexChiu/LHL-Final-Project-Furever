@@ -16,17 +16,6 @@ module.exports = (dataHelpers) => {
     res.json(jsonOutput);
   });
 
-  router.get('/test', async (req, res) => {
-    const result = await dataHelpers.returnAll();
-
-    // comment this out for serialized data
-    res.json(result);
-
-    // uncomment this for serialized data
-    // const jsonOutput = PetsSerializer.serialize(result);
-    // res.json(jsonOutput);
-  });
-
   router.get('/petfind', async (req, res) => {
     const result = await dataHelpers.checkPetExists(20217192);
 
@@ -64,12 +53,12 @@ module.exports = (dataHelpers) => {
     const options = {
       location: 'toronto,ontario',
       output: 'full',
-      count: 0
+      count: 100
     };
     try {
       const result = await petfinder('pet.find', options);
-      // const sanitized = await sanitizePetfinder(result);
-      const output = await dataHelpers.insertMultiplePets(result.petfinder.pets.pet);
+      const sanitized = await sanitizePetfinder(result);
+      const output = await dataHelpers.insertMultiplePets(sanitized);
       res.json(output);
     } catch (e) {
       console.log('Error', e);

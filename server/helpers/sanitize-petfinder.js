@@ -3,38 +3,56 @@ function capitalizeFirstLetter(string) {
 }
 
 module.exports = function santizePetfinder(json) {
-  // const sanitizedJson = json.petfinder.pets.pet;
+  json = json.petfinder.pets.pet;
 
-  json.petfinder.pets.pet.forEach((elem) => {
-    // guard statement for no photos
-    if (elem.media.photos.photo === '') {
-      console.log('\n\nNo Photo!\n\n');
-      elem = '';
+  // synchronous for loop
+  for (let i = 0; i < json.length; i++) {
+    // guard statements to delete element if missing values
+    // no pictures
+    if (json[i].media === '') {
+      console.log(`No Picture: ${json[i].id}`);
+      json[i] = '';
+      continue;
+    }
+    // no breeds info
+    if (json[i].breeds === undefined) {
+      console.log(`No Breeds: ${json[i].id}`);
+      json[i] = '';
+      continue;
     }
 
-    // // sanitize pet.breeds.breed to pet.breed
-    // elem.breed = elem.breeds.breed;
-    // delete elem.breeds;
-
-    // console.log(`Elem: ${JSON.stringify(elem)}`);
+    // sanitize pet.breeds.breed to pet.breeds
+    if (json[i].breeds.breed instanceof Array) {
+      json[i].breed = json[i].breeds.breed.join(' and ');
+    } else {
+      json[i].breed = json[i].breeds.breed;
+    }
+    delete json[i].breeds;
 
     // // sanitize pet.media.photos.photo to pet.photos
-    // elem.photos = elem.media.photos.photo;
-    // delete elem.media;
+    // json[i].photos = json[i].media.photos.photo;
+    // delete json[i].media;
+    json[i].photos = [];
+    for (let j = 0; j < json[i].media.photos.photo.length; j++) {
+      if (json[i].media.photos.photo[j].includes('x.jpg')) {
+        json[i].photos.push(json[i].media.photos.photo[j]);
+      }
+    }
+    delete json[i].media;
 
-    // // sanitize pet.options.option to pet.options
-    // const options = elem.options.option;
-    // delete elem.options;
-    // // not an array, put into array
-    // if (options && !(options instanceof Array)) {
-    //   elem.options = [options];
-    // } else {
-    //   elem.options = options || '';
-    // }
+    // sanitize pet.options.option to pet.options
+    const options = json[i].options.option;
+    delete json[i].options;
+    // not an array, put into array
+    if (options && !(options instanceof Array)) {
+      json[i].options = [options];
+    } else {
+      json[i].options = options || '';
+    }
 
     // sanitize pet.name to remove all caps
-    // elem.name = capitalizeFirstLetter(elem.name);
-  });
+    json[i].name = capitalizeFirstLetter(json[i].name);
+  }
 
-  return json.petfinder.pets.pet;
+  return Promise.resolve(json);
 };
