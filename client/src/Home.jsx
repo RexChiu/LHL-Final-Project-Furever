@@ -9,8 +9,11 @@ class Home extends Component {
       login_username: '',
       login_password: '',
       register_username: '',
-      register_password: ''
+      register_password: '',
+      lat: 43.65003,
+      lng: -79.39159
     };
+    this.getLocation();
   }
 
   submitLogin = event => {
@@ -52,6 +55,18 @@ class Home extends Component {
     });
   };
 
+  // function call to grab the gps locations of the user
+  getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.setLocation);
+    }
+  };
+
+  // function call to set the current state to the current location
+  setLocation = position => {
+    this.setState({ lat: position.coords.latitude, lng: position.coords.longitude });
+  };
+
   submitRegister = event => {
     event.preventDefault();
 
@@ -63,7 +78,9 @@ class Home extends Component {
 
     const reqObj = {
       username: this.state.register_username,
-      password: this.state.register_password
+      password: this.state.register_password,
+      lat: this.state.lat,
+      lng: this.state.lng
     };
 
     axios

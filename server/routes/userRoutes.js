@@ -23,7 +23,9 @@ module.exports = (dataHelpers) => {
     // constructs an user object to send to db
     const inputObj = {
       username: req.body.username,
-      passwordDigest
+      passwordDigest,
+      lat: req.body.lat,
+      lng: req.body.lng
     };
 
     // grabs userId from successful db insert
