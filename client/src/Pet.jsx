@@ -38,7 +38,11 @@ class Pet extends Component {
         <section>
           <div className="col-sm-4" data-toggle="modal" href={'#petDetails' + this.props.pet.id}>
             <div className="adoptitem panel panel-default">
-              <img src={this.props.pet.attributes.media.photos.photo[2]} alt="notWorking" id="mouseUI" />
+              <img
+                src={this.props.pet.attributes.media ? this.props.pet.attributes.media.photos.photo[2] : 'https://i.imgur.com/I4y3r3l.jpg'}
+                alt="notWorking"
+                id="mouseUI"
+              />
               <p> {this.props.pet.attributes.animal} </p>
               <p> {this.props.pet.attributes.breeds.breed} </p>
               <p> {this.props.pet.attributes.age} </p>
@@ -46,19 +50,20 @@ class Pet extends Component {
           </div>
           {/*                   MODAL                     */}
 
-          <div id={'petDetails' + this.props.pet.id} class="modal fade">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <div id={'petDetails' + this.props.pet.id} className="modal fade">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                   </button>
-                  <h4 class="modal-title">Confirmation</h4>
+                  <h4 className="modal-title">Confirmation</h4>
                 </div>
-                <div class="modal-body">
-                  <h1> {this.props.pet.name} </h1>
-                  <small> {this.props.pet.attributes.sex} </small>
-                  <img src={this.props.pet.attributes.media.photos.photo[2]} alt="notWorking" />
+                <div className="modal-body">
+                  <img
+                    src={this.props.pet.attributes.media ? this.props.pet.attributes.media.photos.photo[2] : 'https://i.imgur.com/I4y3r3l.jpg'}
+                    alt="notWorking"
+                  />
                   <p> {this.props.pet.attributes.animal} </p>
                   <p> {this.props.pet.attributes.breeds.breed} </p>
                   <p> {this.props.pet.attributes.age} </p>
@@ -69,7 +74,7 @@ class Pet extends Component {
                     {this.props.pet.attributes.contact.state}{' '}
                   </p>
 
-                  <p class="text-warning">
+                  <p className="text-warning">
                     <small> {this.props.pet.attributes.description} </small>
                   </p>
                   <p>
@@ -77,12 +82,12 @@ class Pet extends Component {
                     {this.props.pet.attributes.contact.phone}, {this.props.pet.attributes.contact.email}{' '}
                   </p>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-default" data-dismiss="modal">
                     Close
                   </button>
 
-                  <a onClick={this.handleSubmit} value={this.props.pet.id} class="btn btn-lg btn-primary">
+                  <a onClick={this.handleSubmit} value={this.props.pet.id} className="btn btn-lg btn-primary">
                     Adopt
                   </a>
                 </div>
