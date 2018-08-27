@@ -7,7 +7,10 @@ module.exports = function makeDataHelpers(db) {
 
   return {
     returnAll() {
-      return ref.once('value').then(snap => jsonConverter(snap.val()));
+      return ref
+        .child('pets')
+        .once('value')
+        .then(snap => jsonConverter(snap.val()));
     },
     // Insert Pet records from the sanitized API to the database.
     insertMultiplePets(jsonInput) {
@@ -153,6 +156,19 @@ module.exports = function makeDataHelpers(db) {
         date_of_birth: 'June 23, 2018',
         full_name: 'Ginger Paws',
         nickname: 'Gingu'
+      });
+    },
+    filterPets(options) {
+      return new Promise((resolve, reject) => {
+        const petsRef = ref.child('pets');
+        petsRef
+          .orderByChild('breed')
+          .equalTo(options)
+          .once('value', (snapshot) => {
+            const pet = jsonConverter(snapshot.val());
+            console.log('Value of breed exists ', pet);
+            resolve(pet);
+          });
       });
     }
   };
