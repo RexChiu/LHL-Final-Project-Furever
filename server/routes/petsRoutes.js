@@ -4,6 +4,9 @@ import PetsSerializer from '../serializers/pets';
 import petfinder from '../api/petfinder';
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
+import rp from 'request-promise-native';
+import cheerio from 'cheerio';
+
 const router = express.Router();
 
 /* GET index page. */
@@ -53,7 +56,8 @@ module.exports = (dataHelpers) => {
     const options = {
       location: 'toronto,ontario',
       output: 'full',
-      count: 100
+      count: 500,
+      animal: 'dog'
     };
     try {
       const result = await petfinder('pet.find', options);
@@ -64,6 +68,24 @@ module.exports = (dataHelpers) => {
       console.log('Error', e);
       res.json(e);
     }
+  });
+
+  router.get('/populate/dogbreeds', async (req, res) => {
+    const options = {
+      uri: 'https://www.petfinder.com/dog-breeds'
+    };
+
+    rp(options)
+      .then((html) => {
+        const $ = cheerio.load(html);
+        $('#breed_select option').each((i, el) => {
+          console.log($(el).attr('value'));
+        });
+        res.json('Cats');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   return router;

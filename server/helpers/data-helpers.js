@@ -7,7 +7,10 @@ module.exports = function makeDataHelpers(db) {
 
   return {
     returnAll() {
-      return ref.once('value').then(snap => jsonConverter(snap.val()));
+      return ref
+        .child('pets')
+        .once('value')
+        .then(snap => jsonConverter(snap.val()));
     },
     // Insert Pet records from the sanitized API to the database.
     insertMultiplePets(jsonInput) {
