@@ -9,10 +9,10 @@ class Navbar extends Component {
         <a className="navbar-brand">
           <Link to="/">Home</Link>
         </a>
-        <a className="nav-item nav-link">
+        <a className="nav-item">
           <Link to="/events">Events</Link>
         </a>
-        <a className="nav-item nav-link">
+        <a className="nav-item">
           <Link to="/adopt">Adopt</Link>
         </a>
         <hr />

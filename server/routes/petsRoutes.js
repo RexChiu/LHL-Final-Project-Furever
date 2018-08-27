@@ -66,5 +66,19 @@ module.exports = (dataHelpers) => {
     }
   });
 
+  // routed to AdoptFilter.jsx to find pets by filters
+  router.put('/filter', async (req, res) => {
+    console.log(`Req Body ${JSON.stringify(req.body)}`);
+    const breedOut = req.body.breed;
+    const options = {
+      breed: req.body.breed
+    };
+    console.log(options);
+
+    const result = await dataHelpers.filterPets(req.body.breed);
+    const jsonOutput = PetsSerializer.serialize(result);
+    res.json(jsonOutput);
+    console.log(jsonOutput);
+  });
   return router;
 };

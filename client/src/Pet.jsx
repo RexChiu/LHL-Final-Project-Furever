@@ -46,31 +46,41 @@ class Pet extends Component {
           </div>
           {/*                   MODAL                     */}
 
-          <div id={'petDetails' + this.props.pet.id} class="modal fade">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <div id={'petDetails' + this.props.pet.id} className="modal fade">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                   </button>
-                  <h4 class="modal-title">Confirmation</h4>
+                  <h4 className="modal-title">Confirmation</h4>
                 </div>
                 <div class="modal-body">
                   <img src={this.props.pet.attributes.photos} alt="notWorking" />
                   <p> {this.props.pet.attributes.animal} </p>
                   <p> {this.props.pet.attributes.breed} </p>
                   <p> {this.props.pet.attributes.age} </p>
+
                   <p>
                     {' '}
-                    {this.props.pet.attributes.contact.address1}, {this.props.pet.attributes.contact.city}, {this.props.pet.attributes.contact.state}{' '}
+                    {this.props.pet.attributes.contact.address1}, {this.props.pet.attributes.contact.zip}, {this.props.pet.attributes.contact.city},{' '}
+                    {this.props.pet.attributes.contact.state}{' '}
+                  </p>
+
+                  <p className="text-warning">
+                    <small> {this.props.pet.attributes.description} </small>
+                  </p>
+                  <p>
+                    {' '}
+                    {this.props.pet.attributes.contact.phone}, {this.props.pet.attributes.contact.email}{' '}
                   </p>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-default" data-dismiss="modal">
                     Close
                   </button>
 
-                  <a onClick={this.handleSubmit} value={this.props.pet.id} class="btn btn-lg btn-primary">
+                  <a onClick={this.handleSubmit} value={this.props.pet.id} className="btn btn-lg btn-primary">
                     Adopt
                   </a>
                 </div>
