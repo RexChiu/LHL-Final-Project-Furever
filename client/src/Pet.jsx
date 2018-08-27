@@ -56,17 +56,13 @@ class Pet extends Component {
                   <h4 class="modal-title">Confirmation</h4>
                 </div>
                 <div class="modal-body">
-                  <img src={this.props.pet.attributes.photos[0]} alt="notWorking" />
+                  <img src={this.props.pet.attributes.photos} alt="notWorking" />
                   <p> {this.props.pet.attributes.animal} </p>
                   <p> {this.props.pet.attributes.breed} </p>
                   <p> {this.props.pet.attributes.age} </p>
                   <p>
                     {' '}
                     {this.props.pet.attributes.contact.address1}, {this.props.pet.attributes.contact.city}, {this.props.pet.attributes.contact.state}{' '}
-                  </p>
-                  <p>Do you want to save changes you made to document before closing?</p>
-                  <p class="text-warning">
-                    <small>If you don't save, your changes will be lost.</small>
                   </p>
                 </div>
                 <div class="modal-footer">
