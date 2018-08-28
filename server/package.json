@@ -26,6 +26,7 @@
     "query-string": "^6.1.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
+    "uuid": "^3.3.2",
     "xml2json-light": "^1.0.6"
   },
   "devDependencies": {

@@ -2,6 +2,7 @@
 import firebaseConverter from '../helpers/convert-json-to-firebase';
 import jsonConverter from '../helpers/convert-firebase-to-json';
 import petFilterHelper from './pet-filter-helper';
+import uuidv4 from 'uuid/v4';
 
 module.exports = function makeDataHelpers(db) {
   return {
@@ -36,6 +37,35 @@ module.exports = function makeDataHelpers(db) {
         .commit()
         .then(result => result)
         .catch(err => err);
+    },
+    // inserts a new user into the firestore db
+    insertNewUser(newUser) {
+      // creates a new unique id for a user
+      const uuid = uuidv4();
+      const usersRef = db.collection('users').doc(uuid);
+      // inserts user into the database
+      usersRef
+        .set(newUser)
+        .then(result => uuid)
+        .then(err => err);
+    },
+    // searches the db for a username
+    getUserDetails(username) {
+      // searches in users collection
+      const usersRef = db.collection('users');
+      return usersRef
+        .where('username', '==', username)
+        .get()
+        .then((result) => {
+          if (!result.empty) {
+            return result.docs();
+          }
+          return null;
+        })
+        .catch((err) => {
+          console.log('error');
+          return err;
+        });
     }
   };
 };

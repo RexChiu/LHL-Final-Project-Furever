@@ -9,7 +9,6 @@ const SALT_ROUNDS = 10;
 /* GET index page. */
 module.exports = (dataHelpers) => {
   router.post('/register', async (req, res) => {
-    console.log(`Req: ${JSON.stringify(req.body)}`);
     // guard statment for existing username
     const exists = await dataHelpers.getUserDetails(req.body.username);
     if (exists) {
