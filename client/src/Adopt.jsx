@@ -38,15 +38,27 @@ class Adopt extends Component {
       );
   }
 
+  rerenderPets = pets2 => {
+    console.log('CLIENT-SIDE', JSON.parse(pets2).data.data);
+    this.setState({ pets: JSON.parse(pets2).data.data });
+
+    // this.state = {
+    //   error: null,
+    //   isLoaded: false,
+    //   pets: pets2
+    // };
+  };
+
   render() {
     const { pets } = this.state;
+    // const adoptItems = '';
     const adoptItems = pets.map((pet, i) => <Pet pet={pet} userId={this.props.userId} key={pet.id} />);
 
     return (
       <React.Fragment>
         <p> Adopt Page </p>
         <SearchUI />
-        <AdoptFilter />
+        <AdoptFilter rerenderPets={this.rerenderPets} />
         <div>{adoptItems}</div>
       </React.Fragment>
     );

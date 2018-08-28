@@ -39,7 +39,8 @@ module.exports = function makeDataHelpers(db) {
     },
     moveFbRecord(oldRef, newRef) {
       oldRef.once('value', (snap) => {
-        newRef.set(snap.val(), (error) => {
+        const newAdoptRef = newRef.push();
+        newAdoptRef.set(snap.val(), (error) => {
           if (!error) {
             oldRef.remove();
           } else if (typeof console !== 'undefined' && console.error) {
@@ -51,16 +52,13 @@ module.exports = function makeDataHelpers(db) {
     // This datahelper will check if the provided petID exists(returns boolean) in the database
     checkPetIDExists(petID) {
       const usersRef = ref.child('pets');
-      console.log('Within checkPetExists');
+      console.log('Within checkPetExists', petID);
       return new Promise((resolve, reject) => {
-        usersRef
-          .orderByChild('id')
-          .equalTo(petID)
-          .once('value', (snapshot) => {
-            const exists = snapshot.val() !== null;
-            console.log('Value of checkPetIDExists exists ', exists);
-            resolve(exists);
-          });
+        usersRef.child(petID).once('value', (snapshot) => {
+          const exists = snapshot.val() !== null;
+          console.log('Value of checkPetIDExists exists ', exists);
+          resolve(exists);
+        });
       });
     },
     // This datahelper will check if the provided username exists(returns boolean) in the database
@@ -95,6 +93,8 @@ module.exports = function makeDataHelpers(db) {
       const usersRef = ref.child(`users/${userID}/adopted`);
       const petsRef = ref.child(`pets/${petID}`);
 
+      console.log('adoptPet', userID, petID);
+
       if ((await this.checkPetIDExists(petID)) && (await this.checkUserIDExists(userID))) {
         console.log('After PetID and UserID exists');
         this.moveFbRecord(petsRef, usersRef);
@@ -121,6 +121,19 @@ module.exports = function makeDataHelpers(db) {
       return breedsRef.set(breeds).then(() => {
         console.log('Synchronization succeeded');
         return breeds;
+      });
+    },
+    filterPets(options) {
+      return new Promise((resolve, reject) => {
+        const petsRef = ref.child('pets');
+        petsRef
+          .orderByChild('breed')
+          .equalTo(options)
+          .once('value', (snapshot) => {
+            const pet = jsonConverter(snapshot.val());
+            console.log('Value of breed exists ', pet);
+            resolve(pet);
+          });
       });
     }
   };
