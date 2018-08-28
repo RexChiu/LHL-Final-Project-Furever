@@ -4,6 +4,9 @@ import PetsSerializer from '../serializers/pets';
 import petfinder from '../api/petfinder';
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
+import rp from 'request-promise-native';
+import cheerio from 'cheerio';
+
 const router = express.Router();
 
 /* GET index page. */
@@ -64,7 +67,8 @@ module.exports = (dataHelpers) => {
     const options = {
       location: 'toronto,ontario',
       output: 'full',
-      count: 100
+      count: 500,
+      animal: 'dog'
     };
     try {
       const result = await petfinder('pet.find', options);
@@ -75,6 +79,40 @@ module.exports = (dataHelpers) => {
       console.log('Error', e);
       res.json(e);
     }
+  });
+
+  // routed to AdoptFilter.jsx to find pets by filters
+  router.put('/filter', async (req, res) => {
+    console.log(`Req Body ${JSON.stringify(req.body)}`);
+    const breedOut = req.body.breed;
+    const options = {
+      breed: req.body.breed
+    };
+    console.log(options);
+
+    const result = await dataHelpers.filterPets(req.body.breed);
+    const jsonOutput = PetsSerializer.serialize(result);
+    res.json(jsonOutput);
+    console.log(jsonOutput);
+  });
+
+  router.get('/populate/dogbreeds', async (req, res) => {
+    const options = {
+      uri: 'https://www.petfinder.com/dog-breeds'
+    };
+    const dogBreeds = {};
+
+    rp(options)
+      .then((html) => {
+        const $ = cheerio.load(html);
+        $('#breed_select option').each((i, el) => {
+          dogBreeds[$(el).text()] = $(el).attr('value');
+        });
+        res.json(dogBreeds);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 
   return router;
