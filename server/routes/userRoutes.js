@@ -39,27 +39,19 @@ module.exports = (dataHelpers) => {
   });
 
   router.post('/login', async (req, res) => {
-    console.log(`Req Body ${JSON.stringify(req.body)}`);
-
     const inputObj = {
       username: req.body.username,
       password: req.body.password
     };
 
     // grab user details with login details
-    let user = await dataHelpers.getUserDetails(req.body.username);
+    const user = await dataHelpers.getUserDetails(req.body.username);
 
     // guard statment for no existing user
     if (!user) {
       res.sendStatus(401);
       return;
     }
-
-    // using .val() to extract data out of firebase snapshot, dunno why
-    user = user.val();
-
-    // extracting out the values of the user (don't know key, only way to grab the values)
-    user = Object.values(user)[0];
 
     // using bcrypt to check password match
     const match = await bcrypt.compare(inputObj.password, user.passwordDigest);

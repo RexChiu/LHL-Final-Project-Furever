@@ -40,13 +40,13 @@ module.exports = function makeDataHelpers(db) {
     },
     // inserts a new user into the firestore db
     insertNewUser(newUser) {
-      // creates a new unique id for a user
-      const uuid = uuidv4();
-      const usersRef = db.collection('users').doc(uuid);
+      // creates a new unique id for a user and adds into user
+      const usersRef = db.collection('users').doc();
+      newUser.id = usersRef.id;
       // inserts user into the database
       usersRef
         .set(newUser)
-        .then(result => uuid)
+        .then(result => usersRef.id)
         .then(err => err);
     },
     // searches the db for a username
@@ -57,8 +57,13 @@ module.exports = function makeDataHelpers(db) {
         .where('username', '==', username)
         .get()
         .then((result) => {
+          // query returns a querySnapshot, which has an array (.docs) of documentSnapshot
           if (!result.empty) {
-            return result.docs();
+            // grabs the first instance of the query
+            const outputObj = result.docs[0].data();
+            // grabs the id of the document in a weird way and append to output
+            outputObj.id = result.docs[0].ref.id;
+            return outputObj;
           }
           return null;
         })
