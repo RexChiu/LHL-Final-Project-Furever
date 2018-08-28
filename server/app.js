@@ -17,6 +17,8 @@ firebase.initializeApp({
 
 // data helper
 const db = firebase.firestore();
+const settings = { /* your settings... */ timestampsInSnapshots: true };
+db.settings(settings);
 const DataHelpers = require('./helpers/data-helpers.js')(db);
 
 // Setup express and environment
