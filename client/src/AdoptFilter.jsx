@@ -45,17 +45,17 @@ class AdoptFilter extends Component {
 
     // constructs output obj, only puts in the selected filters
     const outputObj = {};
-    if (this.state.animal !== '') {
-      outputObj.animal = this.state.animal;
-    }
-    if (this.state.sex !== '') {
-      outputObj.sex = this.state.sex;
+    if (this.state.size !== '') {
+      outputObj.size = this.state.size;
     }
     if (this.state.age !== '') {
       outputObj.age = this.state.age;
     }
-    if (this.state.size !== '') {
-      outputObj.size = this.state.size;
+    if (this.state.sex !== '') {
+      outputObj.sex = this.state.sex;
+    }
+    if (this.state.animal !== '') {
+      outputObj.animal = this.state.animal;
     }
 
     axios

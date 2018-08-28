@@ -16,6 +16,7 @@ module.exports = function filter(pets, options) {
         // if a key in this pet does not match, do not push into array
         if (pets[i][keys[j]] !== values[j]) {
           matchAll = false;
+          break;
         }
       }
       if (matchAll) {
