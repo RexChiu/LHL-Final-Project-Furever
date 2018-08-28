@@ -20,15 +20,16 @@ module.exports = (dataHelpers) => {
     const breedOut = req.body.breed;
     const ageOut = req.body.age;
     const options = {
-      breed: req.body.breed,
+      animal: req.body.animal,
+      size: req.body.size,
+      sex: req.body.sex,
       age: req.body.age
     };
     console.log('//----OPTIONS----//', options);
 
     const result = await dataHelpers.filterPets(options);
     if (result === {}) {
-      const data = {};
-      res.json(data);
+      res.json(result);
     } else {
       const jsonOutput = PetsSerializer.serialize(result);
       res.json(jsonOutput);

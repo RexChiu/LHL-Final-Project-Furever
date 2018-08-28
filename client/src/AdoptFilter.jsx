@@ -36,6 +36,11 @@ class AdoptFilter extends Component {
 
   filterSubmit = event => {
     event.preventDefault();
+    // no options selected, break
+    if (!this.state.animal && !this.state.size && !this.state.sex && !this.state.age) {
+      return;
+    }
+
     const { rerenderPets } = this.props;
 
     axios
