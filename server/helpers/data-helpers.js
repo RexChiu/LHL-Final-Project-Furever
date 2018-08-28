@@ -5,6 +5,18 @@ import petFilterHelper from './pet-filter-helper';
 
 module.exports = function makeDataHelpers(db) {
   return {
+    returnAll() {
+      const petsRef = db.collection('pets');
+      const resultArr = [];
+      return petsRef
+        .get()
+        .then((snapshot) => {
+          // synchronized for loop
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
     insertMultiplePets(pets) {
       const batch = db.batch();
       const petsRef = db.collection('pets');
