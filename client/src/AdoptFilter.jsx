@@ -70,6 +70,10 @@ class AdoptFilter extends Component {
       });
   };
 
+  refreshPage = () => {
+    window.location.reload();
+  };
+
   render() {
     return (
       <section className="panel panel-default">
@@ -113,6 +117,9 @@ class AdoptFilter extends Component {
 
           <input type="submit" value="submit" />
         </form>
+        <button type="button" onClick={this.refreshPage}>
+          Reset Filters
+        </button>
       </section>
     );
   }
