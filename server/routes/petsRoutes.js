@@ -1,11 +1,6 @@
 import express from 'express';
 
 import PetsSerializer from '../serializers/pets';
-import petfinder from '../api/petfinder';
-import sanitizePetfinder from '../helpers/sanitize-petfinder';
-
-import rp from 'request-promise-native';
-import cheerio from 'cheerio';
 
 const router = express.Router();
 
