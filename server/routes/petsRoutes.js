@@ -85,12 +85,14 @@ module.exports = (dataHelpers) => {
   router.put('/filter', async (req, res) => {
     console.log(`Req Body ${JSON.stringify(req.body)}`);
     const breedOut = req.body.breed;
+    const ageOut = req.body.age;
     const options = {
-      breed: req.body.breed
+      breed: req.body.breed,
+      age: req.body.age
     };
-    console.log(options);
+    console.log('//----OPTIONS----//', options);
 
-    const result = await dataHelpers.filterPets(req.body.breed);
+    const result = await dataHelpers.filterPets(options);
     if (result === {}) {
       const data = {};
       res.json(data);
