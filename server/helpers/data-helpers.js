@@ -145,21 +145,28 @@ module.exports = function makeDataHelpers(db) {
     filterPets(options) {
       return new Promise((resolve, reject) => {
         const petsRef = ref.child('pets');
+        // deconstructs options obj into an array
+        const optionsArr = [];
+        Object.keys(options).forEach((key) => {
+          if (options[key]) {
+            optionsArr.push({ [key]: options[key] });
+          }
+        });
+        console.log(optionsArr);
 
-        petsRef
-          .orderByChild('breed')
-          .equalTo(options.breed)
-          .once('value', (snapshot) => {
-            if (snapshot.val() === null) {
-              resolve({});
-            } else {
-              console.log('Value of breed exists ', snapshot.val());
-              const pet = jsonConverter(snapshot.val());
-              // const pets2ndfilter = filterHelper(pet, options);
-              resolve(pet);
-            }
-          });
-        // need if statement for when value is not found.
+        // petsRef
+        //   .orderByChild('breed')
+        //   .equalTo(options.breed)
+        //   .once('value', (snapshot) => {
+        //     if (snapshot.val() === null) {
+        //       resolve({});
+        //     } else {
+        //       console.log('Value of breed exists ', snapshot.val());
+        //       const pet = jsonConverter(snapshot.val());
+        //       // const pets2ndfilter = filterHelper(pet, options);
+        //       resolve(pet);
+        //     }
+        //   });
       });
     }
   };

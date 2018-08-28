@@ -8,9 +8,9 @@ class AdoptFilter extends Component {
     // this.rerenderPets = this.rerenderPets.bind(this);
     this.state = {
       animal: '',
-      size: '',
       sex: '',
-      age: ''
+      age: '',
+      size: ''
     };
   }
 
@@ -73,16 +73,6 @@ class AdoptFilter extends Component {
             <option value="dog">Dog</option>
           </select>
 
-          <select id="size" onChange={this.changeSize}>
-            <option value="" hidden disabled selected>
-              Size
-            </option>
-            <option value="S">Small</option>
-            <option value="M">Medium</option>
-            <option value="L">Large</option>
-            <option value="XL">XLarge</option>
-          </select>
-
           <select id="sex" onChange={this.changeSex}>
             <option value="" hidden disabled selected>
               Sex
@@ -99,6 +89,16 @@ class AdoptFilter extends Component {
             <option value="Young">Young</option>
             <option value="Adult">Adult</option>
             <option value="Senior">Senior</option>
+          </select>
+
+          <select id="size" onChange={this.changeSize}>
+            <option value="" hidden disabled selected>
+              Size
+            </option>
+            <option value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+            <option value="XL">XLarge</option>
           </select>
 
           <input type="submit" value="submit" />
