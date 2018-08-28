@@ -123,6 +123,22 @@ module.exports = function makeDataHelpers(db) {
         return breeds;
       });
     },
+    getBreeds(type) {
+      const breedsRef = ref.child('breeds').child(type);
+      return breedsRef.once('value').then(snap => jsonConverter(snap.val()));
+    },
+    saveInfo(typeAnimal, typeInfo, id, personality) {
+      const personalityRef = ref
+        .child('info')
+        .child(typeAnimal)
+        .child(id)
+        .child(typeInfo);
+
+      return personalityRef.set(personality).then(() => {
+        console.log('Synchronization succeeded');
+        return personality;
+      });
+    },
     filterPets(options) {
       return new Promise((resolve, reject) => {
         const petsRef = ref.child('pets');

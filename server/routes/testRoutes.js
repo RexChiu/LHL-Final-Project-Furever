@@ -30,13 +30,15 @@ module.exports = (dataHelpers) => {
 
   router.get('/populate/dogbreeds', async (req, res) => {
     const options = {
-      uri: 'https://www.petfinder.com/dog-breeds'
+      uri: 'https://www.petfinder.com/dog-breeds',
+      transform(body) {
+        return cheerio.load(body);
+      }
     };
     const dogBreeds = {};
 
     rp(options)
-      .then((html) => {
-        const $ = cheerio.load(html);
+      .then(($) => {
         $('#breed_select option').each((i, el) => {
           const name = $(el).text();
           const url = $(el).attr('value');
@@ -55,13 +57,15 @@ module.exports = (dataHelpers) => {
 
   router.get('/populate/catbreeds', async (req, res) => {
     const options = {
-      uri: 'https://www.petfinder.com/cat-breeds'
+      uri: 'https://www.petfinder.com/cat-breeds',
+      transform(body) {
+        return cheerio.load(body);
+      }
     };
     const catBreeds = {};
 
     rp(options)
-      .then((html) => {
-        const $ = cheerio.load(html);
+      .then(($) => {
         $('#breed_select option').each((i, el) => {
           const name = $(el).text();
           const url = $(el).attr('value');
@@ -75,6 +79,42 @@ module.exports = (dataHelpers) => {
       .then(result => res.json(result))
       .catch((err) => {
         console.log(err);
+      });
+  });
+
+  router.get('/populate/catcare', async (req, res) => {
+    // grabs the entire list of breeds from db
+    const result = await dataHelpers.getBreeds('cat');
+
+    const cat = result[0];
+    const personalityTag = `${cat.name} Cat Personality`;
+    const traitsTag = `${cat.name} Cat Breed Traits`;
+    const options = {
+      uri: cat.url,
+      transform(body) {
+        return cheerio.load(body);
+      }
+    };
+
+    // makes API call to grab the personality and traits
+    rp(options)
+      .then(($) => {
+        const personality = $('h2')
+          .filter((i, el) => $(el).text() === personalityTag)
+          .parent()
+          .html()
+          .trim();
+
+        return dataHelpers.saveInfo('cat', 'personality', cat.name, personality).then(() => $);
+      })
+      .then(($) => {
+        const traits = $('h2')
+          .filter((i, el) => $(el).text() === traitsTag)
+          .parent()
+          .html()
+          .trim();
+
+        return dataHelpers.saveInfo('cat', 'traits', cat.name, traits).then(() => $);
       });
   });
 
