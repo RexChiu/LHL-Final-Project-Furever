@@ -91,9 +91,14 @@ module.exports = (dataHelpers) => {
     console.log(options);
 
     const result = await dataHelpers.filterPets(req.body.breed);
-    const jsonOutput = PetsSerializer.serialize(result);
-    res.json(jsonOutput);
-    console.log(jsonOutput);
+    if (result === {}) {
+      const data = {};
+      res.json(data);
+    } else {
+      const jsonOutput = PetsSerializer.serialize(result);
+      res.json(jsonOutput);
+      console.log(jsonOutput);
+    }
   });
 
   router.get('/populate/dogbreeds', async (req, res) => {

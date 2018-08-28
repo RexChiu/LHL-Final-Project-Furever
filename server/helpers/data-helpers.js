@@ -158,6 +158,7 @@ module.exports = function makeDataHelpers(db) {
         nickname: 'Gingu'
       });
     },
+    // Filter through pets for adopt page
     filterPets(options) {
       return new Promise((resolve, reject) => {
         const petsRef = ref.child('pets');
@@ -165,10 +166,15 @@ module.exports = function makeDataHelpers(db) {
           .orderByChild('breed')
           .equalTo(options)
           .once('value', (snapshot) => {
-            const pet = jsonConverter(snapshot.val());
-            console.log('Value of breed exists ', pet);
-            resolve(pet);
+            if (snapshot.val() === null) {
+              resolve({});
+            } else {
+              console.log('Value of breed exists ', snapshot.val());
+              const pet = jsonConverter(snapshot.val());
+              resolve(pet);
+            }
           });
+        // need if statement for when value is not found.
       });
     }
   };
