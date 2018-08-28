@@ -7,13 +7,25 @@ class AdoptFilter extends Component {
     super(props);
     // this.rerenderPets = this.rerenderPets.bind(this);
     this.state = {
-      breed: '',
+      animal: '',
+      size: '',
+      sex: '',
       age: ''
     };
   }
 
-  change = event => {
-    this.setState({ breed: event.target.value });
+  changeAnimal = event => {
+    this.setState({ animal: event.target.value });
+    console.log('log: ' + event.target.value);
+  };
+
+  changeSize = event => {
+    this.setState({ size: event.target.value });
+    console.log('log: ' + event.target.value);
+  };
+
+  changeSex = event => {
+    this.setState({ sex: event.target.value });
     console.log('log: ' + event.target.value);
   };
 
@@ -28,8 +40,10 @@ class AdoptFilter extends Component {
 
     axios
       .put(`http://localhost:8080/pets/filter`, {
-        breed: `${this.state.breed}`,
-        age: `${this.state.age}`
+        animal: this.state.animal,
+        size: this.state.size,
+        sex: this.state.sex,
+        age: this.state.age
       })
       .then(function(response) {
         console.log('////////');
@@ -46,31 +60,42 @@ class AdoptFilter extends Component {
       <section className="panel panel-default">
         <p>Filter</p>
         <form onSubmit={this.filterSubmit}>
-          <select id="breed" onChange={this.change} value={this.state.breed}>
-            <option value="persian">Persian</option>
-            <option value="Tabby">Tabby</option>
-            <option value="Domestic Long Hair">Domestic Long Hair</option>
-            <option value="Chihuahua">Chihuahua</option>
-            <option value="select" selected>
-              Select
+          <select id="animal" onChange={this.changeAnimal}>
+            <option value="" hidden disabled selected>
+              Animal
             </option>
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
           </select>
 
-          <select id="age" onChange={this.changeAge} value={this.state.age}>
-            <option value="Senior">Senior</option>
-            <option value="Adult">Adult</option>
-            <option value="Young">Young</option>
+          <select id="size" onChange={this.changeSize}>
+            <option value="" hidden disabled selected>
+              Size
+            </option>
+            <option value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+            <option value="XL">XLarge</option>
+          </select>
+
+          <select id="sex" onChange={this.changeSex}>
+            <option value="" hidden disabled selected>
+              Sex
+            </option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+
+          <select id="age" onChange={this.changeAge}>
+            <option value="" hidden disabled selected>
+              Age
+            </option>
             <option value="Baby">Baby</option>
-            <option value="select" selected>
-              Select
-            </option>
+            <option value="Young">Young</option>
+            <option value="Adult">Adult</option>
+            <option value="Senior">Senior</option>
           </select>
 
-          <p>
-            current value:
-            {this.state.breed}
-            {this.state.age}
-          </p>
           <input type="submit" value="submit" />
         </form>
       </section>
