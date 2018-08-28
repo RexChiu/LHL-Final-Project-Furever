@@ -147,20 +147,25 @@ module.exports = function makeDataHelpers(db) {
         const petsRef = ref.child('pets');
 
         console.log(options);
+        // grabs the first filter to query db
+        const filter = Object.keys(options)[0];
+        const filterValue = options[filter];
+        console.log(filter, filterValue);
 
-        // petsRef
-        //   .orderByChild('breed')
-        //   .equalTo(options.breed)
-        //   .once('value', (snapshot) => {
-        //     if (snapshot.val() === null) {
-        //       resolve({});
-        //     } else {
-        //       console.log('Value of breed exists ', snapshot.val());
-        //       const pet = jsonConverter(snapshot.val());
-        //       // const pets2ndfilter = filterHelper(pet, options);
-        //       resolve(pet);
-        //     }
-        //   });
+        petsRef
+          .orderByChild(filter)
+          .equalTo(filterValue)
+          .once('value', (snapshot) => {
+            // no animals matches filter, return empty object
+            if (snapshot.val() === null) {
+              resolve({});
+            } else {
+              console.log('Value of breed exists ', snapshot.val());
+              const pet = jsonConverter(snapshot.val());
+              // const pets2ndfilter = filterHelper(pet, options);
+              resolve(pet);
+            }
+          });
       });
     }
   };

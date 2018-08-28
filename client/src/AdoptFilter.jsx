@@ -79,8 +79,8 @@ class AdoptFilter extends Component {
             <option value="" hidden disabled selected>
               Animal
             </option>
-            <option value="cat">Cat</option>
-            <option value="dog">Dog</option>
+            <option value="Cat">Cat</option>
+            <option value="Dog">Dog</option>
           </select>
 
           <select id="sex" onChange={this.changeSex}>
