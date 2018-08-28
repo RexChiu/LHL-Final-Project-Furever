@@ -7,9 +7,10 @@ module.exports = function makeDataHelpers(db) {
   return {
     insertMultiplePets(pets) {
       const batch = db.batch();
+      const petsRef = db.collection('pets');
 
       for (let i = 0; i < pets.length; i++) {
-        batch.set(db.collection('pets').doc(pets[i].id.toString()), pets[i]);
+        batch.set(petsRef.doc(pets[i].id.toString()), pets[i]);
       }
       return batch
         .commit()
