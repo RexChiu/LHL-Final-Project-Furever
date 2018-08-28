@@ -40,6 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/user', require('./routes/userRoutes.js')(DataHelpers));
 app.use('/pets', require('./routes/petsRoutes.js')(DataHelpers));
 app.use('/pet', require('./routes/petRoutes.js')(DataHelpers));
+app.use('/test', require('./routes/testRoutes.js')(DataHelpers));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
