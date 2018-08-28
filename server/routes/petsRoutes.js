@@ -74,14 +74,15 @@ module.exports = (dataHelpers) => {
     const options = {
       uri: 'https://www.petfinder.com/dog-breeds'
     };
+    const dogBreeds = {};
 
     rp(options)
       .then((html) => {
         const $ = cheerio.load(html);
         $('#breed_select option').each((i, el) => {
-          console.log($(el).attr('value'));
+          dogBreeds[$(el).text()] = $(el).attr('value');
         });
-        res.json('Cats');
+        res.json(dogBreeds);
       })
       .catch((err) => {
         console.log(err);
