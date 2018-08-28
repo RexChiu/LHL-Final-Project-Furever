@@ -116,8 +116,8 @@ module.exports = function makeDataHelpers(db) {
       }
       return null;
     },
-    saveBreeds(breeds) {
-      const breedsRef = ref.child('breeds');
+    saveBreeds(type, breeds) {
+      const breedsRef = ref.child('breeds').child(type);
       return breedsRef.set(breeds).then(() => {
         console.log('Synchronization succeeded');
         return breeds;

@@ -45,7 +45,32 @@ module.exports = (dataHelpers) => {
             url
           };
         });
-        return dataHelpers.saveBreeds(dogBreeds).then(result => result);
+        return dataHelpers.saveBreeds('dog', dogBreeds).then(result => result);
+      })
+      .then(result => res.json(result))
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  router.get('/populate/catbreeds', async (req, res) => {
+    const options = {
+      uri: 'https://www.petfinder.com/cat-breeds'
+    };
+    const catBreeds = {};
+
+    rp(options)
+      .then((html) => {
+        const $ = cheerio.load(html);
+        $('#breed_select option').each((i, el) => {
+          const name = $(el).text();
+          const url = $(el).attr('value');
+          catBreeds[$(el).text()] = {
+            name,
+            url
+          };
+        });
+        return dataHelpers.saveBreeds('cat', catBreeds).then(result => result);
       })
       .then(result => res.json(result))
       .catch((err) => {
