@@ -12,12 +12,11 @@ const firebase = require('firebase-admin');
 const serviceAccount = require('./serviceAccountKey.json');
 
 firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL: 'https://test1-c94ea.firebaseio.com'
+  credential: firebase.credential.cert(serviceAccount)
 });
 
 // data helper
-const db = firebase.database();
+const db = firebase.firestore();
 const DataHelpers = require('./helpers/data-helpers.js')(db);
 
 // Setup express and environment
