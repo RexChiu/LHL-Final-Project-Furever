@@ -10,8 +10,8 @@ class Home extends Component {
       login_password: '',
       register_username: '',
       register_password: '',
-      lat: 43.65003,
-      lng: -79.39159
+      lat: 43.65,
+      lng: -79.391
     };
     this.getLocation();
   }

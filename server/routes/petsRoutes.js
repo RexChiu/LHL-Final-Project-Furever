@@ -14,5 +14,21 @@ module.exports = (dataHelpers) => {
     res.json(jsonOutput);
   });
 
+  // routed to AdoptFilter.jsx to find pets by filters
+  router.put('/filter', async (req, res) => {
+    console.log(`Req Body ${JSON.stringify(req.body)}`);
+    const breedOut = req.body.breed;
+    const ageOut = req.body.age;
+    const options = req.body;
+
+    const result = await dataHelpers.filterPets(options);
+    if (result === {}) {
+      res.json(result);
+    } else {
+      const jsonOutput = PetsSerializer.serialize(result);
+      res.json(jsonOutput);
+    }
+  });
+
   return router;
 };

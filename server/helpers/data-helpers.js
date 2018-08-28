@@ -1,7 +1,7 @@
 // temp data helper functions to return dummy data
 import firebaseConverter from '../helpers/convert-json-to-firebase';
 import jsonConverter from '../helpers/convert-firebase-to-json';
-import filterHelper from '../helpers/filter-helper';
+import petFilterHelper from './pet-filter-helper';
 
 module.exports = function makeDataHelpers(db) {
   const ref = db.ref('restricted_access/secret_document');
@@ -146,20 +146,31 @@ module.exports = function makeDataHelpers(db) {
       return new Promise((resolve, reject) => {
         const petsRef = ref.child('pets');
 
+        console.log(options);
+        // grabs the first filter to query db
+        const filter = Object.keys(options)[0];
+        const filterValue = options[filter];
+        const filterLength = Object.keys(options).length;
+        console.log(filter, filterValue, filterLength);
+
         petsRef
-          .orderByChild('breed')
-          .equalTo(options.breed)
-          .once('value', (snapshot) => {
+          .orderByChild(filter)
+          .equalTo(filterValue)
+          .once('value', async (snapshot) => {
+            // no animals matches filter, return empty object
             if (snapshot.val() === null) {
               resolve({});
             } else {
-              console.log('Value of breed exists ', snapshot.val());
-              const pet = jsonConverter(snapshot.val());
-              // const pets2ndfilter = filterHelper(pet, options);
-              resolve(pet);
+              let pets = jsonConverter(snapshot.val());
+
+              // if more than one filter, do server side filtering
+              if (filterLength > 1) {
+                // console.log(pets);
+                pets = await petFilterHelper(pets, options);
+              }
+              resolve(pets);
             }
           });
-        // need if statement for when value is not found.
       });
     }
   };
