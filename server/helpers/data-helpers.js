@@ -145,14 +145,8 @@ module.exports = function makeDataHelpers(db) {
     filterPets(options) {
       return new Promise((resolve, reject) => {
         const petsRef = ref.child('pets');
-        // deconstructs options obj into an array
-        const optionsArr = [];
-        Object.keys(options).forEach((key) => {
-          if (options[key]) {
-            optionsArr.push({ [key]: options[key] });
-          }
-        });
-        console.log(optionsArr);
+
+        console.log(options);
 
         // petsRef
         //   .orderByChild('breed')

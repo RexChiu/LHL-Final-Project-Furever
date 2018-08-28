@@ -19,12 +19,7 @@ module.exports = (dataHelpers) => {
     console.log(`Req Body ${JSON.stringify(req.body)}`);
     const breedOut = req.body.breed;
     const ageOut = req.body.age;
-    const options = {
-      animal: req.body.animal,
-      size: req.body.size,
-      sex: req.body.sex,
-      age: req.body.age
-    };
+    const options = req.body;
     console.log('//----OPTIONS----//', options);
 
     const result = await dataHelpers.filterPets(options);

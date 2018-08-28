@@ -43,13 +43,23 @@ class AdoptFilter extends Component {
 
     const { rerenderPets } = this.props;
 
+    // constructs output obj, only puts in the selected filters
+    const outputObj = {};
+    if (this.state.animal !== '') {
+      outputObj.animal = this.state.animal;
+    }
+    if (this.state.sex !== '') {
+      outputObj.sex = this.state.sex;
+    }
+    if (this.state.age !== '') {
+      outputObj.age = this.state.age;
+    }
+    if (this.state.size !== '') {
+      outputObj.size = this.state.size;
+    }
+
     axios
-      .put(`http://localhost:8080/pets/filter`, {
-        animal: this.state.animal,
-        size: this.state.size,
-        sex: this.state.sex,
-        age: this.state.age
-      })
+      .put(`http://localhost:8080/pets/filter`, outputObj)
       .then(function(response) {
         console.log('////////');
         console.log(JSON.stringify(response));
