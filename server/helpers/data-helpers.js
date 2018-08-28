@@ -1,6 +1,7 @@
 // temp data helper functions to return dummy data
 import firebaseConverter from '../helpers/convert-json-to-firebase';
 import jsonConverter from '../helpers/convert-firebase-to-json';
+import filterHelper from '../helpers/filter-helper';
 
 module.exports = function makeDataHelpers(db) {
   const ref = db.ref('restricted_access/secret_document');
@@ -139,17 +140,26 @@ module.exports = function makeDataHelpers(db) {
         return personality;
       });
     },
+
+    // Filter through pets for adopt page
     filterPets(options) {
       return new Promise((resolve, reject) => {
         const petsRef = ref.child('pets');
+
         petsRef
           .orderByChild('breed')
-          .equalTo(options)
+          .equalTo(options.breed)
           .once('value', (snapshot) => {
-            const pet = jsonConverter(snapshot.val());
-            console.log('Value of breed exists ', pet);
-            resolve(pet);
+            if (snapshot.val() === null) {
+              resolve({});
+            } else {
+              console.log('Value of breed exists ', snapshot.val());
+              const pet = jsonConverter(snapshot.val());
+              // const pets2ndfilter = filterHelper(pet, options);
+              resolve(pet);
+            }
           });
+        // need if statement for when value is not found.
       });
     }
   };

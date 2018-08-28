@@ -51,8 +51,10 @@ class Adopt extends Component {
 
   render() {
     const { pets } = this.state;
-    // const adoptItems = '';
-    const adoptItems = pets.map((pet, i) => <Pet pet={pet} userId={this.props.userId} key={pet.id} />);
+    let adoptItems = '';
+    if (pets instanceof Array) {
+      adoptItems = pets.map((pet, i) => <Pet pet={pet} userId={this.props.userId} key={pet.id} />);
+    }
 
     return (
       <React.Fragment>
