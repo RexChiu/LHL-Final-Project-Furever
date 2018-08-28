@@ -98,13 +98,15 @@ module.exports = (dataHelpers) => {
 
   router.get('/populate/dogbreeds', async (req, res) => {
     const options = {
-      uri: 'https://www.petfinder.com/dog-breeds'
+      uri: 'https://www.petfinder.com/dog-breeds',
+      transform(body) {
+        return cheerio.load(body);
+      }
     };
     const dogBreeds = {};
 
     rp(options)
-      .then((html) => {
-        const $ = cheerio.load(html);
+      .then(($) => {
         $('#breed_select option').each((i, el) => {
           dogBreeds[$(el).text()] = $(el).attr('value');
         });
