@@ -84,9 +84,9 @@ module.exports = (dataHelpers) => {
 
   router.get('/populate/catcare', async (req, res) => {
     // grabs the entire list of breeds from db
-    const result = await dataHelpers.getBreeds('cat');
+    const breeds = await dataHelpers.getBreeds('cat');
 
-    const cat = result[0];
+    const cat = breeds[0];
     const personalityTag = `${cat.name} Cat Personality`;
     const traitsTag = `${cat.name} Cat Breed Traits`;
     const options = {
@@ -114,8 +114,9 @@ module.exports = (dataHelpers) => {
           .html()
           .trim();
 
-        return dataHelpers.saveInfo('cat', 'traits', cat.name, traits).then(() => $);
-      });
+        return dataHelpers.saveInfo('cat', 'traits', cat.name, traits).then(() => 'Ok');
+      })
+      .then(result => res.json(result));
   });
 
   return router;
