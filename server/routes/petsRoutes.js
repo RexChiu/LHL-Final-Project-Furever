@@ -17,7 +17,7 @@ module.exports = (dataHelpers) => {
   });
 
   router.get('/petfind', async (req, res) => {
-    const result = await dataHelpers.checkPetExists(20217192);
+    const result = await dataHelpers.checkPetIDExists(37527717);
 
     // comment this out for serialized data
     res.json(result);
@@ -27,19 +27,30 @@ module.exports = (dataHelpers) => {
     // res.json(jsonOutput);
   });
 
-  router.get('/adopt', async (req, res) => {
-    const result = await dataHelpers.adoptPet('-LKrevl5Yz2jAqcNaD9b', 20217221);
+  router.post('/:id/adopt', (req, res) => {
+    const templateVar = {
+      userId: req.body.userId,
+      petId: req.body.petID
+    };
 
-    // comment this out for serialized data
+    const result = dataHelpers.adoptPet(req.body.userId, req.body.petId);
+
     res.json(result);
-
-    // uncomment this for serialized data
-    // const jsonOutput = PetsSerializer.serialize(result);
-    // res.json(jsonOutput);
   });
+
+  // router.get('/adopt', async (req, res) => {
+  //   const result = await dataHelpers.adoptPet('-LKrevl5Yz2jAqcNaD9b', 20217221);
+
+  //   // comment this out for serialized data
+  //   res.json(result);
+
+  //   // uncomment this for serialized data
+  //   // const jsonOutput = PetsSerializer.serialize(result);
+  //   // res.json(jsonOutput);
+  // });
 
   router.get('/useridfind', async (req, res) => {
-    const result = await dataHelpers.checkUserIDExists('-LKrbAGsDo6KsWQ-7reg');
+    const result = await dataHelpers.checkUserIDExists('-LKx26xM_YDH0WQde2Ia');
 
     // comment this out for serialized data
     res.json(result);
