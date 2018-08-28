@@ -69,6 +69,37 @@ module.exports = function makeDataHelpers(db) {
           console.log('error');
           return err;
         });
+    },
+    // function to see if the petId exists in the database, returns pet if exists, null if not
+    getPetDetails(petId) {
+      // searches in users collection
+      const petsRef = db.collection('pets').doc(petId.toString());
+      return petsRef
+        .get()
+        .then((result) => {
+          // returns document snapshot
+          if (result.exists) {
+            return result.data();
+          }
+          return null;
+        })
+        .catch((err) => {
+          console.log('error');
+          return err;
+        });
     }
   };
 };
+
+// // This datahelper will check if the provided petID exists(returns boolean) in the database
+// checkPetIDExists(petID) {
+//   const usersRef = ref.child('pets');
+//   console.log('Within checkPetExists', petID);
+//   return new Promise((resolve, reject) => {
+//     usersRef.child(petID).once('value', (snapshot) => {
+//       const exists = snapshot.val() !== null;
+//       console.log('Value of checkPetIDExists exists ', exists);
+//       resolve(exists);
+//     });
+//   });
+// },

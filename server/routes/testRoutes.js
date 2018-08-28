@@ -10,6 +10,11 @@ const router = express.Router();
 
 /* GET index page. */
 module.exports = (dataHelpers) => {
+  router.get('/findpet/:id', async (req, res) => {
+    const result = await dataHelpers.getPetDetails(req.params.id);
+    res.json(result);
+  });
+
   router.get('/populate', async (req, res) => {
     const options = {
       location: 'toronto,ontario',
