@@ -61,8 +61,6 @@ module.exports = function makeDataHelpers(db) {
           if (!result.empty) {
             // grabs the first instance of the query
             const outputObj = result.docs[0].data();
-            // grabs the id of the document in a weird way and append to output
-            outputObj.id = result.docs[0].ref.id;
             return outputObj;
           }
           return null;
