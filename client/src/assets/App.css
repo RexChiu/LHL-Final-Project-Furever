@@ -66,3 +66,34 @@
   width: 20em;
   height: 20em;
 }
+
+#eventlocalusers {
+  float: left;
+  margin-left: 1em;
+  background-color: #fcfeff;
+  outline-style: solid;
+  outline-width: 0.005em;
+  outline-style: auto;
+}
+#eventlocalusers div {
+  width: 12em;
+  min-height: 15em;
+  max-height: 20em;
+}
+#eventlocalusers p {
+  margin: 0 0 0px;
+}
+
+#eventlocalusers #eventlocal {
+  background-color: #dbf0f6;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+#eventlocalusers #friendrequest {
+  background-color: #fdd76f;
+}
+
+#eventlocalusers .btn {
+  background-color: #75b5c4;
+}
