@@ -80,11 +80,16 @@ module.exports = (dataHelpers) => {
       .then((html) => {
         const $ = cheerio.load(html);
         $('#breed_select option').each((i, el) => {
-          dogBreeds[$(el).text()] = $(el).attr('value');
+          const name = $(el).text();
+          const url = $(el).attr('value');
+          dogBreeds[$(el).text()] = {
+            name,
+            url
+          };
         });
-
-        res.json(dogBreeds);
+        return dataHelpers.saveBreeds(dogBreeds).then(result => result);
       })
+      .then(result => res.json(result))
       .catch((err) => {
         console.log(err);
       });

@@ -29,7 +29,7 @@ module.exports = function makeDataHelpers(db) {
           return error;
         });
     },
-    // This datahelper will insert/register a demo record into the database
+    // This datahelper will insert/register a record into the database
     insertNewUser(newUser) {
       const usersRef = ref.child('users');
       const newUserRef = usersRef.push();
@@ -115,6 +115,13 @@ module.exports = function makeDataHelpers(db) {
           .once('value', snap => snap.val());
       }
       return null;
+    },
+    saveBreeds(breeds) {
+      const breedsRef = ref.child('breeds');
+      return breedsRef.set(breeds).then(() => {
+        console.log('Synchronization succeeded');
+        return breeds;
+      });
     }
   };
 };
