@@ -6,11 +6,19 @@ class AdoptFilter extends Component {
   constructor(props) {
     super(props);
     // this.rerenderPets = this.rerenderPets.bind(this);
-    this.state = { breed: '' };
+    this.state = {
+      breed: '',
+      age: ''
+    };
   }
 
   change = event => {
     this.setState({ breed: event.target.value });
+    console.log('log: ' + event.target.value);
+  };
+
+  changeAge = event => {
+    this.setState({ age: event.target.value });
     console.log('log: ' + event.target.value);
   };
 
@@ -20,7 +28,8 @@ class AdoptFilter extends Component {
 
     axios
       .put(`http://localhost:8080/pets/filter`, {
-        breed: `${this.state.breed}`
+        breed: `${this.state.breed}`,
+        age: `${this.state.age}`
       })
       .then(function(response) {
         console.log('////////');
@@ -46,9 +55,21 @@ class AdoptFilter extends Component {
               Select
             </option>
           </select>
+
+          <select id="age" onChange={this.changeAge} value={this.state.age}>
+            <option value="Senior">Senior</option>
+            <option value="Adult">Adult</option>
+            <option value="Young">Young</option>
+            <option value="Baby">Baby</option>
+            <option value="select" selected>
+              Select
+            </option>
+          </select>
+
           <p>
             current value:
             {this.state.breed}
+            {this.state.age}
           </p>
           <input type="submit" value="submit" />
         </form>
