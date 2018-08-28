@@ -82,6 +82,7 @@ module.exports = (dataHelpers) => {
         $('#breed_select option').each((i, el) => {
           dogBreeds[$(el).text()] = $(el).attr('value');
         });
+
         res.json(dogBreeds);
       })
       .catch((err) => {

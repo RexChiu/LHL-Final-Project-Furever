@@ -29,11 +29,12 @@ module.exports = function makeDataHelpers(db) {
           return error;
         });
     },
-    // This datahelper will insert/register a new user into the database
+    // This datahelper will insert/register a demo record into the database
     insertNewUser(newUser) {
       const usersRef = ref.child('users');
       const newUserRef = usersRef.push();
-      console.log(newUserRef.key);
+      console.log();
+      newUser.id = newUserRef.key;
       return newUserRef.set(newUser).then(() => newUserRef.key);
     },
     moveFbRecord(oldRef, newRef) {
@@ -114,49 +115,6 @@ module.exports = function makeDataHelpers(db) {
           .once('value', snap => snap.val());
       }
       return null;
-    },
-    // This datahelper will insert/register a demo record into the database
-    insertNewUser(newUser) {
-      const usersRef = ref.child('users');
-      const newUserRef = usersRef.push();
-      console.log();
-      newUser.id = newUserRef.key;
-      return newUserRef.set(newUser).then(() => newUserRef.key);
-    },
-    // Test Function
-    returnPetDescription() {
-      return ref.once('value').then(snap => snap.val());
-    },
-    // Test function
-    findAll() {
-      return [
-        { id: 1, name: 'Cats', animal: 'Cats' },
-        { id: 2, name: 'Dogs', animal: 'Dogs' },
-        { id: 3, name: 'Alpacas', animal: 'Alpacas' }
-      ];
-    },
-    // Test function
-    find(id) {
-      return { id, name: 'Cats', animal: 'Cats' };
-    },
-    // Test function - inserts 1 new user record to database
-    insertNewUserDemo() {
-      const usersRef = ref.child('users');
-      const newUserRef = usersRef.push();
-      console.log();
-      newUserRef.set({
-        username: 'ginger',
-        password: '123'
-      });
-    },
-    // Test function - inserts 1 pet record into database
-    insertDemoRecord() {
-      const petsRef = ref.child('pets');
-      petsRef.push().set({
-        date_of_birth: 'June 23, 2018',
-        full_name: 'Ginger Paws',
-        nickname: 'Gingu'
-      });
     }
   };
 };
