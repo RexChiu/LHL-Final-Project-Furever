@@ -143,21 +143,79 @@ module.exports = function makeDataHelpers(db) {
         Promise.resolve(true);
       }
       Promise.resolve(false);
+    },
+    // Filter through pets with options provided
+    filterPets(options) {
+      let queryRef = db.collection('pets');
+      console.log(options);
+      const keys = Object.keys(options);
+      const values = Object.values(options);
+
+      // // filter by size if any
+      if (options.size) {
+        queryRef = queryRef.where('size', '==', options.size);
+      }
+      // filter by age if any
+      if (options.age) {
+        queryRef = queryRef.where('age', '==', options.age);
+      }
+      // filter by sex if any
+      if (options.sex) {
+        queryRef = queryRef.where('sex', '==', options.sex);
+      }
+      // filter by animal if any
+      if (options.animal) {
+        queryRef = queryRef.where('animal', '==', options.animal);
+      }
+
+      // executes query
+      return queryRef.get().then((snap) => {
+        // query not empty
+        if (!snap.empty) {
+          console.log('Not Empty!');
+          const resultArr = [];
+          for (let i = 0; i < snap.size; i++) {
+            resultArr.push(snap.docs[i].data());
+          }
+          return resultArr;
+        }
+        // no queries
+        console.log('Empty!');
+        return {};
+      });
     }
   };
 };
 
-// // This datahelper will attach the Pet to a userID into the database
-// async adoptPet(userID, petID) {
-//   const usersRef = ref.child(`users/${userID}/adopted`);
-//   const petsRef = ref.child(`pets/${petID}`);
+// // Filter through pets for adopt page
+// filterPets(options) {
+//   return new Promise((resolve, reject) => {
+//     const petsRef = ref.child('pets');
 
-//   console.log('adoptPet', userID, petID);
+//     console.log(options);
+//     // grabs the first filter to query db
+//     const filter = Object.keys(options)[0];
+//     const filterValue = options[filter];
+//     const filterLength = Object.keys(options).length;
+//     console.log(filter, filterValue, filterLength);
 
-//   if ((await this.checkPetIDExists(petID)) && (await this.checkUserIDExists(userID))) {
-//     console.log('After PetID and UserID exists');
-//     this.moveFbRecord(petsRef, usersRef);
-//     return true;
-//   }
-//   return false;
-// },
+//     petsRef
+//       .orderByChild(filter)
+//       .equalTo(filterValue)
+//       .once('value', async (snapshot) => {
+//         // no animals matches filter, return empty object
+//         if (snapshot.val() === null) {
+//           resolve({});
+//         } else {
+//           let pets = jsonConverter(snapshot.val());
+
+//           // if more than one filter, do server side filtering
+//           if (filterLength > 1) {
+//             // console.log(pets);
+//             pets = await petFilterHelper(pets, options);
+//           }
+//           resolve(pets);
+//         }
+//       });
+//   });
+// }
