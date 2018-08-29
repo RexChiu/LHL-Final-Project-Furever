@@ -6,7 +6,7 @@ const router = express.Router();
 /* GET index page. */
 module.exports = (dataHelpers) => {
   router.post('/:id/adopt', async (req, res) => {
-    const result = await dataHelpers.adoptPet(req.body.userId, req.body.petId);
+    const result = await dataHelpers.adoptPet(req.body.userId, req.params.id);
 
     res.json(result);
   });

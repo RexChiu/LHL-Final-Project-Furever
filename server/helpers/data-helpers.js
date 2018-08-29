@@ -116,7 +116,7 @@ module.exports = function makeDataHelpers(db) {
         .collection('users')
         .doc(user.id.toString())
         .collection('adopted')
-        .doc(user.id.toString());
+        .doc(pet.id.toString());
       const petsRef = db.collection('pets').doc(pet.id.toString());
 
       return usersRef
@@ -141,8 +141,10 @@ module.exports = function makeDataHelpers(db) {
         console.log('user and pet exists');
         await this.movePet(user, pet);
         Promise.resolve(true);
+      } else {
+        console.log('something went wrong');
+        Promise.resolve(false);
       }
-      Promise.resolve(false);
     },
     // Filter through pets with options provided
     filterPets(options) {
