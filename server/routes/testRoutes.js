@@ -34,29 +34,35 @@ module.exports = (dataHelpers) => {
   });
 
   router.get('/populate/dogbreeds', async (req, res) => {
+    // constructs options to do a cheerio web scrape
     const options = {
       uri: 'https://www.petfinder.com/dog-breeds',
       transform(body) {
         return cheerio.load(body);
       }
     };
-    const dogBreeds = {};
+    const dogBreeds = [];
 
+    // sends request, grab all the HTML and load into $ (cheerio)
     rp(options)
       .then(($) => {
+        // selects the breeds list, and iterates through each one
         $('#breed_select option').each((i, el) => {
           const name = $(el).text();
           const url = $(el).attr('value');
-          dogBreeds[$(el).text()] = {
+          // pushes extracted dog breed into array
+          dogBreeds.push({
             name,
             url
-          };
+          });
         });
         return dataHelpers.saveBreeds('dog', dogBreeds).then(result => result);
+        // return dogBreeds;
       })
       .then(result => res.json(result))
       .catch((err) => {
         console.log(err);
+        res.json(err);
       });
   });
 
