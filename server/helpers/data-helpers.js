@@ -307,6 +307,26 @@ module.exports = function makeDataHelpers(db) {
         snapshot.forEach(pet => pets.push(pet.data()));
         return pets;
       });
+    },
+    getUsersWithPets() {
+      const userRef = db.collection('users');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
+      return userRef
+        .where('adoptedPet', '==', true)
+        .get()
+        .then(async (snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          for (const doc of snapshot.docs) {
+            const user = doc.data();
+            const userId = user.id;
+            const petsArr = await this.getUserPetsByUserId(userId);
+            user.pets = petsArr;
+            resultArr.push(user);
+          }
+          return resultArr;
+        });
     }
   };
 };
