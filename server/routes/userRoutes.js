@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 
 import UserSerializer from '../serializers/user';
+import PetsSerializer from '../serializers/pets';
 
 const router = express.Router();
 const SALT_ROUNDS = 10;
@@ -85,8 +86,21 @@ module.exports = (dataHelpers) => {
     res.json(jsonOutput);
   });
 
-  // JARON EVANS END
+  // gets the pets of the user
+  router.get('/:id/pets', async (req, res) => {
+    try {
+      const pets = await dataHelpers.getUserPetsByUserId(req.params.id);
+      const jsonOutput = PetsSerializer.serialize(pets);
+      // const jsonOutput = result;
+      res.json(jsonOutput);
+    } catch (e) {
+      console.log(e);
+      res.json(e);
+    }
+  });
 
+  //   THIS MUST BE THE LAST ROUTE!!!!!!!!  ///
+  // get details of the user
   router.get('/:id', async (req, res) => {
     try {
       const user = await dataHelpers.getUserDetailsById(req.params.id);
@@ -98,6 +112,7 @@ module.exports = (dataHelpers) => {
       res.json(e);
     }
   });
+  //   THE ABOVE MUST BE THE LAST ROUTE!!!! ///
 
   return router;
 };

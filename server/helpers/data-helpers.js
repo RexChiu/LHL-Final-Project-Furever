@@ -294,6 +294,19 @@ module.exports = function makeDataHelpers(db) {
         .doc(id.toString());
 
       return infoRef.set(info).then(() => info);
+    },
+    // returns all the pets of the userId
+    getUserPetsByUserId(userId) {
+      const userRef = db
+        .collection('users')
+        .doc(userId.toString())
+        .collection('adopted');
+
+      return userRef.get().then((snapshot) => {
+        const pets = [];
+        snapshot.forEach(pet => pets.push(pet.data()));
+        return pets;
+      });
     }
   };
 };
