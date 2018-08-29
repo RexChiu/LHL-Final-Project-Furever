@@ -53,7 +53,7 @@ class Adopt extends Component {
     const { pets } = this.state;
     let adoptItems = '';
     if (pets instanceof Array) {
-      adoptItems = pets.map((pet, i) => <Pet pet={pet} userId={this.props.userId} key={pet.id} />);
+      adoptItems = pets.map((pet, i) => <Pet pet={pet} key={pet.id} />);
     }
 
     return (
