@@ -1,9 +1,3 @@
-// temp data helper functions to return dummy data
-import firebaseConverter from '../helpers/convert-json-to-firebase';
-import jsonConverter from '../helpers/convert-firebase-to-json';
-import petFilterHelper from './pet-filter-helper';
-import uuidv4 from 'uuid/v4';
-
 module.exports = function makeDataHelpers(db) {
   return {
     // returns all pets from the firestore database

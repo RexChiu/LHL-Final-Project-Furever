@@ -1,8 +1,6 @@
-import Debug from 'debug';
+// import Debug from 'debug';
 import express from 'express';
 import logger from 'morgan';
-import path from 'path';
-import url from 'url';
 import cors from 'cors';
 
 require('dotenv').config();
@@ -23,7 +21,7 @@ const DataHelpers = require('./helpers/data-helpers.js')(db);
 
 // Setup express and environment
 const app = express();
-const debug = Debug('server:app');
+// const debug = Debug('server:app');
 app.set('env', process.env.APP_ENV || 'development');
 
 // Enable All CORS Requests
