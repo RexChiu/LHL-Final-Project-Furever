@@ -86,6 +86,14 @@ module.exports = (dataHelpers) => {
     res.json(jsonOutput);
   });
 
+  router.get('/:id/withpets', async (req, res) => {
+    const result = await dataHelpers.getUserWithPets(req.params.id);
+
+    const jsonOutput = UserSerializer.serialize(result);
+    // const jsonOutput = result;
+    res.json(jsonOutput);
+  });
+
   // gets the pets of the user
   router.get('/:id/pets', async (req, res) => {
     try {

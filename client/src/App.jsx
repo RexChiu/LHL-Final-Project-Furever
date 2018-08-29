@@ -22,7 +22,7 @@ class App extends Component {
       <React.Fragment>
         <Navbar />
         <div className="App">
-          <Main setUserId={this.setUserId} userId={this.state.userId} />
+          <Main setUserId={this.setUserId} />
         </div>
       </React.Fragment>
     );

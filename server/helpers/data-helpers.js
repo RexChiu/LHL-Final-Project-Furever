@@ -327,6 +327,15 @@ module.exports = function makeDataHelpers(db) {
           }
           return resultArr;
         });
+    },
+    getUserWithPets(userId) {
+      const userRef = db.collection('users').doc(userId.toString());
+      return userRef.get().then(async (doc) => {
+        const user = doc.data();
+        const petsArr = await this.getUserPetsByUserId(userId);
+        user.pets = petsArr;
+        return user;
+      });
     }
   };
 };
