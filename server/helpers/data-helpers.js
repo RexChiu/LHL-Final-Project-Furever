@@ -1,9 +1,3 @@
-// temp data helper functions to return dummy data
-import firebaseConverter from '../helpers/convert-json-to-firebase';
-import jsonConverter from '../helpers/convert-firebase-to-json';
-import petFilterHelper from './pet-filter-helper';
-import uuidv4 from 'uuid/v4';
-
 module.exports = function makeDataHelpers(db) {
   return {
     // returns all pets from the firestore database
@@ -13,7 +7,8 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return petsRef
-        .limit(100)
+        .orderBy('id', 'desc')
+        .limit(1)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -49,6 +44,7 @@ module.exports = function makeDataHelpers(db) {
         .set(newUser)
         .then(result => usersRef.id)
         .then(err => err);
+      return newUser.id;
     },
     // function to search if username exists in the database, returns user if exists, null if not
     getUserDetails(username) {
@@ -127,6 +123,7 @@ module.exports = function makeDataHelpers(db) {
     },
     // function to adopt a pet, moves pet from pets collection to a adopted collection in user
     async adoptPet(userId, petId) {
+      console.log(`userId: ${userId}, petId: ${petId}`);
       // specifies the paths
       const usersRef = db
         .collection('users')
@@ -173,7 +170,8 @@ module.exports = function makeDataHelpers(db) {
 
       // executes query
       return queryRef
-        .limit(100)
+        .orderBy('id', 'desc')
+        .limit(1)
         .get()
         .then((snap) => {
           // query not empty
@@ -189,6 +187,54 @@ module.exports = function makeDataHelpers(db) {
           console.log('Empty!');
           return {};
         });
+    },
+    // saves breeds into the db accordingly
+    saveBreeds(type, breeds) {
+      // creates a batch to insert as a group
+      const batch = db.batch();
+      const breedsRef = db
+        .collection('breeds')
+        .doc(`${type.toString()}Breeds`)
+        .collection(type.toString());
+
+      // synchronized for loop to specify the document path and inserting
+      for (let i = 0; i < breeds.length; i++) {
+        // need to toString() the name
+        batch.set(breedsRef.doc(breeds[i].name.toString()), breeds[i]);
+      }
+      // commits the batch and returns
+      return batch
+        .commit()
+        .then(result => result)
+        .catch(err => err);
+    },
+    // gets all the breeds of that type
+    getBreeds(type) {
+      const breedsRef = db
+        .collection('breeds')
+        .doc(`${type.toString()}Breeds`)
+        .collection(type.toString());
+
+      const resultArr = [];
+      // grabs all the breeds under the collection pets
+      return breedsRef
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
+    // saves the pet care info into the db
+    saveInfo(typeAnimal, id, info) {
+      const infoRef = db
+        .collection('info')
+        .doc(`${typeAnimal.toString()}Breeds`)
+        .collection(typeAnimal.toString())
+        .doc(id.toString());
+
+      return infoRef.set(info).then(() => info);
     }
   };
 };
