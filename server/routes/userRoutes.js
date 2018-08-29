@@ -24,7 +24,8 @@ module.exports = (dataHelpers) => {
       username: req.body.username,
       passwordDigest,
       lat: req.body.lat,
-      lng: req.body.lng
+      lng: req.body.lng,
+      adoptedPet: req.body.adoptedPet
     };
 
     // grabs userId from successful db insert

@@ -153,11 +153,21 @@ module.exports = function makeDataHelpers(db) {
       if (user && pet) {
         console.log('user and pet exists');
         await this.movePet(user, pet);
+        await this.setAdoptedPetTrue(userId);
         Promise.resolve(true);
       } else {
         console.log('something went wrong');
         Promise.resolve(false);
       }
+    },
+    // sets the adoptedPet flag of user to be true
+    setAdoptedPetTrue(userId) {
+      const usersRef = db.collection('users').doc(userId.toString());
+
+      return usersRef
+        .update({ adoptedPet: true })
+        .then(() => console.log('Adopted'))
+        .catch(err => console.log(err));
     },
     // Filter through pets with options provided
     filterPets(options) {

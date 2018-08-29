@@ -36,6 +36,7 @@ class Home extends Component {
         //grabs the userId from the successful login response
         let userId = { userId: res.data.data.attributes.id };
         this.props.setUserId(userId);
+        sessionStorage.setItem('userId', res.data.data.attributes.id);
         this.props.history.push('/adopt');
       })
       .catch(err => alert(err));
@@ -80,7 +81,8 @@ class Home extends Component {
       username: this.state.register_username,
       password: this.state.register_password,
       lat: this.state.lat,
-      lng: this.state.lng
+      lng: this.state.lng,
+      adoptedPet: false
     };
 
     axios
@@ -89,6 +91,7 @@ class Home extends Component {
         //grabs the userId from the successful login response
         let userId = { userId: res.data.data.attributes.id };
         this.props.setUserId(userId);
+        sessionStorage.setItem('userId', res.data.data.attributes.id);
         this.props.history.push('/adopt');
       })
       .catch(err => alert(err));
