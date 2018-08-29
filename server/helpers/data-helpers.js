@@ -42,11 +42,18 @@ module.exports = function makeDataHelpers(db) {
         .where('adoptedPet', '==', true)
         .limit(100)
         .get()
-        .then((snapshot) => {
+        .then(async (snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
-          snapshot.forEach(doc => resultArr.push(doc.data()));
+          snapshot.forEach((doc) => {
+            const user = doc.data();
+
+            // grab pets of this user
+            // add onto user.pets
+
+            resultArr.push(user);
+          });
           console.log('result', resultArr);
-          this.returnAllUsersWithPets02(resultArr);
+          await this.returnAllUsersWithPets02(resultArr);
 
           return resultArr;
         })
@@ -55,14 +62,20 @@ module.exports = function makeDataHelpers(db) {
     returnAllUsersWithPets02(array) {
       const userRef = db.collection('users');
       const petsArr = [];
+      const resultArr = [];
       array.forEach((element) => {
         const tempId = element.id;
         console.log('ID', tempId);
         // above is to isolate UserID
-        // this.db.collection('users').collection('adopt').get().
-        // then(snapshot) => {
-        //   console.log(snapshot);
-        // console.log(userRef.tempId);
+        db.collection('users')
+          .doc(tempId.toString())
+          .collection('adopted')
+          .get()
+          .then((snapshot) => {
+            snapshot.forEach(collection => resultArr.push(collection.data()));
+            console.log(resultArr);
+            return resultArr;
+          });
       });
     },
     // above was added by Jaron
