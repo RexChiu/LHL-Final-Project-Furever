@@ -31,12 +31,13 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-mocha": "^4.11.0",
-    "eslint-plugin-react": "^7.2.1",
-    "nodemon": "^1.18.3"
+    "eslint-plugin-react": "^7.2.1"
   }
 }

@@ -4,7 +4,11 @@ import rp from 'request-promise-native';
 import cheerio from 'cheerio';
 
 import petfinder from '../api/petfinder';
+import vetfinder from '../api/vetfinder';
+
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
+
+import VetsSerializer from '../serializers/vets';
 
 const router = express.Router();
 
@@ -27,6 +31,25 @@ module.exports = (dataHelpers) => {
       const sanitized = await sanitizePetfinder(result);
       const output = await dataHelpers.insertMultiplePets(sanitized);
       res.json(output);
+    } catch (e) {
+      console.log('Error', e);
+      res.json(e);
+    }
+  });
+
+  /* GET places page. */
+  router.get('/places', async (req, res) => {
+    const options = {
+      location: '43.6446,-79.3950',
+      type: 'veterinary_care',
+      radius: 1500,
+      keyword: 'pets'
+    };
+    try {
+      const result = await vetfinder('nearbysearch', options);
+      const jsonOutput = VetsSerializer.serialize(result);
+      res.json(jsonOutput);
+      // res.json(result);
     } catch (e) {
       console.log('Error', e);
       res.json(e);
