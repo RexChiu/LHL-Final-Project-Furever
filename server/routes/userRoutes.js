@@ -87,5 +87,17 @@ module.exports = (dataHelpers) => {
 
   // JARON EVANS END
 
+  router.get('/:id', async (req, res) => {
+    try {
+      const user = await dataHelpers.getUserDetailsById(req.params.id);
+      const jsonOutput = UserSerializer.serialize(user);
+      // const jsonOutput = result;
+      res.json(jsonOutput);
+    } catch (e) {
+      console.log(e);
+      res.json(e);
+    }
+  });
+
   return router;
 };
