@@ -2,176 +2,193 @@
 import firebaseConverter from '../helpers/convert-json-to-firebase';
 import jsonConverter from '../helpers/convert-firebase-to-json';
 import petFilterHelper from './pet-filter-helper';
+import uuidv4 from 'uuid/v4';
 
 module.exports = function makeDataHelpers(db) {
-  const ref = db.ref('restricted_access/secret_document');
-
   return {
+    // returns all pets from the firestore database
     returnAll() {
-      return ref
-        .child('pets')
-        .once('value')
-        .then(snap => jsonConverter(snap.val()));
-    },
-    // Insert Pet records from the sanitized API to the database.
-    insertMultiplePets(jsonInput) {
-      const petsRef = ref.child('pets');
-
-      const jsonInputCleaned = firebaseConverter(jsonInput);
-
+      const petsRef = db.collection('pets');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
       return petsRef
-        .set(jsonInputCleaned)
-        .then(() => {
-          console.log('Synchronization succeeded');
-          return jsonInputCleaned;
+        .limit(100)
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
         })
-        .catch((error) => {
-          console.log('Synchronization failed');
-          return error;
-        });
+        .catch(err => err);
     },
-    // This datahelper will insert/register a record into the database
+    // inserts multiple pets into firestore db
+    insertMultiplePets(pets) {
+      // creates a batch to insert as a group
+      const batch = db.batch();
+      const petsRef = db.collection('pets');
+
+      // synchronized for loop to specify the document path and inserting
+      for (let i = 0; i < pets.length; i++) {
+        // need to toString() the id
+        batch.set(petsRef.doc(pets[i].id.toString()), pets[i]);
+      }
+      // commits the batch and returns
+      return batch
+        .commit()
+        .then(result => result)
+        .catch(err => err);
+    },
+    // inserts a new user into the firestore db
     insertNewUser(newUser) {
-      const usersRef = ref.child('users');
-      const newUserRef = usersRef.push();
-      console.log();
-      newUser.id = newUserRef.key;
-      return newUserRef.set(newUser).then(() => newUserRef.key);
+      // creates a new unique id for a user and adds into user
+      const usersRef = db.collection('users').doc();
+      newUser.id = usersRef.id;
+      // inserts user into the database
+      usersRef
+        .set(newUser)
+        .then(result => usersRef.id)
+        .then(err => err);
     },
-    moveFbRecord(oldRef, newRef) {
-      oldRef.once('value', (snap) => {
-        const newAdoptRef = newRef.push();
-        newAdoptRef.set(snap.val(), (error) => {
-          if (!error) {
-            oldRef.remove();
-          } else if (typeof console !== 'undefined' && console.error) {
-            console.error(error);
+    // function to search if username exists in the database, returns user if exists, null if not
+    getUserDetails(username) {
+      // searches in users collection
+      const usersRef = db.collection('users');
+      return usersRef
+        .where('username', '==', username)
+        .get()
+        .then((result) => {
+          // query returns a querySnapshot, which has an array (.docs) of documentSnapshot
+          if (!result.empty) {
+            // grabs the first instance of the query
+            const outputObj = result.docs[0].data();
+            return outputObj;
           }
+          return null;
+        })
+        .catch((err) => {
+          console.log('error');
+          return err;
         });
-      });
     },
-    // This datahelper will check if the provided petID exists(returns boolean) in the database
-    checkPetIDExists(petID) {
-      const usersRef = ref.child('pets');
-      console.log('Within checkPetExists', petID);
-      return new Promise((resolve, reject) => {
-        usersRef.child(petID).once('value', (snapshot) => {
-          const exists = snapshot.val() !== null;
-          console.log('Value of checkPetIDExists exists ', exists);
-          resolve(exists);
-        });
-      });
-    },
-    // This datahelper will check if the provided username exists(returns boolean) in the database
-    checkUserExists(userName) {
-      const usersRef = ref.child('users');
-      console.log('Within checkUserExists');
-      return new Promise((resolve, reject) => {
-        usersRef
-          .orderByChild('username')
-          .equalTo(userName)
-          .once('value', (snapshot) => {
-            const exists = snapshot.val() !== null;
-            console.log('Value of checkUserExists exists ', exists);
-            resolve(exists);
-          });
-      });
-    },
-    // This datahelper will check if the provided userID exists(returns boolean) in the database
-    checkUserIDExists(userID) {
-      const usersRef = ref.child('users');
-      console.log('Within checkUserIDExists');
-      return new Promise((resolve, reject) => {
-        usersRef.child(userID).once('value', (snapshot) => {
-          const exists = snapshot.val() !== null;
-          console.log('Value of checkUserIDExists exists ', exists);
-          resolve(exists);
-        });
-      });
-    },
-    // This datahelper will attach the Pet to a userID into the database
-    async adoptPet(userID, petID) {
-      const usersRef = ref.child(`users/${userID}/adopted`);
-      const petsRef = ref.child(`pets/${petID}`);
-
-      console.log('adoptPet', userID, petID);
-
-      if ((await this.checkPetIDExists(petID)) && (await this.checkUserIDExists(userID))) {
-        console.log('After PetID and UserID exists');
-        this.moveFbRecord(petsRef, usersRef);
-        return true;
-      }
-      return false;
-    },
-    // This datahelper will return all details for an existing username from the database
-    async getUserDetails(userName) {
-      const usersRef = ref.child('users');
-      const exists = await this.checkUserExists(userName);
-      console.log('Before true-> exists', exists);
-      if (exists === true) {
-        console.log('---->Within true', userName);
-        return usersRef
-          .orderByChild('username')
-          .equalTo(userName)
-          .once('value', snap => snap.val());
-      }
-      return null;
-    },
-    saveBreeds(type, breeds) {
-      const breedsRef = ref.child('breeds').child(type);
-      return breedsRef.set(breeds).then(() => {
-        console.log('Synchronization succeeded');
-        return breeds;
-      });
-    },
-    getBreeds(type) {
-      const breedsRef = ref.child('breeds').child(type);
-      return breedsRef.once('value').then(snap => jsonConverter(snap.val()));
-    },
-    saveInfo(typeAnimal, typeInfo, id, personality) {
-      const personalityRef = ref
-        .child('info')
-        .child(typeAnimal)
-        .child(id)
-        .child(typeInfo);
-
-      return personalityRef.set(personality).then(() => {
-        console.log('Synchronization succeeded');
-        return personality;
-      });
-    },
-
-    // Filter through pets for adopt page
-    filterPets(options) {
-      return new Promise((resolve, reject) => {
-        const petsRef = ref.child('pets');
-
-        console.log(options);
-        // grabs the first filter to query db
-        const filter = Object.keys(options)[0];
-        const filterValue = options[filter];
-        const filterLength = Object.keys(options).length;
-        console.log(filter, filterValue, filterLength);
-
-        petsRef
-          .orderByChild(filter)
-          .equalTo(filterValue)
-          .once('value', async (snapshot) => {
-            // no animals matches filter, return empty object
-            if (snapshot.val() === null) {
-              resolve({});
-            } else {
-              let pets = jsonConverter(snapshot.val());
-
-              // if more than one filter, do server side filtering
-              if (filterLength > 1) {
-                // console.log(pets);
-                pets = await petFilterHelper(pets, options);
-              }
-              resolve(pets);
+    // function to search if username exists in the database, returns user if exists, null if not
+    getUserDetailsById(userId) {
+      // searches in users collection
+      const usersRef = db.collection('users').doc(userId);
+      return usersRef
+        .get()
+        .then((result) => {
+          if (result.exists) {
+            // returns document snapshot, if exists return data
+            if (result.exists) {
+              return result.data();
             }
-          });
-      });
+            return null;
+          }
+          return null;
+        })
+        .catch((err) => {
+          console.log('error');
+          return err;
+        });
+    },
+    // function to see if the petId exists in the database, returns pet if exists, null if not
+    getPetDetailsById(petId) {
+      // searches in users collection
+      const petsRef = db.collection('pets').doc(petId.toString());
+      return petsRef
+        .get()
+        .then((result) => {
+          // returns document snapshot, if exists return data
+          if (result.exists) {
+            return result.data();
+          }
+          return null;
+        })
+        .catch((err) => {
+          console.log('error');
+          return err;
+        });
+    },
+    // moves the pet into user.adopted, and deletes from pets collection
+    movePet(user, pet) {
+      // grabs the refs of the user and pet
+      const usersRef = db
+        .collection('users')
+        .doc(user.id.toString())
+        .collection('adopted')
+        .doc(pet.id.toString());
+      const petsRef = db.collection('pets').doc(pet.id.toString());
+
+      return usersRef
+        .set(pet)
+        .then(result => result)
+        .then(() => petsRef.delete());
+    },
+    // function to adopt a pet, moves pet from pets collection to a adopted collection in user
+    async adoptPet(userId, petId) {
+      // specifies the paths
+      const usersRef = db
+        .collection('users')
+        .doc(userId.toString())
+        .collection('adopted');
+      const petsRef = db.collection('pets').doc(petId.toString());
+
+      // gets the details of the user and pet
+      const user = await this.getUserDetailsById(userId);
+      const pet = await this.getPetDetailsById(petId);
+
+      if (user && pet) {
+        console.log('user and pet exists');
+        await this.movePet(user, pet);
+        Promise.resolve(true);
+      } else {
+        console.log('something went wrong');
+        Promise.resolve(false);
+      }
+    },
+    // Filter through pets with options provided
+    filterPets(options) {
+      let queryRef = db.collection('pets');
+      console.log(options);
+      const keys = Object.keys(options);
+      const values = Object.values(options);
+
+      // // filter by size if any
+      if (options.size) {
+        queryRef = queryRef.where('size', '==', options.size);
+      }
+      // filter by age if any
+      if (options.age) {
+        queryRef = queryRef.where('age', '==', options.age);
+      }
+      // filter by sex if any
+      if (options.sex) {
+        queryRef = queryRef.where('sex', '==', options.sex);
+      }
+      // filter by animal if any
+      if (options.animal) {
+        queryRef = queryRef.where('animal', '==', options.animal);
+      }
+
+      // executes query
+      return queryRef
+        .limit(100)
+        .get()
+        .then((snap) => {
+          // query not empty
+          if (!snap.empty) {
+            console.log('Not Empty!');
+            const resultArr = [];
+            for (let i = 0; i < snap.size; i++) {
+              resultArr.push(snap.docs[i].data());
+            }
+            return resultArr;
+          }
+          // no queries
+          console.log('Empty!');
+          return {};
+        });
     }
   };
 };
