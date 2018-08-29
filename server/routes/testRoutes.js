@@ -8,12 +8,9 @@ import vetfinder from '../api/vetfinder';
 
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
-<<<<<<< HEAD
 /* shop API */
 import shop from '../api/shopfinder';
-=======
 import VetsSerializer from '../serializers/vets';
->>>>>>> 1c38ab09b17ca4395179d9100a637df5eebe22a6
 
 const router = express.Router();
 
