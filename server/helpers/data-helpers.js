@@ -115,7 +115,8 @@ module.exports = function makeDataHelpers(db) {
       const usersRef = db
         .collection('users')
         .doc(user.id.toString())
-        .collection('adopted');
+        .collection('adopted')
+        .doc(user.id.toString());
       const petsRef = db.collection('pets').doc(pet.id.toString());
 
       return usersRef
