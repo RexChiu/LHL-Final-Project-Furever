@@ -150,52 +150,62 @@ module.exports = (dataHelpers) => {
   });
 
   router.get('/populate/dogcare', async (req, res) => {
-    // grabs the entire list of breeds from db
-    const breeds = await dataHelpers.getBreeds('dog');
+    try {
+      // grabs the entire list of breeds from db
+      const breeds = await dataHelpers.getBreeds('dog');
 
-    breeds.forEach((dog) => {
-      const tempermentTag = `${dog.name} Dog Temperament`;
-      const careTag = `${dog.name} Dog Care`;
-      const healthTag = `${dog.name} Dog Health`;
-      const options = {
-        uri: dog.url,
-        transform(body) {
-          return cheerio.load(body);
-        }
-      };
+      breeds.forEach((dog) => {
+        const tempermentTag = `${dog.name} Dog Temperament`;
+        const careTag = `${dog.name} Dog Care`;
+        const healthTag = `${dog.name} Dog Health`;
+        const options = {
+          uri: dog.url,
+          transform(body) {
+            return cheerio.load(body);
+          }
+        };
 
-      // makes API call to grab the temperment, care, and health
-      rp(options)
-        .then(($) => {
-          const temperment = $('h2')
-            .filter((i, el) => $(el).text() === tempermentTag)
-            .parent()
-            .html()
-            .trim();
+        const dogInfo = {};
 
-          return dataHelpers.saveInfo('dog', 'temperment', dog.name, temperment).then(() => $);
-        })
-        .then(($) => {
-          const care = $('h2')
-            .filter((i, el) => $(el).text() === careTag)
-            .parent()
-            .html()
-            .trim();
+        // makes API call to grab the temperment, care, and health
+        rp(options)
+          .then(($) => {
+            const temperment = $('h2')
+              .filter((i, el) => $(el).text() === tempermentTag)
+              .parent()
+              .html()
+              .trim();
 
-          return dataHelpers.saveInfo('dog', 'care', dog.name, care).then(() => $);
-        })
-        .then(($) => {
-          const health = $('h2')
-            .filter((i, el) => $(el).text() === healthTag)
-            .parent()
-            .html()
-            .trim();
+            dogInfo.temperment = temperment;
+            return $;
+          })
+          .then(($) => {
+            const care = $('h2')
+              .filter((i, el) => $(el).text() === careTag)
+              .parent()
+              .html()
+              .trim();
 
-          return dataHelpers.saveInfo('dog', 'health', dog.name, health).then(() => 'Ok');
-        });
-    });
+            dogInfo.care = care;
+            return $;
+          })
+          .then(($) => {
+            const health = $('h2')
+              .filter((i, el) => $(el).text() === healthTag)
+              .parent()
+              .html()
+              .trim();
 
-    res.json('ok');
+            dogInfo.health = health;
+          })
+          .then(() => dataHelpers.saveInfo('dog', dog.name, dogInfo).then(() => 'Ok'));
+      });
+
+      res.json('ok');
+    } catch (e) {
+      console.log(e);
+      res.json(e);
+    }
   });
 
   return router;
