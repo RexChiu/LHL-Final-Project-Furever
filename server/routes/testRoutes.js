@@ -6,6 +6,9 @@ import cheerio from 'cheerio';
 import petfinder from '../api/petfinder';
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
+/* shop API */
+import shop from '../api/shopfinder';
+
 const router = express.Router();
 
 /* GET index page. */
@@ -32,6 +35,19 @@ module.exports = (dataHelpers) => {
       res.json(e);
     }
   });
+  // added in for shop data -JARON EVANS
+  router.get('/petfood', async (req, res) => {
+    try {
+      const result = await petfinder('pet.find', options);
+      const sanitized = await sanitizePetfinder(result);
+      const output = await dataHelpers.insertMultiplePets(sanitized);
+      res.json(output);
+    } catch (e) {
+      console.log('Error', e);
+      res.json(e);
+    }
+  });
+  // added in above for shop data -JARON EVANS
 
   router.get('/populate/dogbreeds', async (req, res) => {
     const options = {
