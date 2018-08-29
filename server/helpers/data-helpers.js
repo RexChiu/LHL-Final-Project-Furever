@@ -186,12 +186,13 @@ module.exports = function makeDataHelpers(db) {
           return {};
         });
     },
+    // saves breeds into the db accordingly
     saveBreeds(type, breeds) {
       // creates a batch to insert as a group
       const batch = db.batch();
       const breedsRef = db
         .collection('breeds')
-        .doc(type.toString())
+        .doc(`${type.toString()}Breeds`)
         .collection(type.toString());
 
       // synchronized for loop to specify the document path and inserting
@@ -204,6 +205,47 @@ module.exports = function makeDataHelpers(db) {
         .commit()
         .then(result => result)
         .catch(err => err);
+    },
+    // gets all the breeds of that type
+    getBreeds(type) {
+      const breedsRef = db
+        .collection('breeds')
+        .doc(`${type.toString()}Breeds`)
+        .collection(type.toString());
+
+      const resultArr = [];
+      // grabs all the breeds under the collection pets
+      return breedsRef
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
+    // saves the pet care info into the db
+    saveInfo(typeAnimal, id, info) {
+      const infoRef = db
+        .collection('info')
+        .doc(`${typeAnimal.toString()}Breeds`)
+        .collection(typeAnimal.toString())
+        .doc(id.toString());
+
+      return infoRef.set(info).then(() => info);
     }
   };
 };
+
+// saveInfo(typeAnimal, typeInfo, id, personality) {
+//   const personalityRef = ref
+//     .child('info')
+//     .child(typeAnimal)
+//     .child(id)
+//     .child(typeInfo);
+
+//   return personalityRef.set(personality).then(() => {
+//     console.log('Synchronization succeeded');
+//     return personality;
+//   });
+// },

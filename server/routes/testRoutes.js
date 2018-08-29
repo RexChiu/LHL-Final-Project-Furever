@@ -48,9 +48,8 @@ module.exports = (dataHelpers) => {
       .then(($) => {
         // selects the breeds list, and iterates through each one
         $('#breed_select option').each((i, el) => {
-          const name = $(el)
-            .text()
-            .trim();
+          const name = $(el).text();
+          // .trim();
           const url = $(el).attr('value');
           // pushes extracted dog breed into array
           dogBreeds.push({
@@ -83,9 +82,8 @@ module.exports = (dataHelpers) => {
       .then(($) => {
         // selects the breeds list, and iterates through each one
         $('#breed_select option').each((i, el) => {
-          const name = $(el)
-            .text()
-            .trim();
+          const name = $(el).text();
+          // .trim();
           const url = $(el).attr('value');
           // pushes extracted cat breed into array
           catBreeds.push({
@@ -104,42 +102,51 @@ module.exports = (dataHelpers) => {
   });
 
   router.get('/populate/catcare', async (req, res) => {
-    // grabs the entire list of breeds from db
-    const breeds = await dataHelpers.getBreeds('cat');
+    try {
+      // grabs the entire list of breeds from db
+      const breeds = await dataHelpers.getBreeds('cat');
 
-    breeds.forEach((cat) => {
-      const personalityTag = `${cat.name} Cat Personality`;
-      const traitsTag = `${cat.name} Cat Breed Traits`;
-      const options = {
-        uri: cat.url,
-        transform(body) {
-          return cheerio.load(body);
-        }
-      };
+      breeds.forEach((cat) => {
+        const personalityTag = `${cat.name} Cat Personality`;
+        const traitsTag = `${cat.name} Cat Breed Traits`;
+        const options = {
+          uri: cat.url,
+          transform(body) {
+            return cheerio.load(body);
+          }
+        };
 
-      // makes API call to grab the personality and traits
-      rp(options)
-        .then(($) => {
-          const personality = $('h2')
-            .filter((i, el) => $(el).text() === personalityTag)
-            .parent()
-            .html()
-            .trim();
+        const catInfo = {};
 
-          return dataHelpers.saveInfo('cat', 'personality', cat.name, personality).then(() => $);
-        })
-        .then(($) => {
-          const traits = $('h2')
-            .filter((i, el) => $(el).text() === traitsTag)
-            .parent()
-            .html()
-            .trim();
+        // makes API call to grab the personality and traits
+        rp(options)
+          .then(($) => {
+            const personality = $('h2')
+              .filter((i, el) => $(el).text() === personalityTag)
+              .parent()
+              .html()
+              .trim();
 
-          return dataHelpers.saveInfo('cat', 'traits', cat.name, traits).then(() => 'Ok');
-        });
-    });
+            catInfo.personality = personality;
+            return $;
+          })
+          .then(($) => {
+            const traits = $('h2')
+              .filter((i, el) => $(el).text() === traitsTag)
+              .parent()
+              .html()
+              .trim();
 
-    res.json('ok');
+            catInfo.traits = traits;
+          })
+          .then(() => dataHelpers.saveInfo('cat', cat.name, catInfo).then(() => 'Ok'));
+      });
+
+      res.json('ok');
+    } catch (e) {
+      console.log(e);
+      res.json(e);
+    }
   });
 
   router.get('/populate/dogcare', async (req, res) => {
