@@ -189,7 +189,10 @@ module.exports = function makeDataHelpers(db) {
     saveBreeds(type, breeds) {
       // creates a batch to insert as a group
       const batch = db.batch();
-      const breedsRef = db.collection('breeds').doc(type.toString());
+      const breedsRef = db
+        .collection('breeds')
+        .doc(type.toString())
+        .collection(type.toString());
 
       // synchronized for loop to specify the document path and inserting
       for (let i = 0; i < breeds.length; i++) {
@@ -204,11 +207,3 @@ module.exports = function makeDataHelpers(db) {
     }
   };
 };
-
-// saveBreeds(type, breeds) {
-//   const breedsRef = ref.child('breeds').child(type);
-//   return breedsRef.set(breeds).then(() => {
-//     console.log('Synchronization succeeded');
-//     return breeds;
-//   });
-// },
