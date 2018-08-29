@@ -7,6 +7,7 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return petsRef
+        .orderBy('id', 'desc')
         .limit(100)
         .get()
         .then((snapshot) => {
@@ -169,6 +170,7 @@ module.exports = function makeDataHelpers(db) {
 
       // executes query
       return queryRef
+        .orderBy('id', 'desc')
         .limit(100)
         .get()
         .then((snap) => {
