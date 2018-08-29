@@ -49,6 +49,7 @@ module.exports = function makeDataHelpers(db) {
         .set(newUser)
         .then(result => usersRef.id)
         .then(err => err);
+      return newUser.id;
     },
     // function to search if username exists in the database, returns user if exists, null if not
     getUserDetails(username) {
@@ -127,6 +128,7 @@ module.exports = function makeDataHelpers(db) {
     },
     // function to adopt a pet, moves pet from pets collection to a adopted collection in user
     async adoptPet(userId, petId) {
+      console.log(`userId: ${userId}, petId: ${petId}`);
       // specifies the paths
       const usersRef = db
         .collection('users')
@@ -189,6 +191,30 @@ module.exports = function makeDataHelpers(db) {
           console.log('Empty!');
           return {};
         });
+    },
+    saveBreeds(type, breeds) {
+      // creates a batch to insert as a group
+      const batch = db.batch();
+      const breedsRef = db.collection('breeds').doc(type.toString());
+
+      // synchronized for loop to specify the document path and inserting
+      for (let i = 0; i < breeds.length; i++) {
+        // need to toString() the name
+        batch.set(breedsRef.doc(breeds[i].name.toString()), breeds[i]);
+      }
+      // commits the batch and returns
+      return batch
+        .commit()
+        .then(result => result)
+        .catch(err => err);
     }
   };
 };
+
+// saveBreeds(type, breeds) {
+//   const breedsRef = ref.child('breeds').child(type);
+//   return breedsRef.set(breeds).then(() => {
+//     console.log('Synchronization succeeded');
+//     return breeds;
+//   });
+// },
