@@ -8,7 +8,7 @@ module.exports = function makeDataHelpers(db) {
       // grabs all the pets under the collection pets
       return petsRef
         .orderBy('id', 'desc')
-        .limit(100)
+        .limit(1)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -171,7 +171,7 @@ module.exports = function makeDataHelpers(db) {
       // executes query
       return queryRef
         .orderBy('id', 'desc')
-        .limit(100)
+        .limit(1)
         .get()
         .then((snap) => {
           // query not empty
@@ -238,16 +238,3 @@ module.exports = function makeDataHelpers(db) {
     }
   };
 };
-
-// saveInfo(typeAnimal, typeInfo, id, personality) {
-//   const personalityRef = ref
-//     .child('info')
-//     .child(typeAnimal)
-//     .child(id)
-//     .child(typeInfo);
-
-//   return personalityRef.set(personality).then(() => {
-//     console.log('Synchronization succeeded');
-//     return personality;
-//   });
-// },
