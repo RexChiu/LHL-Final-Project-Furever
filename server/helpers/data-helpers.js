@@ -22,6 +22,21 @@ module.exports = function makeDataHelpers(db) {
         })
         .catch(err => err);
     },
+    returnAllUsers() {
+      const userRef = db.collection('users');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
+      return userRef
+        .limit(100)
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
     // inserts multiple pets into firestore db
     insertMultiplePets(pets) {
       // creates a batch to insert as a group
