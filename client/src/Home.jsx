@@ -37,6 +37,7 @@ class Home extends Component {
         let userId = { userId: res.data.data.attributes.id };
         this.props.setUserId(userId);
         sessionStorage.setItem('userId', res.data.data.attributes.id);
+        sessionStorage.setItem('username', res.data.data.attributes.username);
         this.props.history.push('/adopt');
       })
       .catch(err => alert(err));
@@ -92,6 +93,7 @@ class Home extends Component {
         let userId = { userId: res.data.data.attributes.id };
         this.props.setUserId(userId);
         sessionStorage.setItem('userId', res.data.data.attributes.id);
+        sessionStorage.setItem('username', res.data.data.attributes.username);
         this.props.history.push('/adopt');
       })
       .catch(err => alert(err));

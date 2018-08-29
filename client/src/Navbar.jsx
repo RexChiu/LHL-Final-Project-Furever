@@ -18,8 +18,8 @@ class Navbar extends Component {
         <a className="nav-item">
           <Link to="/adopt">Adopt</Link>
         </a>
-        <a className="nav-items" onClick={this.logoutUser}>
-          Logout
+        <a className="nav-item" onClick={this.logoutUser}>
+          <Link to="/">Logout</Link>
         </a>
         <hr />
       </div>
