@@ -49,7 +49,7 @@ module.exports = function makeDataHelpers(db) {
         .then(result => usersRef.id)
         .then(err => err);
     },
-    // searches the db for a username
+    // function to search if username exists in the database, returns user if exists, null if not
     getUserDetails(username) {
       // searches in users collection
       const usersRef = db.collection('users');
@@ -70,14 +70,35 @@ module.exports = function makeDataHelpers(db) {
           return err;
         });
     },
+    // function to search if username exists in the database, returns user if exists, null if not
+    getUserDetailsById(userId) {
+      // searches in users collection
+      const usersRef = db.collection('users').doc(userId);
+      return usersRef
+        .get()
+        .then((result) => {
+          if (result.exists) {
+            // returns document snapshot, if exists return data
+            if (result.exists) {
+              return result.data();
+            }
+            return null;
+          }
+          return null;
+        })
+        .catch((err) => {
+          console.log('error');
+          return err;
+        });
+    },
     // function to see if the petId exists in the database, returns pet if exists, null if not
-    getPetDetails(petId) {
+    getPetDetailsById(petId) {
       // searches in users collection
       const petsRef = db.collection('pets').doc(petId.toString());
       return petsRef
         .get()
         .then((result) => {
-          // returns document snapshot
+          // returns document snapshot, if exists return data
           if (result.exists) {
             return result.data();
           }
@@ -87,19 +108,55 @@ module.exports = function makeDataHelpers(db) {
           console.log('error');
           return err;
         });
+    },
+    // moves the pet into user.adopted, and deletes from pets collection
+    movePet(user, pet) {
+      // grabs the refs of the user and pet
+      const usersRef = db
+        .collection('users')
+        .doc(user.id.toString())
+        .collection('adopted');
+      const petsRef = db.collection('pets').doc(pet.id.toString());
+
+      return usersRef
+        .set(pet)
+        .then(result => result)
+        .then(() => petsRef.delete());
+    },
+    // function to adopt a pet, moves pet from pets collection to a adopted collection in user
+    async adoptPet(userId, petId) {
+      // specifies the paths
+      const usersRef = db
+        .collection('users')
+        .doc(userId.toString())
+        .collection('adopted');
+      const petsRef = db.collection('pets').doc(petId.toString());
+
+      // gets the details of the user and pet
+      const user = await this.getUserDetailsById(userId);
+      const pet = await this.getPetDetailsById(petId);
+
+      if (user && pet) {
+        console.log('user and pet exists');
+        await this.movePet(user, pet);
+        Promise.resolve(true);
+      }
+      Promise.resolve(false);
     }
   };
 };
 
-// // This datahelper will check if the provided petID exists(returns boolean) in the database
-// checkPetIDExists(petID) {
-//   const usersRef = ref.child('pets');
-//   console.log('Within checkPetExists', petID);
-//   return new Promise((resolve, reject) => {
-//     usersRef.child(petID).once('value', (snapshot) => {
-//       const exists = snapshot.val() !== null;
-//       console.log('Value of checkPetIDExists exists ', exists);
-//       resolve(exists);
-//     });
-//   });
+// // This datahelper will attach the Pet to a userID into the database
+// async adoptPet(userID, petID) {
+//   const usersRef = ref.child(`users/${userID}/adopted`);
+//   const petsRef = ref.child(`pets/${petID}`);
+
+//   console.log('adoptPet', userID, petID);
+
+//   if ((await this.checkPetIDExists(petID)) && (await this.checkUserIDExists(userID))) {
+//     console.log('After PetID and UserID exists');
+//     this.moveFbRecord(petsRef, usersRef);
+//     return true;
+//   }
+//   return false;
 // },
