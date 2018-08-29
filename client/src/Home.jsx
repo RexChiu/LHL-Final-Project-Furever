@@ -118,7 +118,7 @@ class Home extends Component {
           <source src={require('./assets/bg.mp4')} type="video/mp4" />
         </video>
 
-        <section id="home-panel" class="panel panel-default">
+        <section id="home-panel" className="panel panel-default">
           <img src={require('./assets/moe_00.png')} alt="notWorking" id="mouseUI" />
 
           <p>login</p>
@@ -155,16 +155,16 @@ class Home extends Component {
           </a>
 
           {/* <!-- Modal HTML --> */}
-          <div id="register" class="modal fade">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          <div id="register" className="modal fade">
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                   </button>
-                  <h4 class="modal-title">Register</h4>
+                  <h4 className="modal-title">Register</h4>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   <form onSubmit={this.submitRegister}>
                     <label>
                       username:
@@ -178,8 +178,8 @@ class Home extends Component {
                     <input type="submit" value="Submit" />
                   </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-default" data-dismiss="modal">
                     Close
                   </button>
                 </div>

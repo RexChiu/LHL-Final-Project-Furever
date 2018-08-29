@@ -17,6 +17,55 @@ module.exports = function makeDataHelpers(db) {
         })
         .catch(err => err);
     },
+    returnAllUsers() {
+      const userRef = db.collection('users');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
+      return userRef
+        .limit(100)
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
+    // below was added by Jaron
+    returnAllUsersWithPets() {
+      const userRef = db.collection('users');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
+      return userRef
+        .where('adoptedPet', '==', true)
+        .limit(100)
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          console.log('result', resultArr);
+          this.returnAllUsersWithPets02(resultArr);
+
+          return resultArr;
+        })
+        .catch(err => err);
+    },
+    returnAllUsersWithPets02(array) {
+      const userRef = db.collection('users');
+      const petsArr = [];
+      array.forEach((element) => {
+        const tempId = element.id;
+        console.log('ID', tempId);
+        // above is to isolate UserID
+        // this.db.collection('users').collection('adopt').get().
+        // then(snapshot) => {
+        //   console.log(snapshot);
+        // console.log(userRef.tempId);
+      });
+    },
+    // above was added by Jaron
     // inserts multiple pets into firestore db
     insertMultiplePets(pets) {
       // creates a batch to insert as a group

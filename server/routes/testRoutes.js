@@ -8,6 +8,8 @@ import vetfinder from '../api/vetfinder';
 
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
+/* shop API */
+import shop from '../api/shopfinder';
 import VetsSerializer from '../serializers/vets';
 
 const router = express.Router();
@@ -36,6 +38,19 @@ module.exports = (dataHelpers) => {
       res.json(e);
     }
   });
+  // added in for shop data -JARON EVANS
+  router.get('/petfood', async (req, res) => {
+    try {
+      const result = await petfinder('pet.find', options);
+      const sanitized = await sanitizePetfinder(result);
+      const output = await dataHelpers.insertMultiplePets(sanitized);
+      res.json(output);
+    } catch (e) {
+      console.log('Error', e);
+      res.json(e);
+    }
+  });
+  // added in above for shop data -JARON EVANS
 
   /* GET places page. */
   router.get('/places', async (req, res) => {

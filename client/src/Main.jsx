@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
+// import React, { Component } from 'react';
+// import { BrowserRouter as Route, Switch } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import Adopt from './Adopt.jsx';

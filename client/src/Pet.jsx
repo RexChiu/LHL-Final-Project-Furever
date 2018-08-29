@@ -62,7 +62,7 @@ class Pet extends Component {
                   </button>
                   <h4 className="modal-title">Confirmation</h4>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   <img src={this.props.pet.attributes.photos} alt="notWorking" />
                   <p> {this.props.pet.attributes.animal} </p>
                   <p> {this.props.pet.attributes.breed} </p>

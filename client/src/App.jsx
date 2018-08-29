@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Navbar from './Navbar.jsx';
 import Main from './Main.jsx';
-import './App.css';
+import './assets/App.css';
 
 class App extends Component {
   constructor(props) {
