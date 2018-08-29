@@ -13,6 +13,7 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return petsRef
+        .limit(100)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -171,20 +172,23 @@ module.exports = function makeDataHelpers(db) {
       }
 
       // executes query
-      return queryRef.get().then((snap) => {
-        // query not empty
-        if (!snap.empty) {
-          console.log('Not Empty!');
-          const resultArr = [];
-          for (let i = 0; i < snap.size; i++) {
-            resultArr.push(snap.docs[i].data());
+      return queryRef
+        .limit(100)
+        .get()
+        .then((snap) => {
+          // query not empty
+          if (!snap.empty) {
+            console.log('Not Empty!');
+            const resultArr = [];
+            for (let i = 0; i < snap.size; i++) {
+              resultArr.push(snap.docs[i].data());
+            }
+            return resultArr;
           }
-          return resultArr;
-        }
-        // no queries
-        console.log('Empty!');
-        return {};
-      });
+          // no queries
+          console.log('Empty!');
+          return {};
+        });
     }
   };
 };

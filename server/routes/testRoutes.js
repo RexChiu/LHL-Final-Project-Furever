@@ -19,7 +19,7 @@ module.exports = (dataHelpers) => {
     const options = {
       location: 'toronto,ontario',
       output: 'full',
-      count: 200,
+      count: 500,
       animal: 'cat'
     };
     try {
