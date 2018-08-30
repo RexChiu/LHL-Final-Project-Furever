@@ -17,6 +17,7 @@ class Care extends Component {
       fetch(`http://localhost:8080/user/${userId}/withpets`)
         .then(res => res.json())
         .then(res => {
+          console.log(res);
           this.setState({ user: res.data.attributes });
         });
     }
@@ -30,7 +31,12 @@ class Care extends Component {
     if (!sessionStorage.getItem('userId')) {
       return <div>Login to See this Page!</div>;
     } else {
-      return 'Cats';
+      // checks if the logged in user has a pet
+      if (this.state.user['adopted-pet'] == true) {
+        return <div>You have pets!</div>;
+      } else {
+        return <div>Adopt a pet first!</div>;
+      }
     }
   };
 }
