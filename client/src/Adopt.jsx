@@ -80,7 +80,7 @@ class Adopt extends Component {
   _renderWaypoint = () => {
     if (this.state.isLoaded) {
       // creates a waypoint that triggers on the bottom 50% of the scrolling
-      return <Waypoint className="col-12" bottomOffset="-50%" onEnter={this._handleWaypointEnter} />;
+      return <Waypoint className="col-12" bottomOffset="-20%" onEnter={this._handleWaypointEnter} />;
     }
   };
 
