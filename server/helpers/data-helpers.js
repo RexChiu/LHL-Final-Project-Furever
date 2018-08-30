@@ -8,7 +8,7 @@ module.exports = function makeDataHelpers(db) {
       // grabs all the pets under the collection pets
       return petsRef
         .orderBy('id', 'desc')
-        .limit(1)
+        .limit(9)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -23,7 +23,7 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return userRef
-        .limit(100)
+        .limit(50)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -40,7 +40,7 @@ module.exports = function makeDataHelpers(db) {
       // grabs all the pets under the collection pets
       return userRef
         .where('adopted', '==', true)
-        .limit(100)
+        .limit(50)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -230,7 +230,7 @@ module.exports = function makeDataHelpers(db) {
       // executes query
       return queryRef
         .orderBy('id', 'desc')
-        .limit(1)
+        .limit(9)
         .get()
         .then((snap) => {
           // query not empty
