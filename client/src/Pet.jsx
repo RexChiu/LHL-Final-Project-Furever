@@ -21,17 +21,18 @@ class Pet extends Component {
   // ${this.props.pet.id}
 
   handleSubmit = event => {
-    if (this.props.userId === '') {
+    if (sessionStorage.getItem('userId') === '') {
       alert('Need to Login First!');
       return;
     }
     axios
       .post(`http://localhost:8080/pet/${this.props.pet.id}/adopt`, {
-        userId: `${this.props.userId}`,
+        userId: `${sessionStorage.getItem('userId')}`,
         petId: `${this.props.pet.id}`
       })
       .then(function(response) {
         console.log(response);
+        window.location.reload();
       })
       .catch(function(error) {
         console.log(error);
@@ -61,7 +62,7 @@ class Pet extends Component {
                   </button>
                   <h4 className="modal-title">Confirmation</h4>
                 </div>
-                <div class="modal-body">
+                <div className="modal-body">
                   <img src={this.props.pet.attributes.photos} alt="notWorking" />
                   <p> {this.props.pet.attributes.animal} </p>
                   <p> {this.props.pet.attributes.breed} </p>

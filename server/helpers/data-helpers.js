@@ -17,6 +17,55 @@ module.exports = function makeDataHelpers(db) {
         })
         .catch(err => err);
     },
+    returnAllUsers() {
+      const userRef = db.collection('users');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
+      return userRef
+        .limit(100)
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
+    // below was added by Jaron
+    returnAllUsersWithPets() {
+      const userRef = db.collection('users');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
+      return userRef
+        .where('adoptedPet', '==', true)
+        .limit(100)
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          console.log('result', resultArr);
+          this.returnAllUsersWithPets02(resultArr);
+
+          return resultArr;
+        })
+        .catch(err => err);
+    },
+    returnAllUsersWithPets02(array) {
+      const userRef = db.collection('users');
+      const petsArr = [];
+      array.forEach((element) => {
+        const tempId = element.id;
+        console.log('ID', tempId);
+        // above is to isolate UserID
+        // this.db.collection('users').collection('adopt').get().
+        // then(snapshot) => {
+        //   console.log(snapshot);
+        // console.log(userRef.tempId);
+      });
+    },
+    // above was added by Jaron
     // inserts multiple pets into firestore db
     insertMultiplePets(pets) {
       // creates a batch to insert as a group
@@ -138,11 +187,21 @@ module.exports = function makeDataHelpers(db) {
       if (user && pet) {
         console.log('user and pet exists');
         await this.movePet(user, pet);
+        await this.setAdoptedPetTrue(userId);
         Promise.resolve(true);
       } else {
         console.log('something went wrong');
         Promise.resolve(false);
       }
+    },
+    // sets the adoptedPet flag of user to be true
+    setAdoptedPetTrue(userId) {
+      const usersRef = db.collection('users').doc(userId.toString());
+
+      return usersRef
+        .update({ adoptedPet: true })
+        .then(() => console.log('Adopted'))
+        .catch(err => console.log(err));
     },
     // Filter through pets with options provided
     filterPets(options) {
@@ -235,6 +294,48 @@ module.exports = function makeDataHelpers(db) {
         .doc(id.toString());
 
       return infoRef.set(info).then(() => info);
+    },
+    // returns all the pets of the userId
+    getUserPetsByUserId(userId) {
+      const userRef = db
+        .collection('users')
+        .doc(userId.toString())
+        .collection('adopted');
+
+      return userRef.get().then((snapshot) => {
+        const pets = [];
+        snapshot.forEach(pet => pets.push(pet.data()));
+        return pets;
+      });
+    },
+    getUsersWithPets() {
+      const userRef = db.collection('users');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
+      return userRef
+        .where('adoptedPet', '==', true)
+        .get()
+        .then(async (snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          for (const doc of snapshot.docs) {
+            const user = doc.data();
+            const userId = user.id;
+            const petsArr = await this.getUserPetsByUserId(userId);
+            user.pets = petsArr;
+            resultArr.push(user);
+          }
+          return resultArr;
+        });
+    },
+    getUserWithPets(userId) {
+      const userRef = db.collection('users').doc(userId.toString());
+      return userRef.get().then(async (doc) => {
+        const user = doc.data();
+        const petsArr = await this.getUserPetsByUserId(userId);
+        user.pets = petsArr;
+        return user;
+      });
     }
   };
 };

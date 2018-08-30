@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import EventCompose from './EventCompose';
+import EventLocalUsers from './EventLocalUsers';
+
 //import assets
 
 class Events extends Component {
@@ -7,7 +9,7 @@ class Events extends Component {
     return (
       <React.Fragment>
         <EventCompose />
-        <p> Events Page </p>
+        <EventLocalUsers />
       </React.Fragment>
     );
   }
