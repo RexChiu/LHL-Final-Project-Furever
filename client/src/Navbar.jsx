@@ -13,7 +13,10 @@ class Navbar extends Component {
           <Link to="/events">Events</Link>
         </a>
         <a className="nav-item">
-          <Link to="/adopt">Adopt</Link>
+          <Link to="/adopt">Adopt </Link>
+        </a>
+        <a className="nav-item">
+          <Link to="/places"> Vet Care</Link>
         </a>
         <hr />
       </div>

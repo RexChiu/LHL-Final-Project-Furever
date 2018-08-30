@@ -21,7 +21,7 @@ class Pet extends Component {
   // ${this.props.pet.id}
 
   handleSubmit = event => {
-    if (this.props.userId == '') {
+    if (this.props.userId === '') {
       alert('Need to Login First!');
       return;
     }
