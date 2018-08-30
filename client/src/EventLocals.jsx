@@ -25,14 +25,13 @@ class EventLocals extends Component {
   }
 
   render() {
-    const { users } = this.state;
-    let userItems = '';
+    // const { users } = this.state;
+    // let userItems = '';
+    return 'Cats';
 
-    return (
-    if (users instanceof Array) {
-      userItems = users.map((user, i) => <p> user.id </p>);
-    });
-    
+    // if (users instanceof Array) {
+    //   userItems = users.map((user, i) => <p> user.id </p>);
+    // });
   }
 }
 
