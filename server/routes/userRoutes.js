@@ -33,9 +33,8 @@ module.exports = (dataHelpers) => {
     const id = await dataHelpers.insertNewUser(inputObj);
 
     // constructs return obj and serializes it
-    const returnObj = {
-      id
-    };
+    delete inputObj.passwordDigest;
+    const returnObj = inputObj;
     const jsonOutput = UserSerializer.serialize(returnObj);
     res.json(jsonOutput);
   });

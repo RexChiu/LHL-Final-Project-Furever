@@ -32,7 +32,7 @@ class Care extends Component {
       return <div>Login to See this Page!</div>;
     } else {
       // checks if the logged in user has a pet
-      if (this.state.user.adopted == true) {
+      if (this.state.user.adopted) {
         return <div>You have pets!</div>;
       } else {
         return <div>Adopt a pet first!</div>;
