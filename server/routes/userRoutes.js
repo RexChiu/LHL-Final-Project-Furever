@@ -26,7 +26,7 @@ module.exports = (dataHelpers) => {
       passwordDigest,
       lat: req.body.lat,
       lng: req.body.lng,
-      adoptedPet: req.body.adoptedPet
+      adopted: req.body.adopted
     };
 
     // grabs userId from successful db insert
