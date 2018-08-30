@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 //import assets
+// import Locals from './Locals';
+import EventLocals from './EventLocals';
 
 class EventLocalUsers extends Component {
   componentDidMount() {
@@ -22,6 +24,7 @@ class EventLocalUsers extends Component {
         }
       );
   }
+
   render() {
     return (
       <React.Fragment>
@@ -29,7 +32,7 @@ class EventLocalUsers extends Component {
           <p id="eventlocal"> Locals: </p>
 
           <div>
-            <a> woah </a>
+            <EventLocals />
           </div>
           <p id="friendrequest"> Friend Request: </p>
           <button className="btn btn-sm btn-block"> Find </button>
