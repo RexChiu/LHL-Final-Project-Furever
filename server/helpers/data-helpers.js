@@ -7,12 +7,30 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return petsRef
-        .orderBy('id', 'desc')
-        .limit(1)
+        .orderBy('id')
+        .limit(9)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
           snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
+    // returns all pets from the id in the firestore database
+    returnNextPets(id) {
+      const petsRef = db.collection('pets');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets, after the id given
+      return petsRef
+        .orderBy('id')
+        .startAfter(Number(id)) // convert to number, since stringify/JSON changes it to a string
+        .limit(15)
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.docs.forEach(doc => resultArr.push(doc.data()));
           return resultArr;
         })
         .catch(err => err);
@@ -23,7 +41,7 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return userRef
-        .limit(100)
+        .limit(50)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -40,7 +58,7 @@ module.exports = function makeDataHelpers(db) {
       // grabs all the pets under the collection pets
       return userRef
         .where('adopted', '==', true)
-        .limit(100)
+        .limit(50)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -227,10 +245,14 @@ module.exports = function makeDataHelpers(db) {
         queryRef = queryRef.where('animal', '==', options.animal);
       }
 
+      // sets the index and query start point
+      if (options.lastPet) {
+        queryRef = queryRef.orderBy('id').startAfter(Number(options.lastPet));
+      }
+
       // executes query
       return queryRef
-        .orderBy('id', 'desc')
-        .limit(1)
+        .limit(9)
         .get()
         .then((snap) => {
           // query not empty

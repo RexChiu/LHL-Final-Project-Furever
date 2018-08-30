@@ -1,5 +1,11 @@
+#navfix {
+  top: 1em;
+  margin: 4em;
+}
+
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -75,8 +81,8 @@
   outline-width: 0.005em;
   outline-style: auto;
 }
-#eventlocalusers div {
-  width: 12em;
+#eventlocalusers #eventlocalcontainer {
+  width: 12.5em;
   min-height: 15em;
   max-height: 20em;
 }
@@ -96,4 +102,16 @@
 
 #eventlocalusers .btn {
   background-color: #75b5c4;
+}
+
+.adopt-page {
+  height: 100%;
+}
+
+.pet-item {
+  height: 20em;
+}
+.eventLocalsIcon {
+  float: right;
+  margin: 0.06em;
 }
