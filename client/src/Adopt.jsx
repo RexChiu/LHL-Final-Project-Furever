@@ -46,7 +46,8 @@ class Adopt extends Component {
 
   _handleWaypointEnter = () => {
     if (this.state.isLoaded) {
-      alert('Cats');
+      const lastPet = this.state.pets.length - 1;
+      alert(this.state.pets[lastPet].id);
     }
   };
 
