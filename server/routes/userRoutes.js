@@ -58,6 +58,7 @@ module.exports = (dataHelpers) => {
     const match = await bcrypt.compare(inputObj.password, user.passwordDigest);
 
     if (match) {
+      delete user.passwordDigest;
       const jsonOutput = UserSerializer.serialize(user);
       res.json(jsonOutput);
     } else {
