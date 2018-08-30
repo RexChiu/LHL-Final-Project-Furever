@@ -8,7 +8,7 @@ module.exports = function makeDataHelpers(db) {
       // grabs all the pets under the collection pets
       return petsRef
         .orderBy('id', 'desc')
-        .limit(12)
+        .limit(15)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
@@ -230,7 +230,7 @@ module.exports = function makeDataHelpers(db) {
       // executes query
       return queryRef
         .orderBy('id', 'desc')
-        .limit(12)
+        .limit(15)
         .get()
         .then((snap) => {
           // query not empty
