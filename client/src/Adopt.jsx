@@ -22,21 +22,12 @@ class Adopt extends Component {
     //code I added in will link to server
     fetch('http://localhost:8080/pets')
       .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            pets: result.data
-          });
-        },
-
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
+      .then(result => {
+        this.setState({
+          isLoaded: true,
+          pets: result.data
+        });
+      });
   }
 
   rerenderPets = pets => {
@@ -44,10 +35,22 @@ class Adopt extends Component {
     this.setState({ pets: JSON.parse(pets).data.data, isLoaded: true });
   };
 
+  _getMorePets = id => {
+    fetch(`http://localhost:8080/pets/${id}`)
+      .then(res => res.json())
+      .then(result => {
+        this.setState({
+          isLoaded: true,
+          pets: result.data
+        });
+      });
+  };
+
   _handleWaypointEnter = () => {
     if (this.state.isLoaded) {
       const lastPet = this.state.pets.length - 1;
-      alert(this.state.pets[lastPet].id);
+      const lastPetId = this.state.pets[lastPet].id;
+      // alert(this.state.pets[lastPet].id);
     }
   };
 

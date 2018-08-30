@@ -22,20 +22,20 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="navbar navbar-light">
         <a className="navbar-brand">
           <Link to="/">Home</Link>
         </a>
-        <a className="nav-item">
+        <a id="navfix" className="nav-item">
           <Link to="/events">Events</Link>
         </a>
-        <a className="nav-item">
+        <a id="navfix" className="nav-item">
           <Link to="/adopt">Adopt </Link>
         </a>
-        <a className="nav-item">
+        <a id="navfix" className="nav-item">
           <Link to="/places"> Vet Care</Link>
         </a>
-        <a className="nav-item">
+        <a id="navfix" className="nav-item">
           <Link to="/care">Care</Link>
         </a>
         {this.loggedInUser()}
