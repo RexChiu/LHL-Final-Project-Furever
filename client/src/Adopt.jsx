@@ -35,16 +35,12 @@ class Adopt extends Component {
     this.setState({ pets: JSON.parse(pets).data.data, isLoaded: true });
   };
 
+  // gets the next pets from the server, adds to the end of the pets array, re-renders automagically
   _getMorePets = id => {
     fetch(`http://localhost:8080/pets/${id}`)
       .then(res => res.json())
       .then(result => {
-        console.log('Result: ' + JSON.stringify(result));
-        console.log('Before: ' + this.state.pets.length);
         const pets = this.state.pets.concat(result.data);
-        console.log('After: ' + pets.length);
-        console.log(this.state.pets);
-        console.log(pets);
         this.setState({ pets });
       })
       .catch(err => {
