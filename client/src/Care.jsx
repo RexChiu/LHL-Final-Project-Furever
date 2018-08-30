@@ -6,12 +6,13 @@ class Care extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: ''
+      user: '',
+      petBreeds: {}
     };
   }
 
   componentDidMount() {
-    // on page load, get the user object
+    // on page load, get the user object if logged in
     if (sessionStorage.getItem('userId')) {
       const userId = sessionStorage.getItem('userId');
       if (userId) {
@@ -20,22 +21,39 @@ class Care extends Component {
           .then(res => {
             console.log(res);
             this.setState({ user: res.data.attributes });
+            this.getUserPetBreeds();
           });
       }
     }
   }
 
   render() {
-    return <Fragment>{this.loggedInUser()}</Fragment>;
+    return <Fragment>{this.renderPetCare()}</Fragment>;
   }
 
-  loggedInUser = () => {
+  getUserPetBreeds = () => {
+    const petBreeds = {
+      Cat: [],
+      Dog: []
+    };
+
+    for (const pet of this.state.user.pets) {
+      // if the breed does not exist in the
+      if (!petBreeds[pet.animal].includes(pet.breed)) {
+        petBreeds[pet.animal].push(pet.breed);
+      }
+    }
+
+    this.setState({ petBreeds });
+  };
+
+  renderPetCare = () => {
     if (!sessionStorage.getItem('userId')) {
       return <div>Login to See this Page!</div>;
     } else {
       // checks if the logged in user has a pet
       if (this.state.user.adopted) {
-        return <div>You have pets!</div>;
+        return this.state.petBreeds.Cat;
       } else {
         return <div>Adopt a pet first!</div>;
       }
