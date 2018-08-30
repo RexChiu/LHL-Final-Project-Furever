@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -96,4 +97,12 @@
 
 #eventlocalusers .btn {
   background-color: #75b5c4;
+}
+
+.adopt-page {
+  height: 100%;
+}
+
+.pet-item {
+  height: 20em;
 }

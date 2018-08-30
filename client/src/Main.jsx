@@ -14,7 +14,7 @@ class Main extends React.Component {
       <Switch>
         <Route exact path="/" render={props => <Home {...props} setUserId={this.props.setUserId} />} />
         <Route path="/events" render={props => <Events {...props} />} />
-        <Route path="/adopt" render={props => <Adopt {...props} />} />
+        <Route path="/adopt" render={props => <Adopt {...props} id="adopt-page" />} />
         <Route path="/care" render={props => <Care {...props} />} />
         <Route path="/places" render={props => <Vet {...props} userId={this.props.userId} />} />
       </Switch>

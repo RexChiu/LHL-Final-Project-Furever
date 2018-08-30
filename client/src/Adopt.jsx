@@ -41,14 +41,27 @@ class Adopt extends Component {
 
   rerenderPets = pets2 => {
     console.log('CLIENT-SIDE', JSON.parse(pets2).data.data);
-    this.setState({ pets: JSON.parse(pets2).data.data });
+    this.setState({ pets: JSON.parse(pets2).data.data, isLoaded: true });
+  };
+
+  _handleWaypointEnter = () => {
+    if (this.state.isLoaded) {
+      alert('Cats');
+    }
+  };
+
+  _renderWaypoint = () => {
+    if (this.state.isLoaded) {
+      // creates a waypoint that triggers on the bottom 50% of the scrolling
+      return <Waypoint className="col-sm-12" bottomOffset="-50%" onEnter={this._handleWaypointEnter} />;
+    }
   };
 
   render() {
     const { pets } = this.state;
     let adoptItems = '';
     if (pets instanceof Array) {
-      adoptItems = pets.map((pet, i) => <Pet pet={pet} key={pet.id} />);
+      adoptItems = pets.map((pet, i) => <Pet className="pet-item" pet={pet} key={pet.id} />);
     }
 
     return (
@@ -56,11 +69,10 @@ class Adopt extends Component {
         <p> Adopt Page </p>
         <SearchUI />
         <AdoptFilter rerenderPets={this.rerenderPets} />
-        <div>{adoptItems}</div>
-        <Waypoint scrollableAncestor={window} onEnter={this._handleWaypointEnter} bottomOffset="100px" />
+        {adoptItems}
+        <div className="col-sm-12">{this._renderWaypoint()}</div>
       </React.Fragment>
     );
   }
 }
-
 export default Adopt;
