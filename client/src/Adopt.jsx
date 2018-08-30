@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Waypoint from 'react-waypoint';
 //import assets
 
 //modal
@@ -41,12 +42,6 @@ class Adopt extends Component {
   rerenderPets = pets2 => {
     console.log('CLIENT-SIDE', JSON.parse(pets2).data.data);
     this.setState({ pets: JSON.parse(pets2).data.data });
-
-    // this.state = {
-    //   error: null,
-    //   isLoaded: false,
-    //   pets: pets2
-    // };
   };
 
   render() {
@@ -62,6 +57,7 @@ class Adopt extends Component {
         <SearchUI />
         <AdoptFilter rerenderPets={this.rerenderPets} />
         <div>{adoptItems}</div>
+        <Waypoint scrollableAncestor={window} onEnter={this._handleWaypointEnter} bottomOffset="100px" />
       </React.Fragment>
     );
   }
