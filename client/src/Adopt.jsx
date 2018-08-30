@@ -59,10 +59,11 @@ class Adopt extends Component {
     axios
       .put(`http://localhost:8080/pets/filter`, filters)
       .then(response => {
-        // rerenderPets(JSON.stringify(response), outputObj);
-
-        const pets = this.state.pets.concat(response.data.data);
-        this.setState({ pets });
+        // if there are no results, it is not an array
+        if (response.data.data instanceof Array) {
+          const pets = this.state.pets.concat(response.data.data);
+          this.setState({ pets });
+        }
       })
       .catch(function(error) {
         console.log(error);
@@ -88,7 +89,7 @@ class Adopt extends Component {
     const { pets } = this.state;
     let adoptItems = '';
     if (pets instanceof Array) {
-      adoptItems = pets.map((pet, i) => <Pet className="pet-item" pet={pet} key={pet.id} />);
+      adoptItems = pets.map(pet => <Pet className="pet-item" pet={pet} key={pet.id} />);
     }
 
     return (
