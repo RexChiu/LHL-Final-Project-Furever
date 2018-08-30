@@ -12,14 +12,16 @@ class Care extends Component {
 
   componentDidMount() {
     // on page load, get the user object
-    const userId = sessionStorage.getItem('userId');
-    if (userId) {
-      fetch(`http://localhost:8080/user/${userId}/withpets`)
-        .then(res => res.json())
-        .then(res => {
-          console.log(res);
-          this.setState({ user: res.data.attributes });
-        });
+    if (sessionStorage.getItem('userId')) {
+      const userId = sessionStorage.getItem('userId');
+      if (userId) {
+        fetch(`http://localhost:8080/user/${userId}/withpets`)
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+            this.setState({ user: res.data.attributes });
+          });
+      }
     }
   }
 

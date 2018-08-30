@@ -63,27 +63,12 @@ module.exports = function makeDataHelpers(db) {
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
           snapshot.forEach(doc => resultArr.push(doc.data()));
-          console.log('result', resultArr);
           this.returnAllUsersWithPets02(resultArr);
 
           return resultArr;
         })
         .catch(err => err);
     },
-    returnAllUsersWithPets02(array) {
-      const userRef = db.collection('users');
-      const petsArr = [];
-      array.forEach((element) => {
-        const tempId = element.id;
-        console.log('ID', tempId);
-        // above is to isolate UserID
-        // this.db.collection('users').collection('adopt').get().
-        // then(snapshot) => {
-        //   console.log(snapshot);
-        // console.log(userRef.tempId);
-      });
-    },
-    // above was added by Jaron
     // inserts multiple pets into firestore db
     insertMultiplePets(pets) {
       // creates a batch to insert as a group
@@ -190,7 +175,6 @@ module.exports = function makeDataHelpers(db) {
     },
     // function to adopt a pet, moves pet from pets collection to a adopted collection in user
     async adoptPet(userId, petId) {
-      console.log(`userId: ${userId}, petId: ${petId}`);
       // specifies the paths
       const usersRef = db
         .collection('users')
@@ -203,7 +187,6 @@ module.exports = function makeDataHelpers(db) {
       const pet = await this.getPetDetailsById(petId);
 
       if (user && pet) {
-        console.log('user and pet exists');
         await this.movePet(user, pet);
         await this.setAdoptedTrue(userId);
         Promise.resolve(true);
@@ -224,7 +207,6 @@ module.exports = function makeDataHelpers(db) {
     // Filter through pets with options provided
     filterPets(options) {
       let queryRef = db.collection('pets');
-      console.log(options);
       const keys = Object.keys(options);
       const values = Object.values(options);
 
@@ -257,7 +239,7 @@ module.exports = function makeDataHelpers(db) {
         .then((snap) => {
           // query not empty
           if (!snap.empty) {
-            console.log('Not Empty!');
+            console.log('Found Pets!');
             const resultArr = [];
             for (let i = 0; i < snap.size; i++) {
               resultArr.push(snap.docs[i].data());
