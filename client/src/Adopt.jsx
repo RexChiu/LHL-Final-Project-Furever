@@ -33,7 +33,6 @@ class Adopt extends Component {
   }
 
   rerenderPets = (pets, filters) => {
-    console.log('CLIENT-SIDE', JSON.parse(pets).data.data);
     this.setState({ pets: JSON.parse(pets).data.data, isLoaded: true, filters });
   };
 
