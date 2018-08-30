@@ -85,7 +85,7 @@ class Home extends Component {
       password: this.state.register_password,
       lat: this.state.lat,
       lng: this.state.lng,
-      adoptedPet: false
+      adopted: false
     };
 
     axios

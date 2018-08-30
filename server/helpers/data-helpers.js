@@ -39,7 +39,7 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return userRef
-        .where('adoptedPet', '==', true)
+        .where('adopted', '==', true)
         .limit(100)
         .get()
         .then((snapshot) => {
@@ -187,19 +187,19 @@ module.exports = function makeDataHelpers(db) {
       if (user && pet) {
         console.log('user and pet exists');
         await this.movePet(user, pet);
-        await this.setAdoptedPetTrue(userId);
+        await this.setAdoptedTrue(userId);
         Promise.resolve(true);
       } else {
         console.log('something went wrong');
         Promise.resolve(false);
       }
     },
-    // sets the adoptedPet flag of user to be true
-    setAdoptedPetTrue(userId) {
+    // sets the adopted flag of user to be true
+    setAdoptedTrue(userId) {
       const usersRef = db.collection('users').doc(userId.toString());
 
       return usersRef
-        .update({ adoptedPet: true })
+        .update({ adopted: true })
         .then(() => console.log('Adopted'))
         .catch(err => console.log(err));
     },
@@ -314,7 +314,7 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return userRef
-        .where('adoptedPet', '==', true)
+        .where('adopted', '==', true)
         .get()
         .then(async (snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
