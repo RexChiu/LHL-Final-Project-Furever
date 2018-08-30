@@ -39,9 +39,9 @@ class Adopt extends Component {
       );
   }
 
-  rerenderPets = pets2 => {
-    console.log('CLIENT-SIDE', JSON.parse(pets2).data.data);
-    this.setState({ pets: JSON.parse(pets2).data.data, isLoaded: true });
+  rerenderPets = pets => {
+    console.log('CLIENT-SIDE', JSON.parse(pets).data.data);
+    this.setState({ pets: JSON.parse(pets).data.data, isLoaded: true });
   };
 
   _handleWaypointEnter = () => {
