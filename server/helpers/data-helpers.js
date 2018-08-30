@@ -245,9 +245,13 @@ module.exports = function makeDataHelpers(db) {
         queryRef = queryRef.where('animal', '==', options.animal);
       }
 
+      // sets the index and query start point
+      if (options.lastPet) {
+        queryRef = queryRef.orderBy('id').startAfter(Number(options.lastPet));
+      }
+
       // executes query
       return queryRef
-        .orderBy('id', 'desc')
         .limit(15)
         .get()
         .then((snap) => {

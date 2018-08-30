@@ -61,16 +61,15 @@ class AdoptFilter extends Component {
     axios
       .put(`http://localhost:8080/pets/filter`, outputObj)
       .then(function(response) {
-        console.log('////////');
-        console.log(JSON.stringify(response));
-        rerenderPets(JSON.stringify(response));
+        rerenderPets(JSON.stringify(response), outputObj);
       })
       .catch(function(error) {
         console.log(error);
       });
   };
 
-  refreshPage = () => {
+  resetFilter = () => {
+    this.props.resetFilter();
     window.location.reload();
   };
 
@@ -117,7 +116,7 @@ class AdoptFilter extends Component {
 
           <input type="submit" value="submit" />
         </form>
-        <button type="button" onClick={this.refreshPage}>
+        <button type="button" onClick={this.resetFilter}>
           Reset Filters
         </button>
       </section>
