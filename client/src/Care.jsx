@@ -37,10 +37,16 @@ class Care extends Component {
       Dog: []
     };
 
+    // loops through each pet to get their breed
     for (const pet of this.state.user.pets) {
-      // if the breed does not exist in the
-      if (!petBreeds[pet.animal].includes(pet.breed)) {
-        petBreeds[pet.animal].push(pet.breed);
+      // splits up any mixed breeds into arrays
+      const breedsArr = pet.breed.split(' and ');
+      // loops through breeds array (of a single pet) and appends onto petBreeds obj
+      for (let breed of breedsArr) {
+        // if the breed does not exist in the
+        if (!petBreeds[pet.animal].includes(breed)) {
+          petBreeds[pet.animal].push(breed);
+        }
       }
     }
 
@@ -53,7 +59,7 @@ class Care extends Component {
     } else {
       // checks if the logged in user has a pet
       if (this.state.user.adopted) {
-        return this.state.petBreeds.Cat;
+        return JSON.stringify(this.state.petBreeds);
       } else {
         return <div>Adopt a pet first!</div>;
       }
