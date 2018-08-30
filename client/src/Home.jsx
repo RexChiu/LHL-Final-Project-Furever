@@ -38,6 +38,8 @@ class Home extends Component {
         this.props.setUserId(userId);
         sessionStorage.setItem('userId', res.data.data.attributes.id);
         sessionStorage.setItem('username', res.data.data.attributes.username);
+        sessionStorage.setItem('lat', res.data.data.attributes.lat);
+        sessionStorage.setItem('lng', res.data.data.attributes.lng);
         this.props.history.push('/adopt');
       })
       .catch(err => alert(err));
@@ -94,6 +96,8 @@ class Home extends Component {
         this.props.setUserId(userId);
         sessionStorage.setItem('userId', res.data.data.attributes.id);
         sessionStorage.setItem('username', res.data.data.attributes.username);
+        sessionStorage.setItem('lat', res.data.data.attributes.lat);
+        sessionStorage.setItem('lng', res.data.data.attributes.lng);
         this.props.history.push('/adopt');
       })
       .catch(err => alert(err));
