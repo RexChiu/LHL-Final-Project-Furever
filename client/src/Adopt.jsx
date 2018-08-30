@@ -39,10 +39,16 @@ class Adopt extends Component {
     fetch(`http://localhost:8080/pets/${id}`)
       .then(res => res.json())
       .then(result => {
-        this.setState({
-          isLoaded: true,
-          pets: result.data
-        });
+        console.log('Result: ' + JSON.stringify(result));
+        console.log('Before: ' + this.state.pets.length);
+        const pets = this.state.pets.concat(result.data);
+        console.log('After: ' + pets.length);
+        console.log(this.state.pets);
+        console.log(pets);
+        this.setState({ pets });
+      })
+      .catch(err => {
+        alert(err);
       });
   };
 
@@ -50,7 +56,7 @@ class Adopt extends Component {
     if (this.state.isLoaded) {
       const lastPet = this.state.pets.length - 1;
       const lastPetId = this.state.pets[lastPet].id;
-      // alert(this.state.pets[lastPet].id);
+      this._getMorePets(lastPetId);
     }
   };
 

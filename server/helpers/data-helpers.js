@@ -7,12 +7,31 @@ module.exports = function makeDataHelpers(db) {
       const resultArr = [];
       // grabs all the pets under the collection pets
       return petsRef
-        .orderBy('id', 'desc')
+        .orderBy('id')
         .limit(15)
         .get()
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
           snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
+    // returns all pets from the id in the firestore database
+    returnNextPets(id) {
+      const petsRef = db.collection('pets');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets, after the id given
+      return petsRef
+        .orderBy('id')
+        .startAfter(Number(id))
+        .limit(15)
+        .get()
+        .then((snapshot) => {
+          console.log(`Found: ${snapshot.size}`);
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.docs.forEach(doc => resultArr.push(doc.data()));
           return resultArr;
         })
         .catch(err => err);
