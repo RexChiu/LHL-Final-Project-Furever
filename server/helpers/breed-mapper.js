@@ -39,7 +39,10 @@ module.exports = function breedMap(breeds) {
 
   breeds.Dog.forEach((dogBreed) => {
     if (map[dogBreed]) {
-      mappedBreeds.dog.push(map[dogBreed]);
+      // breed is mapped, add if it is not there.
+      if (!mappedBreeds.dog.includes(map[dogBreed])) {
+        mappedBreeds.dog.push(map[dogBreed]);
+      }
     } else if (dogBreed !== 'Mixed Breed') {
       mappedBreeds.dog.push(dogBreed);
     }
