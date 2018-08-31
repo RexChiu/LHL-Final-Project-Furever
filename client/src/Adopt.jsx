@@ -42,15 +42,11 @@ class Adopt extends Component {
 
   // gets the next pets from the server, adds to the end of the pets array, re-renders automagically
   _getMorePets = id => {
-    // fetch(`http://localhost:8080/pets/${id}`)
-    //   .then(res => res.json())
-    //   .then(result => {
-    //     const pets = this.state.pets.concat(result.data);
-    //     this.setState({ pets });
-    //   })
-    //   .catch(err => {
-    //     alert(err);
-    //   });
+    // guard statement to not ask for pets twice before loading it
+    if (this.state.isLoaded === false) {
+      return;
+    }
+    this.setState({ isLoaded: false });
 
     const filters = this.state.filters;
     filters.lastPet = id;
@@ -61,7 +57,7 @@ class Adopt extends Component {
         // if there are no results, it is not an array
         if (response.data.data instanceof Array) {
           const pets = this.state.pets.concat(response.data.data);
-          this.setState({ pets });
+          this.setState({ pets, isLoaded: true });
         }
       })
       .catch(function(error) {
