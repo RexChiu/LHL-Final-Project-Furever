@@ -31,7 +31,9 @@ module.exports = function breedMap(breeds) {
 
   breeds.Cat.forEach((catBreed) => {
     if (map[catBreed]) {
-      mappedBreeds.cat.push(map[catBreed]);
+      if (!mappedBreeds.cat.includes(map[catBreed])) {
+        mappedBreeds.cat.push(map[catBreed]);
+      }
     } else {
       mappedBreeds.cat.push(catBreed);
     }

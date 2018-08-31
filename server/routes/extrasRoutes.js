@@ -1,6 +1,7 @@
 import express from 'express';
 import VetsSerializer from '../serializers/vets';
 import PetsSerializer from '../serializers/pets';
+import BreedMapper from '../helpers/breed-mapper';
 import vetfinder from '../api/vetfinder';
 
 const router = express.Router();
@@ -23,8 +24,6 @@ function getBreeds(pets) {
       }
     }
   }
-
-  console.log(petBreeds);
   return Promise.resolve(petBreeds);
 }
 
@@ -53,10 +52,11 @@ module.exports = (dataHelpers) => {
   router.get('/care/:id', async (req, res) => {
     const pets = await dataHelpers.getUserPetsByUserId(req.params.id);
     const petBreeds = await getBreeds(pets);
-
+    const mappedBreeds = BreedMapper(petBreeds);
     // const jsonOutput = PetsSerializer.serialize(petBreeds);
     // res.json(jsonOutput);
-    res.json(petBreeds);
+    console.log(mappedBreeds);
+    res.json(mappedBreeds);
   });
 
   return router;
