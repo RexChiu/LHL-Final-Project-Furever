@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 //modal
 
-import Vet from './Vet';
+// import Vet from './Vet';
+import Store from './Store';
 
 class Nearby extends Component {
   constructor(props) {
@@ -21,8 +22,9 @@ class Nearby extends Component {
   render() {
     return (
       <React.Fragment>
-        <p> Resources Nearby </p>
-        <Vet />
+        <h2>Resources Nearby</h2>
+        <Store type={'veterinary_care'} establishment={'Hospital'} />
+        <Store type={'pet_store'} establishment={'Store'} />
       </React.Fragment>
     );
   }
