@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Places from './Places';
+
 const axios = require('axios');
 
 class Vet extends Component {
@@ -15,14 +17,6 @@ class Vet extends Component {
     };
   }
 
-  //Function to determine if the establishment is currently OPEN or CLOSED
-  return_open = status => {
-    if (status === true) {
-      return 'OPEN';
-    }
-    return 'CLOSED';
-  };
-
   //Function to retrieve all the Vets or Hospitals in the area
   retrieveVets = event => {
     event.preventDefault();
@@ -36,7 +30,7 @@ class Vet extends Component {
       // constructs output obj, only puts in the selected filters
       const outputObj = {};
 
-      const { rerenderPets } = this.props;
+      // const { rerenderPets } = this.props;
 
       //Concat the lat and long to send back to Google
       const location = sessionStorage.getItem('lat') + ',' + sessionStorage.getItem('lng');
@@ -62,13 +56,7 @@ class Vet extends Component {
 
   render() {
     const hospital = this.state.results.slice(0);
-    const hospitals = hospital.map(hospital => (
-      <tr>
-        <th className="col-m">{hospital.name}</th>
-        <th className="col-sm"> {hospital.rating}</th>
-        <th className="col-sm"> {this.return_open(hospital['opening-hours']['open_now'])}</th>
-      </tr>
-    ));
+    const hospitals = hospital.map(hospital => <Places place={hospital} />);
     return (
       <React.Fragment>
         <p> Vets in your area </p>

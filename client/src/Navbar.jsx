@@ -33,7 +33,7 @@ class Navbar extends Component {
           <Link to="/adopt">Adopt </Link>
         </a>
         <a id="navfix" className="nav-item">
-          <Link to="/places"> Vet Care</Link>
+          <Link to="/places"> Nearby </Link>
         </a>
         <a id="navfix" className="nav-item">
           <Link to="/care">Care</Link>
