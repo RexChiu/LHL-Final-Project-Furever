@@ -31,9 +31,9 @@ module.exports = function breedMap(breeds) {
 
   breeds.Dog.forEach((dogBreed) => {
     if (map[dogBreed]) {
-      mappedBreeds.cat.push(map[dogBreed]);
-    } else {
-      mappedBreeds.cat.push(dogBreed);
+      mappedBreeds.dog.push(map[dogBreed]);
+    } else if (dogBreed !== 'Mixed Breed') {
+      mappedBreeds.dog.push(dogBreed);
     }
   });
 
