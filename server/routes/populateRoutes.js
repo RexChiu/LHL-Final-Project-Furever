@@ -86,8 +86,8 @@ module.exports = (dataHelpers) => {
             url
           });
         });
-        return dataHelpers.saveBreeds('cat', catBreeds).then(result => result);
-        // return catBreeds;
+        // return dataHelpers.saveBreeds('cat', catBreeds).then(result => result);
+        return catBreeds;
       })
       .then(result => res.json(result))
       .catch((err) => {

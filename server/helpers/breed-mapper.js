@@ -12,7 +12,11 @@ const map = {
   Spitz: 'Finnish Spitz',
   'Treeing Walker Coonhound': 'American Foxhound',
   Foxhound: 'American Foxhound',
-  'American Eskimo Dog': 'American Eskimo Dog (Standard)'
+  'American Eskimo Dog': 'American Eskimo Dog (Standard)',
+  Husky: 'Siberian Husky',
+  Shepherd: 'German Shepherd Dog',
+  Tabby: 'Domestic Short Hair',
+  Calico: 'Domestic Short Hair'
 };
 
 module.exports = function breedMap(breeds) {
