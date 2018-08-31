@@ -16,7 +16,11 @@ const map = {
   Husky: 'Siberian Husky',
   Shepherd: 'German Shepherd Dog',
   Tabby: 'Domestic Short Hair',
-  Calico: 'Domestic Short Hair'
+  Calico: 'Domestic Short Hair',
+  'Dilute Calico': 'Domestic Short Hair',
+  'Pit Bull Terrier': 'Bull Terrier',
+  'Cattle Dog': 'Australian Cattle Dog',
+  'Australian Cattle Dog / Blue Heeler': 'Australian Cattle Dog'
 };
 
 module.exports = function breedMap(breeds) {
