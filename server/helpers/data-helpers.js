@@ -32,6 +32,22 @@ module.exports = function makeDataHelpers(db) {
         })
         .catch(err => err);
     },
+    // BELOW ADDED BY JARON AGAIN!!!!
+    returnAllEvents() {
+      const eventRef = db.collection('events');
+      // inits empty array
+      const resultArr = [];
+      // grabs all the pets under the collection pets
+      return eventRef
+        .limit(100)
+        .get()
+        .then((snapshot) => {
+          // loops through snapshot (multiple docs) and pushes into array
+          snapshot.forEach(doc => resultArr.push(doc.data()));
+          return resultArr;
+        })
+        .catch(err => err);
+    },
     // below was added by Jaron
     returnAllUsersWithPets() {
       const userRef = db.collection('users');

@@ -42,6 +42,9 @@ app.use('/pet', require('./routes/petRoutes.js')(DataHelpers));
 app.use('/populate', require('./routes/populateRoutes.js')(DataHelpers));
 app.use('/test', require('./routes/testRoutes.js')(DataHelpers));
 
+// JARON ADDED route
+app.use('/events', require('./routes/eventsRoutes.js')(DataHelpers));
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
