@@ -1,6 +1,18 @@
-#navfix {
-  top: 1em;
-  margin: 4em;
+.hr {
+  margin-top: 0em;
+  margin-bottom: 5em;
+}
+.messagePanel {
+  width: 20em;
+}
+
+.navbarColor {
+  /* background-color: #b2d7e0;
+  opacity: 0.9; */
+}
+
+.navbar {
+  margin: 0;
 }
 
 .App {
@@ -65,6 +77,12 @@
   width: 45em;
 
   align: center;
+  background-color: #fcfeff;
+  opacity: 0.95;
+}
+
+#buttonColor {
+  background-color: #81b5c1;
 }
 
 #mouseUI {

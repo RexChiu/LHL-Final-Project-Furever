@@ -57,11 +57,11 @@ class EventLocalUsers extends Component {
             Find{' '}
           </button>
         </section>
+
         {/* PET MODAL */}
         <div id="petLocals" className="modal fade">
           <EventLocalsModal users={this.state.users} key={this.state.users.id} />
         </div>
-        ;
       </React.Fragment>
     );
   }

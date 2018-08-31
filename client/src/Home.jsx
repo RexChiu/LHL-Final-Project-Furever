@@ -138,7 +138,7 @@ class Home extends Component {
               <input name="password" type="password" onChange={this.handleChangeLoginPassword} />
             </label>
 
-            <input type="submit" value="Submit" />
+            <input id="buttonColor" type="submit" value="Submit" />
           </form>
 
           <p>register</p>
@@ -152,7 +152,7 @@ class Home extends Component {
               <input name="password" type="password" onChange={this.handleChangeRegisterPassword} />
             </label>
 
-            <input type="submit" value="Submit" />
+            <input id="buttonColor" type="submit" value="Submit" />
           </form>
 
           {/* <!-- Button HTML (to Trigger Modal) --> */}
