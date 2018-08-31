@@ -1,9 +1,7 @@
-import rp from 'request-promise-native';
-import cheerio from 'cheerio';
-
-const mapper = {
+const map = {
   'American Bulldog': 'Bulldog',
   Corgi: 'Pembroke Welsh Corgi',
+  'Welsh Corgi': 'Pembroke Welsh Corgi',
   Terrier: 'Scottish Terrier',
   'Yorkshire Terrier Yorkie': 'Yorkshire Terrier',
   'Shetland Sheepdog Sheltie': 'Shetland Sheepdog',
@@ -15,4 +13,11 @@ const mapper = {
   'Treeing Walker Coonhound': 'American Foxhound',
   Foxhound: 'American Foxhound',
   'American Eskimo Dog': 'American Eskimo Dog (Standard)'
+};
+
+module.exports = function breedMap(breed) {
+  if (map[breed]) {
+    return map[breed];
+  }
+  return breed;
 };

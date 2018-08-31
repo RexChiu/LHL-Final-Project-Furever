@@ -40,6 +40,7 @@ app.use('/user', require('./routes/userRoutes.js')(DataHelpers));
 app.use('/pets', require('./routes/petsRoutes.js')(DataHelpers));
 app.use('/pet', require('./routes/petRoutes.js')(DataHelpers));
 app.use('/populate', require('./routes/populateRoutes.js')(DataHelpers));
+app.use('/extras', require('./routes/extrasRoutes.js')(DataHelpers));
 app.use('/test', require('./routes/testRoutes.js')(DataHelpers));
 
 // JARON ADDED route

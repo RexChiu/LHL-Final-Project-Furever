@@ -10,5 +10,8 @@ module.exports = (dataHelpers) => {
 
     res.json(result);
   });
+
+  // function to get the pet care info of the specified breed
+  router.get('/:breed/care', async (req, res) => {});
   return router;
 };

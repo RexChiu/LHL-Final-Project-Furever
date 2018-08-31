@@ -33,9 +33,8 @@ module.exports = (dataHelpers) => {
     const id = await dataHelpers.insertNewUser(inputObj);
 
     // constructs return obj and serializes it
-    const returnObj = {
-      id
-    };
+    delete inputObj.passwordDigest;
+    const returnObj = inputObj;
     const jsonOutput = UserSerializer.serialize(returnObj);
     res.json(jsonOutput);
   });
@@ -59,6 +58,7 @@ module.exports = (dataHelpers) => {
     const match = await bcrypt.compare(inputObj.password, user.passwordDigest);
 
     if (match) {
+      delete user.passwordDigest;
       const jsonOutput = UserSerializer.serialize(user);
       res.json(jsonOutput);
     } else {

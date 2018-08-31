@@ -34,5 +34,16 @@ module.exports = (dataHelpers) => {
     }
   });
 
+  router.get('/:id', async (req, res) => {
+    try {
+      const result = await dataHelpers.returnNextPets(req.params.id);
+      const jsonOutput = PetsSerializer.serialize(result);
+      res.json(jsonOutput);
+    } catch (err) {
+      console.log(err);
+      res.json(err);
+    }
+  });
+
   return router;
 };

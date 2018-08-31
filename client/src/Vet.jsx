@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
+import Places from './Places';
+
 const axios = require('axios');
 
 class Vet extends Component {
   constructor(props) {
     super(props);
+    //default values (LHL) if none are present
     this.state = {
       location: '43.6446,-79.3950',
       type: 'veterinary_care',
@@ -14,55 +17,64 @@ class Vet extends Component {
     };
   }
 
+  //Function to retrieve all the Vets or Hospitals in the area
   retrieveVets = event => {
     event.preventDefault();
 
-    // constructs output obj, only puts in the selected filters
+    const userId = sessionStorage.getItem('userId');
 
-    const outputObj = {};
+    if (!userId) {
+      alert('Need to Login First!');
+      return;
+    } else {
+      // constructs output obj, only puts in the selected filters
+      const outputObj = {};
 
-    const { rerenderPets } = this.props;
+      // const { rerenderPets } = this.props;
 
-    outputObj.location = this.state.location;
-    outputObj.type = this.state.type;
-    outputObj.radius = this.state.radius;
-    outputObj.keyword = this.state.keyword;
+      //Concat the lat and long to send back to Google
+      const location = sessionStorage.getItem('lat') + ',' + sessionStorage.getItem('lng');
 
-    const component = this;
-    axios
-      .get(`http://localhost:8080/test/places`, outputObj)
-      .then(function(response) {
-        console.log('Client-Vet', response);
+      // Build the query parameters to be sent out by Axios to Server
+      outputObj.location = location;
+      outputObj.type = this.state.type;
+      outputObj.radius = this.state.radius;
+      outputObj.keyword = this.state.keyword;
 
-        const results = response.data.data.attributes.results;
-        console.log('Name of Hospital', results);
-        component.setState({ results });
-
-        // console.log('This is the name', this.state.name);
-        // console.log(JSON.stringify(response));
-        // rerenderPets(JSON.stringify(response));
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+      const component = this;
+      axios
+        .get(`http://localhost:8080/extras/places`, { params: outputObj })
+        .then(function(response) {
+          const results = response.data.data.attributes.results;
+          component.setState({ results });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
   };
 
   render() {
-    console.log('Array', this.state.results);
     const hospital = this.state.results.slice(0);
-    console.log('Ho', hospital instanceof Array);
-    const hospitals = hospital.map(hospital => hospital.name);
-    // const hospitals = 'Spadine';
-
-    // let messages = this.props.messages.map(message => <Message key={message.id} message={message} />);
-
+    const hospitals = hospital.map(hospital => <Places place={hospital} />);
     return (
       <React.Fragment>
         <p> Vets in your area </p>
         <button type="button" onClick={this.retrieveVets}>
           Submit
         </button>
-        <div>{hospitals}</div>
+        <div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th className="col-m">Hospital Name</th>
+                <th className="col-sm">Hospital Rating</th>
+                <th className="col-sm">Hospital Rating</th>
+              </tr>
+            </thead>
+            <tbody>{hospitals}</tbody>
+          </table>
+        </div>
       </React.Fragment>
     );
   }
