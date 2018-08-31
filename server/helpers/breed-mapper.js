@@ -15,9 +15,27 @@ const map = {
   'American Eskimo Dog': 'American Eskimo Dog (Standard)'
 };
 
-module.exports = function breedMap(breed) {
-  if (map[breed]) {
-    return map[breed];
-  }
-  return breed;
+module.exports = function breedMap(breeds) {
+  const mappedBreeds = {
+    cat: [],
+    dog: []
+  };
+
+  breeds.Cat.forEach((catBreed) => {
+    if (map[catBreed]) {
+      mappedBreeds.cat.push(map[catBreed]);
+    } else {
+      mappedBreeds.cat.push(catBreed);
+    }
+  });
+
+  breeds.Dog.forEach((dogBreed) => {
+    if (map[dogBreed]) {
+      mappedBreeds.cat.push(map[dogBreed]);
+    } else {
+      mappedBreeds.cat.push(dogBreed);
+    }
+  });
+
+  return mappedBreeds;
 };

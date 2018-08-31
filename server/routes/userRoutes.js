@@ -79,8 +79,6 @@ module.exports = (dataHelpers) => {
   router.get('/withpets', async (req, res) => {
     const result = await dataHelpers.getUsersWithPets();
 
-    console.log(result);
-
     const jsonOutput = UserSerializer.serialize(result);
     // const jsonOutput = result;
     res.json(jsonOutput);
