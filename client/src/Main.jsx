@@ -16,7 +16,7 @@ class Main extends React.Component {
         <Route path="/events" render={props => <Events {...props} />} />
         <Route path="/adopt" render={props => <Adopt {...props} id="adopt-page" />} />
         <Route path="/care" render={props => <Care {...props} />} />
-        <Route path="/places" render={props => <Nearby {...props} />} />
+        <Route path="/nearby" render={props => <Nearby {...props} />} />
       </Switch>
     );
   }
