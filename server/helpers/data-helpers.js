@@ -114,6 +114,18 @@ module.exports = function makeDataHelpers(db) {
         .then(err => err);
       return newUser.id;
     },
+    // inserts a new message into the firestore db -Jaron Evans
+    insertNewMessage(newMessage) {
+      // creates a new unique id for a user and adds into user
+      const messageRef = db.collection('events').doc();
+      newMessage.id = messageRef.id;
+      // inserts user into the database
+      messageRef
+        .set(newMessage)
+        .then(result => messageRef.id)
+        .then(err => err);
+      return newMessage.id;
+    },
     // function to search if username exists in the database, returns user if exists, null if not
     getUserDetails(username) {
       // searches in users collection

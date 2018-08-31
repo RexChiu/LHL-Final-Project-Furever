@@ -2,8 +2,27 @@
   margin-top: 0em;
   margin-bottom: 5em;
 }
+
+/* EVENTS PAGE */
 .messagePanel {
+  max-width: 20em;
   width: 20em;
+}
+#event_location {
+  max-width: 20em;
+  width: 20em;
+}
+
+#event_title {
+  max-width: 20em;
+  width: 20em;
+}
+
+.messagePanel #event_description {
+  max-width: 20em;
+  width: 20em;
+  max-height: 15em;
+  min-height: 5em;
 }
 
 .navbarColor {
