@@ -1,4 +1,4 @@
-const dogBreeds = [
+module.exports = [
   'Affenpinscher',
   'Afghan Hound',
   'Airedale Terrier',

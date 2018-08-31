@@ -356,6 +356,57 @@ module.exports = function makeDataHelpers(db) {
         user.pets = petsArr;
         return user;
       });
+    },
+    // get information of the breed given
+    getBreedInfo(ref) {
+      return ref
+        .get()
+        .then((result) => {
+          console.log('found');
+          return result.data();
+        })
+        .catch((err) => {
+          console.log('error');
+        });
+    },
+    // returns an object with the breeds information of each breed given
+    async getAllBreedInfo(breeds) {
+      const outputObj = {
+        cat: [],
+        dog: []
+      };
+
+      console.log(`Input: ${JSON.stringify(breeds)}`);
+
+      const catRef = db
+        .collection('info')
+        .doc('catBreeds')
+        .collection('cat');
+      const dogRef = db
+        .collection('info')
+        .doc('dogBreeds')
+        .collection('dog');
+
+      // saves the array of the breeds, if single elem wrap in array
+      const catBreeds = breeds.cat instanceof Array ? breeds.cat : [breeds.cat];
+      const dogBreeds = breeds.dog instanceof Array ? breeds.dog : [breeds.dog];
+
+      // synchronous for loop to grab the cat breeds
+      for (let i = 0; i < catBreeds.length; i++) {
+        const ref = catRef.doc(catBreeds[i].toString());
+        const breedInfo = await this.getBreedInfo(ref);
+        outputObj.cat.push(breedInfo);
+      }
+
+      // synchronous for loop to grab the dog breeds
+      for (let i = 0; i < dogBreeds.length; i++) {
+        const ref = dogRef.doc(dogBreeds[i].toString());
+        const breedInfo = await this.getBreedInfo(ref);
+        outputObj.dog.push(breedInfo);
+      }
+
+      console.log(JSON.stringify(outputObj));
+      return Promise.resolve(outputObj);
     }
   };
 };

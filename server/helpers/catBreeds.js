@@ -1,4 +1,4 @@
-let catBreeds = [
+module.exports = [
   'Abyssinian',
   'American Bobtail',
   'American Curl',
