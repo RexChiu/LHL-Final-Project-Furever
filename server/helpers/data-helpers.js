@@ -361,10 +361,7 @@ module.exports = function makeDataHelpers(db) {
     getBreedInfo(ref) {
       return ref
         .get()
-        .then((result) => {
-          console.log('found');
-          return result.data();
-        })
+        .then(result => result.data())
         .catch((err) => {
           console.log('error');
         });

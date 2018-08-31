@@ -20,7 +20,8 @@ const map = {
   'Dilute Calico': 'Domestic Short Hair',
   'Pit Bull Terrier': 'Bull Terrier',
   'Cattle Dog': 'Australian Cattle Dog',
-  'Australian Cattle Dog / Blue Heeler': 'Australian Cattle Dog'
+  'Australian Cattle Dog / Blue Heeler': 'Australian Cattle Dog',
+  Tuxedo: 'Domestic Short Hair'
 };
 
 module.exports = function breedMap(breeds) {
