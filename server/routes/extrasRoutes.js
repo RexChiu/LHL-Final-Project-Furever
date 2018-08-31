@@ -1,8 +1,32 @@
 import express from 'express';
 import VetsSerializer from '../serializers/vets';
+import PetsSerializer from '../serializers/pets';
 import vetfinder from '../api/vetfinder';
 
 const router = express.Router();
+
+function getBreeds(pets) {
+  const petBreeds = {
+    Cat: [],
+    Dog: []
+  };
+
+  // loops through each pet to get their breed
+  for (const pet of pets) {
+    // splits up any mixed breeds into arrays
+    const breedsArr = pet.breed.split(' and ');
+    // loops through breeds array (of a single pet) and appends onto petBreeds obj
+    for (const breed of breedsArr) {
+      // if the breed does not exist in the
+      if (!petBreeds[pet.animal].includes(breed)) {
+        petBreeds[pet.animal].push(breed);
+      }
+    }
+  }
+
+  console.log(petBreeds);
+  return Promise.resolve(petBreeds);
+}
 
 /* GET index page. */
 module.exports = (dataHelpers) => {
@@ -25,5 +49,15 @@ module.exports = (dataHelpers) => {
       res.json(e);
     }
   });
+
+  router.get('/care/:id', async (req, res) => {
+    const pets = await dataHelpers.getUserPetsByUserId(req.params.id);
+    const petBreeds = await getBreeds(pets);
+
+    // const jsonOutput = PetsSerializer.serialize(petBreeds);
+    // res.json(jsonOutput);
+    res.json(petBreeds);
+  });
+
   return router;
 };

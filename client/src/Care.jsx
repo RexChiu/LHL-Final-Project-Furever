@@ -7,7 +7,8 @@ class Care extends Component {
     super(props);
     this.state = {
       user: '',
-      petBreeds: {}
+      petBreeds: {},
+      breedInfo: ''
     };
   }
 
@@ -16,12 +17,14 @@ class Care extends Component {
     if (sessionStorage.getItem('userId')) {
       const userId = sessionStorage.getItem('userId');
       if (userId) {
-        fetch(`http://localhost:8080/user/${userId}/withpets`)
+        fetch(`http://localhost:8080/extras/care/${userId}`)
           .then(res => res.json())
           .then(res => {
-            this.setState({ user: res.data.attributes });
-            this.getUserPetBreeds();
-          });
+            console.log(res);
+            // this.setState({ breedInfo: res.data.attributes });
+            // this.getUserPetBreeds();
+          })
+          .catch(err => alert(err));
       }
     }
   }
