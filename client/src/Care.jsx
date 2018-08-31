@@ -19,7 +19,6 @@ class Care extends Component {
         fetch(`http://localhost:8080/user/${userId}/withpets`)
           .then(res => res.json())
           .then(res => {
-            console.log(res);
             this.setState({ user: res.data.attributes });
             this.getUserPetBreeds();
           });
