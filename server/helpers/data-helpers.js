@@ -128,13 +128,8 @@ module.exports = function makeDataHelpers(db) {
     },
     // inserts a new message >>> GOING <<< into the firestore db -Jaron Evans
     insertNewMessageGoing(newGoing) {
-      // creates a new unique id for a user and adds into user
-
       const passNewGoing = JSON.stringify(newGoing);
       const resultArr = [passNewGoing];
-      // .add(
-      // .update({
-
       const messageRef = db
         .collection('events')
         .doc(newGoing.eventId)
@@ -149,7 +144,6 @@ module.exports = function makeDataHelpers(db) {
                 going: resultArr
               });
           } else {
-            // resultArr.push(orgObj.going);
             // console.log('SIZE', orgObj.going.length);
             for (let i = 0; i < orgObj.going.length; i++) {
               resultArr.push(orgObj.going[i]);
@@ -163,9 +157,6 @@ module.exports = function makeDataHelpers(db) {
               });
           }
         });
-
-      console.log(resultArr);
-
       return resultArr;
     },
     // function to search if username exists in the database, returns user if exists, null if not
