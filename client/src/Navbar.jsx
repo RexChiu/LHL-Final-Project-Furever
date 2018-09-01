@@ -11,10 +11,7 @@ class Navbar extends Component {
     if (sessionStorage.getItem('userId')) {
       return (
         <Fragment>
-          <span className="navbar-brand">
-            Logged in as
-            {sessionStorage.getItem('username')}
-          </span>
+          <a className="navbar-brand ml-auto disable">Logged in as {sessionStorage.getItem('username')}</a>
           <a className="navbar-brand" onClick={this.logoutUser}>
             <Link to="/">Logout</Link>
           </a>
