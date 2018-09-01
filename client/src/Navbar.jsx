@@ -11,8 +11,11 @@ class Navbar extends Component {
     if (sessionStorage.getItem('userId')) {
       return (
         <Fragment>
-          <span>Logged in as {sessionStorage.getItem('username')}</span>
-          <a className="nav-item" onClick={this.logoutUser}>
+          <span className="navbar-brand">
+            Logged in as
+            {sessionStorage.getItem('username')}
+          </span>
+          <a className="navbar-brand" onClick={this.logoutUser}>
             <Link to="/">Logout</Link>
           </a>
         </Fragment>
@@ -27,12 +30,11 @@ class Navbar extends Component {
           <a className="navbar-brand">
             <Link to="/">Home</Link>
           </a>
-
-          <a className="navbar-brand">
-            <Link to="/events">Events</Link>
-          </a>
           <a className="navbar-brand">
             <Link to="/adopt">Adopt </Link>
+          </a>
+          <a className="navbar-brand">
+            <Link to="/events">Events</Link>
           </a>
           <a className="navbar-brand">
             <Link to="/nearby"> Nearby</Link>
