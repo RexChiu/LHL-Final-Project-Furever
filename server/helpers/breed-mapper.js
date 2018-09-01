@@ -21,7 +21,8 @@ const map = {
   'Pit Bull Terrier': 'Bull Terrier',
   'Cattle Dog': 'Australian Cattle Dog',
   'Australian Cattle Dog / Blue Heeler': 'Australian Cattle Dog',
-  Tuxedo: 'Domestic Short Hair'
+  Tuxedo: 'Domestic Short Hair',
+  Retriever: 'Labrador Retriever'
 };
 
 module.exports = function breedMap(breeds) {
