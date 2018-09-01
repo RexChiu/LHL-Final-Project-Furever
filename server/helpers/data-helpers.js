@@ -128,31 +128,36 @@ module.exports = function makeDataHelpers(db) {
     },
     // inserts a new message >>> GOING <<< into the firestore db -Jaron Evans
     insertNewMessageGoing(newGoing) {
-      // creates a new unique id for a user and adds into user
-
       const passNewGoing = JSON.stringify(newGoing);
-      const resultArr = [];
-      // .add(
-      // .update({
+      const resultArr = [passNewGoing];
       const messageRef = db
         .collection('events')
         .doc(newGoing.eventId)
-        .update({
-          going: passNewGoing
+        .get()
+        .then((result) => {
+          const orgObj = result.data();
+          if (orgObj.going == undefined || orgObj.going == null) {
+            console.log('does not exist');
+            db.collection('events')
+              .doc(newGoing.eventId)
+              .update({
+                going: resultArr
+              });
+          } else {
+            // console.log('SIZE', orgObj.going.length);
+            for (let i = 0; i < orgObj.going.length; i++) {
+              resultArr.push(orgObj.going[i]);
+              // console.log('LOGGING STUFF', orgObj.going[i]);
+            }
+            // console.log("RESULT", resultArr);
+            db.collection('events')
+              .doc(newGoing.eventId)
+              .update({
+                going: resultArr
+              });
+          }
         });
-
-      console.log('TESTING JARON ID', newGoing.eventId);
-
-      // console.log('TESTING JARON', messageRef);
-
-      // newGoing.id = messageRef.id;
-      // inserts user into the database
-      // console.log('NEW GOING!!!!', newGoing);
-      // messageRef
-      //   .set(newGoing)
-      //   .then(result => messageRef.id)
-      //   .then(err => err);
-      return newGoing.id;
+      return resultArr;
     },
     // function to search if username exists in the database, returns user if exists, null if not
     getUserDetails(username) {
