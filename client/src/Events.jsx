@@ -8,7 +8,7 @@ class Events extends Component {
   render() {
     return (
       <React.Fragment>
-        <EventCompose />
+        {/* <EventCompose /> */}
         <EventLocalUsers />
       </React.Fragment>
     );

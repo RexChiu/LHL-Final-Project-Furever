@@ -152,3 +152,7 @@
   float: right;
   margin: 0.06em;
 }
+
+.img-tinder {
+  max-width: 100%;
+}
