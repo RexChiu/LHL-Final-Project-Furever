@@ -1,10 +1,8 @@
 import express from 'express';
 import VetsSerializer from '../serializers/vets';
-import PetsSerializer from '../serializers/pets';
+import BreedsSerializer from '../serializers/breeds';
 import BreedMapper from '../helpers/breed-mapper';
 import vetfinder from '../api/vetfinder';
-import dogBreeds from '../helpers/dogBreeds';
-import catBreeds from '../helpers/catBreeds';
 
 const router = express.Router();
 
@@ -53,11 +51,11 @@ module.exports = (dataHelpers) => {
 
   // gets the pets the user has adopted.
   router.get('/care/:id', async (req, res) => {
-    // grabs the adopted pets array of the user, empty arr if none exists
+    // grabs the adopted pets array of the user, empty obj if none exists
     const pets = await dataHelpers.getUserPetsByUserId(req.params.id);
     if (pets === []) {
       console.log('User has no pets');
-      res.json([]);
+      res.json({ cat: [], dog: [] });
       return;
     }
     // get the unique breeds out for cats and dogs
@@ -65,7 +63,8 @@ module.exports = (dataHelpers) => {
     const mappedBreeds = BreedMapper(petBreeds);
     const result = await dataHelpers.getAllBreedInfo(mappedBreeds);
 
-    res.json(result);
+    const jsonOutput = BreedsSerializer.serialize(result);
+    res.json(jsonOutput);
   });
 
   return router;

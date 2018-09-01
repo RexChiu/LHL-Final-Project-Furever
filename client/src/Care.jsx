@@ -6,9 +6,8 @@ class Care extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: '',
-      petBreeds: {},
-      breedInfo: ''
+      breedInfo: '',
+      isLoaded: false
     };
   }
 
@@ -16,13 +15,14 @@ class Care extends Component {
     // on page load, get the user object if logged in
     if (sessionStorage.getItem('userId')) {
       const userId = sessionStorage.getItem('userId');
-      if (userId) {
+      const adopted = sessionStorage.getItem('adopted');
+      // sends API request to get the pet care of the user if they have pets
+      if (adopted === 'true') {
         fetch(`http://localhost:8080/extras/care/${userId}`)
           .then(res => res.json())
           .then(res => {
-            console.log(res);
-            // this.setState({ breedInfo: res.data.attributes });
-            // this.getUserPetBreeds();
+            this.setState({ breedInfo: res.data.attributes, isLoaded: true });
+            console.log(this.state.breedInfo);
           })
           .catch(err => alert(err));
       }
@@ -33,39 +33,35 @@ class Care extends Component {
     return <Fragment>{this.renderPetCare()}</Fragment>;
   }
 
-  getUserPetBreeds = () => {
-    const petBreeds = {
-      Cat: [],
-      Dog: []
-    };
-
-    // loops through each pet to get their breed
-    for (const pet of this.state.user.pets) {
-      // splits up any mixed breeds into arrays
-      const breedsArr = pet.breed.split(' and ');
-      // loops through breeds array (of a single pet) and appends onto petBreeds obj
-      for (let breed of breedsArr) {
-        // if the breed does not exist in the
-        if (!petBreeds[pet.animal].includes(breed)) {
-          petBreeds[pet.animal].push(breed);
-        }
-      }
-    }
-
-    this.setState({ petBreeds });
-  };
-
   renderPetCare = () => {
     if (!sessionStorage.getItem('userId')) {
       return <div>Login to See this Page!</div>;
     } else {
-      // checks if the logged in user has a pet
-      if (this.state.user.adopted) {
-        return JSON.stringify(this.state.petBreeds);
+      if (sessionStorage.getItem('adopted')) {
+        if (this.state.isLoaded) {
+          return this.renderBreedsInfo();
+        } else {
+          return 'Loading...';
+        }
       } else {
-        return <div>Adopt a pet first!</div>;
+        return 'Adopt a Pet first!';
       }
     }
+  };
+
+  renderBreedsInfo = () => {
+    let html = '';
+    for (let catBreed of this.state.breedInfo.cat) {
+      html += catBreed.personality;
+      html += catBreed.traits;
+    }
+    for (let dogBreed of this.state.breedInfo.dog) {
+      html += dogBreed.temperment;
+      html += dogBreed.care;
+      html += dogBreed.health;
+    }
+
+    return <div dangerouslySetInnerHTML={{ __html: html }} />;
   };
 }
 
