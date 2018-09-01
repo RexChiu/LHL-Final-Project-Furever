@@ -127,8 +127,6 @@ class Home extends Component {
         </video>
 
         <section id="home-panel" className="panel panel-default">
-          <img src={require('./assets/moe_00.png')} alt="notWorking" id="mouseUI" />
-
           <p>login</p>
           <form onSubmit={this.submitLogin}>
             <label>
