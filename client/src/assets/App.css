@@ -4,9 +4,25 @@
 }
 
 /* EVENTS PAGE */
+#messagePanelCenter {
+  display: flex;
+  justify-content: center;
+}
+
+#times-date {
+  margin: 0.5em;
+}
 .messagePanel {
-  max-width: 20em;
-  width: 20em;
+  /* max-width: 20em; */
+  margin: 1em;
+  padding: 1em;
+  background-color: #def0f5;
+  outline-width: 0.005em;
+  outline-style: auto;
+}
+
+.messagePanel #submit {
+  background-color: #81b5c1;
 }
 #event_location {
   max-width: 20em;
@@ -23,6 +39,36 @@
   width: 20em;
   max-height: 15em;
   min-height: 5em;
+}
+
+/* event posts */
+#eventItemsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#eventItems {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.eventPanel {
+  margin: 1em;
+  padding: 1em;
+  width: 30em;
+
+  background-color: #eef3f5;
+  outline-width: 0.005em;
+  outline-style: auto;
+
+  /* order: <integer>; */
+}
+.eventDescription {
+  background-color: white;
+  outline-width: 0.002em;
+  outline-style: auto;
+  outline-color: #8da7ad;
 }
 
 .navbarColor {

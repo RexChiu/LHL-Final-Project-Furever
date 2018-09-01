@@ -126,6 +126,34 @@ module.exports = function makeDataHelpers(db) {
         .then(err => err);
       return newMessage.id;
     },
+    // inserts a new message >>> GOING <<< into the firestore db -Jaron Evans
+    insertNewMessageGoing(newGoing) {
+      // creates a new unique id for a user and adds into user
+
+      const passNewGoing = JSON.stringify(newGoing);
+      const resultArr = [];
+      // .add(
+      // .update({
+      const messageRef = db
+        .collection('events')
+        .doc(newGoing.eventId)
+        .update({
+          going: passNewGoing
+        });
+
+      console.log('TESTING JARON ID', newGoing.eventId);
+
+      // console.log('TESTING JARON', messageRef);
+
+      // newGoing.id = messageRef.id;
+      // inserts user into the database
+      // console.log('NEW GOING!!!!', newGoing);
+      // messageRef
+      //   .set(newGoing)
+      //   .then(result => messageRef.id)
+      //   .then(err => err);
+      return newGoing.id;
+    },
     // function to search if username exists in the database, returns user if exists, null if not
     getUserDetails(username) {
       // searches in users collection

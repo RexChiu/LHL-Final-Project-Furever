@@ -12,7 +12,8 @@ class EventCompose extends Component {
       title: '',
       location: '',
       description: '',
-      date: ''
+      date: '',
+      going: ''
     };
   }
 
@@ -89,32 +90,60 @@ class EventCompose extends Component {
         console.log(error);
       });
   };
+
+  handleGoing = event => {
+    event.preventDefault();
+    const goingObj = {
+      username: `${sessionStorage.getItem('username')}`,
+      userId: `${sessionStorage.getItem('userId')}`,
+      eventId: event.target.value.trim()
+    };
+    console.log(goingObj);
+
+    // return;
+
+    axios
+      .post('http://localhost:8080/events/going', goingObj)
+      .then(function(response) {
+        console.log('response', response);
+
+        // window.location.reload();
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
   render() {
     const { events } = this.state;
     let eventItems = '';
     if (events instanceof Array) {
       eventItems = events.map((event, i) => (
-        <div>
-          {' '}
-          <p> {event.id} </p>
-          <p> Messageid: {event.attributes.id} </p>
-          {/* <p> UserId: {this.state.userId} </p> */}
-          <p> date: {event.attributes.date} </p>
-          <p> user: {event.attributes.user} </p>
-          <p> title: {event.attributes.title} </p>
-          <p> description: {event.attributes.description} </p>
-          <br />
+        <div className="panel eventPanel">
+          <div>
+            {' '}
+            <h3> {event.attributes.title} </h3>
+            <h4> Created By: {event.attributes.user} </h4>
+            <div class="eventDescription">
+              <h7> Date: {event.attributes.date} </h7>
+              <p> description: {event.attributes.description} </p>
+            </div>
+            <button onClick={this.handleGoing} value={event.attributes.id}>
+              {' '}
+              going{' '}
+            </button>
+            <p> {event.attributes.going} </p>
+          </div>
         </div>
       ));
     }
 
     return (
       <React.Fragment>
-        <div className="panel messagePanel">
-          <form id="create">
+        <div id="messagePanelCenter">
+          <form id="create" className="panel messagePanel">
             {/* <form id="create" action="http://localhost:8080/events/create" method="POST"></form> */}
-            <input onChange={this.handleChangeDate} id="times-date" type="date" name="date" placeholder="date" />
-            <br />
+
             <input
               type="text"
               onChange={this.handleChangeTitle}
@@ -135,6 +164,7 @@ class EventCompose extends Component {
               placeholder="Event Description"
             />
             <br />
+            <input onChange={this.handleChangeDate} id="times-date" type="date" name="date" placeholder="date" />
             <button id="submit" type="submit" onClick={this.handleSubmit}>
               Submit
             </button>
@@ -142,7 +172,9 @@ class EventCompose extends Component {
 
           <div />
         </div>
-        <div>{eventItems}</div>
+        <div id="eventItemsContainer">
+          <div id="eventItems">{eventItems}</div>
+        </div>
       </React.Fragment>
     );
   }

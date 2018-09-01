@@ -6,7 +6,7 @@ import axios from 'axios';
 //modal
 
 import AdoptFilter from './AdoptFilter';
-import SearchUI from './SearchUI';
+// import SearchUI from './SearchUI';
 import Pet from './Pet';
 
 class Adopt extends Component {
@@ -89,8 +89,8 @@ class Adopt extends Component {
 
     return (
       <React.Fragment>
-        <p> Adopt Page </p>
-        <SearchUI />
+        <p> Pet Adoption </p>
+
         <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
         {adoptItems}
         <div className="col-sm-12">{this._renderWaypoint()}</div>
