@@ -127,6 +127,10 @@ class Home extends Component {
         </video>
 
         <section id="home-panel" className="panel panel-default">
+          <h1>
+            Fur <i className="fas fa-paw" id="home-title" /> Ever
+          </h1>
+
           <p>login</p>
           <form onSubmit={this.submitLogin}>
             <label>
