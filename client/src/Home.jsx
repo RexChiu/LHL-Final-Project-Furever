@@ -35,7 +35,7 @@ class Home extends Component {
   greetings = () => {
     // show message if already logged in
     if (sessionStorage.getItem('userId')) {
-      return 'Already Logged In!';
+      return;
     }
     // not logged in, show login and register
     return (
