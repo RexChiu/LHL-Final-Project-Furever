@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 
 import Places from './Places';
 
@@ -13,18 +13,15 @@ class Store extends Component {
       type: 'pet_store',
       radius: 1500,
       keyword: 'pets',
-      results: []
+      results: [],
+      isLoaded: false
     };
   }
 
   //Function to retrieve all the Vets or Hospitals in the area
   componentDidMount() {
-    // event.preventDefault();
-
     // constructs output obj, only puts in the selected filters
     const outputObj = {};
-
-    // const { rerenderPets } = this.props;
 
     //Concat the lat and long to send back to Google
     const location = sessionStorage.getItem('lat') + ',' + sessionStorage.getItem('lng');
@@ -40,7 +37,13 @@ class Store extends Component {
       .get(`http://localhost:8080/extras/places`, { params: outputObj })
       .then(function(response) {
         const results = response.data.data.attributes.results;
-        component.setState({ results });
+        if (component.props.type === 'veterinary_care') {
+          component.props.loadedVet();
+        }
+        if (component.props.type === 'pet_store') {
+          component.props.loadedStore();
+        }
+        component.setState({ results, isLoaded: true });
       })
       .catch(function(error) {
         console.log(error);
@@ -48,15 +51,11 @@ class Store extends Component {
   }
 
   render() {
-    const userId = sessionStorage.getItem('userId');
-
-    if (!userId) {
-      return <h4>Please Login First</h4>;
-    } else {
-      const place = this.state.results.slice(0);
-      const places = place.map(place => <Places place={place} />);
+    const place = this.state.results.slice(0);
+    const places = place.map(place => <Places place={place} />);
+    if (this.state.isLoaded) {
       return (
-        <React.Fragment>
+        <Fragment>
           <h3>
             <small>{this.props.establishment}s in your area</small>
           </h3>
@@ -72,9 +71,10 @@ class Store extends Component {
               <tbody>{places}</tbody>
             </table>
           </div>
-        </React.Fragment>
+        </Fragment>
       );
     }
+    return '';
   }
 }
 
