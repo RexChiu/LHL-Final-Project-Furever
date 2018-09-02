@@ -311,3 +311,16 @@ a.disable {
   font-size: 4em;
   font-weight: bold;
 }
+
+.nav {
+  background-color: #fcfeff;
+  opacity: 0.95;
+  margin-bottom: 5em;
+}
+
+.nav > li.disabled > a:hover {
+  cursor: default;
+}
+
+.form-group {
+}
