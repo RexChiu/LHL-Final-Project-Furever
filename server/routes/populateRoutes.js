@@ -142,7 +142,7 @@ module.exports = (dataHelpers) => {
               .html()
               .trim();
             const imageUrl = imageRegex.exec(imageHTML);
-            catInfo.image = imageUrl[1];
+            catInfo.image = `<img src='${imageUrl[1]}' />`;
           })
           .then(() => dataHelpers.saveInfo('cat', cat.name, catInfo).then(() => 'Ok'));
       });
@@ -210,7 +210,7 @@ module.exports = (dataHelpers) => {
               .html()
               .trim();
             const imageUrl = imageRegex.exec(imageHTML);
-            dogInfo.image = imageUrl[1];
+            dogInfo.image = `<img src='${imageUrl[1]}' />`;
           })
           .then(() => dataHelpers.saveInfo('dog', dog.name, dogInfo).then(() => 'Ok'));
       });
