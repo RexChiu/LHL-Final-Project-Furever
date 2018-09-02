@@ -36,7 +36,8 @@ module.exports = (dataHelpers) => {
     const inputObj = {
       user: req.body.username,
       userId: req.body.userId,
-      eventId: req.body.eventId
+      eventId: req.body.eventId,
+      going: []
     };
 
     // grabs userId from successful db insert
