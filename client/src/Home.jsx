@@ -1,21 +1,10 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import axios from 'axios';
 //import assets
+import Login from './Login.jsx';
+import Register from './Register.jsx';
 
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      login_username: '',
-      login_password: '',
-      register_username: '',
-      register_password: '',
-      lat: 43.65,
-      lng: -79.391
-    };
-    this.getLocation();
-  }
-
   submitLogin = event => {
     event.preventDefault();
 
@@ -58,18 +47,6 @@ class Home extends Component {
     this.setState({
       login_password: event.target.value.trim()
     });
-  };
-
-  // function call to grab the gps locations of the user
-  getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.setLocation);
-    }
-  };
-
-  // function call to set the current state to the current location
-  setLocation = position => {
-    this.setState({ lat: position.coords.latitude, lng: position.coords.longitude });
   };
 
   submitRegister = event => {
@@ -121,7 +98,7 @@ class Home extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <video id="home-video-background" loop autoPlay>
           <source src={require('./assets/bg.mp4')} type="video/mp4" />
         </video>
@@ -131,35 +108,14 @@ class Home extends Component {
             Fur <i className="fas fa-paw home-title-icon" /> Ever
           </h1>
 
-          <p>login</p>
-          <form onSubmit={this.submitLogin}>
-            <label>
-              username:
-              <input name="username" type="text" onChange={this.handleChangeLoginUsername} />
-            </label>
-            <label>
-              password:
-              <input name="password" type="password" onChange={this.handleChangeLoginPassword} />
-            </label>
-
-            <input id="buttonColor" type="submit" value="Submit" />
-          </form>
-
-          <p>register</p>
-          <form onSubmit={this.submitRegister}>
-            <label>
-              username:
-              <input name="username" type="text" onChange={this.handleChangeRegisterUsername} />
-            </label>
-            <label>
-              password:
-              <input name="password" type="password" onChange={this.handleChangeRegisterPassword} />
-            </label>
-
-            <input id="buttonColor" type="submit" value="Submit" />
-          </form>
+          {sessionStorage.getItem('userId') === null && (
+            <Fragment>
+              <Login />
+              <Register />
+            </Fragment>
+          )}
         </section>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
