@@ -18,6 +18,10 @@ class EventLocalsModal extends Component {
     alert('Clicked on Me by', param);
   };
 
+  showFollowing = () => {
+    console.log('Following');
+  };
+
   render() {
     const { users } = this.props;
     let tinderItems = [];

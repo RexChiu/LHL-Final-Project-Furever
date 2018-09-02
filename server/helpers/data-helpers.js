@@ -265,6 +265,25 @@ module.exports = function makeDataHelpers(db) {
         .then(() => console.log('Adopted'))
         .catch(err => console.log(err));
     },
+    // Add a friend to follow.
+    // Accepts an Array as Parameter and reinserts it back.
+    addFriends(userId, follow) {
+      const userRef = db.collection('tusers').doc(userId);
+
+      db.runTransaction(transaction =>
+        transaction.get(userRef).then((snapshot) => {
+          const largerArray = snapshot.get(following);
+          largerArray.push(follow);
+          transaction.update(userRef, following, largerArray);
+        })
+      )
+        .then((result) => {
+          console.log('Transaction success!', result);
+        })
+        .catch((err) => {
+          console.log('Transaction failure:', err);
+        });
+    },
     // Filter through pets with options provided
     filterPets(options) {
       let queryRef = db.collection('pets');
