@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import Waypoint from 'react-waypoint';
 import axios from 'axios';
+import ReactLoading from 'react-loading';
+
 //import assets
 
 //modal
@@ -80,19 +82,32 @@ class Adopt extends Component {
     }
   };
 
-  render() {
-    const { pets } = this.state;
-    let adoptItems = '';
-    if (pets instanceof Array) {
-      adoptItems = pets.map(pet => <Pet className="pet-item" pet={pet} key={pet.id} />);
-    }
+  _renderAdoptItems = () => {
+    // render only if pet care info is loaded
+    if (this.state.isLoaded) {
+      const { pets } = this.state;
+      let adoptItems = '';
+      if (pets instanceof Array) {
+        adoptItems = pets.map(pet => <Pet className="pet-item" pet={pet} key={pet.id} />);
+      }
 
+      return adoptItems;
+    } else {
+      return (
+        <Fragment>
+          <strong>Loading...</strong>
+          <ReactLoading className="loading-icon" type={'spinningBubbles'} color={'#000000'} height={'10%'} width={'10%'} />
+        </Fragment>
+      );
+    }
+  };
+
+  render() {
     return (
       <React.Fragment>
-        <p> Pet Adoption </p>
-
+        <h1> Pet Adoption </h1>
         <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
-        {adoptItems}
+        {this._renderAdoptItems()}
         <div className="col-sm-12">{this._renderWaypoint()}</div>
       </React.Fragment>
     );
