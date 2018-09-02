@@ -321,6 +321,3 @@ a.disable {
 .nav > li.disabled > a:hover {
   cursor: default;
 }
-
-.form-group {
-}
