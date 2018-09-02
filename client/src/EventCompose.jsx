@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EventComposeFeed from './EventComposeFeed';
 const axios = require('axios');
 //import assets
 
@@ -96,7 +97,8 @@ class EventCompose extends Component {
     const goingObj = {
       username: `${sessionStorage.getItem('username')}`,
       userId: `${sessionStorage.getItem('userId')}`,
-      eventId: event.target.value.trim()
+      eventId: event.target.value.trim(),
+      going: []
     };
     console.log(goingObj);
 
@@ -114,36 +116,38 @@ class EventCompose extends Component {
       });
   };
 
+  // labelGoingCount = () => {
+  //   if (event.attributes.hasOwnProperty(going) {
+  //     return (
+
+  //         <label for="buttonGoing"> {event.attributes.going.length} </label>
+
+  //     );
+  //   }
+  // };
+
+  //   renderElement(){
+  //     if(this.state.value == 'news')
+  //        return <Text>data</Text>;
+  //     return null;
+  //  }
+
+  // <p> {if (!event.attributes.hasOwnProperty('going') == undefined){ }
+
+  // event.attributes.going.length()} </p>
+
   render() {
     const { events } = this.state;
+
     let eventItems = '';
     if (events instanceof Array) {
-      eventItems = events.map((event, i) => (
-        <div className="panel eventPanel">
-          <div>
-            {' '}
-            <h3> {event.attributes.title} </h3>
-            <h4> Created By: {event.attributes.user} </h4>
-            <div class="eventDescription">
-              <h7> Date: {event.attributes.date} </h7>
-              <p> description: {event.attributes.description} </p>
-            </div>
-            <button onClick={this.handleGoing} value={event.attributes.id}>
-              {' '}
-              going{' '}
-            </button>
-            <p> {event.attributes.going} </p>
-          </div>
-        </div>
-      ));
+      eventItems = events.map((event, i) => <EventComposeFeed event={event} key={event.id} handleGoing={this.handleGoing} />);
     }
 
     return (
       <React.Fragment>
         <div id="messagePanelCenter">
           <form id="create" className="panel messagePanel">
-            {/* <form id="create" action="http://localhost:8080/events/create" method="POST"></form> */}
-
             <input
               type="text"
               onChange={this.handleChangeTitle}
