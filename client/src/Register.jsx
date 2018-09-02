@@ -62,6 +62,7 @@ class Register extends Component {
 
     const reqObj = {
       username: this.state.username,
+      email: this.state.email,
       password: this.state.password,
       lat: this.state.lat,
       lng: this.state.lng,
