@@ -199,7 +199,13 @@
   margin: 0.06em;
 }
 
-#home-title {
+.home-title {
+  vertical-align: middle;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+.home-title-icon {
   font-size: 0.5em;
   vertical-align: middle;
 }

@@ -127,8 +127,8 @@ class Home extends Component {
         </video>
 
         <section id="home-panel" className="panel panel-default">
-          <h1>
-            Fur <i className="fas fa-paw" id="home-title" /> Ever
+          <h1 className="home-title">
+            Fur <i className="fas fa-paw home-title-icon" /> Ever
           </h1>
 
           <p>login</p>
