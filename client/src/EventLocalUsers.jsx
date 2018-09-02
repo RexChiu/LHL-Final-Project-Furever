@@ -16,6 +16,7 @@ class EventLocalUsers extends Component {
   }
 
   componentDidMount() {
+    // this.props.setEventName('Cats');
     //code I added in will link to server
     fetch('http://localhost:8080/user/withpets')
       .then(res => res.json())
@@ -38,9 +39,17 @@ class EventLocalUsers extends Component {
 
   render() {
     const { users } = this.state;
-    let userItems = '';
+    let userItems = [];
+
     if (users instanceof Array) {
-      userItems = users.map((user, i) => <EventLocals user={user} key={user.id} />);
+      for (let i = 0; i < users.length; i++) {
+        for (let j = 0; j < users[i].attributes.pets.length; j++) {
+          let adoptedPetPhoto = users[i].attributes.pets[j].photos[0];
+          console.log('Photo::', users[i].attributes.pets[j].photos[0], '||userid::', users[i].id);
+          userItems.push(<EventLocals user={users[i]} photo={adoptedPetPhoto} key={adoptedPetPhoto + users[i].id} />);
+          adoptedPetPhoto = '';
+        }
+      }
     }
 
     return (
@@ -60,11 +69,10 @@ class EventLocalUsers extends Component {
 
         {/* PET MODAL */}
         <div id="petLocals" className="modal fade">
-          <EventLocalsModal users={this.state.users} key={this.state.users.id} />
+          <EventLocalsModal users={this.state.users} key={this.state.users.id} setEventName={this.props.setEventName} />
         </div>
       </React.Fragment>
     );
   }
 }
-
 export default EventLocalUsers;
