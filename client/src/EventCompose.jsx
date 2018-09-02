@@ -97,8 +97,8 @@ class EventCompose extends Component {
     const goingObj = {
       username: `${sessionStorage.getItem('username')}`,
       userId: `${sessionStorage.getItem('userId')}`,
-      eventId: event.target.value.trim(),
-      going: []
+      eventId: event.target.value.trim()
+      // going: []
     };
     console.log(goingObj);
 

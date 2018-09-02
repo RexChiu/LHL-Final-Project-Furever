@@ -18,7 +18,8 @@ module.exports = (dataHelpers) => {
       date: req.body.date,
       title: req.body.title,
       location: req.body.location,
-      description: req.body.description
+      description: req.body.description,
+      going: []
     };
 
     // grabs userId from successful db insert
@@ -36,8 +37,8 @@ module.exports = (dataHelpers) => {
     const inputObj = {
       user: req.body.username,
       userId: req.body.userId,
-      eventId: req.body.eventId,
-      going: []
+      eventId: req.body.eventId
+      // going: []
     };
 
     // grabs userId from successful db insert
