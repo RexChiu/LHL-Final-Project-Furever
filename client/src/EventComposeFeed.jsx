@@ -37,7 +37,7 @@ class EventComposeFeed extends Component {
       .post('http://localhost:8080/events/going', goingObj)
       .then(function(response) {
         console.log('response', response);
-        // window.location.reload();
+        window.location.reload();
       })
       .catch(function(error) {
         console.log(error);

@@ -118,6 +118,34 @@ class EventCompose extends Component {
     const { events } = this.state;
 
     let eventItems = '';
+
+    // sort by date
+    // const renderOrder = () => {
+    //   console.log('DATE');
+    //   events.sort(function(a, b) {
+    //     return new Date(a.attributes.date) - new Date(b.attributes.date);
+    //   });
+    // };
+    // sort by date
+    events.sort(function(a, b) {
+      return new Date(a.attributes.date) - new Date(b.attributes.date) || new Date(b.attributes.going.length) - new Date(a.attributes.going.length);
+    });
+
+    // events.sort(function(a, b) {
+    //   return new Date(b.attributes.going.length) - new Date(a.attributes.going.length);
+    // });
+
+    // const renderOrder = () => {
+    //   console.log('Order');
+    //   // sort by length
+    //   events.sort(function(a, b) {
+    //     return new Date(b.attributes.going.length) - new Date(a.attributes.going.length);
+    //   });
+    //   this.forceUpdate();
+    // };
+
+    // console.log('events', events);
+
     if (events instanceof Array) {
       eventItems = events.map((event, i) => <EventComposeFeed event={event} key={event.id} handleGoing={this.handleGoing} />);
     }
@@ -158,9 +186,19 @@ class EventCompose extends Component {
               Submit
             </button>
           </form>
-
-          <div />
         </div>
+
+        {/* <div>
+            <select>
+              <option onChange={renderOrder} value="date">
+                order by date
+              </option>
+              <option value="likes">order by likes</option>
+            </select> </div> */}
+        {/* <div>
+          <button onClick={renderOrder}> order by likes </button>
+        </div> */}
+
         <div id="eventItemsContainer">
           <div id="eventItems">{eventItems}</div>
         </div>
