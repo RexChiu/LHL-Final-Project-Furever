@@ -1,27 +1,10 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 const axios = require('axios');
 
 class Pet extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.handleSubmit = this.handleSubmit.bind(this);
-  // }
-
-  // handleSubmit = event => {
-  //   event.preventDefault();
-  //   console.log(event.value);
-  //   fetch(`http://localhost:8080/users/${this.props.pet.id}/adopt`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       id: 'LKrbAGsDo6KsWQ-7reg'
-  //     })
-  //   });
-  // };
-
-  // ${this.props.pet.id}
-
   handleSubmit = event => {
-    if (sessionStorage.getItem('userId') === '') {
+    event.preventDefault();
+    if (sessionStorage.getItem('userId') === null) {
       alert('Need to Login First!');
       return;
     }
@@ -41,7 +24,7 @@ class Pet extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <div className="col-sm-4" data-toggle="modal" href={'#petDetails' + this.props.pet.id}>
           <div className="adoptitem panel panel-default">
             <img src={this.props.pet.attributes.photos[0]} alt="notWorking" id="mouseUI" />
@@ -93,7 +76,7 @@ class Pet extends Component {
             </div>
           </div>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
