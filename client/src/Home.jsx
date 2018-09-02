@@ -96,6 +96,20 @@ class Home extends Component {
     });
   };
 
+  greetings = () => {
+    // show message if already logged in
+    if (sessionStorage.getItem('userId')) {
+      return 'Already Logged In!';
+    }
+    // not logged in, show login and register
+    return (
+      <Fragment>
+        <Login />
+        <Register />
+      </Fragment>
+    );
+  };
+
   render() {
     return (
       <Fragment>
@@ -108,12 +122,7 @@ class Home extends Component {
             Fur <i className="fas fa-paw home-title-icon" /> Ever
           </h1>
 
-          {sessionStorage.getItem('userId') === null && (
-            <Fragment>
-              <Login />
-              <Register />
-            </Fragment>
-          )}
+          {this.greetings()}
         </section>
       </Fragment>
     );
