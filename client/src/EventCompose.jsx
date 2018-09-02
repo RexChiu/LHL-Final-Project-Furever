@@ -92,27 +92,27 @@ class EventCompose extends Component {
       });
   };
 
-  handleGoing = event => {
-    event.preventDefault();
-    const goingObj = {
-      username: `${sessionStorage.getItem('username')}`,
-      userId: `${sessionStorage.getItem('userId')}`,
-      eventId: event.target.value.trim()
-    };
-    // console.log(goingObj);
-    // return;
+  // handleGoing = event => {
+  //   event.preventDefault();
+  //   const goingObj = {
+  //     username: `${sessionStorage.getItem('username')}`,
+  //     userId: `${sessionStorage.getItem('userId')}`,
+  //     eventId: event.target.value.trim()
+  //   };
+  //   // console.log(goingObj);
+  //   // return;
 
-    axios
-      .post('http://localhost:8080/events/going', goingObj)
-      .then(function(response) {
-        console.log('response', response);
+  //   axios
+  //     .post('http://localhost:8080/events/going', goingObj)
+  //     .then(function(response) {
+  //       console.log('response', response);
 
-        // window.location.reload();
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };
+  //       // window.location.reload();
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
+  // };
 
   render() {
     const { events } = this.state;
