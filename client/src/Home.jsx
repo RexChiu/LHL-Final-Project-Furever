@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import axios from 'axios';
+
 //import assets
 import Login from './Login.jsx';
 import Register from './Register.jsx';
@@ -46,12 +46,12 @@ class Home extends Component {
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6">
-                    <a href="#" id="login-form-link" onClick={this.showLogin}>
+                    <a id="login-form-link" onClick={this.showLogin}>
                       Login
                     </a>
                   </div>
                   <div class="col-xs-6">
-                    <a href="#" id="register-form-link" onClick={this.showRegister}>
+                    <a id="register-form-link" onClick={this.showRegister}>
                       Register
                     </a>
                   </div>
@@ -73,103 +73,14 @@ class Home extends Component {
     );
   };
 
-  showLogin = () => {
+  showLogin = event => {
+    event.preventDefault();
     this.setState({ loginActive: true, registerActive: false });
   };
 
-  showRegister = () => {
+  showRegister = event => {
+    event.preventDefault();
     this.setState({ loginActive: false, registerActive: true });
-  };
-
-  submitLogin = event => {
-    event.preventDefault();
-
-    // stops submit if either username or password is blank
-    if (!this.state.login_username || !this.state.login_password) {
-      alert('Username or Password is Blank!');
-      return;
-    }
-
-    const reqObj = {
-      username: this.state.login_username,
-      password: this.state.login_password
-    };
-
-    axios
-      .post('http://localhost:8080/user/login', reqObj)
-      .then(res => {
-        //grabs the userId from the successful login response
-        let userId = { userId: res.data.data.attributes.id };
-        this.props.setUserId(userId);
-        sessionStorage.setItem('userId', res.data.data.attributes.id);
-        sessionStorage.setItem('username', res.data.data.attributes.username);
-        sessionStorage.setItem('lat', res.data.data.attributes.lat);
-        sessionStorage.setItem('lng', res.data.data.attributes.lng);
-        sessionStorage.setItem('adopted', res.data.data.attributes.adopted);
-        this.props.history.push('/adopt');
-      })
-      .catch(err => alert(err));
-  };
-
-  // controlled input for username
-  handleChangeLoginUsername = event => {
-    this.setState({
-      login_username: event.target.value.trim()
-    });
-  };
-
-  // controlled input for password
-  handleChangeLoginPassword = event => {
-    this.setState({
-      login_password: event.target.value.trim()
-    });
-  };
-
-  submitRegister = event => {
-    event.preventDefault();
-
-    // stops submit if either username or password is blank
-    if (!this.state.register_username || !this.state.register_password) {
-      alert('Username or Password is Blank!');
-      return;
-    }
-
-    const reqObj = {
-      username: this.state.register_username,
-      password: this.state.register_password,
-      lat: this.state.lat,
-      lng: this.state.lng,
-      adopted: false
-    };
-
-    axios
-      .post('http://localhost:8080/user/register', reqObj)
-      .then(res => {
-        //grabs the userId from the successful login response
-        let userId = { userId: res.data.data.attributes.id };
-        this.props.setUserId(userId);
-        sessionStorage.setItem('userId', res.data.data.attributes.id);
-        sessionStorage.setItem('username', res.data.data.attributes.username);
-        sessionStorage.setItem('lat', res.data.data.attributes.lat);
-        sessionStorage.setItem('lng', res.data.data.attributes.lng);
-        sessionStorage.setItem('adopted', res.data.data.attributes.adopted);
-        this.props.history.push('/adopt');
-      })
-      .catch(err => alert(err));
-  };
-
-  // controlled input for username
-  handleChangeRegisterUsername = event => {
-    this.setState({
-      register_username: event.target.value.trim()
-    });
-  };
-
-  // controlled input for password
-  handleChangeRegisterPassword = event => {
-    this.setState({
-      register_password: event.target.value.trim()
-    });
   };
 }
 

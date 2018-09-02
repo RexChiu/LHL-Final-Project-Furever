@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Register extends Component {
   constructor(props) {
@@ -48,6 +49,58 @@ class Register extends Component {
   // callback function to set the current state to the current location
   setLocation = position => {
     this.setState({ lat: position.coords.latitude, lng: position.coords.longitude });
+  };
+
+  submitRegister = event => {
+    event.preventDefault();
+
+    // stops submit if either username or password is blank
+    if (!this.state.username || !this.state.password) {
+      alert('Username or Password is Blank!');
+      return;
+    }
+
+    const reqObj = {
+      username: this.state.username,
+      password: this.state.password,
+      lat: this.state.lat,
+      lng: this.state.lng,
+      adopted: false
+    };
+
+    axios
+      .post('http://localhost:8080/user/register', reqObj)
+      .then(res => {
+        //grabs the userId from the successful login response
+        sessionStorage.setItem('userId', res.data.data.attributes.id);
+        sessionStorage.setItem('username', res.data.data.attributes.username);
+        sessionStorage.setItem('lat', res.data.data.attributes.lat);
+        sessionStorage.setItem('lng', res.data.data.attributes.lng);
+        sessionStorage.setItem('adopted', res.data.data.attributes.adopted);
+        this.props.history.push('/adopt');
+      })
+      .catch(err => alert(err));
+  };
+
+  // controlled input for username
+  handleChangeUsername = event => {
+    this.setState({
+      username: event.target.value.trim()
+    });
+  };
+
+  // controlled input for email
+  handleChangeEmail = event => {
+    this.setState({
+      email: event.target.value.trim()
+    });
+  };
+
+  // controlled input for password
+  handleChangePassword = event => {
+    this.setState({
+      password: event.target.value.trim()
+    });
   };
 }
 
