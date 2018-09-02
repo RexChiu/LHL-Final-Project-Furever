@@ -5,6 +5,15 @@ import Login from './Login.jsx';
 import Register from './Register.jsx';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loginActive: true,
+      registerActive: false
+    };
+  }
+
   render() {
     return (
       <Fragment>
@@ -30,15 +39,46 @@ class Home extends Component {
     }
     // not logged in, show login and register
     return (
-      <div className="panel-body">
-        <div className="row">
-          <div className="col-lg-12">
-            <Login />
-            <Register />
+      <Fragment>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <a href="#" id="login-form-link" onClick={this.showLogin}>
+                      Login
+                    </a>
+                  </div>
+                  <div class="col-xs-6">
+                    <a href="#" id="register-form-link" onClick={this.showRegister}>
+                      Register
+                    </a>
+                  </div>
+                </div>
+                <hr />
+              </div>
+              <div className="panel-body">
+                <div className="row">
+                  <div className="col-lg-12">
+                    {this.state.loginActive && <Login />}
+                    {this.state.registerActive && <Register />}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
+  };
+
+  showLogin = () => {
+    this.setState({ loginActive: true, registerActive: false });
+  };
+
+  showRegister = () => {
+    this.setState({ loginActive: false, registerActive: true });
   };
 
   submitLogin = event => {
