@@ -62,7 +62,6 @@ module.exports = (dataHelpers) => {
     const petBreeds = await getBreeds(pets);
     const mappedBreeds = BreedMapper(petBreeds);
     const result = await dataHelpers.getAllBreedInfo(mappedBreeds);
-
     const jsonOutput = BreedsSerializer.serialize(result);
     res.json(jsonOutput);
   });
