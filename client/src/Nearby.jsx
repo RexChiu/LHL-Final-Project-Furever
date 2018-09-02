@@ -23,7 +23,7 @@ class Nearby extends Component {
   }
 
   loading = () => {
-    if (!this.state.isVetLoaded || !this.state.isStoreLoaded) {
+    if (!this.state.isVetLoaded && !this.state.isStoreLoaded) {
       return (
         <Fragment>
           <strong>Loading...</strong>
