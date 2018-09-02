@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import ReactLoading from 'react-loading';
 
 //import assets
 
@@ -41,7 +42,12 @@ class Care extends Component {
         if (this.state.isLoaded) {
           return this.renderBreedsInfo();
         } else {
-          return 'Loading...';
+          return (
+            <Fragment>
+              <div>Loading...</div>
+              <ReactLoading className="loading-icon" type={'spinningBubbles'} color={'#000000'} height={'10%'} width={'10%'} />
+            </Fragment>
+          );
         }
       } else {
         return 'Adopt a Pet first!';
