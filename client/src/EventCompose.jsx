@@ -98,10 +98,8 @@ class EventCompose extends Component {
       username: `${sessionStorage.getItem('username')}`,
       userId: `${sessionStorage.getItem('userId')}`,
       eventId: event.target.value.trim()
-      // going: []
     };
-    console.log(goingObj);
-
+    // console.log(goingObj);
     // return;
 
     axios
@@ -115,26 +113,6 @@ class EventCompose extends Component {
         console.log(error);
       });
   };
-
-  // labelGoingCount = () => {
-  //   if (event.attributes.hasOwnProperty(going) {
-  //     return (
-
-  //         <label for="buttonGoing"> {event.attributes.going.length} </label>
-
-  //     );
-  //   }
-  // };
-
-  //   renderElement(){
-  //     if(this.state.value == 'news')
-  //        return <Text>data</Text>;
-  //     return null;
-  //  }
-
-  // <p> {if (!event.attributes.hasOwnProperty('going') == undefined){ }
-
-  // event.attributes.going.length()} </p>
 
   render() {
     const { events } = this.state;
@@ -153,22 +131,29 @@ class EventCompose extends Component {
               onChange={this.handleChangeTitle}
               id="event_title"
               name="title"
-              className="form-group"
+              className="form-group form-control"
               placeholder="What is your event's name?"
             />
             <br />
-            <input onChange={this.handleChangeLocation} type="text" id="event_location" name="location" className="form-group" placeholder="Where is it?" />
+            <input
+              onChange={this.handleChangeLocation}
+              type="text"
+              id="event_location"
+              name="location"
+              className="form-group form-control"
+              placeholder="Where is it?"
+            />
             <br />
             <textarea
               onChange={this.handleChangeDescription}
-              className="form-group"
+              className="form-group form-control"
               id="event_description"
               name="description"
               rows="3"
               placeholder="Event Description"
             />
             <br />
-            <input onChange={this.handleChangeDate} id="times-date" type="date" name="date" placeholder="date" />
+            <input onChange={this.handleChangeDate} className="form-control" id="times-date" type="date" name="date" placeholder="date" />
             <button id="submit" type="submit" onClick={this.handleSubmit}>
               Submit
             </button>

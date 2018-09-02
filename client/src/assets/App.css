@@ -4,13 +4,16 @@
 }
 
 /* EVENTS PAGE */
+.form-group {
+  margin: 0em;
+}
 #messagePanelCenter {
   display: flex;
   justify-content: center;
 }
 
 #times-date {
-  margin: 0.5em;
+  /* margin: 0.5em; */
 }
 .messagePanel {
   /* max-width: 20em; */
