@@ -40,7 +40,7 @@ class EventLocalsModal extends Component {
     if (tinderPhotos instanceof Array) {
       tinderItems = tinderPhotos.map((photo, i) => (
         <div className="item">
-          <img className="eventLocalsIcon" src={photo.picture} alt="notWorking" onClick={this.addEventWithFriend(photo)} />
+          <img className="eventLocalsIcon" src={photo.picture} alt="notWorking" data-dismiss="modal" onClick={this.addEventWithFriend(photo)} />
         </div>
       ));
     }
@@ -57,7 +57,7 @@ class EventLocalsModal extends Component {
               <p> - Find a nearby friend - </p>
             </div>
             <div className="modal-body">
-              <div id="carousel-modal-demo" class="carousel slide" data-ride="carousel">
+              <div id="pets-modal" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                   <div class="item active">
                     <img src={require('./assets/tinder.png')} alt="notWorking" id="mouseUI" />
@@ -71,10 +71,10 @@ class EventLocalsModal extends Component {
                   </div>
                   {tinderItems}
                 </div>
-                <a class="left carousel-control" href="#carousel-modal-demo" data-slide="prev">
+                <a class="left carousel-control" href="#pets-modal" data-slide="prev">
                   <span class="glyphicon glyphicon-chevron-left" />
                 </a>
-                <a class="right carousel-control" href="#carousel-modal-demo" data-slide="next">
+                <a class="right carousel-control" href="#pets-modal" data-slide="next">
                   <span class="glyphicon glyphicon-chevron-right" />
                 </a>
               </div>
