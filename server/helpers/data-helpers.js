@@ -377,6 +377,8 @@ module.exports = function makeDataHelpers(db) {
         .collection(typeAnimal.toString())
         .doc(id.toString());
 
+      // sets the breed of info as breed
+      info.breed = id;
       return infoRef.set(info).then(() => info);
     },
     // returns all the pets of the userId
@@ -465,8 +467,6 @@ module.exports = function makeDataHelpers(db) {
         const breedInfo = await this.getBreedInfo(ref);
         outputObj.dog.push(breedInfo);
       }
-
-      console.log(JSON.stringify(outputObj));
       return Promise.resolve(outputObj);
     }
   };

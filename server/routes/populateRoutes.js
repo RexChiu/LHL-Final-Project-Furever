@@ -8,6 +8,7 @@ import petfinder from '../api/petfinder';
 import sanitizePetfinder from '../helpers/sanitize-petfinder';
 
 const router = express.Router();
+const imageRegex = RegExp('srcs*=s*"(.+?)"');
 
 /* GET index page. */
 module.exports = (dataHelpers) => {
@@ -133,6 +134,15 @@ module.exports = (dataHelpers) => {
               .trim();
 
             catInfo.traits = traits;
+            return $;
+          })
+          .then(($) => {
+            const imageHTML = $('.left')
+              .filter('.left')
+              .html()
+              .trim();
+            const imageUrl = imageRegex.exec(imageHTML);
+            catInfo.image = `<img src='${imageUrl[1]}' />`;
           })
           .then(() => dataHelpers.saveInfo('cat', cat.name, catInfo).then(() => 'Ok'));
       });
@@ -192,6 +202,15 @@ module.exports = (dataHelpers) => {
               .trim();
 
             dogInfo.health = health;
+            return $;
+          })
+          .then(($) => {
+            const imageHTML = $('.left')
+              .filter('.left')
+              .html()
+              .trim();
+            const imageUrl = imageRegex.exec(imageHTML);
+            dogInfo.image = `<img src='${imageUrl[1]}' />`;
           })
           .then(() => dataHelpers.saveInfo('dog', dog.name, dogInfo).then(() => 'Ok'));
       });

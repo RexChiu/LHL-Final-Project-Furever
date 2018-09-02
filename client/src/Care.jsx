@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import ReactLoading from 'react-loading';
 
 //import assets
 
@@ -37,11 +38,18 @@ class Care extends Component {
     if (!sessionStorage.getItem('userId')) {
       return <div>Login to See this Page!</div>;
     } else {
+      // render only if adopted
       if (sessionStorage.getItem('adopted')) {
+        // render only if pet care info is loaded
         if (this.state.isLoaded) {
-          return this.renderBreedsInfo();
+          return <div className="jumbotron">{this.renderBreedsInfo()}</div>;
         } else {
-          return 'Loading...';
+          return (
+            <Fragment>
+              <strong>Loading...</strong>
+              <ReactLoading className="loading-icon" type={'spinningBubbles'} color={'#000000'} height={'10%'} width={'10%'} />
+            </Fragment>
+          );
         }
       } else {
         return 'Adopt a Pet first!';
@@ -50,18 +58,45 @@ class Care extends Component {
   };
 
   renderBreedsInfo = () => {
-    let html = '';
+    let catInfo = [];
+    let dogInfo = [];
+
     for (let catBreed of this.state.breedInfo.cat) {
+      let html = '';
+      html += `<h2>${catBreed.breed}</h2>`;
+      html += catBreed.image;
       html += catBreed.personality;
       html += catBreed.traits;
+      catInfo.push(
+        <Fragment>
+          <hr />
+          <div className="breed-info" dangerouslySetInnerHTML={{ __html: html }} />
+        </Fragment>
+      );
     }
     for (let dogBreed of this.state.breedInfo.dog) {
+      let html = '';
+      html += `<h2>${dogBreed.breed}</h2>`;
+      html += dogBreed.image;
       html += dogBreed.temperment;
       html += dogBreed.care;
       html += dogBreed.health;
+      dogInfo.push(
+        <Fragment>
+          <hr />
+          <div className="breed-info" dangerouslySetInnerHTML={{ __html: html }} />
+        </Fragment>
+      );
     }
 
-    return <div dangerouslySetInnerHTML={{ __html: html }} />;
+    return (
+      <Fragment>
+        <h1>Pet Care Information</h1>
+        <h3>See the below for a list of pet care information for the pets that you have adopted.</h3>
+        {catInfo}
+        {dogInfo}
+      </Fragment>
+    );
   };
 }
 

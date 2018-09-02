@@ -1,203 +1,91 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Fragment, Component } from 'react';
+
 //import assets
+import Login from './Login.jsx';
+import Register from './Register.jsx';
 
 class Home extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      login_username: '',
-      login_password: '',
-      register_username: '',
-      register_password: '',
-      lat: 43.65,
-      lng: -79.391
+      loginActive: true,
+      registerActive: false
     };
-    this.getLocation();
   }
-
-  submitLogin = event => {
-    event.preventDefault();
-
-    // stops submit if either username or password is blank
-    if (!this.state.login_username || !this.state.login_password) {
-      alert('Username or Password is Blank!');
-      return;
-    }
-
-    const reqObj = {
-      username: this.state.login_username,
-      password: this.state.login_password
-    };
-
-    axios
-      .post('http://localhost:8080/user/login', reqObj)
-      .then(res => {
-        //grabs the userId from the successful login response
-        let userId = { userId: res.data.data.attributes.id };
-        this.props.setUserId(userId);
-        sessionStorage.setItem('userId', res.data.data.attributes.id);
-        sessionStorage.setItem('username', res.data.data.attributes.username);
-        sessionStorage.setItem('lat', res.data.data.attributes.lat);
-        sessionStorage.setItem('lng', res.data.data.attributes.lng);
-        sessionStorage.setItem('adopted', res.data.data.attributes.adopted);
-        this.props.history.push('/adopt');
-      })
-      .catch(err => alert(err));
-  };
-
-  // controlled input for username
-  handleChangeLoginUsername = event => {
-    this.setState({
-      login_username: event.target.value.trim()
-    });
-  };
-
-  // controlled input for password
-  handleChangeLoginPassword = event => {
-    this.setState({
-      login_password: event.target.value.trim()
-    });
-  };
-
-  // function call to grab the gps locations of the user
-  getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.setLocation);
-    }
-  };
-
-  // function call to set the current state to the current location
-  setLocation = position => {
-    this.setState({ lat: position.coords.latitude, lng: position.coords.longitude });
-  };
-
-  submitRegister = event => {
-    event.preventDefault();
-
-    // stops submit if either username or password is blank
-    if (!this.state.register_username || !this.state.register_password) {
-      alert('Username or Password is Blank!');
-      return;
-    }
-
-    const reqObj = {
-      username: this.state.register_username,
-      password: this.state.register_password,
-      lat: this.state.lat,
-      lng: this.state.lng,
-      adopted: false
-    };
-
-    axios
-      .post('http://localhost:8080/user/register', reqObj)
-      .then(res => {
-        //grabs the userId from the successful login response
-        let userId = { userId: res.data.data.attributes.id };
-        this.props.setUserId(userId);
-        sessionStorage.setItem('userId', res.data.data.attributes.id);
-        sessionStorage.setItem('username', res.data.data.attributes.username);
-        sessionStorage.setItem('lat', res.data.data.attributes.lat);
-        sessionStorage.setItem('lng', res.data.data.attributes.lng);
-        sessionStorage.setItem('adopted', res.data.data.attributes.adopted);
-        this.props.history.push('/adopt');
-      })
-      .catch(err => alert(err));
-  };
-
-  // controlled input for username
-  handleChangeRegisterUsername = event => {
-    this.setState({
-      register_username: event.target.value.trim()
-    });
-  };
-
-  // controlled input for password
-  handleChangeRegisterPassword = event => {
-    this.setState({
-      register_password: event.target.value.trim()
-    });
-  };
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <video id="home-video-background" loop autoPlay>
           <source src={require('./assets/bg.mp4')} type="video/mp4" />
         </video>
 
         <section id="home-panel" className="panel panel-default">
-          <img src={require('./assets/moe_00.png')} alt="notWorking" id="mouseUI" />
+          <h1 className="home-title">
+            Fur <i className="fas fa-paw home-title-icon" /> Ever
+          </h1>
 
-          <p>login</p>
-          <form onSubmit={this.submitLogin}>
-            <label>
-              username:
-              <input name="username" type="text" onChange={this.handleChangeLoginUsername} />
-            </label>
-            <label>
-              password:
-              <input name="password" type="password" onChange={this.handleChangeLoginPassword} />
-            </label>
+          {this.greetings()}
+        </section>
+      </Fragment>
+    );
+  }
 
-            <input id="buttonColor" type="submit" value="Submit" />
-          </form>
-
-          <p>register</p>
-          <form onSubmit={this.submitRegister}>
-            <label>
-              username:
-              <input name="username" type="text" onChange={this.handleChangeRegisterUsername} />
-            </label>
-            <label>
-              password:
-              <input name="password" type="password" onChange={this.handleChangeRegisterPassword} />
-            </label>
-
-            <input id="buttonColor" type="submit" value="Submit" />
-          </form>
-
-          {/* <!-- Button HTML (to Trigger Modal) --> */}
-          <a href="#register" data-toggle="modal">
-            Register
-          </a>
-
-          {/* <!-- Modal HTML --> */}
-          <div id="register" className="modal fade">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                  </button>
-                  <h4 className="modal-title">Register</h4>
+  greetings = () => {
+    // show message if already logged in
+    if (sessionStorage.getItem('userId')) {
+      return;
+    }
+    // not logged in, show login and register
+    return (
+      <Fragment>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6">
+                    <a id="login-form-link" onClick={this.showLogin}>
+                      Login
+                    </a>
+                  </div>
+                  <div class="col-xs-6">
+                    <a id="register-form-link" onClick={this.showRegister}>
+                      Register
+                    </a>
+                  </div>
                 </div>
-                <div className="modal-body">
-                  <form onSubmit={this.submitRegister}>
-                    <label>
-                      username:
-                      <input name="username" type="text" onChange={this.handleChangeRegisterUsername} />
-                    </label>
-                    <label>
-                      password:
-                      <input name="password" type="password" onChange={this.handleChangeRegisterPassword} />
-                    </label>
-
-                    <input type="submit" value="Submit" />
-                  </form>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal">
-                    Close
-                  </button>
+                <hr />
+              </div>
+              <div className="panel-body">
+                <div className="row">
+                  <div className="col-lg-12">
+                    {this.state.loginActive && <Login redirectAdoptPage={this.redirectAdoptPage} />}
+                    {this.state.registerActive && <Register redirectAdoptPage={this.redirectAdoptPage} />}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </React.Fragment>
+        </div>
+      </Fragment>
     );
-  }
+  };
+
+  showLogin = event => {
+    event.preventDefault();
+    this.setState({ loginActive: true, registerActive: false });
+  };
+
+  showRegister = event => {
+    event.preventDefault();
+    this.setState({ loginActive: false, registerActive: true });
+  };
+
+  redirectAdoptPage = () => {
+    this.props.history.push('/adopt');
+  };
 }
 
 export default Home;
