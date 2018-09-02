@@ -61,8 +61,8 @@ class Home extends Component {
               <div className="panel-body">
                 <div className="row">
                   <div className="col-lg-12">
-                    {this.state.loginActive && <Login />}
-                    {this.state.registerActive && <Register />}
+                    {this.state.loginActive && <Login redirectAdoptPage={this.redirectAdoptPage} />}
+                    {this.state.registerActive && <Register redirectAdoptPage={this.redirectAdoptPage} />}
                   </div>
                 </div>
               </div>
@@ -81,6 +81,10 @@ class Home extends Component {
   showRegister = event => {
     event.preventDefault();
     this.setState({ loginActive: false, registerActive: true });
+  };
+
+  redirectAdoptPage = () => {
+    this.props.history.push('/adopt');
   };
 }
 

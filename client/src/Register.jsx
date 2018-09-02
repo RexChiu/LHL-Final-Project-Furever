@@ -78,7 +78,8 @@ class Register extends Component {
         sessionStorage.setItem('lat', res.data.data.attributes.lat);
         sessionStorage.setItem('lng', res.data.data.attributes.lng);
         sessionStorage.setItem('adopted', res.data.data.attributes.adopted);
-        this.props.history.push('/adopt');
+        sessionStorage.setItem('email', res.data.data.attributes.email);
+        this.props.redirectAdoptPage();
       })
       .catch(err => alert(err));
   };

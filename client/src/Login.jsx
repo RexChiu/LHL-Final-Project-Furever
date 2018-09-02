@@ -49,29 +49,28 @@ class Login extends Component {
       .post('http://localhost:8080/user/login', reqObj)
       .then(res => {
         //grabs the userId from the successful login response
-        let userId = { userId: res.data.data.attributes.id };
-        this.props.setUserId(userId);
         sessionStorage.setItem('userId', res.data.data.attributes.id);
         sessionStorage.setItem('username', res.data.data.attributes.username);
         sessionStorage.setItem('lat', res.data.data.attributes.lat);
         sessionStorage.setItem('lng', res.data.data.attributes.lng);
         sessionStorage.setItem('adopted', res.data.data.attributes.adopted);
-        this.props.history.push('/adopt');
+        sessionStorage.setItem('email', res.data.data.attributes.email);
+        this.props.redirectAdoptPage();
       })
       .catch(err => alert(err));
   };
 
   // controlled input for username
-  handleChangeLoginUsername = event => {
+  handleChangeUsername = event => {
     this.setState({
-      login_username: event.target.value.trim()
+      username: event.target.value.trim()
     });
   };
 
   // controlled input for password
-  handleChangeLoginPassword = event => {
+  handleChangePassword = event => {
     this.setState({
-      login_password: event.target.value.trim()
+      password: event.target.value.trim()
     });
   };
 }
