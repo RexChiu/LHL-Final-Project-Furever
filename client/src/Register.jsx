@@ -20,11 +20,12 @@ class Register extends Component {
     return (
       <Fragment>
         <p>register</p>
-        <form onSubmit={this.submitRegister}>
+        <form id="register-form" onSubmit={this.submitRegister}>
           <label>
             username:
             <input name="username" type="text" onChange={this.handleChangeRegisterUsername} />
           </label>
+          <br />
           <label>
             password:
             <input name="password" type="password" onChange={this.handleChangeRegisterPassword} />

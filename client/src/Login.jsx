@@ -13,16 +13,20 @@ class Login extends Component {
   render() {
     return (
       <Fragment>
-        <p>login</p>
-        <form onSubmit={this.submitLogin}>
-          <label>
-            username:
-            <input name="username" type="text" onChange={this.handleChangeLoginUsername} />
-          </label>
-          <label>
-            password:
-            <input name="password" type="password" onChange={this.handleChangeLoginPassword} />
-          </label>
+        <form id="login-form" onSubmit={this.submitLogin}>
+          <div className="form-group">
+            <input placeholder="Username" class="form-control" tabindex="1" name="username" type="text" onChange={this.handleChangeUsername} />
+          </div>
+          <div className="form-group">
+            <input placeholder="Password" class="form-control" tabindex="2" name="password" type="password" onChange={this.handleChangePassword} />
+          </div>
+          <div className="form-group">
+            <div className="row">
+              <div className="col-sm-6 col-sm-offset-3">
+                <input className="form-control btn btn-login" type="submit" name="login-submit" tabindex="4" value="Log In" />
+              </div>
+            </div>
+          </div>
 
           <input id="buttonColor" type="submit" value="Submit" />
         </form>

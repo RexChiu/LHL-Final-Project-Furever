@@ -5,6 +5,42 @@ import Login from './Login.jsx';
 import Register from './Register.jsx';
 
 class Home extends Component {
+  render() {
+    return (
+      <Fragment>
+        <video id="home-video-background" loop autoPlay>
+          <source src={require('./assets/bg.mp4')} type="video/mp4" />
+        </video>
+
+        <section id="home-panel" className="panel panel-default">
+          <h1 className="home-title">
+            Fur <i className="fas fa-paw home-title-icon" /> Ever
+          </h1>
+
+          {this.greetings()}
+        </section>
+      </Fragment>
+    );
+  }
+
+  greetings = () => {
+    // show message if already logged in
+    if (sessionStorage.getItem('userId')) {
+      return 'Already Logged In!';
+    }
+    // not logged in, show login and register
+    return (
+      <div className="panel-body">
+        <div className="row">
+          <div className="col-lg-12">
+            <Login />
+            <Register />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   submitLogin = event => {
     event.preventDefault();
 
@@ -95,38 +131,6 @@ class Home extends Component {
       register_password: event.target.value.trim()
     });
   };
-
-  greetings = () => {
-    // show message if already logged in
-    if (sessionStorage.getItem('userId')) {
-      return 'Already Logged In!';
-    }
-    // not logged in, show login and register
-    return (
-      <Fragment>
-        <Login />
-        <Register />
-      </Fragment>
-    );
-  };
-
-  render() {
-    return (
-      <Fragment>
-        <video id="home-video-background" loop autoPlay>
-          <source src={require('./assets/bg.mp4')} type="video/mp4" />
-        </video>
-
-        <section id="home-panel" className="panel panel-default">
-          <h1 className="home-title">
-            Fur <i className="fas fa-paw home-title-icon" /> Ever
-          </h1>
-
-          {this.greetings()}
-        </section>
-      </Fragment>
-    );
-  }
 }
 
 export default Home;
