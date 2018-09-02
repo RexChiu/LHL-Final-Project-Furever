@@ -42,7 +42,7 @@ class Care extends Component {
       if (sessionStorage.getItem('adopted')) {
         // render only if pet care info is loaded
         if (this.state.isLoaded) {
-          return this.renderBreedsInfo();
+          return <div className="jumbotron">{this.renderBreedsInfo()}</div>;
         } else {
           return (
             <Fragment>

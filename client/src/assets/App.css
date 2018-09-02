@@ -281,3 +281,16 @@ a.disable {
 .loading-icon {
   margin: 0 auto;
 }
+
+.breed-info {
+  margin: 0 7em;
+}
+
+.breed-info h2 {
+  font-weight: bold;
+}
+
+.breed-info p {
+  font-size: 1.2em;
+  text-align: left;
+}
