@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-
 import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
@@ -11,10 +10,15 @@ class Navbar extends Component {
     if (sessionStorage.getItem('userId')) {
       return (
         <Fragment>
-          <a className="navbar-brand ml-auto disable">Logged in as {sessionStorage.getItem('username')}</a>
-          <a className="navbar-brand" onClick={this.logoutUser}>
-            <Link to="/">Logout</Link>
-          </a>
+          <li role="presentation" className="nav-right disabled">
+            <a className="">Logged in as {sessionStorage.getItem('username')}</a>
+          </li>
+
+          <li role="presentation" className="nav-right" onClick={this.logoutUser}>
+            <a>
+              <Link to="/">Logout</Link>
+            </a>
+          </li>
         </Fragment>
       );
     }
@@ -22,27 +26,36 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div>
-        <div className="navbar navbar-light navbarColor">
-          <a className="navbar-brand">
-            <Link to="/">Home</Link>
-          </a>
-          <a className="navbar-brand">
-            <Link to="/adopt">Adopt </Link>
-          </a>
-          <a className="navbar-brand">
-            <Link to="/events">Events</Link>
-          </a>
-          <a className="navbar-brand">
-            <Link to="/nearby"> Nearby</Link>
-          </a>
-          <a className="navbar-brand">
-            <Link to="/care">Care</Link>
-          </a>
+      <Fragment>
+        <ul className="nav nav-justified nav-tabs navbar-fixed-top">
+          <li id="home-tab" role="presentation">
+            <a>
+              <Link to="/">Home</Link>
+            </a>
+          </li>
+          <li role="presentation">
+            <a>
+              <Link to="/adopt">Adopt </Link>
+            </a>
+          </li>
+          <li role="presentation">
+            <a>
+              <Link to="/events">Events</Link>
+            </a>
+          </li>
+          <li role="presentation">
+            <a>
+              <Link to="/nearby"> Nearby</Link>
+            </a>
+          </li>
+          <li role="presentation">
+            <a>
+              <Link to="/care">Care</Link>
+            </a>
+          </li>
           {this.loggedInUser()}
-        </div>
-        <hr className="hr" />
-      </div>
+        </ul>
+      </Fragment>
     );
   }
 }

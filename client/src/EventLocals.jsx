@@ -21,7 +21,7 @@ class EventLocals extends Component {
       <React.Fragment>
         <img
           className="eventLocalsIcon"
-          src={this.props.user.attributes.pets[0].photos[0]}
+          src={this.props.photo}
           alt="notWorking"
           height="42"
           width="42"
@@ -29,7 +29,7 @@ class EventLocals extends Component {
           href={'#singleLocals' + this.props.user.id}
         />
 
-        {/* Idividual Modals */}
+        {/* Individual Modals */}
 
         <div id={'singleLocals' + this.props.user.id} className="modal fade">
           <div className="modal-dialog">
@@ -43,7 +43,7 @@ class EventLocals extends Component {
               </div>
               <hr />
               <div className="modal-body">
-                <img className="eventLocalsIcon" src={this.props.user.attributes.pets[0].photos[0]} alt="notWorking" />
+                <img className="eventLocalsModal" src={this.props.photo} alt="notWorking" />
 
                 <h1> -USER INFO- </h1>
                 <p> username: {this.props.user.attributes.username} </p>

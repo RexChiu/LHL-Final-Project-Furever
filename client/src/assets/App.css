@@ -85,6 +85,7 @@
 
 .App {
   text-align: center;
+  margin-top: 6em;
   height: 100%;
 }
 
@@ -313,4 +314,14 @@ a.disable {
 .jumbotron h1 {
   font-size: 4em;
   font-weight: bold;
+}
+
+.nav {
+  background-color: #fcfeff;
+  opacity: 0.95;
+  margin-bottom: 5em;
+}
+
+.nav > li.disabled > a:hover {
+  cursor: default;
 }

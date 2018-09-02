@@ -31,12 +31,17 @@ class Care extends Component {
   }
 
   render() {
-    return <Fragment>{this.renderPetCare()}</Fragment>;
+    return (
+      <Fragment>
+        <h1>Pet Care</h1>
+        {this.renderPetCare()}
+      </Fragment>
+    );
   }
 
   renderPetCare = () => {
     if (!sessionStorage.getItem('userId')) {
-      return <div>Login to See this Page!</div>;
+      return 'Please Login to see this page!';
     } else {
       // render only if adopted
       if (sessionStorage.getItem('adopted')) {

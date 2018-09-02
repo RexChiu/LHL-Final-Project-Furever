@@ -10,7 +10,7 @@ class EventCompose extends Component {
       error: null,
       isLoaded: false,
       events: [],
-      title: '',
+      title: this.props.eventName,
       location: '',
       description: '',
       date: '',
@@ -114,6 +114,30 @@ class EventCompose extends Component {
       });
   };
 
+  // labelGoingCount = () => {
+  //   if (event.attributes.hasOwnProperty(going) {
+  //     return (
+
+  //         <label for="buttonGoing"> {event.attributes.going.length} </label>
+
+  //     );
+  //   }
+  // };
+
+  //   renderElement(){
+  //     if(this.state.value == 'news')
+  //        return <Text>data</Text>;
+  //     return null;
+  //  }
+
+  // <p> {if (!event.attributes.hasOwnProperty('going') == undefined){ }
+
+  // event.attributes.going.length()} </p>
+
+  focus_event_location = () => {
+    this.event_location.focus();
+  };
+
   render() {
     const { events } = this.state;
 
@@ -133,9 +157,13 @@ class EventCompose extends Component {
               name="title"
               className="form-group form-control"
               placeholder="What is your event's name?"
+              value={this.props.eventName}
             />
             <br />
             <input
+              ref={input => {
+                this.event_location = input;
+              }}
               onChange={this.handleChangeLocation}
               type="text"
               id="event_location"
@@ -161,6 +189,7 @@ class EventCompose extends Component {
 
           <div />
         </div>
+        s{' '}
         <div id="eventItemsContainer">
           <div id="eventItems">{eventItems}</div>
         </div>

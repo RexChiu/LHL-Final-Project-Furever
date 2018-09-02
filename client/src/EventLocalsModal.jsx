@@ -3,20 +3,48 @@ import React, { Component } from 'react';
 //import assets
 
 class EventLocalsModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      users: []
+    };
+  }
+
+  addEventWithFriend = param => event => {
+    this.props.setEventName('Meeting with ' + param.username);
+  };
+
+  showFollowing = () => {
+    console.log('Following');
+  };
+
   render() {
     const { users } = this.props;
-    // const { users } = this.state;
-    let tinderItems = '';
+    let tinderItems = [];
+    let tinderPhotos = [];
+
     if (users instanceof Array) {
-      tinderItems = users.map((user, i) => (
-        <div className="carousel-item">
-          {/* <p> {user.id} </p> */}
-          <img className="eventLocalsIcon" src={user.attributes.pets[0].photos[0]} alt="notWorking" />
-          {/* <a className="btn btn-lg btn-primary">Nya...</a>
-          <a className="btn btn-lg btn-primary">Yeah!</a> */}
+      for (let i = 0; i < users.length; i++) {
+        for (let j = 0; j < users[i].attributes.pets.length; j++) {
+          tinderPhotos.push({
+            username: users[i].attributes.username,
+            userid: users[i].attributes.id,
+            picture: users[i].attributes.pets[j].photos[0]
+          });
+        }
+      }
+    }
+
+    if (tinderPhotos instanceof Array) {
+      tinderItems = tinderPhotos.map((photo, i) => (
+        <div className="item" key={i}>
+          <img className="eventLocalsIcon" src={photo.picture} alt="notWorking" data-dismiss="modal" onClick={this.addEventWithFriend(photo)} />
         </div>
       ));
     }
+
     return (
       <React.Fragment>
         <div className="modal-dialog">
@@ -29,21 +57,28 @@ class EventLocalsModal extends Component {
               <p> - Find a nearby friend - </p>
             </div>
             <div className="modal-body">
-              {/* <p> {this.props.user.id}</p> */}
-
-              <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
-                <div className="carousel-inner">{tinderItems}</div>
-                <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                  <span className="carousel-control-prev-icon" aria-hidden="true" />
-                  <span className="sr-only">Previous</span>
+              <div id="pets-modal" className="carousel slide" data-ride="carousel">
+                <div className="carousel-inner" role="listbox">
+                  <div className="item active">
+                    <img src={require('./assets/tinder.png')} alt="notWorking" id="mouseUI" />
+                    <div className="carousel-caption">
+                      <h3>Heading 3</h3>
+                      <p>Slide 0 description.</p>
+                    </div>
+                  </div>
+                  <div className="item">
+                    <img src={require('./assets/pet-tinder-dump-246332.jpg')} alt="notWorking" id="mouseUI" />
+                  </div>
+                  {tinderItems}
+                </div>
+                <a className="left carousel-control" href="#pets-modal" data-slide="prev">
+                  <span className="glyphicon glyphicon-chevron-left" />
                 </a>
-                <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                  <span className="carousel-control-next-icon" aria-hidden="true" />
-                  <span className="sr-only">Next</span>
+                <a className="right carousel-control" href="#pets-modal" data-slide="next">
+                  <span className="glyphicon glyphicon-chevron-right" />
                 </a>
               </div>
             </div>
-
             <div className="modal-footer">
               <section>
                 <p>Selected: </p>

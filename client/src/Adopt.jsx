@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import Waypoint from 'react-waypoint';
 import axios from 'axios';
+import ReactLoading from 'react-loading';
+
 //import assets
 
 //modal
@@ -15,6 +17,7 @@ class Adopt extends Component {
     this.state = {
       error: null,
       isLoaded: false,
+      loadedMore: false,
       pets: [],
       filters: {}
     };
@@ -27,13 +30,14 @@ class Adopt extends Component {
       .then(result => {
         this.setState({
           isLoaded: true,
+          loadedMore: true,
           pets: result.data
         });
       });
   }
 
   rerenderPets = (pets, filters) => {
-    this.setState({ pets: JSON.parse(pets).data.data, isLoaded: true, filters });
+    this.setState({ pets: JSON.parse(pets).data.data, isLoaded: true, loadedMore: true, filters });
   };
 
   resetFilter = () => {
@@ -43,10 +47,10 @@ class Adopt extends Component {
   // gets the next pets from the server, adds to the end of the pets array, re-renders automagically
   _getMorePets = id => {
     // guard statement to not ask for pets twice before loading it
-    if (this.state.isLoaded === false) {
+    if (this.state.loadedMore === false) {
       return;
     }
-    this.setState({ isLoaded: false });
+    this.setState({ loadedMore: false });
 
     const filters = this.state.filters;
     filters.lastPet = id;
@@ -57,7 +61,7 @@ class Adopt extends Component {
         // if there are no results, it is not an array
         if (response.data.data instanceof Array) {
           const pets = this.state.pets.concat(response.data.data);
-          this.setState({ pets, isLoaded: true });
+          this.setState({ pets, loadedMore: true });
         }
       })
       .catch(function(error) {
@@ -66,7 +70,7 @@ class Adopt extends Component {
   };
 
   _handleWaypointEnter = () => {
-    if (this.state.isLoaded) {
+    if (this.state.loadedMore) {
       const lastPet = this.state.pets.length - 1;
       const lastPetId = this.state.pets[lastPet].id;
       this._getMorePets(lastPetId);
@@ -80,19 +84,32 @@ class Adopt extends Component {
     }
   };
 
-  render() {
-    const { pets } = this.state;
-    let adoptItems = '';
-    if (pets instanceof Array) {
-      adoptItems = pets.map(pet => <Pet className="pet-item" pet={pet} key={pet.id} />);
-    }
+  _renderAdoptItems = () => {
+    // render only if pet care info is loaded
+    if (this.state.isLoaded) {
+      const { pets } = this.state;
+      let adoptItems = '';
+      if (pets instanceof Array) {
+        adoptItems = pets.map(pet => <Pet className="pet-item" pet={pet} key={pet.id} />);
+      }
 
+      return adoptItems;
+    } else {
+      return (
+        <Fragment>
+          <strong>Loading...</strong>
+          <ReactLoading className="loading-icon" type={'spinningBubbles'} color={'#000000'} height={'10%'} width={'10%'} />
+        </Fragment>
+      );
+    }
+  };
+
+  render() {
     return (
       <React.Fragment>
-        <p> Pet Adoption </p>
-
+        <h1> Pet Adoption </h1>
         <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
-        {adoptItems}
+        {this._renderAdoptItems()}
         <div className="col-sm-12">{this._renderWaypoint()}</div>
       </React.Fragment>
     );
