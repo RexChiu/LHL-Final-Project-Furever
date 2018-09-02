@@ -38,13 +38,15 @@ class Care extends Component {
     if (!sessionStorage.getItem('userId')) {
       return <div>Login to See this Page!</div>;
     } else {
+      // render only if adopted
       if (sessionStorage.getItem('adopted')) {
+        // render only if pet care info is loaded
         if (this.state.isLoaded) {
           return this.renderBreedsInfo();
         } else {
           return (
             <Fragment>
-              <div>Loading...</div>
+              <strong>Loading...</strong>
               <ReactLoading className="loading-icon" type={'spinningBubbles'} color={'#000000'} height={'10%'} width={'10%'} />
             </Fragment>
           );

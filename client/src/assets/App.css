@@ -277,3 +277,7 @@ a.disable {
 #register-form-link {
   cursor: pointer;
 }
+
+.loading-icon {
+  margin: 0 auto;
+}
