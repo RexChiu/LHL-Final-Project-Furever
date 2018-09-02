@@ -35,14 +35,14 @@ class Login extends Component {
     event.preventDefault();
 
     // stops submit if either username or password is blank
-    if (!this.state.login_username || !this.state.login_password) {
+    if (!this.state.username || !this.state.password) {
       alert('Username or Password is Blank!');
       return;
     }
 
     const reqObj = {
-      username: this.state.login_username,
-      password: this.state.login_password
+      username: this.state.username,
+      password: this.state.password
     };
 
     axios
