@@ -19,7 +19,7 @@ class EventComposeFeed extends Component {
             {' '}
             <h3> {this.props.event.attributes.title} </h3>
             <h4> Created By: {this.props.event.attributes.user} </h4>
-            <div class="eventDescription">
+            <div className="eventDescription">
               <h7> Date: {this.props.event.attributes.date} </h7>
               <p> description: {this.props.event.attributes.description} </p>
             </div>

@@ -44,8 +44,10 @@ class EventLocalUsers extends Component {
     if (users instanceof Array) {
       for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].attributes.pets.length; j++) {
-          let adoptedPet = users[i].attributes.pets[j].photos[0];
-          userItems.push(<EventLocals user={users[i]} photo={adoptedPet} key={users[i].id} />);
+          let adoptedPetPhoto = users[i].attributes.pets[j].photos[0];
+          console.log('Photo::', users[i].attributes.pets[j].photos[0], '||userid::', users[i].id);
+          userItems.push(<EventLocals user={users[i]} photo={adoptedPetPhoto} key={adoptedPetPhoto + users[i].id} />);
+          adoptedPetPhoto = '';
         }
       }
     }
