@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 //import assets
 
 //modal
@@ -15,18 +15,25 @@ class Nearby extends Component {
     };
   }
 
-  componentDidMount() {
-    //code I added in will link to server
-  }
-
   render() {
     return (
-      <React.Fragment>
-        <h2>Resources Nearby</h2>
-        <Store type={'veterinary_care'} establishment={'Hospital'} />
-        <Store type={'pet_store'} establishment={'Store'} />
-      </React.Fragment>
+      <Fragment>
+        <h1>Resources Nearby</h1>
+        {this.renderNearBy()}
+      </Fragment>
     );
   }
+
+  renderNearBy = () => {
+    if (!sessionStorage.getItem('userId')) {
+      return 'Please Login to see this page!';
+    }
+    return (
+      <Fragment>
+        <Store type={'veterinary_care'} establishment={'Hospital'} />
+        <Store type={'pet_store'} establishment={'Store'} />
+      </Fragment>
+    );
+  };
 }
 export default Nearby;
