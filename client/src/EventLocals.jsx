@@ -21,7 +21,7 @@ class EventLocals extends Component {
       <React.Fragment>
         <img
           className="eventLocalsIcon"
-          src={this.props.user.attributes.pets[0].photos[0]}
+          src={this.props.photo}
           alt="notWorking"
           height="42"
           width="42"

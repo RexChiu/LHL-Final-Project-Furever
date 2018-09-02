@@ -12,10 +12,8 @@ class EventLocalsModal extends Component {
     };
   }
 
-  addToFriends = param => event => {
-    console.log('Event', event);
-    console.log('Param', param);
-    alert('Clicked on Me by', param);
+  addEventWithFriend = param => event => {
+    this.props.setEventName('Meeting with ' + param.username);
   };
 
   showFollowing = () => {
@@ -25,14 +23,26 @@ class EventLocalsModal extends Component {
   render() {
     const { users } = this.props;
     let tinderItems = [];
+    let tinderPhotos = [];
 
     if (users instanceof Array) {
-      tinderItems = users.map((user, i) => (
+      for (let i = 0; i < users.length; i++) {
+        for (let j = 0; j < users[i].attributes.pets.length; j++) {
+          tinderPhotos.push({
+            username: users[i].attributes.username,
+            userid: users[i].attributes.id,
+            picture: users[i].attributes.pets[j].photos[0]
+          });
+        }
+      }
+    }
+
+    if (tinderPhotos instanceof Array) {
+      tinderItems = tinderPhotos.map((photo, i) => (
         <div className="item">
-          <img className="eventLocalsIcon" src={user.attributes.pets[0].photos[0]} alt="notWorking" onClick={this.addToFriends(user.attributes.id)} />
+          <img className="eventLocalsIcon" src={photo.picture} alt="notWorking" onClick={this.addEventWithFriend(photo)} />
         </div>
       ));
-      console.log('Users', users);
     }
 
     return (
