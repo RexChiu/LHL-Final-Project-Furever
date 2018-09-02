@@ -446,8 +446,6 @@ module.exports = function makeDataHelpers(db) {
         const breedInfo = await this.getBreedInfo(ref);
         outputObj.dog.push(breedInfo);
       }
-
-      console.log(JSON.stringify(outputObj));
       return Promise.resolve(outputObj);
     }
   };
