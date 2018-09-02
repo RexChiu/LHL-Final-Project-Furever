@@ -27,7 +27,7 @@ class Navbar extends Component {
   render() {
     return (
       <Fragment>
-        <ul className="nav nav-justified nav-tabs">
+        <ul className="nav nav-justified nav-tabs navbar-fixed-top">
           <li id="home-tab" role="presentation">
             <a>
               <Link to="/">Home</Link>
