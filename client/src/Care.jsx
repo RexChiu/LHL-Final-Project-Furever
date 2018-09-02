@@ -63,20 +63,36 @@ class Care extends Component {
 
     for (let catBreed of this.state.breedInfo.cat) {
       let html = '';
+      html += `<h2>${catBreed.breed}</h2>`;
+      html += catBreed.image;
       html += catBreed.personality;
       html += catBreed.traits;
-      catInfo.push(<div className="breed-info" dangerouslySetInnerHTML={{ __html: html }} />);
+      catInfo.push(
+        <Fragment>
+          <hr />
+          <div className="breed-info" dangerouslySetInnerHTML={{ __html: html }} />
+        </Fragment>
+      );
     }
     for (let dogBreed of this.state.breedInfo.dog) {
       let html = '';
+      html += `<h2>${dogBreed.breed}</h2>`;
+      html += dogBreed.image;
       html += dogBreed.temperment;
       html += dogBreed.care;
       html += dogBreed.health;
-      dogInfo.push(<div className="breed-info" dangerouslySetInnerHTML={{ __html: html }} />);
+      dogInfo.push(
+        <Fragment>
+          <hr />
+          <div className="breed-info" dangerouslySetInnerHTML={{ __html: html }} />
+        </Fragment>
+      );
     }
 
     return (
       <Fragment>
+        <h1>Pet Care Information</h1>
+        <h3>See the below for a list of pet care information for the pets that you have adopted.</h3>
         {catInfo}
         {dogInfo}
       </Fragment>

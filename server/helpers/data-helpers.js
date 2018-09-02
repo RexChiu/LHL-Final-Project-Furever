@@ -358,6 +358,8 @@ module.exports = function makeDataHelpers(db) {
         .collection(typeAnimal.toString())
         .doc(id.toString());
 
+      // sets the breed of info as breed
+      info.breed = id;
       return infoRef.set(info).then(() => info);
     },
     // returns all the pets of the userId
