@@ -37,12 +37,7 @@ class Store extends Component {
       .get(`http://localhost:8080/extras/places`, { params: outputObj })
       .then(function(response) {
         const results = response.data.data.attributes.results;
-        if (component.props.type === 'veterinary_care') {
-          component.props.loadedVet();
-        }
-        if (component.props.type === 'pet_store') {
-          component.props.loadedStore();
-        }
+        component.props.isLoaded();
         component.setState({ results, isLoaded: true });
       })
       .catch(function(error) {

@@ -8,8 +8,7 @@ class Nearby extends Component {
     super(props);
     this.state = {
       error: null,
-      isVetLoaded: false,
-      isStoreLoaded: false
+      isLoaded: false
     };
   }
 
@@ -23,7 +22,7 @@ class Nearby extends Component {
   }
 
   loading = () => {
-    if (!this.state.isVetLoaded && !this.state.isStoreLoaded) {
+    if (!this.state.isLoaded) {
       return (
         <Fragment>
           <strong>Loading...</strong>
@@ -40,18 +39,14 @@ class Nearby extends Component {
     return (
       <Fragment>
         {this.loading()}
-        <Store type={'veterinary_care'} loadedVet={this.loadedVet} establishment={'Hospital'} />
-        <Store type={'pet_store'} loadedStore={this.loadedStore} establishment={'Store'} />
+        <Store type={'veterinary_care'} isLoaded={this.isLoaded} establishment={'Hospital'} />
+        <Store type={'pet_store'} isLoaded={this.isLoaded} establishment={'Store'} />
       </Fragment>
     );
   };
 
-  loadedVet = () => {
-    this.setState({ isVetLoaded: true });
-  };
-
-  loadedStore = () => {
-    this.setState({ isStoreLoaded: true });
+  isLoaded = () => {
+    this.setState({ isLoaded: true });
   };
 }
 export default Nearby;
