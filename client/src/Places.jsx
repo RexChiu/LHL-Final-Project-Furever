@@ -12,9 +12,9 @@ class Places extends Component {
     return (
       <React.Fragment>
         <tr>
-          <th className="col-m">{this.props.place.name}</th>
-          <th className="col-sm"> {this.props.place.rating}</th>
-          <th className="col-sm"> {this.return_open(this.props.place['opening-hours']['open_now'])}</th>
+          <th className="col-m-4">{this.props.place.name}</th>
+          <th className="col-sm-4 text-center"> {this.props.place.rating}</th>
+          <th className="col-sm-4 text-center"> {this.return_open(this.props.place['opening-hours']['open_now'])}</th>
         </tr>
       </React.Fragment>
     );

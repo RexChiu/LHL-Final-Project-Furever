@@ -51,16 +51,14 @@ class Store extends Component {
     if (this.state.isLoaded) {
       return (
         <Fragment>
-          <h3>
-            <small>{this.props.establishment}s in your area</small>
-          </h3>
+          <h3>{this.props.establishment}s in your area</h3>
           <div>
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th className="col-m">{this.props.establishment} Name</th>
-                  <th className="col-sm">{this.props.establishment} Rating</th>
-                  <th className="col-sm">{this.props.establishment} Availability</th>
+                  <th className="col-m-4">{this.props.establishment} Name</th>
+                  <th className="col-sm-4 text-center">{this.props.establishment} Rating</th>
+                  <th className="col-sm-4 text-center">{this.props.establishment} Availability</th>
                 </tr>
               </thead>
               <tbody>{places}</tbody>
