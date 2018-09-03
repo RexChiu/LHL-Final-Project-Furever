@@ -27,10 +27,12 @@ class Pet extends Component {
       <Fragment>
         <div className="col-sm-4" data-toggle="modal" href={'#petDetails' + this.props.pet.id}>
           <div className="adoptitem panel panel-default">
-            <img src={this.props.pet.attributes.photos[0]} alt="notWorking" id="mouseUI" />
-            <p> {this.props.pet.attributes.animal} </p>
-            <p> {this.props.pet.attributes.breed} </p>
-            <p> {this.props.pet.attributes.age} </p>
+            <img className="img-responsive" src={this.props.pet.attributes.photos[0]} alt="notWorking" id="mouseUI" />
+            <div className="pet-info">
+              <p> Name: {this.props.pet.attributes.name} </p>
+              <p> Breed: {this.props.pet.attributes.breed} </p>
+              <p> Age: {this.props.pet.attributes.age} </p>
+            </div>
           </div>
         </div>
         {/*                   MODAL                     */}
