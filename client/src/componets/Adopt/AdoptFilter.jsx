@@ -75,7 +75,7 @@ class AdoptFilter extends Component {
 
   render() {
     return (
-      <section className="panel panel-default">
+      <section id="adoptfilter" className="panel panel-default">
         <p>Filter</p>
         <form onSubmit={this.filterSubmit}>
           <select id="animal" onChange={this.changeAnimal}>

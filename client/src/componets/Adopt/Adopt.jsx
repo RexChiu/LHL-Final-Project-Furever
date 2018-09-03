@@ -90,7 +90,11 @@ class Adopt extends Component {
       const { pets } = this.state;
       let adoptItems = '';
       if (pets instanceof Array) {
-        adoptItems = pets.map(pet => <Pet className="pet-item" pet={pet} key={pet.id} />);
+        adoptItems = pets.map(pet => (
+          <div className="col-lg-3 col-sm-4">
+            <Pet className="pet-item" pet={pet} key={pet.id} />
+          </div>
+        ));
       }
 
       return adoptItems;
@@ -113,9 +117,11 @@ class Adopt extends Component {
         </div>
         <div id="adoptContentPanel">
           <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
-          {this._renderAdoptItems()}
 
-          <div className="col-sm-12">{this._renderWaypoint()}</div>
+          <div className="container-fluid">
+            <div className="row">{this._renderAdoptItems()}</div>
+          </div>
+          <div className="col-lg-12">{this._renderWaypoint()}</div>
         </div>
       </React.Fragment>
     );
