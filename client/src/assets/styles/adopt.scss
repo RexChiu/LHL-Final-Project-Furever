@@ -12,3 +12,9 @@
 .pet-item {
   height: 20em;
 }
+
+.pet-image {
+  padding: 10px;
+  object-fit: cover; /* Do not scale the image */
+  object-position: center;
+}
