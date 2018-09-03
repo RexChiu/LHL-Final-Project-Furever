@@ -2,6 +2,7 @@
 @import 'home';
 @import 'care';
 @import 'adopt';
+@import 'event';
 
 .loading-icon {
   margin: 0 auto;
@@ -52,52 +53,6 @@ hr {
 .messagePanel #submit {
   background-color: #81b5c1;
 }
-#event_location {
-  max-width: 20em;
-  width: 20em;
-}
-
-#event_title {
-  max-width: 20em;
-  width: 20em;
-}
-
-.messagePanel #event_description {
-  max-width: 20em;
-  width: 20em;
-  max-height: 15em;
-  min-height: 5em;
-}
-
-/* event posts */
-#eventItemsContainer {
-  display: flex;
-  justify-content: center;
-}
-
-#eventItems {
-  display: flex;
-
-  flex-direction: column;
-}
-
-.eventPanel {
-  margin: 1em;
-  padding: 1em;
-  width: 30em;
-
-  background-color: #eef3f5;
-  outline-width: 0.005em;
-  outline-style: auto;
-
-  /* order: <integer>; */
-}
-.eventDescription {
-  background-color: white;
-  outline-width: 0.002em;
-  outline-style: auto;
-  outline-color: #8da7ad;
-}
 
 .App {
   text-align: center;
@@ -114,38 +69,10 @@ hr {
   height: 20em;
 }
 
-#eventlocalusers {
-  float: left;
-  margin-left: 1em;
-  background-color: #fcfeff;
-  outline-style: solid;
-  outline-width: 0.005em;
-  outline-style: auto;
-}
-#eventlocalusers #eventlocalcontainer {
-  width: 12.5em;
-  min-height: 15em;
-  max-height: 20em;
-}
-#eventlocalusers p {
-  margin: 0 0 0px;
+.adopt-page {
+  height: 100%;
 }
 
-#eventlocalusers #eventlocal {
-  background-color: #dbf0f6;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-}
-
-#eventlocalusers #friendrequest {
-  background-color: #fdd76f;
-}
-
-#eventlocalusers .btn {
-  background-color: #75b5c4;
-}
-
-.eventLocalsIcon {
-  float: right;
-  margin: 0.06em;
+.pet-item {
+  height: 20em;
 }
