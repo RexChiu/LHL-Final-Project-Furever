@@ -14,7 +14,7 @@ class Events extends Component {
     // not logged in, redirect to home page
     if (!sessionStorage.getItem('userId')) {
       alert('Unauthorized Access! Login First!');
-      this.props.history.push('/home');
+      this.props.history.push('/');
     }
     // does not have a pet, redirect to adopt page
     if (sessionStorage.getItem('adopted') === 'false') {
