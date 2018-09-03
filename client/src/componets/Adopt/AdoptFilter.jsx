@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import { DropdownButton, MenuItem, ButtonToolbar, Button } from 'react-bootstrap';
 
 //import assets
@@ -32,8 +32,8 @@ class AdoptFilter extends Component {
     const sizeTitle = this.state.size !== '' ? this.state.size : 'Size';
 
     return (
-      <Fragment>
-        <ButtonToolbar>
+      <div className="filter-buttons">
+        <ButtonToolbar className="btn-group">
           <DropdownButton title={animalTitle} key="Animal" id="dropdown-animal" onSelect={this.changeAnimal}>
             <MenuItem eventKey="Cat">Cat</MenuItem>
             <MenuItem eventKey="Dog">Dog</MenuItem>
@@ -55,11 +55,12 @@ class AdoptFilter extends Component {
             <MenuItem eventKey="XL">XL</MenuItem>
           </DropdownButton>
         </ButtonToolbar>
-        <ButtonToolbar>
+        <br />
+        <ButtonToolbar className="btn-group">
           <Button onClick={this.filterSubmit}>Submit</Button>
           <Button onClick={this.resetFilter}>Reset</Button>
         </ButtonToolbar>
-      </Fragment>
+      </div>
     );
   };
 
