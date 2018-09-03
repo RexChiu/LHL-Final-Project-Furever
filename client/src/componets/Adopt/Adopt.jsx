@@ -25,15 +25,7 @@ class Adopt extends Component {
 
   componentDidMount() {
     //code I added in will link to server
-    fetch('http://localhost:8080/pets')
-      .then(res => res.json())
-      .then(result => {
-        this.setState({
-          isLoaded: true,
-          loadedMore: true,
-          pets: result.data
-        });
-      });
+    this.getPets();
   }
 
   render() {
@@ -55,6 +47,18 @@ class Adopt extends Component {
     );
   }
 
+  getPets = () => {
+    fetch('http://localhost:8080/pets')
+      .then(res => res.json())
+      .then(result => {
+        this.setState({
+          isLoaded: true,
+          loadedMore: true,
+          pets: result.data
+        });
+      });
+  };
+
   rerenderPets = (pets, filters) => {
     // if not an array, put an empty array
     let petsArr = JSON.parse(pets).data.data;
@@ -66,7 +70,7 @@ class Adopt extends Component {
 
   resetFilter = () => {
     this.setState({ filters: {} });
-    window.location.reload();
+    this.getPets();
   };
 
   // gets the next pets from the server, adds to the end of the pets array, re-renders automagically

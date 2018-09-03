@@ -7,7 +7,6 @@ const axios = require('axios');
 class AdoptFilter extends Component {
   constructor(props) {
     super(props);
-    // this.rerenderPets = this.rerenderPets.bind(this);
     this.state = {
       animal: '',
       sex: '',
