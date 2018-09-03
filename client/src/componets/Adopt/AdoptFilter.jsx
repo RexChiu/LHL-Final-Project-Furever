@@ -17,12 +17,7 @@ class AdoptFilter extends Component {
   }
 
   render() {
-    return (
-      <section className="panel panel-default">
-        <p>Filter</p>
-        {this.renderDropdownButtons()}
-      </section>
-    );
+    return <section className="panel panel-default">{this.renderDropdownButtons()}</section>;
   }
 
   renderDropdownButtons = () => {
@@ -32,7 +27,8 @@ class AdoptFilter extends Component {
     const sizeTitle = this.state.size !== '' ? this.state.size : 'Size';
 
     return (
-      <div className="filter-buttons">
+      <div className="filter-buttons panel-body">
+        <p>Filter</p>
         <ButtonToolbar className="btn-group">
           <DropdownButton title={animalTitle} key="Animal" id="dropdown-animal" onSelect={this.changeAnimal}>
             <MenuItem eventKey="Cat">Cat</MenuItem>
