@@ -15,6 +15,6 @@
 
 .pet-image {
   padding: 10px;
-  object-fit: cover; /* Do not scale the image */
   object-position: center;
+  margin: 0 auto;
 }

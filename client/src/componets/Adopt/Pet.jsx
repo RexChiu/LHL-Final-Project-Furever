@@ -25,14 +25,12 @@ class Pet extends Component {
   render() {
     return (
       <Fragment>
-        <div className="col-sm-4" data-toggle="modal" href={'#petDetails' + this.props.pet.id}>
-          <div className="adoptitem panel panel-default">
-            <img className="img-responsive img-rounded pet-image" src={this.props.pet.attributes.photos[0]} alt="notWorking" id="mouseUI" />
-            <div className="pet-info">
-              <p> Name: {this.props.pet.attributes.name} </p>
-              <p> Breed: {this.props.pet.attributes.breed} </p>
-              <p> Age: {this.props.pet.attributes.age} </p>
-            </div>
+        <div className="adoptitem panel panel-default" data-toggle="modal" href={'#petDetails' + this.props.pet.id}>
+          <img className="img-responsive img-rounded pet-image" src={this.props.pet.attributes.photos[0]} alt="notWorking" id="mouseUI" />
+          <div className="pet-info">
+            <p> Name: {this.props.pet.attributes.name} </p>
+            <p> Breed: {this.props.pet.attributes.breed} </p>
+            <p> Age: {this.props.pet.attributes.age} </p>
           </div>
         </div>
         {/*                   MODAL                     */}
@@ -48,21 +46,17 @@ class Pet extends Component {
               </div>
               <div className="modal-body">
                 <img src={this.props.pet.attributes.photos} alt="notWorking" />
-                <p> {this.props.pet.attributes.animal} </p>
-                <p> {this.props.pet.attributes.breed} </p>
-                <p> {this.props.pet.attributes.age} </p>
-
+                <p> Name: {this.props.pet.attributes.name} </p>
+                <p> Breed: {this.props.pet.attributes.breed} </p>
+                <p> Age: {this.props.pet.attributes.age} </p>
                 <p>
-                  {' '}
-                  {this.props.pet.attributes.contact.address1}, {this.props.pet.attributes.contact.zip}, {this.props.pet.attributes.contact.city},{' '}
+                  Address: {this.props.pet.attributes.contact.address1}, {this.props.pet.attributes.contact.zip}, {this.props.pet.attributes.contact.city},{' '}
                   {this.props.pet.attributes.contact.state}{' '}
                 </p>
-
                 <p className="text-warning">
-                  <small> {this.props.pet.attributes.description} </small>
+                  Description: <small> {this.props.pet.attributes.description} </small>
                 </p>
                 <p>
-                  {' '}
                   {this.props.pet.attributes.contact.phone}, {this.props.pet.attributes.contact.email}{' '}
                 </p>
               </div>
