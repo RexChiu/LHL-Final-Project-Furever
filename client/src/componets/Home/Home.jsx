@@ -1,8 +1,8 @@
 import React, { Fragment, Component } from 'react';
 
 //import assets
-import Login from './Login.jsx';
-import Register from './Register.jsx';
+import Login from './Login';
+import Register from './Register';
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Home extends Component {
     return (
       <Fragment>
         <video id="home-video-background" loop autoPlay>
-          <source src={require('./assets/bg.mp4')} type="video/mp4" />
+          <source src={require('../../assets/bg.mp4')} type="video/mp4" />
         </video>
 
         <section id="home-panel" className="panel panel-default">
