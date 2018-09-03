@@ -58,7 +58,7 @@ class AdoptFilter extends Component {
         <br />
         <ButtonToolbar className="btn-group">
           <Button onClick={this.filterSubmit}>Submit</Button>
-          <Button onClick={this.resetFilter}>Reset</Button>
+          <Button onClick={this.resetFilter}>Reset Filter</Button>
         </ButtonToolbar>
       </div>
     );
