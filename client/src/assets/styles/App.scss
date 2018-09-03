@@ -1,9 +1,22 @@
 @import 'navbar';
 @import 'home';
 @import 'care';
+@import 'adopt';
 
 .loading-icon {
   margin: 0 auto;
+}
+
+hr {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  clear: both;
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
 }
 
 .hr {
@@ -88,21 +101,6 @@
   height: 100%;
 }
 
-.adoptitem {
-  background-color: #f2f2f2;
-  margin: 1em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-}
-
-.searchui {
-  margin: 1em;
-  margin: 0 auto;
-  width: 500px;
-  height: 200px;
-  align: center;
-}
-
 #buttonColor {
   background-color: #81b5c1;
 }
@@ -143,13 +141,6 @@
   background-color: #75b5c4;
 }
 
-.adopt-page {
-  height: 100%;
-}
-
-.pet-item {
-  height: 20em;
-}
 .eventLocalsIcon {
   float: right;
   margin: 0.06em;
