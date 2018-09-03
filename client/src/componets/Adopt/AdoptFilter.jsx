@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
+import { DropdownButton, MenuItem, ButtonToolbar, Button } from 'react-bootstrap';
 
 //import assets
 const axios = require('axios');
@@ -53,6 +53,7 @@ class AdoptFilter extends Component {
           <MenuItem eventKey="L">L</MenuItem>
           <MenuItem eventKey="XL">XL</MenuItem>
         </DropdownButton>
+        <Button onClick={this.filterSubmit}>Submit</Button>
       </ButtonToolbar>
     );
   };
@@ -114,53 +115,3 @@ class AdoptFilter extends Component {
 }
 
 export default AdoptFilter;
-
-/*
-<form onSubmit={this.filterSubmit}>
-  render() {
-    return (
-      <section id="adoptfilter" className="panel panel-default">
-        <p>Filter</p>
-        <form onSubmit={this.filterSubmit}>
-          <select id="animal" onChange={this.changeAnimal}>
-            <option value="" hidden disabled selected>
-              Animal
-            </option>
-            <option value="Cat">Cat</option>
-            <option value="Dog">Dog</option>
-          </select>
-
-          <select id="sex" onChange={this.changeSex}>
-            <option value="" hidden disabled selected>
-              Sex
-            </option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-          </select>
-
-          <select id="age" onChange={this.changeAge}>
-            <option value="" hidden disabled selected>
-              Age
-            </option>
-            <option value="Baby">Baby</option>
-            <option value="Young">Young</option>
-            <option value="Adult">Adult</option>
-            <option value="Senior">Senior</option>
-          </select>
-
-          <select id="size" onChange={this.changeSize}>
-            <option value="" hidden disabled selected>
-              Size
-            </option>
-            <option value="S">Small</option>
-            <option value="M">Medium</option>
-            <option value="L">Large</option>
-            <option value="XL">XLarge</option>
-          </select>
-
-          <input type="submit" value="submit" />
-        </form>
-        <button type="button" onClick={this.resetFilter}>
-          Reset Filters
-        </button>
-*/
