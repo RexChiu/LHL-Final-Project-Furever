@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Navbar from './Navbar.jsx';
 import Main from './Main.jsx';
-import './assets/App.css';
+import './assets/App.scss';
 
 class App extends Component {
   // RENDERING
