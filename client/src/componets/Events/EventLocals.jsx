@@ -26,12 +26,12 @@ class EventLocals extends Component {
           height="42"
           width="42"
           data-toggle="modal"
-          href={'#singleLocals' + this.props.user.id}
+          href={'#singleLocals' + this.props.randomkey}
         />
 
         {/* Individual Modals */}
 
-        <div id={'singleLocals' + this.props.user.id} className="modal fade">
+        <div id={'singleLocals' + this.props.randomkey} className="modal fade">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
