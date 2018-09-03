@@ -103,7 +103,7 @@ class Care extends Component {
     return (
       <Fragment>
         <h1>Pet Care Information</h1>
-        <h3>See the below for a list of pet care information for the pets that you have adopted.</h3>
+        <h3>Personalized list of pet care information for your pets.</h3>
         {catInfo}
         {dogInfo}
       </Fragment>
