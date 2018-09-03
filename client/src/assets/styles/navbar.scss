@@ -16,3 +16,7 @@
 .nav > li.disabled > a:hover {
   cursor: default;
 }
+
+.nav-tabs > li > a:hover {
+  border-color: transparent;
+}

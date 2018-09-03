@@ -150,6 +150,7 @@ class EventCompose extends Component {
     //     return new Date(a.attributes.date) - new Date(b.attributes.date);
     //   });
     // };
+
     // sort by date
     events.sort(function(a, b) {
       return new Date(a.attributes.date) - new Date(b.attributes.date) || new Date(b.attributes.going.length) - new Date(a.attributes.going.length);

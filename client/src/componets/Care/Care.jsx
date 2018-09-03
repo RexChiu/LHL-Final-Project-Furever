@@ -10,6 +10,17 @@ class Care extends Component {
       breedInfo: '',
       isLoaded: false
     };
+
+    // not logged in, redirect to home page
+    if (!sessionStorage.getItem('userId')) {
+      alert('Unauthorized Access! Login First!');
+      this.props.history.push('/');
+    }
+    // does not have a pet, redirect to adopt page
+    if (sessionStorage.getItem('adopted') === 'false') {
+      alert('Unauthorized Access! Adopt a pet First!');
+      this.props.history.push('/adopt');
+    }
   }
 
   componentDidMount() {
@@ -92,7 +103,7 @@ class Care extends Component {
     return (
       <Fragment>
         <h1>Pet Care Information</h1>
-        <h3>See the below for a list of pet care information for the pets that you have adopted.</h3>
+        <h3>Personalized list of pet care information for your pets.</h3>
         {catInfo}
         {dogInfo}
       </Fragment>

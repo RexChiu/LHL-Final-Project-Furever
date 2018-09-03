@@ -4,6 +4,19 @@ import { DropdownButton, MenuItem, ButtonToolbar, Button } from 'react-bootstrap
 //import assets
 const axios = require('axios');
 
+const sexMapper = {
+  Sex: 'Sex',
+  M: 'Male',
+  F: 'Female'
+};
+const sizeMapper = {
+  Size: 'Size',
+  S: 'Small',
+  M: 'Medium',
+  L: 'Large',
+  XL: 'XLarge'
+};
+
 class AdoptFilter extends Component {
   constructor(props) {
     super(props);
@@ -33,9 +46,9 @@ class AdoptFilter extends Component {
             <MenuItem eventKey="Cat">Cat</MenuItem>
             <MenuItem eventKey="Dog">Dog</MenuItem>
           </DropdownButton>
-          <DropdownButton title={sexTitle} key="Sex" id="dropdown-sex" onSelect={this.changeSex}>
-            <MenuItem eventKey="M">M</MenuItem>
-            <MenuItem eventKey="F">F</MenuItem>
+          <DropdownButton title={sexMapper[sexTitle]} key="Sex" id="dropdown-sex" onSelect={this.changeSex}>
+            <MenuItem eventKey="M">Male</MenuItem>
+            <MenuItem eventKey="F">Female</MenuItem>
           </DropdownButton>
           <DropdownButton title={ageTitle} key="Age" id="dropdown-age" onSelect={this.changeAge}>
             <MenuItem eventKey="Baby">Baby</MenuItem>
@@ -43,11 +56,11 @@ class AdoptFilter extends Component {
             <MenuItem eventKey="Young">Young</MenuItem>
             <MenuItem eventKey="Senior">Senior</MenuItem>
           </DropdownButton>
-          <DropdownButton title={sizeTitle} key="Size" id="dropdown-size" onSelect={this.changeSize}>
-            <MenuItem eventKey="S">S</MenuItem>
-            <MenuItem eventKey="M">M</MenuItem>
-            <MenuItem eventKey="L">L</MenuItem>
-            <MenuItem eventKey="XL">XL</MenuItem>
+          <DropdownButton title={sizeMapper[sizeTitle]} key="Size" id="dropdown-size" onSelect={this.changeSize}>
+            <MenuItem eventKey="S">Small</MenuItem>
+            <MenuItem eventKey="M">Medium</MenuItem>
+            <MenuItem eventKey="L">Large</MenuItem>
+            <MenuItem eventKey="XL">XLarge</MenuItem>
           </DropdownButton>
         </ButtonToolbar>
         <br />

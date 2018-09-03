@@ -10,6 +10,12 @@ class Nearby extends Component {
       error: null,
       isLoaded: false
     };
+
+    // not logged in, redirect to home page
+    if (!sessionStorage.getItem('userId')) {
+      alert('Unauthorized Access! Login First!');
+      this.props.history.push('/');
+    }
   }
 
   render() {
@@ -39,8 +45,8 @@ class Nearby extends Component {
     return (
       <Fragment>
         {this.loading()}
-        <Store type={'veterinary_care'} isLoaded={this.isLoaded} establishment={'Hospital'} />
         <Store type={'pet_store'} isLoaded={this.isLoaded} establishment={'Store'} />
+        <Store type={'veterinary_care'} isLoaded={this.isLoaded} establishment={'Hospital'} />
       </Fragment>
     );
   };
