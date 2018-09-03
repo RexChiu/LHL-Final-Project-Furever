@@ -31,12 +31,7 @@ class Care extends Component {
   }
 
   render() {
-    return (
-      <Fragment>
-        <h1>Pet Care</h1>
-        {this.renderPetCare()}
-      </Fragment>
-    );
+    return <Fragment>{this.renderPetCare()}</Fragment>;
   }
 
   renderPetCare = () => {
