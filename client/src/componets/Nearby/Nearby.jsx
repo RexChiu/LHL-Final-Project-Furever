@@ -10,6 +10,12 @@ class Nearby extends Component {
       error: null,
       isLoaded: false
     };
+
+    // not logged in, redirect to home page
+    if (!sessionStorage.getItem('userId')) {
+      alert('Unauthorized Access! Login First!');
+      this.props.history.push('/');
+    }
   }
 
   render() {
