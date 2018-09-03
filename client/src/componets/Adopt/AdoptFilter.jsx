@@ -101,6 +101,11 @@ export default AdoptFilter;
 
 /*
 <form onSubmit={this.filterSubmit}>
+  render() {
+    return (
+      <section id="adoptfilter" className="panel panel-default">
+        <p>Filter</p>
+        <form onSubmit={this.filterSubmit}>
           <select id="animal" onChange={this.changeAnimal}>
             <option value="" hidden disabled selected>
               Animal
