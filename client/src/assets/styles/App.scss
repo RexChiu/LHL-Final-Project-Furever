@@ -1,3 +1,5 @@
+@import 'navbar';
+
 .hr {
   margin-top: 0em;
   margin-bottom: 5em;
@@ -72,15 +74,6 @@
   outline-width: 0.002em;
   outline-style: auto;
   outline-color: #8da7ad;
-}
-
-.navbarColor {
-  /* background-color: #b2d7e0;
-  opacity: 0.9; */
-}
-
-.navbar {
-  margin: 0;
 }
 
 .App {
@@ -314,14 +307,4 @@ a.disable {
 .jumbotron h1 {
   font-size: 4em;
   font-weight: bold;
-}
-
-.nav {
-  background-color: #fcfeff;
-  opacity: 0.95;
-  margin-bottom: 5em;
-}
-
-.nav > li.disabled > a:hover {
-  cursor: default;
 }

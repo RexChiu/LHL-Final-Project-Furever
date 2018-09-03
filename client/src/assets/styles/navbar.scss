@@ -1,0 +1,18 @@
+.navbarColor {
+  /* background-color: #b2d7e0;
+  opacity: 0.9; */
+}
+
+.navbar {
+  margin: 0;
+}
+
+.nav {
+  background-color: #fcfeff;
+  opacity: 0.95;
+  margin-bottom: 5em;
+}
+
+.nav > li.disabled > a:hover {
+  cursor: default;
+}
