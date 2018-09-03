@@ -36,6 +36,25 @@ class Adopt extends Component {
       });
   }
 
+  render() {
+    return (
+      <React.Fragment>
+        <img id="adoptbg" src={require('../../assets/adopt_bg2.jpeg')} alt="Girl in a jacket" />
+        <div id="adopttitle">
+          <h1> Pet Adoption </h1>
+        </div>
+        <div id="adoptContentPanel">
+          <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
+
+          <div className="container-fluid">
+            <div className="row">{this._renderAdoptItems()}</div>
+          </div>
+          <div className="col-lg-12">{this._renderWaypoint()}</div>
+        </div>
+      </React.Fragment>
+    );
+  }
+
   rerenderPets = (pets, filters) => {
     // if not an array, put an empty array
     let petsArr = JSON.parse(pets).data.data;
@@ -47,6 +66,7 @@ class Adopt extends Component {
 
   resetFilter = () => {
     this.setState({ filters: {} });
+    window.location.reload();
   };
 
   // gets the next pets from the server, adds to the end of the pets array, re-renders automagically
@@ -112,24 +132,5 @@ class Adopt extends Component {
       );
     }
   };
-
-  render() {
-    return (
-      <React.Fragment>
-        <img id="adoptbg" src={require('../../assets/adopt_bg2.jpeg')} alt="Girl in a jacket" />
-        <div id="adopttitle">
-          <h1> Pet Adoption </h1>
-        </div>
-        <div id="adoptContentPanel">
-          <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
-
-          <div className="container-fluid">
-            <div className="row">{this._renderAdoptItems()}</div>
-          </div>
-          <div className="col-lg-12">{this._renderWaypoint()}</div>
-        </div>
-      </React.Fragment>
-    );
-  }
 }
 export default Adopt;

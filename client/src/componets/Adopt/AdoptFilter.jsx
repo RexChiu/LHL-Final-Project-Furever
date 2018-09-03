@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { DropdownButton, MenuItem, ButtonToolbar, Button } from 'react-bootstrap';
 
 //import assets
@@ -32,29 +32,34 @@ class AdoptFilter extends Component {
     const sizeTitle = this.state.size !== '' ? this.state.size : 'Size';
 
     return (
-      <ButtonToolbar>
-        <DropdownButton title={animalTitle} key="Animal" id="dropdown-animal" onSelect={this.changeAnimal}>
-          <MenuItem eventKey="Cat">Cat</MenuItem>
-          <MenuItem eventKey="Dog">Dog</MenuItem>
-        </DropdownButton>
-        <DropdownButton title={sexTitle} key="Sex" id="dropdown-sex" onSelect={this.changeSex}>
-          <MenuItem eventKey="M">M</MenuItem>
-          <MenuItem eventKey="F">F</MenuItem>
-        </DropdownButton>
-        <DropdownButton title={ageTitle} key="Age" id="dropdown-age" onSelect={this.changeAge}>
-          <MenuItem eventKey="Baby">Baby</MenuItem>
-          <MenuItem eventKey="Adult">Adult</MenuItem>
-          <MenuItem eventKey="Young">Young</MenuItem>
-          <MenuItem eventKey="Senior">Senior</MenuItem>
-        </DropdownButton>
-        <DropdownButton title={sizeTitle} key="Size" id="dropdown-size" onSelect={this.changeSize}>
-          <MenuItem eventKey="S">S</MenuItem>
-          <MenuItem eventKey="M">M</MenuItem>
-          <MenuItem eventKey="L">L</MenuItem>
-          <MenuItem eventKey="XL">XL</MenuItem>
-        </DropdownButton>
-        <Button onClick={this.filterSubmit}>Submit</Button>
-      </ButtonToolbar>
+      <Fragment>
+        <ButtonToolbar>
+          <DropdownButton title={animalTitle} key="Animal" id="dropdown-animal" onSelect={this.changeAnimal}>
+            <MenuItem eventKey="Cat">Cat</MenuItem>
+            <MenuItem eventKey="Dog">Dog</MenuItem>
+          </DropdownButton>
+          <DropdownButton title={sexTitle} key="Sex" id="dropdown-sex" onSelect={this.changeSex}>
+            <MenuItem eventKey="M">M</MenuItem>
+            <MenuItem eventKey="F">F</MenuItem>
+          </DropdownButton>
+          <DropdownButton title={ageTitle} key="Age" id="dropdown-age" onSelect={this.changeAge}>
+            <MenuItem eventKey="Baby">Baby</MenuItem>
+            <MenuItem eventKey="Adult">Adult</MenuItem>
+            <MenuItem eventKey="Young">Young</MenuItem>
+            <MenuItem eventKey="Senior">Senior</MenuItem>
+          </DropdownButton>
+          <DropdownButton title={sizeTitle} key="Size" id="dropdown-size" onSelect={this.changeSize}>
+            <MenuItem eventKey="S">S</MenuItem>
+            <MenuItem eventKey="M">M</MenuItem>
+            <MenuItem eventKey="L">L</MenuItem>
+            <MenuItem eventKey="XL">XL</MenuItem>
+          </DropdownButton>
+        </ButtonToolbar>
+        <ButtonToolbar>
+          <Button onClick={this.filterSubmit}>Submit</Button>
+          <Button onClick={this.resetFilter}>Reset</Button>
+        </ButtonToolbar>
+      </Fragment>
     );
   };
 
@@ -106,6 +111,16 @@ class AdoptFilter extends Component {
       .catch(function(error) {
         console.log(error);
       });
+  };
+
+  resetFilter = () => {
+    this.setState({
+      animal: '',
+      sex: '',
+      age: '',
+      size: ''
+    });
+    this.props.resetFilter();
   };
 }
 
