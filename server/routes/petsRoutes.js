@@ -14,7 +14,7 @@ module.exports = (dataHelpers) => {
     res.json(jsonOutput);
   });
 
-  // routed to AdoptFilter.jsx to find pets by filters
+  // routed to AdoptFilter to find pets by filters
   router.put('/filter', async (req, res) => {
     const breedOut = req.body.breed;
     const ageOut = req.body.age;
