@@ -38,7 +38,6 @@ module.exports = (dataHelpers) => {
       user: req.body.username,
       userId: req.body.userId,
       eventId: req.body.eventId
-      // going: []
     };
 
     // grabs userId from successful db insert

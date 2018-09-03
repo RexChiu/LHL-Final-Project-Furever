@@ -52,9 +52,25 @@ module.exports = function makeDataHelpers(db) {
     },
     // BELOW ADDED BY JARON AGAIN!!!!
     returnAllEvents() {
+      // GET DATE
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+
+      if(dd<10) {
+          dd = '0'+dd
+      } 
+
+      if(mm<10) {
+          mm = '0'+mm
+      } 
+
+      today = yyyy + '/' + mm + '/' + dd;
       const eventRef = db.collection('events');
       // inits empty array
       const resultArr = [];
+      const resultArrDate = [];
       // grabs all the pets under the collection pets
       return eventRef
         .limit(100)
@@ -62,7 +78,22 @@ module.exports = function makeDataHelpers(db) {
         .then((snapshot) => {
           // loops through snapshot (multiple docs) and pushes into array
           snapshot.forEach(doc => resultArr.push(doc.data()));
-          return resultArr;
+
+          for (let i = 0; i < resultArr.length; i++) {
+            // need to toString() the id
+            const date = resultArr[i].date.replace(/-/g,'/');
+            console.log("printedEVERTYINGSLKDFLSDF77552", date);
+            if(today < date) {
+              resultArrDate.push(resultArr[i]);
+            }
+            // batch.set(petsRef.doc(pets[i].id.toString()), pets[i]);
+          }
+          console.log(today);
+          console.log("acceptable", resultArrDate);
+          // NEED TO ADD THIS IN
+          // console.log("output", resultArr);
+          return resultArrDate;
+          // return resultArr;
         })
         .catch(err => err);
     },
