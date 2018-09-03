@@ -150,6 +150,7 @@ class EventCompose extends Component {
     //     return new Date(a.attributes.date) - new Date(b.attributes.date);
     //   });
     // };
+
     // sort by date
     events.sort(function(a, b) {
       return new Date(a.attributes.date) - new Date(b.attributes.date) || new Date(b.attributes.going.length) - new Date(a.attributes.going.length);
@@ -177,7 +178,7 @@ class EventCompose extends Component {
     return (
       <React.Fragment>
         <div id="messagePanelCenter">
-          <form id="create" className="panel messagePanel">
+          <form id="create" className="panel messagePanel" style={{ marginRight: '14em' }}>
             <input
               type="text"
               onChange={this.handleChangeTitle}

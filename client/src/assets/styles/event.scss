@@ -28,13 +28,21 @@
   outline-color: #8da7ad;
 }
 
+.flexcontainerevents {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 #eventlocalusers {
-  float: left;
+  // float: left;
   margin-left: 1em;
   background-color: #fcfeff;
   outline-style: solid;
   outline-width: 0.005em;
   outline-style: auto;
+  width: 12.5em;
 }
 #eventlocalusers #eventlocalcontainer {
   width: 12.5em;
@@ -81,4 +89,25 @@
   width: 20em;
   max-height: 15em;
   min-height: 5em;
+}
+
+#eventstitle {
+  height: 10.5em;
+}
+#eventstitle p {
+  color: #6070a9;
+  // margin-top: 5em;
+  font-size: 4em;
+  margin-top: 3.75em;
+  opacity: 0.8;
+}
+
+#eventbg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: -1;
+
+  min-height: 100vh;
+  min-width: 100vw;
 }

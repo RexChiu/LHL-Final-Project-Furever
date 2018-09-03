@@ -31,7 +31,7 @@ class Adopt extends Component {
   render() {
     return (
       <React.Fragment>
-        <img id="adoptbg" src={require('../../assets/adopt_bg2.jpeg')} alt="Girl in a jacket" />
+        <img id="adoptbg" src={require('../../assets/adopt_bg2.jpeg')} alt="" />
         <div id="adopttitle">
           <h1> Pet Adoption </h1>
         </div>
