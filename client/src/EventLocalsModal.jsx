@@ -60,14 +60,11 @@ class EventLocalsModal extends Component {
               <div id="pets-modal" className="carousel slide" data-ride="carousel">
                 <div className="carousel-inner" role="listbox">
                   <div className="item active">
-                    <img src={require('./assets/tinder.png')} alt="notWorking" id="mouseUI" />
+                    <img src={require('./assets/background.png')} alt="notWorking" id="mouseUI" />
                     <div className="carousel-caption">
-                      <h3>Heading 3</h3>
-                      <p>Slide 0 description.</p>
+                      <h3>Pet Tinder</h3>
+                      <p>Choose a Pet companion to hang out with</p>
                     </div>
-                  </div>
-                  <div className="item">
-                    <img src={require('./assets/pet-tinder-dump-246332.jpg')} alt="notWorking" id="mouseUI" />
                   </div>
                   {tinderItems}
                 </div>
