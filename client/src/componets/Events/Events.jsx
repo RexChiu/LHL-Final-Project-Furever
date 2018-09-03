@@ -10,6 +10,17 @@ class Events extends Component {
     this.state = {
       eventName: ''
     };
+
+    // not logged in, redirect to home page
+    if (!sessionStorage.getItem('userId')) {
+      alert('Unauthorized Access! Login First!');
+      this.props.history.push('/home');
+    }
+    // does not have a pet, redirect to adopt page
+    if (sessionStorage.getItem('adopted') === 'false') {
+      alert('Unauthorized Access! Adopt a pet First!');
+      this.props.history.push('/adopt');
+    }
   }
   render() {
     return (
