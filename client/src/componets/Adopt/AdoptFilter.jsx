@@ -26,10 +26,10 @@ class AdoptFilter extends Component {
   }
 
   renderDropdownButtons = () => {
-    const animalTitle = this.state.animal != '' ? this.state.animal : 'Animal';
-    const sexTitle = this.state.sex != '' ? this.state.sex : 'Sex';
-    const ageTitle = this.state.age != '' ? this.state.age : 'Age';
-    const sizeTitle = this.state.size != '' ? this.state.size : 'Size';
+    const animalTitle = this.state.animal !== '' ? this.state.animal : 'Animal';
+    const sexTitle = this.state.sex !== '' ? this.state.sex : 'Sex';
+    const ageTitle = this.state.age !== '' ? this.state.age : 'Age';
+    const sizeTitle = this.state.size !== '' ? this.state.size : 'Size';
 
     return (
       <ButtonToolbar>
@@ -41,6 +41,18 @@ class AdoptFilter extends Component {
           <MenuItem eventKey="Male">Male</MenuItem>
           <MenuItem eventKey="Female">Female</MenuItem>
         </DropdownButton>
+        <DropdownButton title={ageTitle} key="Age" id="dropdown-age" onSelect={this.changeAge}>
+          <MenuItem eventKey="Baby">Baby</MenuItem>
+          <MenuItem eventKey="Adult">Adult</MenuItem>
+          <MenuItem eventKey="Young">Young</MenuItem>
+          <MenuItem eventKey="Senior">Senior</MenuItem>
+        </DropdownButton>
+        <DropdownButton title={sizeTitle} key="Size" id="dropdown-size" onSelect={this.changeSize}>
+          <MenuItem eventKey="S">S</MenuItem>
+          <MenuItem eventKey="M">M</MenuItem>
+          <MenuItem eventKey="L">L</MenuItem>
+          <MenuItem eventKey="XL">XL</MenuItem>
+        </DropdownButton>
       </ButtonToolbar>
     );
   };
@@ -49,18 +61,16 @@ class AdoptFilter extends Component {
     this.setState({ animal: key });
   };
 
-  changeSize = event => {
-    this.setState({ size: event.target.value });
-    console.log('log: ' + event.target.value);
+  changeSize = (key, event) => {
+    this.setState({ size: key });
   };
 
   changeSex = (key, event) => {
     this.setState({ sex: key });
   };
 
-  changeAge = event => {
-    this.setState({ age: event.target.value });
-    console.log('log: ' + event.target.value);
+  changeAge = (key, event) => {
+    this.setState({ age: key });
   };
 
   filterSubmit = event => {
