@@ -1,5 +1,29 @@
+#adoptbg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: -1;
+
+  min-height: 33vh;
+  min-width: 100vw;
+}
+
+#adopttitle {
+  height: 10.5em;
+}
+#adopttitle h1 {
+  color: #fcfeff;
+  // margin-top: 5em;
+  font-size: 4em;
+  margin-top: 3.75em;
+  opacity: 0.8;
+}
+
+#adoptContentPanel {
+  background-color: white;
+}
 .adoptitem {
-  background-color: #f2f2f2;
+  background: #e1ecef;
   margin: 1em;
   margin-left: 0.5em;
   margin-right: 0.5em;
@@ -17,4 +41,8 @@
   padding: 10px;
   object-position: center;
   margin: 0 auto;
+}
+
+#adoptfilter {
+  background: #e1ecef;
 }

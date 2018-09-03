@@ -111,12 +111,18 @@ class Adopt extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1> Pet Adoption </h1>
-        <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
-        <div className="container-fluid">
-          <div className="row">{this._renderAdoptItems()}</div>
+        <img id="adoptbg" src={require('../../assets/adopt_bg2.jpeg')} alt="Girl in a jacket" />
+        <div id="adopttitle">
+          <h1> Pet Adoption </h1>
         </div>
-        <div className="col-lg-12">{this._renderWaypoint()}</div>
+        <div id="adoptContentPanel">
+          <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
+
+          <div className="container-fluid">
+            <div className="row">{this._renderAdoptItems()}</div>
+          </div>
+          <div className="col-lg-12">{this._renderWaypoint()}</div>
+        </div>
       </React.Fragment>
     );
   }
