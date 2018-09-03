@@ -4,8 +4,6 @@ import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
 //import assets
 const axios = require('axios');
 
-const BUTTONS = ['Animal', 'Sex', 'Age', 'Size'];
-
 class AdoptFilter extends Component {
   constructor(props) {
     super(props);
@@ -28,11 +26,20 @@ class AdoptFilter extends Component {
   }
 
   renderDropdownButtons = () => {
+    const animalTitle = this.state.animal != '' ? this.state.animal : 'Animal';
+    const sexTitle = this.state.sex != '' ? this.state.sex : 'Sex';
+    const ageTitle = this.state.age != '' ? this.state.age : 'Age';
+    const sizeTitle = this.state.size != '' ? this.state.size : 'Size';
+
     return (
       <ButtonToolbar>
-        <DropdownButton title="Animal" key={0} id="dropdown-animal" onSelect={this.changeAnimal}>
+        <DropdownButton title={animalTitle} key="Animal" id="dropdown-animal" onSelect={this.changeAnimal}>
           <MenuItem eventKey="Cat">Cat</MenuItem>
           <MenuItem eventKey="Dog">Dog</MenuItem>
+        </DropdownButton>
+        <DropdownButton title={sexTitle} key="Sex" id="dropdown-sex" onSelect={this.changeSex}>
+          <MenuItem eventKey="Male">Male</MenuItem>
+          <MenuItem eventKey="Female">Female</MenuItem>
         </DropdownButton>
       </ButtonToolbar>
     );
@@ -47,9 +54,8 @@ class AdoptFilter extends Component {
     console.log('log: ' + event.target.value);
   };
 
-  changeSex = event => {
-    this.setState({ sex: event.target.value });
-    console.log('log: ' + event.target.value);
+  changeSex = (key, event) => {
+    this.setState({ sex: key });
   };
 
   changeAge = event => {
