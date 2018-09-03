@@ -22,8 +22,6 @@ module.exports = (dataHelpers) => {
 
     try {
       const result = await dataHelpers.filterPets(options);
-      console.log(options);
-      console.log(result);
       if (result === {}) {
         res.json(result);
       } else {

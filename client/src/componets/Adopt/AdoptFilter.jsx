@@ -38,8 +38,8 @@ class AdoptFilter extends Component {
           <MenuItem eventKey="Dog">Dog</MenuItem>
         </DropdownButton>
         <DropdownButton title={sexTitle} key="Sex" id="dropdown-sex" onSelect={this.changeSex}>
-          <MenuItem eventKey="Male">Male</MenuItem>
-          <MenuItem eventKey="Female">Female</MenuItem>
+          <MenuItem eventKey="M">M</MenuItem>
+          <MenuItem eventKey="F">F</MenuItem>
         </DropdownButton>
         <DropdownButton title={ageTitle} key="Age" id="dropdown-age" onSelect={this.changeAge}>
           <MenuItem eventKey="Baby">Baby</MenuItem>
