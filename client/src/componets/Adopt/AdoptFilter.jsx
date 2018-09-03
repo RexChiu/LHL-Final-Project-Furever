@@ -107,11 +107,6 @@ class AdoptFilter extends Component {
         console.log(error);
       });
   };
-
-  resetFilter = () => {
-    this.props.resetFilter();
-    window.location.reload();
-  };
 }
 
 export default AdoptFilter;

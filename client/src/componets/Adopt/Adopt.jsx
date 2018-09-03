@@ -37,7 +37,12 @@ class Adopt extends Component {
   }
 
   rerenderPets = (pets, filters) => {
-    this.setState({ pets: JSON.parse(pets).data.data, isLoaded: true, loadedMore: true, filters });
+    // if not an array, put an empty array
+    let petsArr = JSON.parse(pets).data.data;
+    if (!(petsArr instanceof Array)) {
+      petsArr = [];
+    }
+    this.setState({ pets: petsArr, isLoaded: true, loadedMore: true, filters });
   };
 
   resetFilter = () => {
