@@ -21,8 +21,10 @@ class Nearby extends Component {
   render() {
     return (
       <Fragment>
-        <h1>Resources Nearby</h1>
-        {this.renderNearBy()}
+        <div className="jumbotron nearby-container">
+          <h1>Resources Nearby</h1>
+          {this.renderNearBy()}
+        </div>
       </Fragment>
     );
   }

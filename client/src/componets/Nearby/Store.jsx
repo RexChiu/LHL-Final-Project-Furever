@@ -52,6 +52,7 @@ class Store extends Component {
       return (
         <Fragment>
           <h3>{this.props.establishment}s in your area</h3>
+          <hr />
           <div>
             <table class="table table-striped">
               <thead>

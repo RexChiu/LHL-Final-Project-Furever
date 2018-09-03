@@ -3,6 +3,7 @@
 @import 'care';
 @import 'adopt';
 @import 'event';
+@import 'nearby';
 
 .loading-icon {
   margin: 0 auto;
@@ -66,13 +67,5 @@ hr {
 
 #mouseUI {
   width: 20em;
-  height: 20em;
-}
-
-.adopt-page {
-  height: 100%;
-}
-
-.pet-item {
   height: 20em;
 }
