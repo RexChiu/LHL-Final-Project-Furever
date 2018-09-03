@@ -14,8 +14,16 @@ class Events extends Component {
   render() {
     return (
       <React.Fragment>
-        <EventCompose eventName={this.state.eventName} />
-        <EventLocalUsers setEventName={this.setEventName} />
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span4">
+              <EventLocalUsers setEventName={this.setEventName} />
+            </div>
+            <div class="span4">
+              <EventCompose eventName={this.state.eventName} />
+            </div>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
