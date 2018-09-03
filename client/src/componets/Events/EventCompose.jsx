@@ -185,7 +185,7 @@ class EventCompose extends Component {
               name="title"
               className="form-group form-control"
               placeholder="What is your event's name?"
-              value={this.props.eventName}
+              defaultValue={this.props.eventName}
             />
             <br />
             <input
