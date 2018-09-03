@@ -4,8 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import Adopt from './Adopt/Adopt';
 import Events from './Events/Events';
 import Home from './Home/Home';
-import Nearby from './Nearby';
-import Care from './Care';
+import Nearby from './Nearby/Nearby';
+import Care from './Care/Care';
 
 class Main extends React.Component {
   //       //              RENDERING
