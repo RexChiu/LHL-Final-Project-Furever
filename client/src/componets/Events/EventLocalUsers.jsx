@@ -37,6 +37,10 @@ class EventLocalUsers extends Component {
       );
   }
 
+  getRandomInt = max => {
+    return Math.floor(Math.random() * Math.floor(max));
+  };
+
   render() {
     const { users } = this.state;
     let userItems = [];
@@ -45,8 +49,9 @@ class EventLocalUsers extends Component {
       for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].attributes.pets.length; j++) {
           let adoptedPetPhoto = users[i].attributes.pets[j].photos[0];
-          console.log('Photo::', users[i].attributes.pets[j].photos[0], '||userid::', users[i].id);
-          userItems.push(<EventLocals user={users[i]} photo={adoptedPetPhoto} key={adoptedPetPhoto + users[i].id} />);
+          let randomkey = this.getRandomInt(100000);
+          console.log('Photo::', users[i].attributes.pets[j].photos[0], '||userid::', users[i].id, '|| key ', randomkey);
+          userItems.push(<EventLocals user={users[i]} photo={adoptedPetPhoto} randomkey={randomkey} />);
           adoptedPetPhoto = '';
         }
       }
