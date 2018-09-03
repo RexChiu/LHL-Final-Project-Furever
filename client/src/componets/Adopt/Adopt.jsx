@@ -25,6 +25,29 @@ class Adopt extends Component {
 
   componentDidMount() {
     //code I added in will link to server
+    this.getPets();
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <img id="adoptbg" src={require('../../assets/adopt_bg2.jpeg')} alt="Girl in a jacket" />
+        <div id="adopttitle">
+          <h1> Pet Adoption </h1>
+        </div>
+        <div id="adoptContentPanel">
+          <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
+
+          <div className="container-fluid">
+            <div className="row">{this._renderAdoptItems()}</div>
+          </div>
+          <div className="col-lg-12">{this._renderWaypoint()}</div>
+        </div>
+      </React.Fragment>
+    );
+  }
+
+  getPets = () => {
     fetch('http://localhost:8080/pets')
       .then(res => res.json())
       .then(result => {
@@ -34,14 +57,20 @@ class Adopt extends Component {
           pets: result.data
         });
       });
-  }
+  };
 
   rerenderPets = (pets, filters) => {
-    this.setState({ pets: JSON.parse(pets).data.data, isLoaded: true, loadedMore: true, filters });
+    // if not an array, put an empty array
+    let petsArr = JSON.parse(pets).data.data;
+    if (!(petsArr instanceof Array)) {
+      petsArr = [];
+    }
+    this.setState({ pets: petsArr, isLoaded: true, loadedMore: true, filters });
   };
 
   resetFilter = () => {
     this.setState({ filters: {} });
+    this.getPets();
   };
 
   // gets the next pets from the server, adds to the end of the pets array, re-renders automagically
@@ -70,7 +99,7 @@ class Adopt extends Component {
   };
 
   _handleWaypointEnter = () => {
-    if (this.state.loadedMore) {
+    if (this.state.loadedMore && this.state.pets.length > 0) {
       const lastPet = this.state.pets.length - 1;
       const lastPetId = this.state.pets[lastPet].id;
       this._getMorePets(lastPetId);
@@ -107,24 +136,5 @@ class Adopt extends Component {
       );
     }
   };
-
-  render() {
-    return (
-      <React.Fragment>
-        <img id="adoptbg" src={require('../../assets/adopt_bg2.jpeg')} alt="Girl in a jacket" />
-        <div id="adopttitle">
-          <h1> Pet Adoption </h1>
-        </div>
-        <div id="adoptContentPanel">
-          <AdoptFilter rerenderPets={this.rerenderPets} resetFilter={this.resetFilter} />
-
-          <div className="container-fluid">
-            <div className="row">{this._renderAdoptItems()}</div>
-          </div>
-          <div className="col-lg-12">{this._renderWaypoint()}</div>
-        </div>
-      </React.Fragment>
-    );
-  }
 }
 export default Adopt;

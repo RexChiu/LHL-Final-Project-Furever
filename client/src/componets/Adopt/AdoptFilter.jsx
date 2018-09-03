@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
+import { DropdownButton, MenuItem, ButtonToolbar, Button } from 'react-bootstrap';
 
 //import assets
 const axios = require('axios');
 
-const BUTTONS = ['Animal', 'Sex', 'Age', 'Size'];
-
 class AdoptFilter extends Component {
   constructor(props) {
     super(props);
-    // this.rerenderPets = this.rerenderPets.bind(this);
     this.state = {
       animal: '',
       sex: '',
@@ -19,22 +16,46 @@ class AdoptFilter extends Component {
   }
 
   render() {
-    return (
-      <section className="panel panel-default">
-        <p>Filter</p>
-        {this.renderDropdownButtons()}
-      </section>
-    );
+    return <section className="panel panel-default">{this.renderDropdownButtons()}</section>;
   }
 
   renderDropdownButtons = () => {
+    const animalTitle = this.state.animal !== '' ? this.state.animal : 'Animal';
+    const sexTitle = this.state.sex !== '' ? this.state.sex : 'Sex';
+    const ageTitle = this.state.age !== '' ? this.state.age : 'Age';
+    const sizeTitle = this.state.size !== '' ? this.state.size : 'Size';
+
     return (
-      <ButtonToolbar>
-        <DropdownButton title="Animal" key={0} id="dropdown-animal" onSelect={this.changeAnimal}>
-          <MenuItem eventKey="Cat">Cat</MenuItem>
-          <MenuItem eventKey="Dog">Dog</MenuItem>
-        </DropdownButton>
-      </ButtonToolbar>
+      <div className="filter-buttons panel-body">
+        <p>Filter</p>
+        <ButtonToolbar className="btn-group">
+          <DropdownButton title={animalTitle} key="Animal" id="dropdown-animal" onSelect={this.changeAnimal}>
+            <MenuItem eventKey="Cat">Cat</MenuItem>
+            <MenuItem eventKey="Dog">Dog</MenuItem>
+          </DropdownButton>
+          <DropdownButton title={sexTitle} key="Sex" id="dropdown-sex" onSelect={this.changeSex}>
+            <MenuItem eventKey="M">M</MenuItem>
+            <MenuItem eventKey="F">F</MenuItem>
+          </DropdownButton>
+          <DropdownButton title={ageTitle} key="Age" id="dropdown-age" onSelect={this.changeAge}>
+            <MenuItem eventKey="Baby">Baby</MenuItem>
+            <MenuItem eventKey="Adult">Adult</MenuItem>
+            <MenuItem eventKey="Young">Young</MenuItem>
+            <MenuItem eventKey="Senior">Senior</MenuItem>
+          </DropdownButton>
+          <DropdownButton title={sizeTitle} key="Size" id="dropdown-size" onSelect={this.changeSize}>
+            <MenuItem eventKey="S">S</MenuItem>
+            <MenuItem eventKey="M">M</MenuItem>
+            <MenuItem eventKey="L">L</MenuItem>
+            <MenuItem eventKey="XL">XL</MenuItem>
+          </DropdownButton>
+        </ButtonToolbar>
+        <br />
+        <ButtonToolbar className="btn-group">
+          <Button onClick={this.filterSubmit}>Submit</Button>
+          <Button onClick={this.resetFilter}>Reset Filter</Button>
+        </ButtonToolbar>
+      </div>
     );
   };
 
@@ -42,19 +63,16 @@ class AdoptFilter extends Component {
     this.setState({ animal: key });
   };
 
-  changeSize = event => {
-    this.setState({ size: event.target.value });
-    console.log('log: ' + event.target.value);
+  changeSize = (key, event) => {
+    this.setState({ size: key });
   };
 
-  changeSex = event => {
-    this.setState({ sex: event.target.value });
-    console.log('log: ' + event.target.value);
+  changeSex = (key, event) => {
+    this.setState({ sex: key });
   };
 
-  changeAge = event => {
-    this.setState({ age: event.target.value });
-    console.log('log: ' + event.target.value);
+  changeAge = (key, event) => {
+    this.setState({ age: key });
   };
 
   filterSubmit = event => {
@@ -92,59 +110,14 @@ class AdoptFilter extends Component {
   };
 
   resetFilter = () => {
+    this.setState({
+      animal: '',
+      sex: '',
+      age: '',
+      size: ''
+    });
     this.props.resetFilter();
-    window.location.reload();
   };
 }
 
 export default AdoptFilter;
-
-/*
-<form onSubmit={this.filterSubmit}>
-  render() {
-    return (
-      <section id="adoptfilter" className="panel panel-default">
-        <p>Filter</p>
-        <form onSubmit={this.filterSubmit}>
-          <select id="animal" onChange={this.changeAnimal}>
-            <option value="" hidden disabled selected>
-              Animal
-            </option>
-            <option value="Cat">Cat</option>
-            <option value="Dog">Dog</option>
-          </select>
-
-          <select id="sex" onChange={this.changeSex}>
-            <option value="" hidden disabled selected>
-              Sex
-            </option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-          </select>
-
-          <select id="age" onChange={this.changeAge}>
-            <option value="" hidden disabled selected>
-              Age
-            </option>
-            <option value="Baby">Baby</option>
-            <option value="Young">Young</option>
-            <option value="Adult">Adult</option>
-            <option value="Senior">Senior</option>
-          </select>
-
-          <select id="size" onChange={this.changeSize}>
-            <option value="" hidden disabled selected>
-              Size
-            </option>
-            <option value="S">Small</option>
-            <option value="M">Medium</option>
-            <option value="L">Large</option>
-            <option value="XL">XLarge</option>
-          </select>
-
-          <input type="submit" value="submit" />
-        </form>
-        <button type="button" onClick={this.resetFilter}>
-          Reset Filters
-        </button>
-*/

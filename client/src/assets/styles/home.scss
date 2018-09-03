@@ -21,11 +21,9 @@
 }
 
 #home-panel {
-  margin: 1em;
-  margin: 0 auto;
+  position: relative;
+  margin: 10em auto;
   width: 45em;
-
-  align: center;
   background-color: #fcfeff;
   opacity: 0.95;
 }

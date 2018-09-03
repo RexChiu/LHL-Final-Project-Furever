@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
+import ReactLoading from 'react-loading';
 import axios from 'axios';
 
 class Register extends Component {
@@ -10,32 +11,45 @@ class Register extends Component {
       password: '',
       email: '',
       lat: '43.6444',
-      lng: '-79.3951'
+      lng: '-79.3951',
+      loading: false
     };
 
     this.getLocation();
   }
 
   render() {
+    let loading = '';
+    if (this.state.loading) {
+      loading = (
+        <Fragment>
+          <strong>Loading...</strong>
+          <ReactLoading className="loading-icon" type={'spinningBubbles'} color={'#000000'} height={'10%'} width={'10%'} />
+        </Fragment>
+      );
+    }
     return (
-      <form id="register-form" onSubmit={this.submitRegister}>
-        <div className="form-group">
-          <input placeholder="Username" class="form-control" tabindex="1" name="username" type="text" onChange={this.handleChangeUsername} />
-        </div>
-        <div className="form-group">
-          <input placeholder="Email" class="form-control" tabindex="2" name="email" type="text" onChange={this.handleChangeEmail} />
-        </div>
-        <div className="form-group">
-          <input placeholder="Password" class="form-control" tabindex="3" name="password" type="password" onChange={this.handleChangePassword} />
-        </div>
-        <div className="form-group">
-          <div className="row">
-            <div className="col-sm-6 col-sm-offset-3">
-              <input className="form-control btn btn-register" type="submit" name="register-submit" tabindex="4" value="Register" />
+      <Fragment>
+        <form id="register-form" onSubmit={this.submitRegister}>
+          <div className="form-group">
+            <input placeholder="Username" class="form-control" tabindex="1" name="username" type="text" onChange={this.handleChangeUsername} />
+          </div>
+          <div className="form-group">
+            <input placeholder="Email" class="form-control" tabindex="2" name="email" type="text" onChange={this.handleChangeEmail} />
+          </div>
+          <div className="form-group">
+            <input placeholder="Password" class="form-control" tabindex="3" name="password" type="password" onChange={this.handleChangePassword} />
+          </div>
+          <div className="form-group">
+            <div className="row">
+              <div className="col-sm-6 col-sm-offset-3">
+                <input className="form-control btn btn-register" type="submit" name="register-submit" tabindex="4" value="Register" />
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+        {loading}
+      </Fragment>
     );
   }
 
@@ -53,6 +67,7 @@ class Register extends Component {
 
   submitRegister = event => {
     event.preventDefault();
+    this.setState({ loading: true });
 
     // stops submit if either username or password is blank
     if (!this.state.username || !this.state.password) {
@@ -79,6 +94,7 @@ class Register extends Component {
         sessionStorage.setItem('lng', res.data.data.attributes.lng);
         sessionStorage.setItem('adopted', res.data.data.attributes.adopted);
         sessionStorage.setItem('email', res.data.data.attributes.email);
+        this.setState({ loading: false });
         this.props.redirectAdoptPage();
       })
       .catch(err => alert(err));
