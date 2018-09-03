@@ -14,8 +14,15 @@ class Events extends Component {
   render() {
     return (
       <React.Fragment>
-        <EventCompose eventName={this.state.eventName} />
+        <img id="eventbg" src={require('../../assets/events_bg3.jpeg')} alt="Girl in a jacket" />
+
+        <div id="eventstitle">
+          <p> Community Events </p>
+        </div>
+
         <EventLocalUsers setEventName={this.setEventName} />
+
+        <EventCompose eventName={this.state.eventName} />
       </React.Fragment>
     );
   }
