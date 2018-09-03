@@ -70,3 +70,4 @@ client/.DS_Store
 
 # PackageLock
 package-lock.json
+.DS_Store
