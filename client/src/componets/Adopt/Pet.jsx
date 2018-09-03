@@ -42,22 +42,22 @@ class Pet extends Component {
                 <button type="button" className="close" data-dismiss="modal" aria-hidden="true">
                   &times;
                 </button>
-                <h4 className="modal-title">Confirmation</h4>
+                <h4 className="modal-title">{this.props.pet.attributes.name}</h4>
               </div>
               <div className="modal-body">
                 <img src={this.props.pet.attributes.photos} alt="notWorking" />
-                <p> Name: {this.props.pet.attributes.name} </p>
+                <p />
                 <p> Breed: {this.props.pet.attributes.breed} </p>
                 <p> Age: {this.props.pet.attributes.age} </p>
-                <p>
-                  Address: {this.props.pet.attributes.contact.address1}, {this.props.pet.attributes.contact.zip}, {this.props.pet.attributes.contact.city},{' '}
-                  {this.props.pet.attributes.contact.state}{' '}
-                </p>
                 <p className="text-warning">
                   Description: <small> {this.props.pet.attributes.description} </small>
                 </p>
                 <p>
-                  {this.props.pet.attributes.contact.phone}, {this.props.pet.attributes.contact.email}{' '}
+                  Contact Info: {this.props.pet.attributes.contact.phone}, {this.props.pet.attributes.contact.email}{' '}
+                </p>
+                <p>
+                  Address: {this.props.pet.attributes.contact.address1}, {this.props.pet.attributes.contact.zip}, {this.props.pet.attributes.contact.city},{' '}
+                  {this.props.pet.attributes.contact.state}{' '}
                 </p>
               </div>
               <div className="modal-footer">
