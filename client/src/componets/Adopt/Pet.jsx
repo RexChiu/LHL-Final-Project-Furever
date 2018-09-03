@@ -2,27 +2,16 @@ import React, { Fragment, Component } from 'react';
 const axios = require('axios');
 
 class Pet extends Component {
-  handleSubmit = event => {
-    event.preventDefault();
-    if (sessionStorage.getItem('userId') === null) {
-      alert('Need to Login First!');
-      return;
-    }
-    axios
-      .post(`http://localhost:8080/pet/${this.props.pet.id}/adopt`, {
-        userId: `${sessionStorage.getItem('userId')}`,
-        petId: `${this.props.pet.id}`
-      })
-      .then(function(response) {
-        console.log(response);
-        window.location.reload();
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };
-
   render() {
+    // if not logged in, do not show the adopt button.
+    const adoptButton = sessionStorage.getItem('userId') ? (
+      <a onClick={this.handleSubmit} value={this.props.pet.id} className="btn btn-lg btn-primary">
+        Adopt
+      </a>
+    ) : (
+      ''
+    );
+
     return (
       <Fragment>
         <div className="adoptitem panel panel-default" data-toggle="modal" href={'#petDetails' + this.props.pet.id}>
@@ -64,10 +53,7 @@ class Pet extends Component {
                 <button type="button" className="btn btn-default" data-dismiss="modal">
                   Close
                 </button>
-
-                <a onClick={this.handleSubmit} value={this.props.pet.id} className="btn btn-lg btn-primary">
-                  Adopt
-                </a>
+                {adoptButton}
               </div>
             </div>
           </div>
@@ -75,5 +61,24 @@ class Pet extends Component {
       </Fragment>
     );
   }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    if (sessionStorage.getItem('userId') === null) {
+      alert('Need to Login First!');
+      return;
+    }
+    axios
+      .post(`http://localhost:8080/pet/${this.props.pet.id}/adopt`, {
+        userId: `${sessionStorage.getItem('userId')}`,
+        petId: `${this.props.pet.id}`
+      })
+      .then(function(response) {
+        window.location.reload();
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 }
 export default Pet;

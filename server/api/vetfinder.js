@@ -12,11 +12,8 @@ module.exports = function APICall(method, params) {
   // adds the api key to the params, and converts any params into query strings
   params.key = process.env.GOOGLEPLACES_APIKEY;
   const query = queryString.stringify(params);
-  console.log('Query params', uri, query);
 
   uri += `?${query}`;
-
-  console.log('Query params', uri);
 
   return rp(uri)
     .then(result => JSON.parse(result))
