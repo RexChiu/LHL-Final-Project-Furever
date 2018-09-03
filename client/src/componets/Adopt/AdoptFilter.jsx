@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { DropdownButton, MenuItem, ButtonToolbar } from 'react-bootstrap';
+
 //import assets
 const axios = require('axios');
+
+const BUTTONS = ['Animal', 'Sex', 'Age', 'Size'];
 
 class AdoptFilter extends Component {
   constructor(props) {
@@ -14,9 +18,28 @@ class AdoptFilter extends Component {
     };
   }
 
-  changeAnimal = event => {
-    this.setState({ animal: event.target.value });
-    console.log('log: ' + event.target.value);
+  render() {
+    return (
+      <section className="panel panel-default">
+        <p>Filter</p>
+        {this.renderDropdownButtons()}
+      </section>
+    );
+  }
+
+  renderDropdownButtons = () => {
+    return (
+      <ButtonToolbar>
+        <DropdownButton title="Animal" key={0} id="dropdown-animal" onSelect={this.changeAnimal}>
+          <MenuItem eventKey="Cat">Cat</MenuItem>
+          <MenuItem eventKey="Dog">Dog</MenuItem>
+        </DropdownButton>
+      </ButtonToolbar>
+    );
+  };
+
+  changeAnimal = (key, event) => {
+    this.setState({ animal: key });
   };
 
   changeSize = event => {
@@ -72,12 +95,12 @@ class AdoptFilter extends Component {
     this.props.resetFilter();
     window.location.reload();
   };
+}
 
-  render() {
-    return (
-      <section className="panel panel-default">
-        <p>Filter</p>
-        <form onSubmit={this.filterSubmit}>
+export default AdoptFilter;
+
+/*
+<form onSubmit={this.filterSubmit}>
           <select id="animal" onChange={this.changeAnimal}>
             <option value="" hidden disabled selected>
               Animal
@@ -119,9 +142,4 @@ class AdoptFilter extends Component {
         <button type="button" onClick={this.resetFilter}>
           Reset Filters
         </button>
-      </section>
-    );
-  }
-}
-
-export default AdoptFilter;
+*/
