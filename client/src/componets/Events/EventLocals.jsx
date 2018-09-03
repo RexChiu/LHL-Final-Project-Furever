@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 //import assets
 
 class EventLocals extends Component {
+  addEventWithFriend = () => event => {
+    this.props.setEventName('Meeting with ' + this.props.user.attributes.username);
+  };
+
   render() {
     // const { users } = this.props;
     // let userItems= <img className="eventLocalsIcon" src={user.attributes.pets[0].photos[0]} alt="notWorking" height="42" width="42" />
@@ -59,7 +63,7 @@ class EventLocals extends Component {
               <hr />
 
               <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal">
+                <button type="button" className="btn btn-default" onClick={this.addEventWithFriend()} data-dismiss="modal">
                   Invite
                 </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">
