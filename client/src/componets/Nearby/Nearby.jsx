@@ -16,6 +16,8 @@ class Nearby extends Component {
       alert('Unauthorized Access! Login First!');
       this.props.history.push('/');
     }
+
+    this.props.showClippy(false, 'empty');
   }
 
   render() {

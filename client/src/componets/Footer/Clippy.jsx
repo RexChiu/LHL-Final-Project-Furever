@@ -1,6 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Tooltip, Overlay } from 'react-bootstrap';
+import React, { Component } from 'react';
 
 class Clippy extends Component {
   render() {

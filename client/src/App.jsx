@@ -10,7 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       showClippy: false,
-      clippyText: ''
+      clippyTextkey: 'empty'
     };
   }
   // RENDERING
@@ -19,12 +19,16 @@ class App extends Component {
       <React.Fragment>
         <Navbar />
         <div className="App">
-          <Main />
+          <Main showClippy={this.showClippy} />
         </div>
-        <Footer show={this.state.showClippy} text={this.state.clippyText} />
+        <Footer show={this.state.showClippy} text={this.state.clippyTextkey} />
       </React.Fragment>
     );
   }
+
+  showClippy = (toggle, key) => {
+    this.setState({ showClippy: toggle, clippyTextkey: key });
+  };
 }
 
 export default App;
