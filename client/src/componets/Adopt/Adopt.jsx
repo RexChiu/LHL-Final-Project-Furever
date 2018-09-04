@@ -21,7 +21,10 @@ class Adopt extends Component {
       pets: [],
       filters: {}
     };
+
+    // empty clippy, scroll to top
     this.props.showClippy(false, 'empty');
+    window.scrollTo(0, 0);
   }
 
   componentDidMount() {
