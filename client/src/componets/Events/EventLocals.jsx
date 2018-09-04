@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 class EventLocals extends Component {
   addEventWithFriend = () => event => {
     this.props.setEventName('Meeting with ' + this.props.user.attributes.username);
+    this.props.showClippy(true, 'invite');
   };
 
   render() {

@@ -74,11 +74,8 @@ class EventCompose extends Component {
       return;
     }
 
-    alert('WTF' + this.props.eventName + '-X-' + this.state.title);
-
     if (this.state.title.trim() === '') {
       this.handleSetTitle();
-      alert('WTF' + this.props.eventName + '-X-' + this.state.title);
     }
 
     const reqObj = {
