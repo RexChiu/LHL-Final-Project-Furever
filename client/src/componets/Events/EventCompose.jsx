@@ -19,30 +19,33 @@ class EventCompose extends Component {
   }
 
   componentDidMount() {
+    this.setState({ title: this.props.eventName });
     //code I added in will link to server
     fetch('http://localhost:8080/events')
       .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            events: result.data
-          });
-        },
-
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
+      .then(result => {
+        this.setState({
+          isLoaded: true,
+          events: result.data
+        });
+      });
   }
+
+  componentWillReceiveProps(props) {
+    this.setState({ title: props.eventName });
+  }
+
   //          adding handles
 
   handleChangeTitle = event => {
     this.setState({
       title: event.target.value.trim()
+    });
+  };
+
+  handleSetTitle = () => {
+    this.setState({
+      title: 'Meeting with '
     });
   };
 
@@ -71,6 +74,13 @@ class EventCompose extends Component {
       return;
     }
 
+    alert('WTF' + this.props.eventName + '-X-' + this.state.title);
+
+    if (this.state.title.trim() === '') {
+      this.handleSetTitle();
+      alert('WTF' + this.props.eventName + '-X-' + this.state.title);
+    }
+
     const reqObj = {
       user: `${sessionStorage.getItem('username')}`,
       userId: `${sessionStorage.getItem('userId')}`,
@@ -79,12 +89,9 @@ class EventCompose extends Component {
       description: this.state.description,
       date: this.state.date
     };
-    console.log('Object', reqObj);
     axios
       .post('http://localhost:8080/events/create', reqObj)
       .then(function(response) {
-        console.log('response', response);
-
         window.location.reload();
       })
       .catch(function(error) {
@@ -168,8 +175,6 @@ class EventCompose extends Component {
     //   });
     //   this.forceUpdate();
     // };
-
-    // console.log('events', events);
 
     if (events instanceof Array) {
       eventItems = events.map((event, i) => <EventComposeFeed event={event} key={event.id} handleGoing={this.handleGoing} />);

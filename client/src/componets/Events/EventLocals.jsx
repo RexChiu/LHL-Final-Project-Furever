@@ -49,7 +49,7 @@ class EventLocals extends Component {
               <div className="modal-body">
                 {/* <img className="eventLocalsModal" src={this.props.photo} alt="notWorking" /> */}
 
-                <div className="card" style={{ width: '18rem;' }}>
+                <div className="card">
                   <img className="eventLocalsModal" src={this.props.photo} alt="notWorking" />
                   <div className="card-body">
                     <h5 className="card-title">Owner: {this.props.user.attributes.username}</h5>
