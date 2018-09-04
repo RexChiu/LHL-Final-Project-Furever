@@ -224,21 +224,53 @@ module.exports = (dataHelpers) => {
   });
 
   router.get('/cat/:count', async (req, res) => {
-    const options = {
-      location: 'toronto,ontario',
-      output: 'full',
-      count: 500,
-      animal: 'cat'
-    };
-    try {
-      const result = await petfinder('pet.find', options);
-      const sanitized = await sanitizePetfinder(result);
-      const output = await dataHelpers.insertMultiplePets(sanitized);
-      res.json(output);
-    } catch (e) {
-      console.log('Error', e);
-      res.json(e);
+    let options = {};
+    for (let i = 0; i < req.params.count; i++) {
+      options = {
+        location: 'toronto,ontario',
+        output: 'full',
+        count: 500,
+        offset: i * 500,
+        animal: 'cat'
+      };
+      try {
+        const result = await petfinder('pet.find', options);
+        const sanitized = await sanitizePetfinder(result);
+        console.log(result.petfinder.lastOffset);
+        // res.json(result);
+        const output = await dataHelpers.insertMultiplePets(sanitized);
+        // res.json(output);
+      } catch (e) {
+        console.log('Error', e);
+        res.json(e);
+      }
     }
+    res.json('ok');
+  });
+
+  router.get('/dog/:count', async (req, res) => {
+    let options = {};
+    for (let i = 0; i < req.params.count; i++) {
+      options = {
+        location: 'toronto,ontario',
+        output: 'full',
+        count: 500,
+        offset: i * 500,
+        animal: 'dog'
+      };
+      try {
+        const result = await petfinder('pet.find', options);
+        const sanitized = await sanitizePetfinder(result);
+        console.log(result.petfinder.lastOffset);
+        // res.json(result);
+        const output = await dataHelpers.insertMultiplePets(sanitized);
+        // res.json(output);
+      } catch (e) {
+        console.log('Error', e);
+        res.json(e);
+      }
+    }
+    res.json('ok');
   });
 
   return router;

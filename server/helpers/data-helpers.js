@@ -53,20 +53,20 @@ module.exports = function makeDataHelpers(db) {
     // BELOW ADDED BY JARON AGAIN!!!!
     returnAllEvents() {
       // GET DATE
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth()+1; //January is 0!
-      var yyyy = today.getFullYear();
+      let today = new Date();
+      let dd = today.getDate();
+      let mm = today.getMonth() + 1; // January is 0!
+      const yyyy = today.getFullYear();
 
-      if(dd<10) {
-          dd = '0'+dd
-      } 
+      if (dd < 10) {
+        dd = `0${dd}`;
+      }
 
-      if(mm<10) {
-          mm = '0'+mm
-      } 
+      if (mm < 10) {
+        mm = `0${mm}`;
+      }
 
-      today = yyyy + '/' + mm + '/' + dd;
+      today = `${yyyy}/${mm}/${dd}`;
       const eventRef = db.collection('events');
       // inits empty array
       const resultArr = [];
@@ -81,15 +81,15 @@ module.exports = function makeDataHelpers(db) {
 
           for (let i = 0; i < resultArr.length; i++) {
             // need to toString() the id
-            const date = resultArr[i].date.replace(/-/g,'/');
-            console.log("printedEVERTYINGSLKDFLSDF77552", date);
-            if(today < date) {
+            const date = resultArr[i].date.replace(/-/g, '/');
+            console.log('printedEVERTYINGSLKDFLSDF77552', date);
+            if (today < date) {
               resultArrDate.push(resultArr[i]);
             }
             // batch.set(petsRef.doc(pets[i].id.toString()), pets[i]);
           }
           console.log(today);
-          console.log("acceptable", resultArrDate);
+          console.log('acceptable', resultArrDate);
           // NEED TO ADD THIS IN
           // console.log("output", resultArr);
           return resultArrDate;
@@ -125,7 +125,10 @@ module.exports = function makeDataHelpers(db) {
       // synchronized for loop to specify the document path and inserting
       for (let i = 0; i < pets.length; i++) {
         // need to toString() the id
-        batch.set(petsRef.doc(pets[i].id.toString()), pets[i]);
+        // add only if the pet exists
+        if (pets[i].id) {
+          batch.set(petsRef.doc(pets[i].id.toString()), pets[i]);
+        }
       }
       // commits the batch and returns
       return batch
