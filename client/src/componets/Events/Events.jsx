@@ -42,7 +42,6 @@ class Events extends Component {
             </div>
             <div className="span4">
               <div id="eventbackdrop">
-                {/* <div className="panel"> */}
                 <EventCompose eventName={this.state.eventName} />
               </div>
             </div>

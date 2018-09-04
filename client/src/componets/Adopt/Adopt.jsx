@@ -3,12 +3,7 @@ import Waypoint from 'react-waypoint';
 import axios from 'axios';
 import ReactLoading from 'react-loading';
 
-//import assets
-
-//modal
-
 import AdoptFilter from './AdoptFilter';
-// import SearchUI from './SearchUI';
 import Pet from './Pet';
 
 class Adopt extends Component {
@@ -28,7 +23,7 @@ class Adopt extends Component {
   }
 
   componentDidMount() {
-    //code I added in will link to server
+    // get pets from the server
     this.getPets();
   }
 
@@ -50,6 +45,30 @@ class Adopt extends Component {
       </React.Fragment>
     );
   }
+
+  _renderAdoptItems = () => {
+    // render only if pet care info is loaded
+    if (this.state.isLoaded) {
+      const { pets } = this.state;
+      let adoptItems = '';
+      if (pets instanceof Array) {
+        adoptItems = pets.map(pet => (
+          <div className="col-lg-3 col-sm-4" key={pet.id}>
+            <Pet className="pet-item" pet={pet} key={pet.id} showClippy={this.props.showClippy} getPets={this.getPets} />
+          </div>
+        ));
+      }
+
+      return adoptItems;
+    } else {
+      return (
+        <Fragment>
+          <strong>Loading...</strong>
+          <ReactLoading className="loading-icon" type={'spinningBubbles'} color={'#000000'} height={'10%'} width={'10%'} />
+        </Fragment>
+      );
+    }
+  };
 
   getPets = () => {
     fetch('http://localhost:8080/pets')
@@ -102,6 +121,7 @@ class Adopt extends Component {
       });
   };
 
+  // gets more pets from server if hitting waypoint, and not loading more pets
   _handleWaypointEnter = () => {
     if (this.state.loadedMore && this.state.pets.length > 0) {
       const lastPet = this.state.pets.length - 1;
@@ -110,34 +130,11 @@ class Adopt extends Component {
     }
   };
 
+  // adds a waypoint to the screen, 20% from the bottom
   _renderWaypoint = () => {
     if (this.state.isLoaded) {
       // creates a waypoint that triggers on the bottom 50% of the scrolling
       return <Waypoint className="col-12" bottomOffset="-20%" onEnter={this._handleWaypointEnter} />;
-    }
-  };
-
-  _renderAdoptItems = () => {
-    // render only if pet care info is loaded
-    if (this.state.isLoaded) {
-      const { pets } = this.state;
-      let adoptItems = '';
-      if (pets instanceof Array) {
-        adoptItems = pets.map(pet => (
-          <div className="col-lg-3 col-sm-4" key={pet.id}>
-            <Pet className="pet-item" pet={pet} key={pet.id} showClippy={this.props.showClippy} getPets={this.getPets} />
-          </div>
-        ));
-      }
-
-      return adoptItems;
-    } else {
-      return (
-        <Fragment>
-          <strong>Loading...</strong>
-          <ReactLoading className="loading-icon" type={'spinningBubbles'} color={'#000000'} height={'10%'} width={'10%'} />
-        </Fragment>
-      );
     }
   };
 }
