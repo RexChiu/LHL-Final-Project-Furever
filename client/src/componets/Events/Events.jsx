@@ -38,6 +38,7 @@ class Events extends Component {
           <div className="row-fluid">
             <div className="span4">
               <EventLocalUsers setEventName={this.setEventName} showClippy={this.props.showClippy} />
+              <EventUserInfo />
             </div>
             <div className="span4">
               <div id="eventbackdrop">
@@ -47,7 +48,6 @@ class Events extends Component {
             </div>
           </div>
         </div>
-        <EventUserInfo />
       </React.Fragment>
     );
   }
