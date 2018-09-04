@@ -40,17 +40,17 @@ class Home extends Component {
     // not logged in, show login and register
     return (
       <Fragment>
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-            <div class="panel-login">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
+        <div className="row">
+          <div className="col-md-6 col-md-offset-3">
+            <div className="panel-login">
+              <div className="panel-heading">
+                <div className="row">
+                  <div className="col-xs-6">
                     <a id="login-form-link" onClick={this.showLogin}>
                       Login
                     </a>
                   </div>
-                  <div class="col-xs-6">
+                  <div className="col-xs-6">
                     <a id="register-form-link" onClick={this.showRegister}>
                       Register
                     </a>

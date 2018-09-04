@@ -27,15 +27,15 @@ class Login extends Component {
       <Fragment>
         <form id="login-form" onSubmit={this.submitLogin}>
           <div className="form-group">
-            <input placeholder="Username" class="form-control" tabindex="1" name="username" type="text" onChange={this.handleChangeUsername} />
+            <input placeholder="Username" className="form-control" tabIndex="1" name="username" type="text" onChange={this.handleChangeUsername} />
           </div>
           <div className="form-group">
-            <input placeholder="Password" class="form-control" tabindex="2" name="password" type="password" onChange={this.handleChangePassword} />
+            <input placeholder="Password" className="form-control" tabIndex="2" name="password" type="password" onChange={this.handleChangePassword} />
           </div>
           <div className="form-group">
             <div className="row">
               <div className="col-sm-6 col-sm-offset-3">
-                <input className="form-control btn btn-login" type="submit" name="login-submit" tabindex="4" value="Log In" />
+                <input className="form-control btn btn-login" type="submit" name="login-submit" tabIndex="4" value="Log In" />
               </div>
             </div>
           </div>

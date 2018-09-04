@@ -120,7 +120,7 @@ class Adopt extends Component {
       let adoptItems = '';
       if (pets instanceof Array) {
         adoptItems = pets.map(pet => (
-          <div className="col-lg-3 col-sm-4">
+          <div className="col-lg-3 col-sm-4" key={pet.id}>
             <Pet className="pet-item" pet={pet} key={pet.id} />
           </div>
         ));

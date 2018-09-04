@@ -29,14 +29,14 @@ class Events extends Component {
         <div id="eventsheader">
           <p> events page </p>
         </div>
-        <div class="container-fluid">
-          <div class="row-fluid">
-            <div class="span4">
+        <div className="container-fluid">
+          <div className="row-fluid">
+            <div className="span4">
               <EventLocalUsers setEventName={this.setEventName} />
             </div>
-            <div class="span4">
+            <div className="span4">
               <div id="eventbackdrop">
-                {/* <div class="panel"> */}
+                {/* <div className="panel"> */}
                 <EventCompose eventName={this.state.eventName} />
               </div>
             </div>

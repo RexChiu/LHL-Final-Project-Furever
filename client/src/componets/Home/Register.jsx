@@ -32,18 +32,18 @@ class Register extends Component {
       <Fragment>
         <form id="register-form" onSubmit={this.submitRegister}>
           <div className="form-group">
-            <input placeholder="Username" class="form-control" tabindex="1" name="username" type="text" onChange={this.handleChangeUsername} />
+            <input placeholder="Username" className="form-control" tabIndex="1" name="username" type="text" onChange={this.handleChangeUsername} />
           </div>
           <div className="form-group">
-            <input placeholder="Email" class="form-control" tabindex="2" name="email" type="text" onChange={this.handleChangeEmail} />
+            <input placeholder="Email" className="form-control" tabIndex="2" name="email" type="text" onChange={this.handleChangeEmail} />
           </div>
           <div className="form-group">
-            <input placeholder="Password" class="form-control" tabindex="3" name="password" type="password" onChange={this.handleChangePassword} />
+            <input placeholder="Password" className="form-control" tabIndex="3" name="password" type="password" onChange={this.handleChangePassword} />
           </div>
           <div className="form-group">
             <div className="row">
               <div className="col-sm-6 col-sm-offset-3">
-                <input className="form-control btn btn-register" type="submit" name="register-submit" tabindex="4" value="Register" />
+                <input className="form-control btn btn-register" type="submit" name="register-submit" tabIndex="4" value="Register" />
               </div>
             </div>
           </div>

@@ -54,7 +54,7 @@ class Store extends Component {
           <h3>{this.props.establishment}s in your area</h3>
           <hr />
           <div>
-            <table class="table table-striped">
+            <table className="table table-striped">
               <thead>
                 <tr>
                   <th className="col-m-4">{this.props.establishment} Name</th>
