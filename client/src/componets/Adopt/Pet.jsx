@@ -78,6 +78,7 @@ class Pet extends Component {
         petId: `${this.props.pet.id}`
       })
       .then(function(response) {
+        sessionStorage.setItem('adopted', true);
         boundThis.props.showClippy(true, 'adopted');
         boundThis.props.getPets();
         window.scrollTo(0, 0);
