@@ -34,8 +34,9 @@ class EventLocals extends Component {
         />
 
         {/* Individual Modals */}
+        {/* modalz */}
 
-        <div id={'singleLocals' + this.props.randomkey} className="modal fade">
+        <div id={'singleLocals' + this.props.randomkey} className="modal fade modalz">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventCompose from './EventCompose';
 import EventLocalUsers from './EventLocalUsers';
+import EventUserInfo from './EventUserInfo';
 
 //import assets
 
@@ -42,6 +43,7 @@ class Events extends Component {
             </div>
           </div>
         </div>
+        <EventUserInfo />
       </React.Fragment>
     );
   }
