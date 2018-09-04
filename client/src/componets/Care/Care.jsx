@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import ReactLoading from 'react-loading';
 
-//import assets
-
 class Care extends Component {
   constructor(props) {
     super(props);
@@ -72,10 +70,12 @@ class Care extends Component {
     }
   };
 
+  // renders the array of cat and dog breed info (already in HTML tags from server)
   renderBreedsInfo = () => {
     let catInfo = [];
     let dogInfo = [];
 
+    // goes through the list of Cat breed info HTML and constructs and array of Cat info
     for (let catBreed of this.state.breedInfo.cat) {
       let html = '';
       html += `<h2>${catBreed.breed}</h2>`;
@@ -89,6 +89,7 @@ class Care extends Component {
         </Fragment>
       );
     }
+    // same thing as above
     for (let dogBreed of this.state.breedInfo.dog) {
       let html = '';
       html += `<h2>${dogBreed.breed}</h2>`;
@@ -104,6 +105,7 @@ class Care extends Component {
       );
     }
 
+    // shows the constructed cat and dog care info
     return (
       <Fragment>
         <h1>Pet Care Information</h1>
