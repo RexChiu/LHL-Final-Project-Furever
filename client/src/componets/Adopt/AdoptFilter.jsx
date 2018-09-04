@@ -4,6 +4,7 @@ import { DropdownButton, MenuItem, ButtonToolbar, Button } from 'react-bootstrap
 //import assets
 const axios = require('axios');
 
+// mappers to map the event keys with a more readable text
 const sexMapper = {
   Sex: 'Sex',
   M: 'Male',
@@ -32,6 +33,7 @@ class AdoptFilter extends Component {
     return <section className="panel panel-default">{this.renderDropdownButtons()}</section>;
   }
 
+  // renders the drop down buttons, sets defaults if nothing selected
   renderDropdownButtons = () => {
     const animalTitle = this.state.animal !== '' ? this.state.animal : 'Animal';
     const sexTitle = this.state.sex !== '' ? this.state.sex : 'Sex';
@@ -74,6 +76,7 @@ class AdoptFilter extends Component {
     );
   };
 
+  // controlled inputs for button selection
   changeAnimal = (key, event) => {
     this.setState({ animal: key });
   };
@@ -90,6 +93,7 @@ class AdoptFilter extends Component {
     this.setState({ age: key });
   };
 
+  // submits selected filters to adopt
   filterSubmit = event => {
     event.preventDefault();
     // no options selected, break
