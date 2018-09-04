@@ -25,6 +25,8 @@ class EventLocalsModal extends Component {
     let tinderItems = [];
     let tinderPhotos = [];
 
+    //Iterate through each user to pick out the username, id and photo
+    //into a new array called tinderPhoto
     if (users instanceof Array) {
       for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].attributes.pets.length; j++) {
@@ -37,6 +39,7 @@ class EventLocalsModal extends Component {
       }
     }
 
+    //Iterate through each tinderPhoto element to generate the HTML div
     if (tinderPhotos instanceof Array) {
       tinderItems = tinderPhotos.map((photo, i) => (
         <div className="item" key={i}>

@@ -47,9 +47,22 @@ class EventLocals extends Component {
               </div>
               <hr />
               <div className="modal-body">
-                <img className="eventLocalsModal" src={this.props.photo} alt="notWorking" />
+                {/* <img className="eventLocalsModal" src={this.props.photo} alt="notWorking" /> */}
 
-                <h1> -USER INFO- </h1>
+                <div className="card" style={{ width: '18rem;' }}>
+                  <img className="eventLocalsModal" src={this.props.photo} alt="notWorking" />
+                  <div className="card-body">
+                    <h5 className="card-title">Owner: {this.props.user.attributes.username}</h5>
+                    <p className="card-text">name: {this.props.user.attributes.pets[0].name}</p>
+                    <p className="card-text">sex: {this.props.user.attributes.pets[0].sex}</p>
+                    <p className="card-text">age: {this.props.user.attributes.pets[0].age}</p>
+                    <p className="card-text">breed: {this.props.user.attributes.pets[0].breed}</p>
+                    <p className="card-text">mix? {this.props.user.attributes.pets[0].mix}</p>
+                    <p className="card-text">size: {this.props.user.attributes.pets[0].size}</p>
+                  </div>
+                </div>
+
+                {/* <h1> -USER INFO- </h1>
                 <p> username: {this.props.user.attributes.username} </p>
                 <p> id: {this.props.user.attributes.id} </p>
                 <h1> -PET INFO-</h1>
@@ -58,16 +71,13 @@ class EventLocals extends Component {
                 <p> age: {this.props.user.attributes.pets[0].age} </p>
                 <p> breed: {this.props.user.attributes.pets[0].breed} </p>
                 <p> mix? {this.props.user.attributes.pets[0].mix} </p>
-                <p> size: {this.props.user.attributes.pets[0].size} </p>
+                <p> size: {this.props.user.attributes.pets[0].size} </p> */}
               </div>
               <hr />
 
               <div className="modal-footer">
                 <button type="button" className="btn btn-default" onClick={this.addEventWithFriend()} data-dismiss="modal">
                   Invite
-                </button>
-                <button type="button" className="btn btn-default" data-dismiss="modal">
-                  Reject
                 </button>
                 <button type="button" className="btn btn-default" data-dismiss="modal">
                   Close
