@@ -20,6 +20,7 @@ class Navbar extends Component {
 
   logoutUser = () => {
     sessionStorage.clear();
+    window.location.reload();
   };
 
   hasPetUser = () => {

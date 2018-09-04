@@ -13,6 +13,7 @@ class App extends Component {
       clippyTextkey: 'empty'
     };
   }
+
   // RENDERING
   render() {
     return (
@@ -27,7 +28,10 @@ class App extends Component {
   }
 
   showClippy = (toggle, key) => {
-    this.setState({ showClippy: toggle, clippyTextkey: key });
+    console.log('Comparing: ' + this.state.clippyTextkey, key);
+    if (this.state.clippyTextkey !== key) {
+      this.setState({ showClippy: toggle, clippyTextkey: key });
+    }
   };
 }
 

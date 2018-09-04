@@ -21,7 +21,10 @@ class Adopt extends Component {
       pets: [],
       filters: {}
     };
-    this.props.showClippy(true, 'adopted');
+
+    // empty clippy, scroll to top
+    this.props.showClippy(false, 'empty');
+    window.scrollTo(0, 0);
   }
 
   componentDidMount() {
@@ -122,7 +125,7 @@ class Adopt extends Component {
       if (pets instanceof Array) {
         adoptItems = pets.map(pet => (
           <div className="col-lg-3 col-sm-4" key={pet.id}>
-            <Pet className="pet-item" pet={pet} key={pet.id} showClippy={this.props.showClippy} />
+            <Pet className="pet-item" pet={pet} key={pet.id} showClippy={this.props.showClippy} getPets={this.getPets} />
           </div>
         ));
       }

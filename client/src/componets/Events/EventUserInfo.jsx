@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 //import assets
-const axios = require('axios');
 
 class EventUserInfo extends Component {
   constructor(props) {

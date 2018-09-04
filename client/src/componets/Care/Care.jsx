@@ -22,7 +22,9 @@ class Care extends Component {
       this.props.history.push('/adopt');
     }
 
+    // empty clippy, scroll to top
     this.props.showClippy(false, 'empty');
+    window.scrollTo(0, 0);
   }
 
   componentDidMount() {
