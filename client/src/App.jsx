@@ -6,6 +6,13 @@ import Main from './componets/Main';
 import './assets/styles/App.scss';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showClippy: false,
+      clippyText: ''
+    };
+  }
   // RENDERING
   render() {
     return (
@@ -14,7 +21,7 @@ class App extends Component {
         <div className="App">
           <Main />
         </div>
-        <Footer />
+        <Footer show={this.state.showClippy} text={this.state.clippyText} />
       </React.Fragment>
     );
   }
