@@ -320,7 +320,7 @@ module.exports = function makeDataHelpers(db) {
     },
     // Filter through pets with options provided
     filterPets(options) {
-      let queryRef = db.collection('pets');
+      let queryRef = db.collection('pets').orderBy('id');
       const keys = Object.keys(options);
       const values = Object.values(options);
 
@@ -343,7 +343,7 @@ module.exports = function makeDataHelpers(db) {
 
       // sets the index and query start point
       if (options.lastPet) {
-        queryRef = queryRef.orderBy('id').startAfter(Number(options.lastPet));
+        queryRef = queryRef.startAfter(Number(options.lastPet));
       }
 
       // executes query
