@@ -10,7 +10,7 @@ class Navbar extends Component {
             <Link to="/">Home</Link>
           </li>
           <li role="presentation">
-            <Link to="/adopt">Adopt </Link>
+            <Link to="/adopt">Adopt</Link>
           </li>
           {this.loggedInUser()}
         </ul>

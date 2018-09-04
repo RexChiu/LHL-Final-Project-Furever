@@ -12,11 +12,11 @@ class Main extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/" render={props => <Home {...props} />} />
-        <Route path="/events" render={props => <Events {...props} />} />
-        <Route path="/adopt" render={props => <Adopt {...props} id="adopt-page" />} />
-        <Route path="/care" render={props => <Care {...props} />} />
-        <Route path="/nearby" render={props => <Nearby {...props} />} />
+        <Route exact path="/" render={props => <Home {...props} showClippy={this.props.showClippy} />} />
+        <Route path="/events" render={props => <Events {...props} showClippy={this.props.showClippy} />} />
+        <Route path="/adopt" render={props => <Adopt {...props} showClippy={this.props.showClippy} />} />
+        <Route path="/care" render={props => <Care {...props} showClippy={this.props.showClippy} />} />
+        <Route path="/nearby" render={props => <Nearby {...props} showClippy={this.props.showClippy} />} />
       </Switch>
     );
   }

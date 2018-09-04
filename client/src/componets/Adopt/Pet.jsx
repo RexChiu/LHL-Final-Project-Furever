@@ -68,13 +68,15 @@ class Pet extends Component {
       alert('Need to Login First!');
       return;
     }
+    const boundThis = this;
     axios
       .post(`http://localhost:8080/pet/${this.props.pet.id}/adopt`, {
         userId: `${sessionStorage.getItem('userId')}`,
         petId: `${this.props.pet.id}`
       })
       .then(function(response) {
-        window.location.reload();
+        boundThis.props.showClippy(true, 'adopted');
+        // window.location.reload();
       })
       .catch(function(error) {
         console.log(error);

@@ -21,6 +21,7 @@ class Adopt extends Component {
       pets: [],
       filters: {}
     };
+    this.props.showClippy(true, 'adopted');
   }
 
   componentDidMount() {
@@ -121,7 +122,7 @@ class Adopt extends Component {
       if (pets instanceof Array) {
         adoptItems = pets.map(pet => (
           <div className="col-lg-3 col-sm-4" key={pet.id}>
-            <Pet className="pet-item" pet={pet} key={pet.id} />
+            <Pet className="pet-item" pet={pet} key={pet.id} showClippy={this.props.showClippy} />
           </div>
         ));
       }

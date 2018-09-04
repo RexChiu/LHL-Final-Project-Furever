@@ -22,6 +22,7 @@ class Events extends Component {
       alert('Unauthorized Access! Adopt a pet First!');
       this.props.history.push('/adopt');
     }
+    this.props.showClippy(false, 'empty');
   }
   render() {
     return (

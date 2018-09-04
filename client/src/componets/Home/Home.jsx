@@ -12,6 +12,8 @@ class Home extends Component {
       loginActive: true,
       registerActive: false
     };
+
+    this.props.showClippy(false, 'empty');
   }
 
   render() {
