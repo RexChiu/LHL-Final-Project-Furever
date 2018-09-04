@@ -5,7 +5,7 @@ class Pet extends Component {
   render() {
     // if not logged in, do not show the adopt button.
     const adoptButton = sessionStorage.getItem('userId') ? (
-      <a onClick={this.handleSubmit} value={this.props.pet.id} className="btn btn-lg btn-primary">
+      <a onClick={this.handleSubmit} value={this.props.pet.id} className="btn btn-lg btn-primary" data-dismiss="modal">
         Adopt
       </a>
     ) : (
@@ -76,6 +76,8 @@ class Pet extends Component {
       })
       .then(function(response) {
         boundThis.props.showClippy(true, 'adopted');
+        boundThis.props.getPets();
+        window.scrollTo(0, 0);
         // window.location.reload();
       })
       .catch(function(error) {

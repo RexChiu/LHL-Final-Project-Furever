@@ -18,7 +18,7 @@ class Footer extends Component {
   }
 
   renderClippy = () => {
-    if (this.props.show == true) {
+    if (this.props.show === true) {
       const clippyMessages = {
         adopted: this.adoptedMessage,
         empty: '?'
