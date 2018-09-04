@@ -60,17 +60,17 @@ class EventUserInfo extends Component {
 
     return (
       <React.Fragment>
-        <div id="eventuserinfo" className="col-sm-3 col-xs-3">
+        <div id="eventuserinfo" className="pull-right col-sm-3 col-xs-3 ">
           <h4>
             {' '}
             <u> user info </u>{' '}
           </h4>
           <div id="eventsuserinformation">
             <p> username: {sessionStorage.getItem('username')} </p>
-            <p>
+            {/* <p>
               user id: `$
               {sessionStorage.getItem('userId')}`{' '}
-            </p>
+            </p> */}
           </div>
           <h4>
             {' '}
