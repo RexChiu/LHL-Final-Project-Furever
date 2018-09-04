@@ -85,9 +85,6 @@ class EventLocalsModal extends Component {
               </div>
             </div>
             <div className="modal-footer">
-              <section>
-                <p>Selected: </p>
-              </section>
               <button type="button" className="btn btn-default" data-dismiss="modal">
                 Close
               </button>
