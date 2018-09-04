@@ -178,7 +178,7 @@ class EventCompose extends Component {
     return (
       <React.Fragment>
         <div id="messagePanelCenter">
-          <form id="create" className="panel messagePanel" style={{ marginRight: '14em' }}>
+          <form id="create" className="panel messagePanel">
             <input
               type="text"
               onChange={this.handleChangeTitle}
