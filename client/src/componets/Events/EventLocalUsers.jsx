@@ -45,14 +45,18 @@ class EventLocalUsers extends Component {
     const { users } = this.state;
     let userItems = [];
 
+    //Iterate through each element in the user array; then iterate through each
+    //users adopted pets to generate a list of ALL adopted pets <except> the logged in user
     if (users instanceof Array) {
       for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].attributes.pets.length; j++) {
-          let adoptedPetPhoto = users[i].attributes.pets[j].photos[0];
-          let randomkey = this.getRandomInt(100000);
-          console.log('Photo::', users[i].attributes.pets[j].photos[0], '||userid::', users[i].id, '|| key ', randomkey);
-          userItems.push(<EventLocals user={users[i]} photo={adoptedPetPhoto} randomkey={randomkey} setEventName={this.props.setEventName} />);
-          adoptedPetPhoto = '';
+          if (!(users[i].id === sessionStorage.getItem('userId'))) {
+            let adoptedPetPhoto = users[i].attributes.pets[j].photos[0];
+            let randomkey = this.getRandomInt(100000);
+            console.log('Photo::', users[i].attributes.pets[j].photos[0], '||userid::', users[i].id, '|| key ', randomkey);
+            userItems.push(<EventLocals user={users[i]} photo={adoptedPetPhoto} randomkey={randomkey} setEventName={this.props.setEventName} />);
+            adoptedPetPhoto = '';
+          }
         }
       }
     }
