@@ -21,6 +21,7 @@ class Footer extends Component {
     if (this.props.show === true) {
       const clippyMessages = {
         adopted: this.adoptedMessage,
+        home: this.homeMessage,
         empty: '?'
       };
 
@@ -39,7 +40,17 @@ class Footer extends Component {
   adoptedMessage = () => {
     return (
       <Fragment>
-        Adopted Pet! Click <Link to="/events">here</Link> for Events!
+        <p className="clippy-message">
+          You have adopted a Pet! Click <Link to="/events">here</Link> for Events! Or <Link to="/care">here</Link> for Pet Care Info!
+        </p>
+      </Fragment>
+    );
+  };
+
+  homeMessage = () => {
+    return (
+      <Fragment>
+        <p className="clippyMessage">Please Login/Register to see our member specific features!</p>
       </Fragment>
     );
   };
