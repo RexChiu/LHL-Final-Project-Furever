@@ -69,6 +69,7 @@ class Home extends Component {
               <div className="panel-body">
                 <div className="row">
                   <div className="col-lg-12">
+                    {/* renders either login or register page accordingly */}
                     {this.state.loginActive && <Login redirectAdoptPage={this.redirectAdoptPage} />}
                     {this.state.registerActive && <Register redirectAdoptPage={this.redirectAdoptPage} />}
                   </div>

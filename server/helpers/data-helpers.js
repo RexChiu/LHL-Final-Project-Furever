@@ -82,16 +82,10 @@ module.exports = function makeDataHelpers(db) {
           for (let i = 0; i < resultArr.length; i++) {
             // need to toString() the id
             const date = resultArr[i].date.replace(/-/g, '/');
-            console.log('printedEVERTYINGSLKDFLSDF77552', date);
             if (today < date) {
               resultArrDate.push(resultArr[i]);
             }
-            // batch.set(petsRef.doc(pets[i].id.toString()), pets[i]);
           }
-          console.log(today);
-          console.log('acceptable', resultArrDate);
-          // NEED TO ADD THIS IN
-          // console.log("output", resultArr);
           return resultArrDate;
           // return resultArr;
         })
@@ -171,19 +165,15 @@ module.exports = function makeDataHelpers(db) {
         .then((result) => {
           const orgObj = result.data();
           if (orgObj.going == undefined || orgObj.going == null) {
-            console.log('does not exist');
             db.collection('events')
               .doc(newGoing.eventId)
               .update({
                 going: resultArr
               });
           } else {
-            // console.log('SIZE', orgObj.going.length);
             for (let i = 0; i < orgObj.going.length; i++) {
               resultArr.push(orgObj.going[i]);
-              // console.log('LOGGING STUFF', orgObj.going[i]);
             }
-            // console.log("RESULT", resultArr);
             db.collection('events')
               .doc(newGoing.eventId)
               .update({
@@ -299,30 +289,9 @@ module.exports = function makeDataHelpers(db) {
         .then(() => console.log('Adopted'))
         .catch(err => console.log(err));
     },
-    // Add a friend to follow.
-    // Accepts an Array as Parameter and reinserts it back.
-    addFriends(userId, follow) {
-      const userRef = db.collection('tusers').doc(userId);
-
-      db.runTransaction(transaction =>
-        transaction.get(userRef).then((snapshot) => {
-          const largerArray = snapshot.get(following);
-          largerArray.push(follow);
-          transaction.update(userRef, following, largerArray);
-        })
-      )
-        .then((result) => {
-          console.log('Transaction success!', result);
-        })
-        .catch((err) => {
-          console.log('Transaction failure:', err);
-        });
-    },
     // Filter through pets with options provided
     filterPets(options) {
       let queryRef = db.collection('pets').orderBy('id');
-      const keys = Object.keys(options);
-      const values = Object.values(options);
 
       // // filter by size if any
       if (options.size) {
@@ -353,15 +322,12 @@ module.exports = function makeDataHelpers(db) {
         .then((snap) => {
           // query not empty
           if (!snap.empty) {
-            console.log('Found Pets!');
             const resultArr = [];
             for (let i = 0; i < snap.size; i++) {
               resultArr.push(snap.docs[i].data());
             }
             return resultArr;
           }
-          // no queries
-          console.log('Empty!');
           return {};
         });
     },
@@ -472,9 +438,6 @@ module.exports = function makeDataHelpers(db) {
         cat: [],
         dog: []
       };
-
-      console.log(`Input: ${JSON.stringify(breeds)}`);
-
       const catRef = db
         .collection('info')
         .doc('catBreeds')

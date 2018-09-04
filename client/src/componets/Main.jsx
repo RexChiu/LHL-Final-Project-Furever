@@ -8,8 +8,8 @@ import Nearby from './Nearby/Nearby';
 import Care from './Care/Care';
 
 class Main extends React.Component {
-  //       //              RENDERING
   render() {
+    // weird props format to pass in props through a react-router component
     return (
       <Switch>
         <Route exact path="/" render={props => <Home {...props} showClippy={this.props.showClippy} />} />

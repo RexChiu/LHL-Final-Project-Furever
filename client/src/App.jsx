@@ -14,7 +14,6 @@ class App extends Component {
     };
   }
 
-  // RENDERING
   render() {
     return (
       <React.Fragment>
@@ -27,6 +26,7 @@ class App extends Component {
     );
   }
 
+  // function that is passed down to almost all components, enables clippy with a message
   showClippy = (toggle, key) => {
     console.log('Comparing: ' + this.state.clippyTextkey, key);
     if (this.state.clippyTextkey !== key) {

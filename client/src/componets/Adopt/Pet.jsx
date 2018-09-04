@@ -71,19 +71,17 @@ class Pet extends Component {
       alert('Need to Login First!');
       return;
     }
-    // rebinding "this", as axios overrides it
-    const boundThis = this;
     axios
       .post(`http://localhost:8080/pet/${this.props.pet.id}/adopt`, {
         userId: `${sessionStorage.getItem('userId')}`,
         petId: `${this.props.pet.id}`
       })
-      .then(function(response) {
+      .then(response => {
         // successful adoption, set adopted to be true on client side
         // show clippy to prompt other pages, get new list of pets
         sessionStorage.setItem('adopted', true);
-        boundThis.props.showClippy(true, 'adopted');
-        boundThis.props.getPets();
+        this.props.showClippy(true, 'adopted');
+        this.props.getPets();
         window.scrollTo(0, 0);
       })
       .catch(function(error) {
