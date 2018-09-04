@@ -12,6 +12,7 @@ class Pet extends Component {
         </a>
       );
     } else {
+      // show clippy message if not logged in
       this.props.showClippy(true, 'login');
     }
 
@@ -26,7 +27,6 @@ class Pet extends Component {
           </div>
         </div>
         {/*                   MODAL                     */}
-
         <div id={'petDetails' + this.props.pet.id} className="modal fade">
           <div className="modal-dialog">
             <div className="modal-content">
@@ -71,6 +71,7 @@ class Pet extends Component {
       alert('Need to Login First!');
       return;
     }
+    // rebinding "this", as axios overrides it
     const boundThis = this;
     axios
       .post(`http://localhost:8080/pet/${this.props.pet.id}/adopt`, {
@@ -78,6 +79,8 @@ class Pet extends Component {
         petId: `${this.props.pet.id}`
       })
       .then(function(response) {
+        // successful adoption, set adopted to be true on client side
+        // show clippy to prompt other pages, get new list of pets
         sessionStorage.setItem('adopted', true);
         boundThis.props.showClippy(true, 'adopted');
         boundThis.props.getPets();
