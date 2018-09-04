@@ -69,7 +69,7 @@ class EventLocalUsers extends Component {
           <div id="eventlocalcontainer">
             <section>{userItems}</section>
           </div>
-          <p id="friendrequest"> Friend Request: </p>
+          {/* <p id="friendrequest"> Friend Request: </p> */}
           <button className="btn btn-sm btn-block" data-toggle="modal" href="#petLocals">
             {' '}
             Find{' '}

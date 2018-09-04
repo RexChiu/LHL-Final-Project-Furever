@@ -98,7 +98,7 @@ class EventComposeFeed extends Component {
 
     return (
       <React.Fragment>
-        <div className="panel eventPanel">
+        <div className="panel eventPanel ">
           <div>
             {' '}
             <h3> {this.props.event.attributes.title} </h3>

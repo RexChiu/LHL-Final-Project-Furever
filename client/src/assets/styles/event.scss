@@ -15,9 +15,9 @@
   padding: 1em;
   width: 30em;
 
-  background-color: #eef3f5;
-  outline-width: 0.005em;
-  outline-style: auto;
+  background-color: #e4ecef;
+  // outline-width: 0.005em;
+  // outline-style: auto;
 
   /* order: <integer>; */
 }
@@ -36,7 +36,7 @@
 }
 
 #eventlocalusers {
-  position: fixed;
+  // position: fixed;
   float: left;
   margin-left: 1em;
   background-color: #fcfeff;
@@ -76,20 +76,23 @@
 }
 
 #event_location {
-  max-width: 20em;
-  width: 20em;
+  // max-width: 20em;
+  // width: 20em;
 }
 
 #event_title {
-  max-width: 20em;
-  width: 20em;
+  max-width: 28em;
+  width: 28em;
 }
 
 .messagePanel #event_description {
-  max-width: 20em;
-  width: 20em;
+  // max-width: 20em;
+  // width: 20em;
   max-height: 15em;
   min-height: 5em;
+
+  max-width: 28em;
+  min-width: 28em;
 }
 
 #eventstitle {
@@ -110,14 +113,13 @@
   border-radius: 0.5em;
   opacity: 0.95;
   background: white;
-  // width: 20em;
+
   margin-top: 5em;
-  // margin: 1em;
+
   position: absolute;
   top: 6em;
   left: 50%;
   transform: translateX(-50%);
-  // align-content: center;
 }
 
 #eventsheader {
@@ -125,9 +127,40 @@
 }
 
 #eventsheader p {
-  color: #6070a9;
+  background: #becaceb3;
+  color: #5565a0;
   // margin-top: 5em;
   font-size: 4em;
   margin-top: 1.1em;
   opacity: 0.8;
 }
+
+// .modalz {
+//   z-index: 2000;
+// }
+
+#eventuserinfo {
+  background-color: white;
+  margin-top: 1em;
+  margin-left: 0.5em;
+  padding: 0.4em;
+  border-radius: 0.5em;
+}
+#eventsuserinformation {
+  background-color: #e1e6f6;
+  margin-top: 1em;
+  margin-left: 0.5em;
+  padding: 0.4em;
+  border-radius: 0.5em;
+}
+
+.eventpetinfocolor {
+  background-color: #dbf0f6;
+  margin-top: 1em;
+  margin-left: 0.5em;
+  padding: 0.4em;
+  border-radius: 0.5em;
+}
+// #displayblock {
+//   display: block;
+// }

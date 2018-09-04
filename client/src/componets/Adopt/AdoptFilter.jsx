@@ -39,8 +39,10 @@ class AdoptFilter extends Component {
     const sizeTitle = this.state.size !== '' ? this.state.size : 'Size';
 
     return (
-      <div className="filter-buttons panel-body">
-        <p><strong>Filter</strong></p>
+      <div className="filter-buttons panel-body" id="adoptfilterbgcolor">
+        <p>
+          <strong>Filter</strong>
+        </p>
         <ButtonToolbar className="btn-group">
           <DropdownButton title={animalTitle} key="Animal" id="dropdown-animal" onSelect={this.changeAnimal}>
             <MenuItem eventKey="Cat">Cat</MenuItem>

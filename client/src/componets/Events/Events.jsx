@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventCompose from './EventCompose';
 import EventLocalUsers from './EventLocalUsers';
+import EventUserInfo from './EventUserInfo';
 
 //import assets
 
@@ -29,12 +30,14 @@ class Events extends Component {
         <div id="eventsheader">
           <p> events page </p>
         </div>
-        <div class="container-fluid">
-          <div class="row-fluid">
-            <div class="span4">
+        {/* <EventUserInfo /> */}
+
+        <div className="container-fluid">
+          <div className="row-fluid">
+            <div className="span4">
               <EventLocalUsers setEventName={this.setEventName} />
             </div>
-            <div class="span4">
+            <div className="span4">
               <div id="eventbackdrop">
                 {/* <div class="panel"> */}
                 <EventCompose eventName={this.state.eventName} />
@@ -42,6 +45,7 @@ class Events extends Component {
             </div>
           </div>
         </div>
+        <EventUserInfo />
       </React.Fragment>
     );
   }
