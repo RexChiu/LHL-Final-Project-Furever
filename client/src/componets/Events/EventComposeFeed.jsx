@@ -27,7 +27,6 @@ class EventComposeFeed extends Component {
     };
     // console.log(goingObj);
     // return;
-    console.log('BEFORE', this.state.clicked);
     this.setState({
       clicked: true
     });
@@ -104,7 +103,7 @@ class EventComposeFeed extends Component {
             <h3> {this.props.event.attributes.title} </h3>
             <h4> Created By: {this.props.event.attributes.user} </h4>
             <div className="eventDescription">
-              <h7> Date: {this.props.event.attributes.date} </h7>
+              <h6> Date: {this.props.event.attributes.date} </h6>
               <p> description: {this.props.event.attributes.description} </p>
             </div>
             {countLikeLength}

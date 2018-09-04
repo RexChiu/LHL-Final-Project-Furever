@@ -47,7 +47,8 @@ class Store extends Component {
 
   render() {
     const place = this.state.results.slice(0);
-    const places = place.map(place => <Places place={place} />);
+    let id = 0;
+    const places = place.map(place => <Places place={place} key={id++} />);
     if (this.state.isLoaded) {
       return (
         <Fragment>
