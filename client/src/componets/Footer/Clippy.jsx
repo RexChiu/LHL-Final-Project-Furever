@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// component contains just the image of clippy
+// done because clippy tooltip requires a component as target
 class Clippy extends Component {
   render() {
     return (

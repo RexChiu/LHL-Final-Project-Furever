@@ -17,13 +17,15 @@ class Footer extends Component {
     return this.renderClippy();
   }
 
+  // show clippy only if app sets clippy to show
   renderClippy = () => {
     if (this.props.show === true) {
+      // object to map a key to a function that renders the correct message
       const clippyMessages = {
         adopted: this.adoptedMessage,
         login: this.loginMessage,
         invite: this.inviteMessage,
-        empty: '?'
+        empty: "I shouldn't be here!?"
       };
 
       return (
@@ -38,6 +40,7 @@ class Footer extends Component {
     return '';
   };
 
+  // functions to return the correct message when called.
   adoptedMessage = () => {
     return (
       <Fragment>
