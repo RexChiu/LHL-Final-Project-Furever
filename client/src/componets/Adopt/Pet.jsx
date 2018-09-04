@@ -4,13 +4,16 @@ const axios = require('axios');
 class Pet extends Component {
   render() {
     // if not logged in, do not show the adopt button.
-    const adoptButton = sessionStorage.getItem('userId') ? (
-      <a onClick={this.handleSubmit} value={this.props.pet.id} className="btn btn-lg btn-primary" data-dismiss="modal">
-        Adopt
-      </a>
-    ) : (
-      ''
-    );
+    let adoptButton = '';
+    if (sessionStorage.getItem('userId')) {
+      adoptButton = (
+        <a onClick={this.handleSubmit} value={this.props.pet.id} className="btn btn-lg btn-primary" data-dismiss="modal">
+          Adopt
+        </a>
+      );
+    } else {
+      this.props.showClippy(true, 'login');
+    }
 
     return (
       <Fragment>

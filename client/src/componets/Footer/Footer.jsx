@@ -21,7 +21,7 @@ class Footer extends Component {
     if (this.props.show === true) {
       const clippyMessages = {
         adopted: this.adoptedMessage,
-        home: this.homeMessage,
+        login: this.loginMessage,
         empty: '?'
       };
 
@@ -47,7 +47,7 @@ class Footer extends Component {
     );
   };
 
-  homeMessage = () => {
+  loginMessage = () => {
     return (
       <Fragment>
         <p className="clippyMessage">Please Login/Register to see our member specific features!</p>

@@ -15,7 +15,7 @@ class Home extends Component {
     };
 
     // empty clippy, scroll to top
-    this.props.showClippy(true, 'home');
+    this.props.showClippy(true, 'login');
     window.scrollTo(0, 0);
   }
 
