@@ -30,8 +30,6 @@ module.exports = function santizePetfinder(json) {
     delete json[i].breeds;
 
     // // sanitize pet.media.photos.photo to pet.photos
-    // json[i].photos = json[i].media.photos.photo;
-    // delete json[i].media;
     json[i].photos = [];
     for (let j = 0; j < json[i].media.photos.photo.length; j++) {
       if (json[i].media.photos.photo[j].includes('x.jpg')) {

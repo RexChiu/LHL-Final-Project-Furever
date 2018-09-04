@@ -4,14 +4,10 @@ import bcrypt from 'bcrypt';
 import EventsSerializer from '../serializers/events';
 
 const router = express.Router();
-// const SALT_ROUNDS = 10;
 
-/* GET index page. */
 module.exports = (dataHelpers) => {
   router.post('/create', async (req, res) => {
-    // guard statment for existing username
-
-    // constructs an user object to send to db
+    // constructs an object to send to db
     const inputObj = {
       user: req.body.user,
       userId: req.body.userId,

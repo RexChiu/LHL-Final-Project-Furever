@@ -7,7 +7,6 @@ import PetsSerializer from '../serializers/pets';
 const router = express.Router();
 const SALT_ROUNDS = 10;
 
-/* GET index page. */
 module.exports = (dataHelpers) => {
   router.post('/register', async (req, res) => {
     // guard statment for existing username
@@ -70,10 +69,7 @@ module.exports = (dataHelpers) => {
   router.get('/', async (req, res) => {
     const result = await dataHelpers.returnAllUsers();
 
-    console.log(result);
-
     const jsonOutput = UserSerializer.serialize(result);
-    // const jsonOutput = result;
     res.json(jsonOutput);
   });
 
@@ -81,7 +77,6 @@ module.exports = (dataHelpers) => {
     const result = await dataHelpers.getUsersWithPets();
 
     const jsonOutput = UserSerializer.serialize(result);
-    // const jsonOutput = result;
     res.json(jsonOutput);
   });
 
@@ -89,7 +84,6 @@ module.exports = (dataHelpers) => {
     const result = await dataHelpers.getUserWithPets(req.params.id);
 
     const jsonOutput = UserSerializer.serialize(result);
-    // const jsonOutput = result;
     res.json(jsonOutput);
   });
 
@@ -98,7 +92,6 @@ module.exports = (dataHelpers) => {
     try {
       const pets = await dataHelpers.getUserPetsByUserId(req.params.id);
       const jsonOutput = PetsSerializer.serialize(pets);
-      // const jsonOutput = result;
       res.json(jsonOutput);
     } catch (e) {
       console.log(e);
@@ -112,7 +105,6 @@ module.exports = (dataHelpers) => {
     try {
       const user = await dataHelpers.getUserDetailsById(req.params.id);
       const jsonOutput = UserSerializer.serialize(user);
-      // const jsonOutput = result;
       res.json(jsonOutput);
     } catch (e) {
       console.log(e);
