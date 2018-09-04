@@ -31,11 +31,15 @@ class EventLocalsModal extends Component {
     if (users instanceof Array) {
       for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].attributes.pets.length; j++) {
-          tinderPhotos.push({
-            username: users[i].attributes.username,
-            userid: users[i].attributes.id,
-            picture: users[i].attributes.pets[j].photos[0]
-          });
+          if (!(users[i].id === sessionStorage.getItem('userId'))) {
+            let adoptedPetPhoto = users[i].attributes.pets[j].photos[0];
+            tinderPhotos.push({
+              username: users[i].attributes.username,
+              userid: users[i].attributes.id,
+              picture: adoptedPetPhoto
+            });
+            adoptedPetPhoto = '';
+          }
         }
       }
     }
