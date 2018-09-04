@@ -12,23 +12,6 @@ const imageRegex = RegExp('srcs*=s*"(.+?)"');
 
 /* GET index page. */
 module.exports = (dataHelpers) => {
-  router.get('/', async (req, res) => {
-    const options = {
-      location: 'toronto,ontario',
-      output: 'full',
-      count: 500,
-      animal: 'cat'
-    };
-    try {
-      const result = await petfinder('pet.find', options);
-      const sanitized = await sanitizePetfinder(result);
-      const output = await dataHelpers.insertMultiplePets(sanitized);
-      res.json(output);
-    } catch (e) {
-      console.log('Error', e);
-      res.json(e);
-    }
-  });
   // router.get('/dogbreeds', async (req, res) => {
   //   // constructs options to do a cheerio web scrape
   //   const options = {
@@ -221,6 +204,42 @@ module.exports = (dataHelpers) => {
   //     res.json(e);
   //   }
   // });
+
+  router.get('/', async (req, res) => {
+    const options = {
+      location: 'toronto,ontario',
+      output: 'full',
+      count: 500,
+      animal: 'cat'
+    };
+    try {
+      const result = await petfinder('pet.find', options);
+      const sanitized = await sanitizePetfinder(result);
+      const output = await dataHelpers.insertMultiplePets(sanitized);
+      res.json(output);
+    } catch (e) {
+      console.log('Error', e);
+      res.json(e);
+    }
+  });
+
+  router.get('/cat/:count', async (req, res) => {
+    const options = {
+      location: 'toronto,ontario',
+      output: 'full',
+      count: 500,
+      animal: 'cat'
+    };
+    try {
+      const result = await petfinder('pet.find', options);
+      const sanitized = await sanitizePetfinder(result);
+      const output = await dataHelpers.insertMultiplePets(sanitized);
+      res.json(output);
+    } catch (e) {
+      console.log('Error', e);
+      res.json(e);
+    }
+  });
 
   return router;
 };
