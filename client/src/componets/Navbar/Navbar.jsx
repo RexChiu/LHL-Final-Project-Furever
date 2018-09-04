@@ -7,14 +7,10 @@ class Navbar extends Component {
       <Fragment>
         <ul className="nav nav-justified nav-tabs navbar-fixed-top">
           <li id="home-tab" role="presentation">
-            <a>
-              <Link to="/">Home</Link>
-            </a>
+            <Link to="/">Home</Link>
           </li>
           <li role="presentation">
-            <a>
-              <Link to="/adopt">Adopt </Link>
-            </a>
+            <Link to="/adopt">Adopt </Link>
           </li>
           {this.loggedInUser()}
         </ul>
@@ -31,14 +27,10 @@ class Navbar extends Component {
       return (
         <Fragment>
           <li role="presentation">
-            <a>
-              <Link to="/events">Events</Link>
-            </a>
+            <Link to="/events">Events</Link>
           </li>
           <li role="presentation">
-            <a>
-              <Link to="/care">Care</Link>
-            </a>
+            <Link to="/care">Care</Link>
           </li>
         </Fragment>
       );
@@ -50,9 +42,7 @@ class Navbar extends Component {
       return (
         <Fragment>
           <li role="presentation">
-            <a>
-              <Link to="/nearby"> Nearby</Link>
-            </a>
+            <Link to="/nearby"> Nearby</Link>
           </li>
           {this.hasPetUser()}
           <li role="presentation" className="nav-right disabled">
@@ -60,9 +50,7 @@ class Navbar extends Component {
           </li>
 
           <li role="presentation" className="nav-right" onClick={this.logoutUser}>
-            <a>
-              <Link to="/">Logout</Link>
-            </a>
+            <Link to="/">Logout</Link>
           </li>
         </Fragment>
       );
