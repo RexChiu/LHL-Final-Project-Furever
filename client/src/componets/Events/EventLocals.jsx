@@ -54,12 +54,12 @@ class EventLocals extends Component {
                   <img className="eventLocalsModal" src={this.props.photo} alt="notWorking" />
                   <div className="card-body">
                     <h5 className="card-title">Owner: {this.props.user.attributes.username}</h5>
-                    <p className="card-text">name: {this.props.user.attributes.pets[0].name}</p>
-                    <p className="card-text">sex: {this.props.user.attributes.pets[0].sex}</p>
-                    <p className="card-text">age: {this.props.user.attributes.pets[0].age}</p>
-                    <p className="card-text">breed: {this.props.user.attributes.pets[0].breed}</p>
-                    <p className="card-text">mix? {this.props.user.attributes.pets[0].mix}</p>
-                    <p className="card-text">size: {this.props.user.attributes.pets[0].size}</p>
+                    <p className="card-text">Name: {this.props.user.attributes.pets[0].name}</p>
+                    <p className="card-text">Sex: {this.props.user.attributes.pets[0].sex}</p>
+                    <p className="card-text">Age: {this.props.user.attributes.pets[0].age}</p>
+                    <p className="card-text">Breed: {this.props.user.attributes.pets[0].breed}</p>
+                    <p className="card-text">Mix? {this.props.user.attributes.pets[0].mix}</p>
+                    <p className="card-text">Size: {this.props.user.attributes.pets[0].size}</p>
                   </div>
                 </div>
 
