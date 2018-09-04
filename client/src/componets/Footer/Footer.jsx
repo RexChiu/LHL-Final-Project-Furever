@@ -22,6 +22,7 @@ class Footer extends Component {
       const clippyMessages = {
         adopted: this.adoptedMessage,
         login: this.loginMessage,
+        invite: this.inviteMessage,
         empty: '?'
       };
 
@@ -50,7 +51,15 @@ class Footer extends Component {
   loginMessage = () => {
     return (
       <Fragment>
-        <p className="clippyMessage">Please Login/Register to see our member specific features!</p>
+        <p className="clippy-message">Please Login/Register to see our member specific features!</p>
+      </Fragment>
+    );
+  };
+
+  inviteMessage = () => {
+    return (
+      <Fragment>
+        <p className="clippy-message">Please fill in the form to invite the user to an event!</p>
       </Fragment>
     );
   };

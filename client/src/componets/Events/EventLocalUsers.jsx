@@ -54,7 +54,15 @@ class EventLocalUsers extends Component {
             let adoptedPetPhoto = users[i].attributes.pets[j].photos[0];
             let randomkey = this.getRandomInt(100000);
             // console.log('Photo::', users[i].attributes.pets[j].photos[0], '||userid::', users[i].id, '|| key ', randomkey);
-            userItems.push(<EventLocals user={users[i]} photo={adoptedPetPhoto} randomkey={randomkey} setEventName={this.props.setEventName} />);
+            userItems.push(
+              <EventLocals
+                user={users[i]}
+                photo={adoptedPetPhoto}
+                randomkey={randomkey}
+                setEventName={this.props.setEventName}
+                showClippy={this.props.showClippy}
+              />
+            );
             adoptedPetPhoto = '';
           }
         }
@@ -78,7 +86,7 @@ class EventLocalUsers extends Component {
 
         {/* PET MODAL */}
         <div id="petLocals" className="modal fade">
-          <EventLocalsModal users={this.state.users} key={this.state.users.id} setEventName={this.props.setEventName} />
+          <EventLocalsModal users={this.state.users} key={this.state.users.id} setEventName={this.props.setEventName} showClippy={this.props.showClippy} />
         </div>
       </React.Fragment>
     );

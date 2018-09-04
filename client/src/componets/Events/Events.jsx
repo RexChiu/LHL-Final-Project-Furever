@@ -37,7 +37,7 @@ class Events extends Component {
         <div className="container-fluid">
           <div className="row-fluid">
             <div className="span4">
-              <EventLocalUsers setEventName={this.setEventName} />
+              <EventLocalUsers setEventName={this.setEventName} showClippy={this.props.showClippy} />
             </div>
             <div className="span4">
               <div id="eventbackdrop">
