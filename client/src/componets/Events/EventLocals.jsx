@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 //import assets
-
+//Purpose of Component: This component shows a modal with the individual users
+//on the Event Page under the Locals container
+//User can invite other Users to an Event
 class EventLocals extends Component {
   addEventWithFriend = () => event => {
     this.props.setEventName('Meeting with ' + this.props.user.attributes.username);
