@@ -71,18 +71,20 @@ class EventLocalUsers extends Component {
 
     return (
       <React.Fragment>
-        <section id="eventlocalusers">
-          <p id="eventlocal"> Locals: </p>
+        <div className="col-sm-3 col-xs-3 ">
+          <div id="eventlocalusers">
+            <p id="eventlocal"> Locals: </p>
 
-          <div id="eventlocalcontainer">
-            <section>{userItems}</section>
+            <div id="eventlocalcontainer">
+              <section>{userItems}</section>
+            </div>
+            {/* <p id="friendrequest"> Friend Request: </p> */}
+            <button className="btn btn-sm btn-block" data-toggle="modal" href="#petLocals">
+              {' '}
+              Find{' '}
+            </button>
           </div>
-          {/* <p id="friendrequest"> Friend Request: </p> */}
-          <button className="btn btn-sm btn-block" data-toggle="modal" href="#petLocals">
-            {' '}
-            Find{' '}
-          </button>
-        </section>
+        </div>
 
         {/* PET MODAL */}
         <div id="petLocals" className="modal fade">
