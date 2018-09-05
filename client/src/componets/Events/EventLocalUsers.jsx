@@ -73,7 +73,7 @@ class EventLocalUsers extends Component {
       <React.Fragment>
         <div className="col-sm-3 col-xs-3 ">
           <div id="eventlocalusers">
-            <p id="eventlocal"> Locals: </p>
+            <p id="eventlocal"> Locals Pets: </p>
 
             <div id="eventlocalcontainer">
               <section>{userItems}</section>
@@ -81,7 +81,7 @@ class EventLocalUsers extends Component {
             {/* <p id="friendrequest"> Friend Request: </p> */}
             <button className="btn btn-sm btn-block" data-toggle="modal" href="#petLocals">
               {' '}
-              Find{' '}
+              Pet Tinder{' '}
             </button>
           </div>
         </div>

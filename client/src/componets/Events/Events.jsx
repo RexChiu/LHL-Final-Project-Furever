@@ -32,7 +32,7 @@ class Events extends Component {
       <React.Fragment>
         <img id="eventbg" src={require('../../assets/events_bg3.jpeg')} alt="Girl in a jacket" />
         <div id="eventsheader">
-          <p> events page </p>
+          <p> Events Page </p>
         </div>
         <div className="container-fluid">
           <div className="row-fluid">
