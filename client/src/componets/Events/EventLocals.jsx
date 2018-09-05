@@ -63,7 +63,7 @@ class EventLocals extends Component {
                     <p className="card-text">Sex: {this.props.user.attributes.pets[0].sex}</p>
                     <p className="card-text">Age: {this.props.user.attributes.pets[0].age}</p>
                     <p className="card-text">Breed: {this.props.user.attributes.pets[0].breed}</p>
-                    <p className="card-text">Mix? {this.props.user.attributes.pets[0].mix}</p>
+                    <p className="card-text">Mix?: {this.props.user.attributes.pets[0].mix}</p>
                     <p className="card-text">Size: {this.props.user.attributes.pets[0].size}</p>
                   </div>
                 </div>
