@@ -19,7 +19,7 @@ class Pet extends Component {
     return (
       <Fragment>
         <div className="adoptitem panel panel-default" data-toggle="modal" href={'#petDetails' + this.props.pet.id}>
-          <img className="img-responsive img-rounded pet-image" src={this.props.pet.attributes.photos[0]} alt="notWorking" id="mouseUI" />
+          <img className="img-responsive pet-image" src={this.props.pet.attributes.photos[0]} alt="notWorking" id="mouseUI" />
           <div className="pet-info">
             <p> Name: {this.props.pet.attributes.name} </p>
             <p> Breed: {this.props.pet.attributes.breed} </p>

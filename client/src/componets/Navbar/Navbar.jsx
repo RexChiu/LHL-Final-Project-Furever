@@ -28,10 +28,13 @@ class Navbar extends Component {
       return (
         <Fragment>
           <li role="presentation">
-            <Link to="/events">Events</Link>
+            <Link to="/care">Care</Link>
           </li>
           <li role="presentation">
-            <Link to="/care">Care</Link>
+            <Link to="/nearby"> Nearby</Link>
+          </li>
+          <li role="presentation">
+            <Link to="/events">Events</Link>
           </li>
         </Fragment>
       );
@@ -42,9 +45,6 @@ class Navbar extends Component {
     if (sessionStorage.getItem('userId')) {
       return (
         <Fragment>
-          <li role="presentation">
-            <Link to="/nearby"> Nearby</Link>
-          </li>
           {this.hasPetUser()}
           <li role="presentation" className="nav-right disabled">
             <a className="">Logged in as {sessionStorage.getItem('username')}</a>

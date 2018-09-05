@@ -39,7 +39,7 @@
 
 .pet-image {
   padding: 10px;
-  object-fit: none 10%;
+  object-fit: contain;
   object-position: center;
   margin: 0 auto;
 }
