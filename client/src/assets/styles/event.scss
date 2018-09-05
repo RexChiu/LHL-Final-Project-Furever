@@ -8,12 +8,13 @@
   display: flex;
 
   flex-direction: column;
+  width: 100%;
 }
 
 .eventPanel {
   margin: 1em;
   padding: 1em;
-  width: 30em;
+  // width: 30em;
 
   background-color: #e4ecef;
   // outline-width: 0.005em;
@@ -40,7 +41,7 @@
 #eventlocalusers {
   // position: fixed;
   // float: left;
-  margin-left: 1em;
+  margin-left: 0.5em;
   background-color: #fcfeff;
   padding: 0.55em;
   border-radius: 0.5em;
@@ -116,8 +117,12 @@
 
 #eventbackdrop {
   border-radius: 0.5em;
+  // margin-left: 1em;
+  // margin-right: 2.3em;
   // opacity: 0.95;
+  display: block;
   background: white;
+  left: 3%;
 
   // margin-top: 5em;
 
@@ -132,12 +137,13 @@
 }
 
 #eventsheader p {
-  background: #becaceb3;
-  color: #5565a0;
-  // margin-top: 5em;
+  // background: #becace69;
+  background: #d7d0da5e;
+  color: #3d4461;
   font-size: 4em;
   margin-top: 1.1em;
-  opacity: 0.8;
+  opacity: 0.9;
+  height: 1.052em;
 }
 
 // .modalz {
@@ -188,3 +194,9 @@
 // #displayblock {
 //   display: block;
 // }
+
+//tinder buttons
+#petTinderButton {
+  // font-size: 2.2vw;
+  font-size: 1.6vw;
+}
