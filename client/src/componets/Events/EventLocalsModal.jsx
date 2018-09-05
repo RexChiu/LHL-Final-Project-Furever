@@ -13,7 +13,7 @@ class EventLocalsModal extends Component {
   }
 
   addEventWithFriend = param => event => {
-    this.props.setEventName('Meeting with ' + param.username);
+    this.props.setEventName('PetTinder with ' + param.username);
     this.props.showClippy(true, 'invite');
   };
 
