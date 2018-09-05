@@ -45,7 +45,7 @@ class EventUserInfo extends Component {
             let petphoto = users[i].attributes.pets[j].photos[0];
             userItems.push(
               <div className="eventpetinfocolor">
-                <img src={petphoto} alt="notWorking" width="100em" />
+                <img src={petphoto} alt="notWorking" width="75%" />
                 <p> Name: {users[i].attributes.pets[j].name} </p>
                 <p> Breed: {users[i].attributes.pets[j].breed} </p>
                 <p> Sex: {users[i].attributes.pets[j].sex} </p>

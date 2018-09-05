@@ -40,10 +40,10 @@ class Events extends Component {
               <EventLocalUsers setEventName={this.setEventName} showClippy={this.props.showClippy} />
               <EventUserInfo />
             </div>
-            <div className="span4">
-              <div id="eventbackdrop" className="col-sm-5 col-xs-5">
-                <EventCompose eventName={this.state.eventName} />
-              </div>
+            {/* <div className="span4"> */}
+            <div id="eventbackdrop" className="centered col-sm-5 col-xs-5">
+              <EventCompose eventName={this.state.eventName} />
+              {/* </div> */}
             </div>
           </div>
         </div>
