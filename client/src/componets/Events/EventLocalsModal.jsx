@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 //import assets
-
+//Purpose of Component: When User clicks Find in the Events Page
+//this component renders a Carousel to show other users Pets to
+//invite and create an Event
 class EventLocalsModal extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +14,7 @@ class EventLocalsModal extends Component {
     };
   }
 
+  //Takes in a Username and populates the Event Title in the Events page
   addEventWithFriend = param => event => {
     this.props.setEventName('Meeting with ' + param.username);
     this.props.showClippy(true, 'invite');
