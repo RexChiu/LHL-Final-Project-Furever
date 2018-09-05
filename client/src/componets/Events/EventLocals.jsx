@@ -65,36 +65,6 @@ class EventLocals extends Component {
                     <p className="card-text">Breed: {this.props.user.attributes.pets[0].breed}</p>
                     <p className="card-text"> Mix?: {this.props.user.attributes.pets[0].mix}</p>
                     <p className="card-text"> Size: {this.props.user.attributes.pets[0].size}</p>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <p>
-                            <td>Owner: </td>
-                            <td>{this.props.user.attributes.username} </td>
-                          </p>
-                        </tr>
-                        <tr>
-                          <td> </td>
-                          <td> </td>
-                        </tr>
-                        <tr>
-                          <td> </td>
-                          <td> </td>
-                        </tr>
-                        <tr>
-                          <td> </td>
-                          <td> </td>
-                        </tr>
-                        <tr>
-                          <td> </td>
-                          <td> </td>
-                        </tr>
-                        <tr>
-                          <td> </td>
-                          <td> </td>
-                        </tr>
-                      </tbody>
-                    </table>
                   </div>
                 </div>
               </div>
