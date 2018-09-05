@@ -31,7 +31,7 @@ class EventLocals extends Component {
           src={this.props.photo}
           alt="notWorking"
           width="21%"
-          height="21%"
+          // height="21%"
           // height="42"
           // width="42"
           data-toggle="modal"
