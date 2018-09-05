@@ -59,25 +59,44 @@ class EventLocals extends Component {
                   <img className="eventLocalsModal" src={this.props.photo} alt="notWorking" />
                   <div className="card-body">
                     <h5 className="card-title">Owner: {this.props.user.attributes.username}</h5>
-                    <p className="card-text">Name: {this.props.user.attributes.pets[0].name}</p>
-                    <p className="card-text">Sex: {this.props.user.attributes.pets[0].sex}</p>
-                    <p className="card-text">Age: {this.props.user.attributes.pets[0].age}</p>
+                    <p className="card-text"> Name: {this.props.user.attributes.pets[0].name}</p>
+                    <p className="card-text"> Sex: {this.props.user.attributes.pets[0].sex}</p>
+                    <p className="card-text"> Age: {this.props.user.attributes.pets[0].age}</p>
                     <p className="card-text">Breed: {this.props.user.attributes.pets[0].breed}</p>
-                    <p className="card-text">Mix? {this.props.user.attributes.pets[0].mix}</p>
-                    <p className="card-text">Size: {this.props.user.attributes.pets[0].size}</p>
+                    <p className="card-text"> Mix?: {this.props.user.attributes.pets[0].mix}</p>
+                    <p className="card-text"> Size: {this.props.user.attributes.pets[0].size}</p>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <p>
+                            <td>Owner: </td>
+                            <td>{this.props.user.attributes.username} </td>
+                          </p>
+                        </tr>
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                        </tr>
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                        </tr>
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                        </tr>
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                        </tr>
+                        <tr>
+                          <td> </td>
+                          <td> </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
-
-                {/* <h1> -USER INFO- </h1>
-                <p> username: {this.props.user.attributes.username} </p>
-                <p> id: {this.props.user.attributes.id} </p>
-                <h1> -PET INFO-</h1>
-                <p> name: {this.props.user.attributes.pets[0].name} </p>
-                <p> sex: {this.props.user.attributes.pets[0].sex} </p>
-                <p> age: {this.props.user.attributes.pets[0].age} </p>
-                <p> breed: {this.props.user.attributes.pets[0].breed} </p>
-                <p> mix? {this.props.user.attributes.pets[0].mix} </p>
-                <p> size: {this.props.user.attributes.pets[0].size} </p> */}
               </div>
               <hr />
 
