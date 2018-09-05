@@ -45,7 +45,7 @@ class EventCompose extends Component {
 
   handleSetTitle = () => {
     this.setState({
-      title: 'Meeting with '
+      title: 'PetTinder with '
     });
   };
 
