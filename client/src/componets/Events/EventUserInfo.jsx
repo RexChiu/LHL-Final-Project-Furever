@@ -44,7 +44,7 @@ class EventUserInfo extends Component {
           if (users[i].id === sessionStorage.getItem('userId')) {
             let petphoto = users[i].attributes.pets[j].photos[0];
             userItems.push(
-              <div className="eventpetinfocolor">
+              <div className="eventpetinfocolor" key={i * j}>
                 <img src={petphoto} alt="notWorking" width="75%" />
                 <p> Name: {users[i].attributes.pets[j].name} </p>
                 <p> Breed: {users[i].attributes.pets[j].breed} </p>

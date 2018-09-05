@@ -35,7 +35,7 @@ class EventComposeFeed extends Component {
     axios
       .post('http://localhost:8080/events/going', goingObj)
       .then(function(response) {
-        console.log('response', response);
+        // console.log('response', response);
         window.location.reload();
       })
       .catch(function(error) {
@@ -87,7 +87,7 @@ class EventComposeFeed extends Component {
     if (this.state.clicked === false) {
       for (var e = 0; e < goingId.length; e++) {
         if (goingId[e] === `${sessionStorage.getItem('userId')}`) {
-          console.log('match');
+          // console.log('match');
           this.setState({
             clicked: true
           });
