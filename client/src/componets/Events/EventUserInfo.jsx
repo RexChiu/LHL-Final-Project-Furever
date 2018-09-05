@@ -42,9 +42,7 @@ class EventUserInfo extends Component {
       for (let i = 0; i < users.length; i++) {
         for (let j = 0; j < users[i].attributes.pets.length; j++) {
           if (users[i].id === sessionStorage.getItem('userId')) {
-            console.log('WORK DAMN IT');
             let petphoto = users[i].attributes.pets[j].photos[0];
-            console.log('Photo::', users[i].attributes.pets[j].photos[0], '||userid::', users[i].id);
             userItems.push(
               <div className="eventpetinfocolor">
                 <img src={petphoto} alt="notWorking" width="100em" />
