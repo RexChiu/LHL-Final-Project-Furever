@@ -103,7 +103,7 @@ class EventComposeFeed extends Component {
             <h3> {this.props.event.attributes.title} </h3>
             <h4> Created By: {this.props.event.attributes.user} </h4>
             <div className="eventDescription">
-              <h6> Date: {this.props.event.attributes.date} </h6>
+              <p className="datePanel"> Date: {this.props.event.attributes.date} </p>
               <p> Description: {this.props.event.attributes.description} </p>
             </div>
             {countLikeLength}
