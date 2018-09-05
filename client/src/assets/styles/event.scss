@@ -176,6 +176,15 @@
 .datePanel {
   margin-top: 10px;
 }
+
+.carousel-inner .item {
+  width: 100%;
+  // height: 500px;
+}
+.carousel-inner .item img {
+  min-width: 100%;
+  min-height: 100%;
+}
 // #displayblock {
 //   display: block;
 // }
