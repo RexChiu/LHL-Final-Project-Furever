@@ -52,17 +52,16 @@ class EventLocalsModal extends Component {
     if (tinderPhotos instanceof Array) {
       tinderItems = tinderPhotos.map((photo, i) => (
         <div className="item" key={i}>
-          <img className="eventLocalsIcon" src={photo.picture} alt="notWorking" data-dismiss="modal" onClick={this.addEventWithFriend(photo)} />
+          <img className="d-block w-100" src={photo.picture} alt="notWorking" data-dismiss="modal" onClick={this.addEventWithFriend(photo)} />
         </div>
       ));
     }
     //Loop through the photos array to generate the indicators for the carousel
     if (tinderPhotos instanceof Array) {
       for (let k = 1; k <= tinderPhotos.length; k++) {
-        tinderIndicators[k - 1] = <li data-target="#pets-modal-slide" data-slide-to={k} />;
+        tinderIndicators[k - 1] = <li data-target="#pets-modal-slide" data-slide-to={k} key={k + 1} />;
       }
     }
-    console.log('tinderIndicators', tinderIndicators);
 
     return (
       <React.Fragment>
@@ -76,14 +75,14 @@ class EventLocalsModal extends Component {
               <p> - Find a nearby friend - </p>
             </div>
             <div className="modal-body">
-              <div id="pets-modal-slide" className="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#pets-modal-slide" data-slide-to="0" class="active" />
+              <div id="pets-modal-slide" className="carousel slide carousel-fade" data-ride="carousel">
+                <ol className="carousel-indicators">
+                  <li data-target="#pets-modal-slide" data-slide-to="0" className="active" />
                   {tinderIndicators}
                 </ol>
                 <div className="carousel-inner" role="listbox">
                   <div className="item active">
-                    <img class="d-block w-100" src={require('../../assets/petTinder.jpg')} alt="notWorking" id="mouseUI" />
+                    <img className="d-block w-100" src={require('../../assets/petTinder.jpg')} alt="notWorking" id="mouseUI" />
                     {/* <div className="carousel-caption"> */}
                     {/* <h3>Pet Tinder</h3> */}
                     <p>Choose a Pet companion to hang out with</p>

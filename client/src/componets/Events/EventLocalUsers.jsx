@@ -58,6 +58,7 @@ class EventLocalUsers extends Component {
               <EventLocals
                 user={users[i]}
                 photo={adoptedPetPhoto}
+                key={randomkey * 23}
                 randomkey={randomkey}
                 setEventName={this.props.setEventName}
                 showClippy={this.props.showClippy}
