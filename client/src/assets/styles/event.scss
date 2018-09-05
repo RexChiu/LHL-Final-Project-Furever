@@ -39,16 +39,18 @@
 
 #eventlocalusers {
   // position: fixed;
-  float: left;
+  // float: left;
   margin-left: 1em;
   background-color: #fcfeff;
-  outline-style: solid;
-  outline-width: 0.005em;
-  outline-style: auto;
-  width: 12.5em;
+  padding: 0.55em;
+  border-radius: 0.5em;
+  // outline-style: solid;
+  // outline-width: 0.005em;
+  // outline-style: auto;
+  // width: 12.5em;
 }
 #eventlocalusers #eventlocalcontainer {
-  width: 12.5em;
+  // width: 12.5em;
   min-height: 15em;
   max-height: 20em;
   overflow-x: hidden;
@@ -72,8 +74,9 @@
   background-color: #75b5c4;
 }
 
+// photos within pet tinders locals withing
 .eventLocalsIcon {
-  float: right;
+  // float: right;
   margin: 0.06em;
 }
 
