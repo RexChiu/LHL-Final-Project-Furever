@@ -28,6 +28,7 @@ class EventLocalsModal extends Component {
     const { users } = this.props;
     let tinderItems = [];
     let tinderPhotos = [];
+    let tinderIndicators = [];
 
     //Iterate through each user to pick out the username, id and photo
     //into a new array called tinderPhoto
@@ -55,6 +56,13 @@ class EventLocalsModal extends Component {
         </div>
       ));
     }
+    //Loop through the photos array to generate the indicators for the carousel
+    if (tinderPhotos instanceof Array) {
+      for (let k = 1; k <= tinderPhotos.length; k++) {
+        tinderIndicators[k - 1] = <li data-target="#pets-modal-slide" data-slide-to={k} />;
+      }
+    }
+    console.log('tinderIndicators', tinderIndicators);
 
     return (
       <React.Fragment>
@@ -68,10 +76,14 @@ class EventLocalsModal extends Component {
               <p> - Find a nearby friend - </p>
             </div>
             <div className="modal-body">
-              <div id="pets-modal" className="carousel slide" data-ride="carousel">
+              <div id="pets-modal-slide" className="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#pets-modal-slide" data-slide-to="0" class="active" />
+                  {tinderIndicators}
+                </ol>
                 <div className="carousel-inner" role="listbox">
                   <div className="item active">
-                    <img src={require('../../assets/petTinder.jpg')} alt="notWorking" id="mouseUI" />
+                    <img class="d-block w-100" src={require('../../assets/petTinder.jpg')} alt="notWorking" id="mouseUI" />
                     {/* <div className="carousel-caption"> */}
                     {/* <h3>Pet Tinder</h3> */}
                     <p>Choose a Pet companion to hang out with</p>
@@ -79,10 +91,10 @@ class EventLocalsModal extends Component {
                   </div>
                   {tinderItems}
                 </div>
-                <a className="left carousel-control" href="#pets-modal" data-slide="prev">
+                <a className="left carousel-control" href="#pets-modal-slide" role="button" data-slide="prev">
                   <span className="glyphicon glyphicon-chevron-left" />
                 </a>
-                <a className="right carousel-control" href="#pets-modal" data-slide="next">
+                <a className="right carousel-control" href="#pets-modal-slide" role="button" data-slide="next">
                   <span className="glyphicon glyphicon-chevron-right" />
                 </a>
               </div>
