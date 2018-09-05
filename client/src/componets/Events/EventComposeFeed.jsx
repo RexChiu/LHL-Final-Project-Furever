@@ -47,9 +47,9 @@ class EventComposeFeed extends Component {
     //display like count
     var countLikeLength;
     if (this.props.event.attributes.going === undefined || this.props.event.attributes.going === null) {
-      countLikeLength = <p> 0 </p>;
+      countLikeLength = <p> Number of Attendees: 0 </p>;
     } else {
-      countLikeLength = <p> {this.props.event.attributes.going.length} </p>;
+      countLikeLength = <p> Number of Attendees: {this.props.event.attributes.going.length} </p>;
     }
 
     //created button for going
@@ -64,7 +64,7 @@ class EventComposeFeed extends Component {
           </button>
         );
       } else {
-        buttonPress = <p> you're going</p>;
+        buttonPress = <p>You're Attending</p>;
       }
     }
 
@@ -78,7 +78,7 @@ class EventComposeFeed extends Component {
       names.push(obj.user);
       goingId.push(obj.userId);
     }
-    let namesOutput = names.join(' ');
+    let namesOutput = 'Attending Users: ' + names.join(' ');
 
     // console.log('DID THIS WORK', `${sessionStorage.getItem('userId')}`);
 
@@ -107,9 +107,8 @@ class EventComposeFeed extends Component {
               <p> description: {this.props.event.attributes.description} </p>
             </div>
             {countLikeLength}
-            {buttonPress}
-            {/* <p> {this.props.event.attributes.going} </p> */}
             <p> {namesOutput} </p>
+            {buttonPress}
           </div>
         </div>
       </React.Fragment>
