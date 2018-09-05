@@ -86,8 +86,8 @@
 }
 
 #event_title {
-  max-width: 28em;
-  width: 28em;
+  // max-width: 28em;
+  // width: 28em;
 }
 
 .messagePanel #event_description {
@@ -96,8 +96,8 @@
   max-height: 15em;
   min-height: 5em;
 
-  max-width: 28em;
-  min-width: 28em;
+  max-width: 100%;
+  min-width: 100%;
 }
 
 #eventstitle {
@@ -116,15 +116,15 @@
 
 #eventbackdrop {
   border-radius: 0.5em;
-  opacity: 0.95;
+  // opacity: 0.95;
   background: white;
 
-  margin-top: 5em;
+  // margin-top: 5em;
 
-  position: absolute;
-  top: 6em;
-  left: 50%;
-  transform: translateX(-50%);
+  // position: absolute;
+  // top: 6em;
+  // left: 50%;
+  // transform: translateX(-50%);
 }
 
 #eventsheader {
@@ -146,7 +146,7 @@
 
 #eventuserinfo {
   background-color: white;
-  margin-top: 1em;
+  // margin-top: 1em;
   margin-right: 0.5em;
   padding: 0.4em;
   border-radius: 0.5em;
