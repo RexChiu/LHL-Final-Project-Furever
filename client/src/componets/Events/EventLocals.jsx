@@ -30,8 +30,10 @@ class EventLocals extends Component {
           className="eventLocalsIcon"
           src={this.props.photo}
           alt="notWorking"
-          height="42"
-          width="42"
+          width="21%"
+          height="21%"
+          // height="42"
+          // width="42"
           data-toggle="modal"
           href={'#singleLocals' + this.props.randomkey}
         />
