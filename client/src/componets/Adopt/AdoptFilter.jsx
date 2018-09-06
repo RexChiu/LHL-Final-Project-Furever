@@ -56,8 +56,8 @@ class AdoptFilter extends Component {
           </DropdownButton>
           <DropdownButton title={ageTitle} key="Age" id="dropdown-age" onSelect={this.changeAge}>
             <MenuItem eventKey="Baby">Baby</MenuItem>
-            <MenuItem eventKey="Adult">Adult</MenuItem>
             <MenuItem eventKey="Young">Young</MenuItem>
+            <MenuItem eventKey="Adult">Adult</MenuItem>
             <MenuItem eventKey="Senior">Senior</MenuItem>
           </DropdownButton>
           <DropdownButton title={sizeMapper[sizeTitle]} key="Size" id="dropdown-size" onSelect={this.changeSize}>
