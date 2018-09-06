@@ -22,7 +22,7 @@ class App extends Component {
         <div className="App">
           <Main showClippy={this.showClippy} />
         </div>
-        <Footer show={this.state.showClippy} textKey={this.state.clippyTextkey} />
+        <Footer show={this.state.showClippy} textKey={this.state.clippyTextkey} message={this.state.message} />
       </React.Fragment>
     );
   }

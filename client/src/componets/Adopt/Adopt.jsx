@@ -16,17 +16,17 @@ class Adopt extends Component {
       pets: [],
       filters: {}
     };
-
-    // empty clippy, scroll to top
-    this.props.showClippy(false, 'empty');
-    window.scrollTo(0, 0);
   }
 
   componentDidMount() {
     // get pets from the server
     this.getPets();
+    window.scrollTo(0, 0);
+
     if (!sessionStorage.getItem('userId')) {
       this.props.showClippy(true, 'login');
+    } else {
+      this.props.showClippy(false, 'empty');
     }
   }
 

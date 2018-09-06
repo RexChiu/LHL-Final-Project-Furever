@@ -36,6 +36,8 @@ class Care extends Component {
           .then(res => res.json())
           .then(res => {
             this.setState({ breedInfo: res.data.attributes, isLoaded: true });
+            const breeds = this.getBreeds();
+            this.props.showClippy(true, 'care', breeds);
           })
           .catch(err => alert(err));
       }
@@ -113,6 +115,19 @@ class Care extends Component {
         {dogInfo}
       </Fragment>
     );
+  };
+
+  getBreeds = () => {
+    const breeds = [];
+    for (let cat of this.state.breedInfo.cat) {
+      breeds.push(cat.breed);
+    }
+    for (let dog of this.state.breedInfo.dog) {
+      breeds.push(dog.breed);
+    }
+
+    const outputObj = breeds.slice(0, breeds.length - 1);
+    return outputObj.join(', ') + ' and ' + breeds[breeds.length - 1];
   };
 }
 

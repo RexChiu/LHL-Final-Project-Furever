@@ -26,7 +26,7 @@ class Footer extends Component {
         login: this.loginMessage,
         invite: this.inviteMessage,
         empty: "I shouldn't be here!?",
-        care: this.props.message
+        care: this.careMessage
       };
 
       return (
@@ -64,6 +64,14 @@ class Footer extends Component {
     return (
       <Fragment>
         <p className="clippy-message">Please fill in the form to invite the user to an event!</p>
+      </Fragment>
+    );
+  };
+
+  careMessage = () => {
+    return (
+      <Fragment>
+        <p className="clippy-message">Looks like you have a {this.props.message}.</p>
       </Fragment>
     );
   };
