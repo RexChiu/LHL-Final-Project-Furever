@@ -26,7 +26,9 @@ class Footer extends Component {
         login: this.loginMessage,
         invite: this.inviteMessage,
         empty: "I shouldn't be here!?",
-        care: this.careMessage
+        care: this.careMessage,
+        nearby: this.nearbyMessage,
+        adopt: this.adoptMessage
       };
 
       return (
@@ -72,6 +74,22 @@ class Footer extends Component {
     return (
       <Fragment>
         <p className="clippy-message">Looks like you have a {this.props.message}.</p>
+      </Fragment>
+    );
+  };
+
+  nearbyMessage = () => {
+    return (
+      <Fragment>
+        <p className="clippy-message">Here are the nearby Pet Stores and Vets!</p>
+      </Fragment>
+    );
+  };
+
+  adoptMessage = () => {
+    return (
+      <Fragment>
+        <p className="clippy-message">Adopt your Furever pet here!</p>
       </Fragment>
     );
   };

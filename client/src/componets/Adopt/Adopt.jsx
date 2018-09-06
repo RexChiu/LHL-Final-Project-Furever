@@ -26,7 +26,7 @@ class Adopt extends Component {
     if (!sessionStorage.getItem('userId')) {
       this.props.showClippy(true, 'login');
     } else {
-      this.props.showClippy(false, 'empty');
+      this.props.showClippy(true, 'adopt');
     }
   }
 
