@@ -29,7 +29,6 @@ class App extends Component {
 
   // function that is passed down to almost all components, enables clippy with a message
   showClippy = (toggle, key, message) => {
-    console.log('Comparing: ' + this.state.clippyTextkey, key);
     if (this.state.clippyTextkey !== key) {
       this.setState({ showClippy: toggle, clippyTextkey: key, message });
     }
