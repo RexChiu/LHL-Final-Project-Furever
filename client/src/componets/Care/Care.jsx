@@ -36,7 +36,6 @@ class Care extends Component {
           .then(res => res.json())
           .then(res => {
             this.setState({ breedInfo: res.data.attributes, isLoaded: true });
-            console.log(this.state.breedInfo);
           })
           .catch(err => alert(err));
       }

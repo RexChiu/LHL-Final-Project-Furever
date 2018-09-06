@@ -25,14 +25,15 @@ class Footer extends Component {
         adopted: this.adoptedMessage,
         login: this.loginMessage,
         invite: this.inviteMessage,
-        empty: "I shouldn't be here!?"
+        empty: "I shouldn't be here!?",
+        care: this.props.message
       };
 
       return (
         <div className="navbar navbar-fixed-bottom">
           <Clippy ref={this.clippy} />
           <Overlay container={this} show={this.props.show} placement="top" target={() => ReactDOM.findDOMNode(this.clippy.current)}>
-            <Tooltip id="tooltip">{clippyMessages[this.props.text]()}</Tooltip>
+            <Tooltip id="tooltip">{clippyMessages[this.props.textKey]()}</Tooltip>
           </Overlay>
         </div>
       );

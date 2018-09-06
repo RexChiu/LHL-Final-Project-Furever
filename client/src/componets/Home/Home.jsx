@@ -13,16 +13,18 @@ class Home extends Component {
       registerActive: false,
       showClippy: false
     };
+  }
 
-    // empty clippy, scroll to top
-    this.props.showClippy(true, 'login');
+  componentDidMount() {
     window.scrollTo(0, 0);
+    if (sessionStorage.getItem('userId')) {
+      this.props.showClippy(false, 'empty');
+    } else {
+      this.props.showClippy(true, 'login');
+    }
   }
 
   render() {
-    if (sessionStorage.getItem('userId')) {
-      this.props.showClippy(false, 'empty');
-    }
     return (
       <Fragment>
         <video id="home-video-background" loop autoPlay>

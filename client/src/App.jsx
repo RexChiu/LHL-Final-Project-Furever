@@ -10,7 +10,8 @@ class App extends Component {
     super(props);
     this.state = {
       showClippy: false,
-      clippyTextkey: 'empty'
+      clippyTextkey: 'empty',
+      message: ''
     };
   }
 
@@ -21,16 +22,16 @@ class App extends Component {
         <div className="App">
           <Main showClippy={this.showClippy} />
         </div>
-        <Footer show={this.state.showClippy} text={this.state.clippyTextkey} />
+        <Footer show={this.state.showClippy} textKey={this.state.clippyTextkey} />
       </React.Fragment>
     );
   }
 
   // function that is passed down to almost all components, enables clippy with a message
-  showClippy = (toggle, key) => {
+  showClippy = (toggle, key, message) => {
     console.log('Comparing: ' + this.state.clippyTextkey, key);
     if (this.state.clippyTextkey !== key) {
-      this.setState({ showClippy: toggle, clippyTextkey: key });
+      this.setState({ showClippy: toggle, clippyTextkey: key, message });
     }
   };
 }

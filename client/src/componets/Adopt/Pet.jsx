@@ -11,9 +11,6 @@ class Pet extends Component {
           Adopt
         </a>
       );
-    } else {
-      // show clippy message if not logged in
-      this.props.showClippy(true, 'login');
     }
 
     return (

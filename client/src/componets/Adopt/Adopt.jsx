@@ -25,6 +25,9 @@ class Adopt extends Component {
   componentDidMount() {
     // get pets from the server
     this.getPets();
+    if (!sessionStorage.getItem('userId')) {
+      this.props.showClippy(true, 'login');
+    }
   }
 
   render() {
