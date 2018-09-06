@@ -33,7 +33,7 @@ class Footer extends Component {
 
       return (
         <div className="navbar navbar-fixed-bottom">
-          <Clippy ref={this.clippy} />
+          <Clippy showClippy={this.props.showClippy} ref={this.clippy} />
           <Overlay container={this} show={this.props.show} placement="top" target={() => ReactDOM.findDOMNode(this.clippy.current)}>
             <Tooltip id="tooltip">{clippyMessages[this.props.textKey]()}</Tooltip>
           </Overlay>
@@ -42,6 +42,9 @@ class Footer extends Component {
     }
     return '';
   };
+
+  // function to remove clippy
+  hideClippy = () => {};
 
   // functions to return the correct message when called.
   adoptedMessage = () => {
