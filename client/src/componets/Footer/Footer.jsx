@@ -92,7 +92,7 @@ class Footer extends Component {
   adoptMessage = () => {
     return (
       <Fragment>
-        <p className="clippy-message">Adopt your Furever pet here!</p>
+        <p className="clippy-message">Adopt your Fur <i className="fas fa-paw home-title-icon" /> Ever pet here!</p>
       </Fragment>
     );
   };
