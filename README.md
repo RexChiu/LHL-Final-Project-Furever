@@ -31,6 +31,12 @@ APIs used include the Petfinder API for populating the database with pets, and G
 3. Run the client using `npm start`
 4. Visit the site via localhost:3000
 
+## Heroku Hosting
+Client Hosting:
+http://furever-client.herokuapp.com/
+Server Hosting: (API server)
+http://furever-server.herokuapp.com/
+
 ## Dependencies
 
 ### Server
