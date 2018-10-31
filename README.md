@@ -8,7 +8,7 @@ Furever is a pet adoption site that focuses on the entire pet ecosystem, from ad
 It has a listing page of adoptable pets, personalized pet care info according to adopted pets, and an events page for pet owners.
 
 This project is built with React and React Router for the front end, NodeJS Express for the middleware, and Cloud Firestore for the database.
-Other technologies used are Waypoints for infinite scrolling of paginated DB queries, Cheerio for webscraping of petcare, and cloud hosting by Heroku
+Other technologies used are Waypoints for infinite scrolling of paginated DB queries, Cheerio for webscraping of petcare, and cloud hosting by Heroku.
 APIs used include the Petfinder API for populating the database with pets, and Google Places api for vet and petstore info.
 
 ## Screenshots
