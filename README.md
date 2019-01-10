@@ -11,6 +11,12 @@ This project is built with React and React Router for the front end, NodeJS Expr
 Other technologies used are Waypoints for infinite scrolling of paginated DB queries, Cheerio for webscraping of petcare, and cloud hosting by Heroku.
 APIs used include the Petfinder API for populating the database with pets, and Google Places api for vet and petstore info.
 
+## Heroku Hosting
+Client Hosting:
+http://furever-client.herokuapp.com/
+Server Hosting: (API server)
+http://furever-server.herokuapp.com/
+
 ## Screenshots
 !["Screenshot of home page"](https://github.com/RexChiu/LHL-Final-Project-Furever/blob/master/docs/home%20page.PNG)
 !["Screenshot of adoption page"](https://github.com/RexChiu/LHL-Final-Project-Furever/blob/master/docs/pet%20adoption.PNG)
@@ -30,12 +36,6 @@ APIs used include the Petfinder API for populating the database with pets, and G
 2. Install dependencies in client folder: `npm i`
 3. Run the client using `npm start`
 4. Visit the site via localhost:3000
-
-## Heroku Hosting
-Client Hosting:
-http://furever-client.herokuapp.com/
-Server Hosting: (API server)
-http://furever-server.herokuapp.com/
 
 ## Dependencies
 
